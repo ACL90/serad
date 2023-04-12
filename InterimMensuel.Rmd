@@ -1,0 +1,253 @@
+
+```{r Rlang, echo=FALSE, include=FALSE} 
+lang <- c("EN", "FR")[2] 
+MoisPROV = Nombre$mois[length(Nombre$mois)]
+AnneePROV = Nombre$annee[length(Nombre$mois)]
+MoisRECT = Nombre$mois[length(Nombre$mois)-1]
+AnneeRECT = Nombre$annee[length(Nombre$mois)-1]
+MoisRECT_1 = Nombre$mois[length(Nombre$mois)-2]
+AnneeRECT_1 = Nombre$annee[length(Nombre$mois)-2]
+MoisRECT_2 = Nombre$mois[length(Nombre$mois)-3]
+AnneeRECT_2 = Nombre$annee[length(Nombre$mois)-3]
+MoisRECT_3 = Nombre$mois[length(Nombre$mois)-4]
+AnneeRECT_3 = Nombre$annee[length(Nombre$mois)-4]
+```
+---
+title: "L'intérim en `r MoisRECT` `r AnneeRECT` et `r MoisPROV` `r AnneePROV`"
+output: word_document  
+---
+<!-- output: odt_document   -->
+<!-- output: word_document   -->
+<!-- #lang <- c("EN", "FR")[2]  #choix du français #R-Lang #https://statnmap.com/fr/2017-04-04-formater-texte-avec-conditions-dans-chunks-rmarkdown-article-complet-iframe/  -->
+
+```{r, echo=FALSE, include=FALSE}
+x1 = last(Nombre$Niveau)
+x2= Nombre$Niveau[length(Nombre$mois)-1]
+x3= Nombre$Niveau[length(Nombre$mois)-2]
+x4= Nombre$Niveau[length(Nombre$mois)-3]
+x5= Nombre$Niveau[length(Nombre$mois)-4]
+x6= Nombre$Niveau[length(Nombre$mois)-5]
+EVOL_rec = x2-x3
+
+```
+
+Fin `r MoisPROV` `r AnneePROV`, `r format_niv(x1)` personnes occupent un emploi intérimaire (données provisoires, corrigées des variations saisonnières), soit `r g_nom(x1,x2)` de `r format_g(g(x1,x2),signe = 0)` (soit `r format_delta(x1-x2)` intérimaires) par rapport au mois précédent (après `r format_g(g(x2,x3))` en `r MoisRECT` `r AnneeRECT`, soit `r format_delta(x2-x3)` ;
+après `r format_g(g(x3,x4))` en `r MoisRECT_1` `r AnneeRECT_1`, soit `r format_delta(x3-x2)` ;
+après `r format_g(g(x4,x5))` en `r MoisRECT_2` `r AnneeRECT_2`, soit `r format_delta(x4-x3)` ;
+après `r format_g(g(x5,x6))` en `r MoisRECT_3` `r AnneeRECT_3`, soit `r format_delta(x5-x4)`). 
+
+
+```{r, echo=FALSE, include=FALSE}
+x1 = last(Nombre$Niveau)
+x2= Nombre$Niveau[length(Nombre$mois)-12]
+
+```
+Fin `r MoisPROV` `r AnneePROV`, l’emploi intérimaire `r g_verbe(x1,x2,1)` `r format_g(g(x1,x2),signe=0)` sur un an (soit `r format_delta(x1-x2)` intérimaires).
+
+
+```{r, echo=FALSE, include=TRUE}
+library(scales, quietly = TRUE)
+ggplot(Nombre%>%
+         filter(as.numeric(annee)>=2007), 
+       aes(x=date)) +
+  geom_line( aes(y=Niveau)) +
+     scale_y_continuous(name = "",
+                        labels = comma,
+                        breaks = seq(from = 300000, to = 950000, by = 50000),
+                        limits = c(350000,900000))
+#   guides(size = "none")+
+#   ggtitle("Taux de rotation (y compris intérim) et difficultés de recrutement \n de 2007 à 2014, par secteur")
+
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+Secteurs2 = SecteursG%>%
+  mutate(gm=g(x1,x2),
+         delta_gm=x1-x2)%>%
+  mutate(gm2=g(x2,x3),
+         delta2_gm=x2-x3)%>%
+  mutate(delta_ref = delta_gm/EVOL_rec)%>%
+  arrange(desc(delta_ref))
+```
+Fin `r MoisRECT` `r AnneeRECT`, dernier mois pour lequel des données détaillées sont disponibles, l’emploi intérimaire
+```{r, results='asis', echo=FALSE}
+for (i in 1:nrow(Secteurs2)){
+   cat(paste0(gETa_verbe(Secteurs2[i,5][[1]],Secteurs2[i,4][[1]],Secteurs2[i,3][[1]],1),
+       " dans ",
+       toString(Secteurs2[i,1][[1]]),
+       " (",
+       format_g(Secteurs2[i,6][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,7][[1]]),
+       " intérimaires après ",
+       format_g(Secteurs2[i,8][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,9][[1]]),
+       " intérimaires) ; "))
+}
+```
+```{r, echo=FALSE, include=FALSE}
+Secteurs2 = Secteurs0%>%
+  mutate(gm=g(x1,x2),
+         delta_gm=x1-x2)%>%
+  filter(A17 & industrie)%>%
+  filter(sigle!="C2")%>%
+  mutate(gm2=g(x2,x3),
+         delta2_gm=x2-x3)%>%
+  mutate(delta_ref = delta_gm/EVOL_rec)%>%
+  arrange(desc(delta_ref))%>%
+  filter(!(abs(delta_gm)<550))
+```
+
+Au sein de l’industrie, l’emploi intérimaire
+```{r, results='asis', echo=FALSE}
+for (i in 1:nrow(Secteurs2)){
+   cat(paste0(gETa_verbe(Secteurs2[i,5][[1]],Secteurs2[i,4][[1]],Secteurs2[i,3][[1]],1),
+       " dans ",
+       toString(Secteurs2[i,1][[1]]),
+       " (",
+       format_g(Secteurs2[i,10][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,11][[1]]),
+       " intérimaires après ",
+       format_g(Secteurs2[i,12][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,13][[1]]),
+       " intérimaires) ; "))
+}
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+
+Secteurs2 = Secteurs0%>%
+  mutate(gm=g(x1,x2),
+         delta_gm=x1-x2)%>%
+  filter(A17 & tertiaire)%>%
+  mutate(gm2=g(x2,x3),
+         delta2_gm=x2-x3)%>%
+  #mutate(Secteur = str_sub(Secteur,6,-1))%>%
+  filter(!(abs(delta_gm)<550))%>%
+  mutate(delta_ref = delta_gm/EVOL_rec)%>%
+  arrange(desc(delta_ref))
+
+#a0 = length(t(Secteurs2[,1]))+1
+
+```
+
+Dans le tertiaire, l’emploi intérimaire 
+```{r, results='asis', echo=FALSE}
+for (i in 1:nrow(Secteurs2)){
+   cat(paste0(gETa_verbe(Secteurs2[i,5][[1]],Secteurs2[i,4][[1]],Secteurs2[i,3][[1]],1),
+       " dans ",
+       toString(Secteurs2[i,1][[1]]),
+       " (",
+       format_g(Secteurs2[i,10][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,11][[1]]),
+       " intérimaires après ",
+       format_g(Secteurs2[i,12][[1]]),
+       ", soit ",
+       format_delta(Secteurs2[i,13][[1]]),
+       " intérimaires) ; "))
+}
+```
+
+```{r, echo=FALSE, include=FALSE}
+Secteurs2 = SecteursG%>%
+  mutate(gm=g(x1,x2),
+         delta_gm=x1-x2)%>%
+  mutate(gm2=g(x2,x3),
+         delta2_gm=x2-x3)%>%
+  mutate(delta_ref = delta_gm/EVOL_rec)%>%
+  arrange(desc(delta_ref))
+```
+Sur un an, l’emploi intérimaire 
+```{r, results='asis', echo=FALSE}
+for (i in 1:nrow(Secteurs2)){
+   cat(paste0(g_verbe(SecteursG[i,5][[1]],SecteursG[i,2][[1]],1),
+       " ",
+       format_g(g(SecteursG[i,5][[1]],SecteursG[i,2][[1]]),0),
+       " dans ",
+       toString(SecteursG[i,1][[1]]),
+       " (",
+       "soit ",
+       format_delta(SecteursG[i,5][[1]]-SecteursG[i,2][[1]]),
+       " intérimaires) ; "))
+}
+```
+
+
+```{r, echo=FALSE, include=FALSE}
+a0 = length(Regions[1,])
+b = length(Regions[,1])
+s1 <- seq(3, a0-2, 1)
+x1 = as.numeric(Regions[b,s1])
+x2 = as.numeric(Regions[(b-1),s1])
+x3 = as.numeric(Regions[(b-2),s1])
+gm=g(x1,x2)
+delta_gm=x1-x2
+
+Regions2 = data.frame(Region_nom,delta_gm,gm,x1,x2,x3)%>%
+  filter(!(abs(delta_gm)<550))%>%
+  mutate(gm2=g(x2,x3),
+         delta2_gm=x2-x3)%>%
+  mutate(delta_ref = delta_gm/EVOL_rec)%>%
+  arrange(desc(delta_ref))
+A = length(Regions2[,1])+1
+```
+  
+```{r, results='asis', echo=FALSE}
+cat("Fin ",
+    MoisRECT,
+    " ",
+    AnneeRECT,
+    "l’emploi intérimaire évolue différemment selon les régions. Sur un mois, l’emploi intérimaire ")
+for (i in 1:nrow(Regions2)){
+   cat(paste0(gETa_verbe(Regions2[i,4][[1]],
+                         Regions2[i,5][[1]],Regions2[i,6][[1]],1)," ",
+       toString(Regions2[i,1][[1]]),
+       " (",
+       format_g(Regions2[i,3][[1]]),
+       ", soit ",
+       format_delta(Regions2[i,2][[1]]),
+       " intérimaires après ",
+       format_g(Regions2[i,7][[1]]),
+       ", soit ",
+       format_delta(Regions2[i,8][[1]]),
+       " intérimaires) ; "))
+}
+```
+
+
+
+```{r, echo=FALSE, include=FALSE}
+a0 = length(Regions[1,])
+b = length(Regions[,1])
+s1 <- seq(3, a0-2, 1)
+x1 = as.numeric(Regions[b,s1])
+x12 = as.numeric(Regions[(b-12),s1])
+ga=g(x1,x12)
+delta_ga=x1-x12
+
+Regions2 = data.frame(Region_nom,delta_ga,ga)%>%
+  arrange(desc(delta_ga))
+
+A = length(Regions2[,1])+1
+
+```
+
+
+Sur un an, l’emploi intérimaire `r g_verbe0(Regions2[1,3],1)` `r format_g(Regions2[1,3],0)` `r Regions2[1,1]` (soit `r format_delta(Regions2[1,2])` intérimaires) ; il `r g_verbe0(Regions2[2,3],1)` `r format_g(Regions2[2,3],0)` `r Regions2[2,1]` (soit `r format_delta(Regions2[2,2])` intérimaires) ; il `r g_verbe0(Regions2[3,3],1)` `r format_g(Regions2[3,3],0)` `r Regions2[3,1]` (soit `r format_delta(Regions2[3,2])` intérimaires).
+En revanche, l’emploi intérimaire `r g_verbe0(Regions2[A-1,3],1)` `r format_g(Regions2[A-1,3],0)` `r Regions2[A-1,1]` (soit `r format_delta(Regions2[A-1,2])` intérimaires) ; il `r g_verbe0(Regions2[A-2,3],1)` `r format_g(Regions2[A-2,3],0)` `r Regions2[A-2,1]` (soit `r format_delta(Regions2[A-2,2])` intérimaires) ; il `r g_verbe0(Regions2[A-3,3],1)` `r format_g(Regions2[A-3,3],0)` `r Regions2[A-3,1]` (soit `r format_delta(Regions2[A-3,2])` intérimaires).
+
+```{r, echo=FALSE, include=FALSE}
+x1 = last(Nombre$Niveau)
+x2= Nombre$Niveau[length(Nombre$mois)-1]
+x3= Nombre$Niveau[length(Nombre$mois)-2]
+```
+**Révision**`r knitr::asis_output("\u00A0")`**:**  Par rapport à l’estimation provisoire diffusée le `r jour_publication_precendente`, l’évolution de l’emploi intérimaire entre fin `r MoisRECT_1`  `r AnneeRECT_1` et fin `r MoisRECT`  `r AnneeRECT` est révisée `r alahausse(g(x2,x3),evol_prov_mois_dernier) ` (`r format_g(g(x2,x3))`, contre `r format_g(evol_prov_mois_dernier)`).
+
+
+**Note**`r knitr::asis_output("\u00A0")`**:** la mesure de l’emploi intérimaire en fin de mois est établie sur les 5 derniers jours ouvrés consécutifs en fin de mois. `r final_texte`
