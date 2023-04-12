@@ -42,7 +42,7 @@ x1 = last(Nombre$Niveau)
 x2= Nombre$Niveau[length(Nombre$mois)-12]
 
 ```
-Fin `r MoisPROV` `r AnneePROV`, l’emploi intérimaire `r g_verbe(x1,x2,1)` `r format_g(g(x1,x2),signe=0)` sur un an (soit `r format_delta(x1-x2)` intérimaires).
+Fin `r MoisPROV` `r AnneePROV`, l’emploi intérimaire `r g_verbe(x1,x2,1)` sur un an (soit `r format_delta(x1-x2)` intérimaires).
 
 
 ```{r, echo=FALSE, include=TRUE}
@@ -167,8 +167,6 @@ Sur un an, l’emploi intérimaire
 ```{r, results='asis', echo=FALSE}
 for (i in 1:nrow(Secteurs2)){
    cat(paste0(g_verbe(SecteursG[i,5][[1]],SecteursG[i,2][[1]],1),
-       " ",
-       format_g(g(SecteursG[i,5][[1]],SecteursG[i,2][[1]]),0),
        " dans ",
        toString(SecteursG[i,1][[1]]),
        " (",
@@ -239,8 +237,8 @@ A = length(Regions2[,1])+1
 ```
 
 
-Sur un an, l’emploi intérimaire `r g_verbe0(Regions2[1,3],1)` `r format_g(Regions2[1,3],0)` `r Regions2[1,1]` (soit `r format_delta(Regions2[1,2])` intérimaires) ; il `r g_verbe0(Regions2[2,3],1)` `r format_g(Regions2[2,3],0)` `r Regions2[2,1]` (soit `r format_delta(Regions2[2,2])` intérimaires) ; il `r g_verbe0(Regions2[3,3],1)` `r format_g(Regions2[3,3],0)` `r Regions2[3,1]` (soit `r format_delta(Regions2[3,2])` intérimaires).
-En revanche, l’emploi intérimaire `r g_verbe0(Regions2[A-1,3],1)` `r format_g(Regions2[A-1,3],0)` `r Regions2[A-1,1]` (soit `r format_delta(Regions2[A-1,2])` intérimaires) ; il `r g_verbe0(Regions2[A-2,3],1)` `r format_g(Regions2[A-2,3],0)` `r Regions2[A-2,1]` (soit `r format_delta(Regions2[A-2,2])` intérimaires) ; il `r g_verbe0(Regions2[A-3,3],1)` `r format_g(Regions2[A-3,3],0)` `r Regions2[A-3,1]` (soit `r format_delta(Regions2[A-3,2])` intérimaires).
+Sur un an, l’emploi intérimaire `r g_verbe0(Regions2[1,3],1)` `r Regions2[1,1]` (soit `r format_delta(Regions2[1,2])` intérimaires) ; il `r g_verbe0(Regions2[2,3],1)`  `r Regions2[2,1]` (soit `r format_delta(Regions2[2,2])` intérimaires) ; il `r g_verbe0(Regions2[3,3],1)` `r Regions2[3,1]` (soit `r format_delta(Regions2[3,2])` intérimaires).
+En revanche, l’emploi intérimaire `r g_verbe0(Regions2[A-1,3],1)`  `r Regions2[A-1,1]` (soit `r format_delta(Regions2[A-1,2])` intérimaires) ; il `r g_verbe0(Regions2[A-2,3],1)`  `r Regions2[A-2,1]` (soit `r format_delta(Regions2[A-2,2])` intérimaires) ; il `r g_verbe0(Regions2[A-3,3],1)` `r Regions2[A-3,1]` (soit `r format_delta(Regions2[A-3,2])` intérimaires).
 
 ```{r, echo=FALSE, include=FALSE}
 x1 = last(Nombre$Niveau)
