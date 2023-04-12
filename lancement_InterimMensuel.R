@@ -3,7 +3,6 @@
 # install.packages("knitr")
 # install.packages("sjmisc")
 
-
 library(rmarkdown)
 library(dplyr)
 library(ggplot2)
@@ -15,61 +14,20 @@ library(sjmisc)
 library(stringr)
 library(rlang)
 
-
-
+#################A modifier avant chaque lancement#####################
 Fichier = "Fichier.xlsx"
 jour_publication_precendente = "8 septembre 2022"
 evol_prov_mois_dernier = -0.2 #%
 final_texte = "Pour le mois de juillet 2022, il s'agit de la semaine du 25 au 29, et pour le mois d'août 2022, de celle du 22 au 26."
 
 
-Nombre = read_excel(Fichier, sheet ="Nombre d'intérimaires",skip = 7)
-colnames(Nombre) <- c("date", "Evolution", "Niveau")
-Nombre = Nombre %>%
-  mutate(annee=as.numeric(substr(date,1,4)),
-         mois_num = as.numeric(substr(date,6,7)))%>%
-  mutate(mois=case_when(mois_num==1 ~ "janvier",
-                        mois_num==2 ~ "février",
-                        mois_num==3 ~ "mars",
-                        mois_num==4 ~ "avril",
-                        mois_num==5 ~ "mai",
-                        mois_num==6 ~ "juin",
-                        mois_num==7 ~ "juillet",
-                        mois_num==8 ~ "août",
-                        mois_num==9 ~ "septembre",
-                        mois_num==10 ~"octobre",
-                        mois_num==11 ~"novembre",
-                        mois_num==12 ~"décembre"))
+################Automatisé - attention en cas de restructuration - #####################
 
-
-
-#pour éviter d'etre relancé en permancence lors de  l ecriture du code
-Secteurs=t(read_excel(Fichier, sheet ="intérimaires par secteur",skip = 7))
-colnames(Secteurs) <- Secteurs[1,]
-Secteurs = data.frame(Secteurs)[-1,]%>%
-  data.frame()%>%
-  mutate(date = 1)
-Secteurs$date <- seq(1, length(Secteurs$AZ...Agriculture))
-Secteurs = Secteurs %>%
-  mutate(mois_num = ifelse(date%%12==0,12,date%%12),
-         annee = date%/%12+2000)%>%
-  mutate(mois=case_when(mois_num==1 ~ "janvier",
-                        mois_num==2 ~ "février",
-                        mois_num==3 ~ "mars",
-                        mois_num==4 ~ "avril",
-                        mois_num==5 ~ "mai",
-                        mois_num==6 ~ "juin",
-                        mois_num==7 ~ "juillet",
-                        mois_num==8 ~ "août",
-                        mois_num==9 ~ "septembre",
-                        mois_num==10 ~"octobre",
-                        mois_num==11 ~"novembre",
-                        mois_num==12 ~"décembre"))%>%
-  select(annee,mois,everything())
-
-#et pour des besoins plus courts
+#####Fichiers sur secteurs#####
+#Attention à ces deux lignes en cas de restructuration du fichier
 Secteurs00=read_excel(Fichier, sheet ="intérimaires par secteur",skip = 7)
-Secteurs0 =Secteurs00[1:(nrow(Secteurs00)-5),c(1,length(Secteurs00)-12,length(Secteurs00)-2,length(Secteurs00)-1,length(Secteurs00))]
+Secteurs0 =Secteurs00[,c(1,length(Secteurs00)-12,length(Secteurs00)-2,length(Secteurs00)-1,length(Secteurs00))]
+#rm(Secteurs00)
 colnames(Secteurs0) <- c("Secteur","x12","x3","x2","x1")
 Secteurs0 = Secteurs0%>%
   mutate(sigle=substr(Secteur,1,2))%>%
@@ -108,19 +66,44 @@ Secteurs0 = Secteurs0%>%
                              sigle=="LZ" ~ "les ctivités immobilières",
                              sigle=="MN" ~ "les services aux entreprises",  #Activités scientifiques et techniques ; services administratifs et de soutien
                              sigle=="OQ" ~ "les services non marchands", #Administration publique, enseignement, santé humaine et action sociale
-                             sigle=="RU" ~ "les services aux ménages",)) #Autres activités de services
+                             sigle=="RU" ~ "les services aux ménages",  #Autres activités de services
+                               sigle=="Ag" ~ "l'agriculture",
+                               sigle=="In" ~ "l'industrie",
+                               sigle=="Co" ~ "la construction",
+                               sigle=="Te" ~ "le tertiaire",
+                               sigle=="En" ~ "Ensemble"),)%>%
+  filter(!is.na(Secteur))
 
 
+SecteursG=Secteurs0%>%
+  filter(sigle%in%c("In","Co","Te"))%>%
+  select(-sigle,-A17,-industrie,-tertiaire)
+Secteurs0=Secteurs0%>%
+  filter(!(sigle%in%c("Ag","In","Co","Te","En")))
 
-#les grands secteurs
-SecteursG =Secteurs00[(nrow(Secteurs00)-3):(nrow(Secteurs00)-1),c(1,length(Secteurs00)-12,length(Secteurs00)-2,length(Secteurs00)-1,length(Secteurs00))]
-colnames(SecteursG) <- c("Secteur","x12","x3","x2","x1")
-SecteursG = SecteursG %>%
-  mutate(Secteur = case_when(Secteur=="Industrie" ~ "l'industrie",
-                             Secteur=="Construction" ~ "la construction",
-                             Secteur=="Tertiaire" ~ "le tertiaire"))
+#####Fichier pour le premier paragraphe avec plus d'historique#####
+#attention à la ligne suivante en cas de restructuration du fichier
+Nombre = read_excel(Fichier, sheet ="Nombre d'intérimaires",skip = 7)%>%
+  rename(date='...1')%>%
+  select(date,Niveau)%>%
+  mutate(annee=as.numeric(substr(date,1,4)),
+         mois_num = as.numeric(substr(date,6,7)))%>%
+  mutate(mois=case_when(mois_num==1 ~ "janvier",
+                        mois_num==2 ~ "février",
+                        mois_num==3 ~ "mars",
+                        mois_num==4 ~ "avril",
+                        mois_num==5 ~ "mai",
+                        mois_num==6 ~ "juin",
+                        mois_num==7 ~ "juillet",
+                        mois_num==8 ~ "août",
+                        mois_num==9 ~ "septembre",
+                        mois_num==10 ~"octobre",
+                        mois_num==11 ~"novembre",
+                        mois_num==12 ~"décembre"))
 
-#idem régions
+
+#####Fichier pour les régions#####
+#attention à la ligne suivante en cas de restructuration du fichier
 Regions=t(read_excel(Fichier, sheet ="Intérimaires par région ETU",skip = 7))
 colnames(Regions) <- Regions[1,]
 Regions = data.frame(Regions)[3:length(Regions[,1]),1:12]
@@ -152,9 +135,18 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
              "en Provence-Alpes-Côte d'Azur")
 
 
+################Lancement du Rmarkdown a proprement parler - #####################
+options(encoding = 'UTF-8')
+library("serad")
+#render("InterimMensuel.Rmd", output_format = "word_document")
+render("InterimMensuel.Rmd",
+       word_document(reference_docx="word-template_adaptations.docx"))
 
 
-#############
+
+
+
+################ Pendant le developpement du package #####################
 devtools::check(cran = FALSE)
 #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
 #usethis::use_vignette("serad")
@@ -167,18 +159,3 @@ devtools::build()
 devtools::install(build_vignettes = T) #Il faudrait avoir TRUE
 vignette("serad")
 ??serad
-
-
-#############
-options(encoding = 'UTF-8')
-#source(file = "pour_commentaires_Dares.R")
-library("serad")
-
-#render("InterimMensuel.Rmd", output_format = "word_document")
-#render("InterimMensuel.Rmd", output_format = "odt_document")
-render("InterimMensuel.Rmd",
-       word_document(reference_docx="word-template_adaptations.docx"))
-
-
-
-
