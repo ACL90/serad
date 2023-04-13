@@ -22,13 +22,12 @@
 #' gETa_verbe00(-20,1)       #13
 #' gETa_verbe00(-21,1)       #12
 #'
-#' @export
-
+# pas utilisable par l'utilisateur donc pas le mot cle export
 gETa_verbe00 = function(g1,g2){
 
   a = serad::g(g1,g2)
   return(
-  case_when((arrondi_tot(g1,1)==0) & (arrondi_tot(g2,1)==0) ~1,  #reste stable # round(g1,1)
+    dplyr::case_when((arrondi_tot(g1,1)==0) & (arrondi_tot(g2,1)==0) ~1,  #reste stable # round(g1,1)
             (arrondi_tot(g1,1)==0) & (arrondi_tot(g2,1)!=0) ~2,  #se stabilise
             g1>0 & g2<(-0.5)                ~3,  #repart à la hausse #se redresse
             g1>0 & g2<0                     ~4,  #augmente, est en hausse
