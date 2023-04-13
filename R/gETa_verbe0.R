@@ -27,7 +27,7 @@
 gETa_verbe0 = function(g1,g2,sing=1){  #sing=1 pour singulier
   #rd = runif(1)
   rd = 0.6
-  return(case_when(gETa_verbe00(g1,g2)==1~ifelse(sing,"reste stable","restent stables"),
+  return(dplyr::case_when(gETa_verbe00(g1,g2)==1~ifelse(sing,"reste stable","restent stables"),
                    gETa_verbe00(g1,g2)==2~ifelse(sing,"se stabilise","se stabilisent"),
                    gETa_verbe00(g1,g2)==3 & rd>=0.5~ifelse(sing,"repart \u00e0 la hausse","repartent \u00e0 la hausse"),
                    gETa_verbe00(g1,g2)==3 & rd<0.5~ifelse(sing,"se redresse","se redressent"),

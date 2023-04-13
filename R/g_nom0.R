@@ -16,7 +16,7 @@
 #'
 #' @export
 g_nom0 = function(g){
-  case_when(g>4-0.05~"une forte hausse",
+  dplyr::case_when(g>4-0.05~"une forte hausse",
             g>1-0.05~"une hausse",
             g>0.4-0.05~"une hausse mod\u00e9r\u00e9e",
             g>0.1-0.05~"une l\u00e9g\u00e8re hausse",

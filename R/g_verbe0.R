@@ -22,7 +22,7 @@
 #' @export
 g_verbe0 = function(g,sing=1){  #sing pour singulier
 
-  z = case_when(g>10-0.05~ifelse(sing,"bondit de","bondissent de"),
+  z = dplyr::case_when(g>10-0.05~ifelse(sing,"bondit de","bondissent de"),
             g>4-0.05~ifelse(sing,"s'accroit de","s'acroissent de"),
             g>1-0.05~ifelse(sing,"est en hausse de","sont en hausse de"),
             g>0.3-0.05~ifelse(sing,"augmente de","augmentent de"),

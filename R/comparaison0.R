@@ -28,7 +28,7 @@
 comparaison0  = function(g,hausse0,egalite0,baisse0,
                          seuil=0.1,param=0,
                          hausse1=hausse0,egalite1=egalite0,baisse1=baisse0){
-  case_when(((g>=seuil)&(param==0))~hausse0,
+  dplyr::case_when(((g>=seuil)&(param==0))~hausse0,
             ((g>=seuil)&(param==1))~hausse1,
             ((g<=-seuil)&(param==0))~baisse0,
             ((g<=-seuil)&(param==1))~baisse1,
