@@ -4,7 +4,7 @@
 \alias{s}
 \title{Met au pluriel si la valeur absolue du nombre est supérieure ou égale a 2.}
 \usage{
-s(a, sing = "", plur = "s", seuil = 1.95)
+s(a, sing = "", plur = "s", seuil = 2)
 }
 \arguments{
 \item{a}{Le nombre}
@@ -13,18 +13,24 @@ s(a, sing = "", plur = "s", seuil = 1.95)
 
 \item{plur}{Le mot à indiquer au pluriel, -s par défaut (d'ou le nom de la fonction)}
 
-\item{seuil}{Pour gérer le cas limite où un arrondi à 2 depuis l'inférieur.}
+\item{seuil}{Pour gérer un arrondi à 2 depuis l'inférieur.}
 }
 \value{
-Le mot bien accordé ; par défault '-s ou rien.
+Le mot bien accordé ; par défault '-s ou rien. TEST
 }
 \description{
 Met au pluriel si la valeur absolue du nombre est supérieure ou égale a 2.
 }
 \examples{
-s(-7.5)
-s(-2)
-s(1.4,"chat parle", "chats parlent")
-s(-2,"chat parle", "chats parlent")
+s(-7.5)             #s
+s(-2)               #s
+s(1.4,"chat parle", "chats parlent") #chat parle
+s(-2,"chat parle", "chats parlent")  #chats parlent
+s(1.97)             #NA
+s(round(1.97,1))    #s
+s(1.97, seuil=1.95) #s
 
+}
+\seealso{
+Le \href{https://www.dictionnaire-academie.fr/article/QDL057}{site de l'Académie française}
 }
