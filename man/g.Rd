@@ -4,12 +4,14 @@
 \alias{g}
 \title{Calcul d'une variation}
 \usage{
-g(x1, x2)
+g(x1, x2, eps = 1e-08)
 }
 \arguments{
 \item{x1}{Le niveau le plus récent}
 
 \item{x2}{Le niveau le plus ancien}
+
+\item{eps}{Gestion du cas du denominateur nul}
 }
 \value{
 La variation, exprimée en pourcentage (si x1=2.x1, cela retourne 100).
@@ -18,7 +20,8 @@ La variation, exprimée en pourcentage (si x1=2.x1, cela retourne 100).
 Calcul d'une variation
 }
 \details{
-Pas (encore) de gestion du cas où x2 est nul.
+Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
+C'est une valeur paramétrable avec eps. #' L'idée est de toujours sortir quelque chose.
 }
 \examples{
 g(2,1)  #100

@@ -153,9 +153,10 @@ devtools::check(cran = FALSE)
 #usethis::use_vignette("serad")
 #https://community.rstudio.com/t/bypass-qpdf-checks/115691
 #devtools::build_vignettes()  #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
-#rmarkdown::render("vignettes/serad.Rmd")
 devtools::build()
 devtools::document()
+rmarkdown::render("vignettes/serad.Rmd")
+
 
 #devtools::load_all()
 #Le suivant nécessite de faire skip en ligne de commande
