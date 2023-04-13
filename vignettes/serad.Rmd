@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 31 janvier 2022.
+Dernière mise à jour de cette documentation : 13 avril 2022.
 
 ```{r setup}
 library(serad)
@@ -23,6 +23,7 @@ library(serad)
 
 Le package **serad** (**S**ynthese d'**E**crits avec les **R**egles en vigueur **A** la **D**ares) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage en vigueur à la Dares.
 
+***
 **Fonctions de base et formatage**
 
 Les fonctions `serad::g(x1,x2)` et `serad::a(x1,x2,x3)` permettent d'obtenir une variation, ou une accélération, exprimée en pourcentage.
@@ -68,6 +69,7 @@ Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut a
 ```
 
 
+***
 **Autres**
 
 Le pluriel n'advient en français que lorsqu'on atteint ou dépasse 2, ce que gère `s(a,sing,plur)` - privilégier la forme `serad::s(a,sing,plur)` :
@@ -89,7 +91,7 @@ arrondi_tot(0.35) #0.4 <:)>
 ```
 
 
-
+***
 **Un exemple simpliste d'application... **
 *à ne pas reproduire en l'état.*
 
@@ -101,14 +103,15 @@ A <- data.frame(as.matrix(Seatbelts), date=time(Seatbelts))
    
 #En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` 
 #conducteurs d'automobiles sont décédes en Grande-Bretagne, soit 
-#`r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(g(x1,x2))`,
+#`r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(serad::g(x1,x2))`,
 #soit `r format_delta(x1-x2)` décès). Le niveau atteint 
 #`r depasse(x1,x168,1)` celui de décembre 1982 - avant l'obligation 
-#du port de la ceinture de sécurité (`r format_g(g(x1,x168))`, soit 
+#du port de la ceinture de sécurité (`r format_g(serad::g(x1,x168))`, soit 
 #`r format_delta(x1-x168)` décès).
 ```
+Cela produit :
 
-En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'automobiles sont décédés en Grande-Bretagne, soit `r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(g(x1,x2))`, soit `r format_delta(x1-x2)` décès). Le niveau atteint `r depasse(x1,x168,1)` celui de décembre 1982 - avant l'obligation du port de la ceinture de sécurité (`r format_g(g(x1,x168))`, soit `r format_delta(x1-x168)` décès).
+En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'automobiles sont décédés en Grande-Bretagne, soit `r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(serad::g(x1,x2))`, soit `r format_delta(x1-x2)` décès). Le niveau atteint `r depasse(x1,x168,1)` celui de décembre 1982 - avant l'obligation du port de la ceinture de sécurité (`r format_g(serad::g(x1,x168))`, soit `r format_delta(x1-x168)` décès).
 
 ```{r, echo=TRUE, include=TRUE }
    y1 = A$front[length(A$law)]
@@ -117,12 +120,16 @@ En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'au
    z1 = A$rear[length(A$law)]
    z2 = A$rear[length(A$law)-12]
    
-#En glissements annuels, le nombre de décès de passagers avant 
-#`r gETa_verbe(y1,y2,y3,1)` (`r format_g(g(y1,y2))`, soit 
-#`r format_delta(y1-y2)` décès, après `r format_g(g(y2,y3))`, 
+#En glissements annuels, le nombre de décès de passagers à l'avant 
+#`r gETa_verbe(y1,y2,y3,1)` (`r format_g(serad::g(y1,y2))`, soit 
+#`r format_delta(y1-y2)` décès, après `r format_g(serad::g(y2,y3))`, 
 #soit `r format_delta(y2-y3)`).
+#Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)`
+#(soit `r format_delta(y1-y2)` décès).
 ```
-En glissements annuels, le nombre de décès de passagers à l'avant *`r gETa_verbe(y1,y2,y3,1)`* (`r format_g(g(y1,y2))`, soit `r format_delta(y1-y2)` décès, après `r format_g(g(y2,y3))`, soit `r format_delta(y2-y3)`). Le nombre de décès de passagers à l'arrière *`r g_verbe(z1,z2,1)`* (soit `r format_delta(y1-y2)` décès).
+Cela produit :
+
+En glissements annuels, le nombre de décès de passagers à l'avant `r gETa_verbe(y1,y2,y3,1)` (`r format_g(serad::g(y1,y2))`, soit `r format_delta(y1-y2)` décès, après `r format_g(serad::g(y2,y3))`, soit `r format_delta(y2-y3)`). Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)` (soit `r format_delta(y1-y2)` décès).
 
 
 
