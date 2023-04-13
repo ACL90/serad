@@ -45,7 +45,7 @@ x2= Nombre$Niveau[length(Nombre$mois)-12]
 Fin `r MoisPROV` `r AnneePROV`, l’emploi intérimaire `r g_verbe(x1,x2,1)` sur un an (soit `r format_delta(x1-x2)` intérimaires).
 
 
-```{r, echo=FALSE, include=TRUE}
+```{r, echo=FALSE, include=TRUE, warning=FALSE}
 library(scales, quietly = TRUE)
 ggplot(Nombre%>%
          filter(as.numeric(annee)>=2007), 
