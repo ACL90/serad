@@ -30,7 +30,6 @@ Les fonctions `serad::g(x1,x2)` et `serad::a(x1,x2,x3)` permettent d'obtenir une
 Elles se combinent avec la fonction `format_g` pour obtenir facilement le formatage idoine d'une variation (ou d'une accélération).
 ```{r }
 #Astuce : il est possible d enlever le signe avec format_g(g,signe=0).
-#Avertissement : dans le  cas improbable d'un dénominateur nul, il est considéré arbitrairement petit.
 ?format_g
 ```
 Les autres fonctions de formatage sont :
