@@ -14,5 +14,10 @@
 #' a(6,2,1) #100
 #'
 #' @export
-a = function(x1,x2,x3){100*(g(x1,x2)/g(x2,x3)-1)}
+a = function(x1,x2,x3){
+  serad::g(
+    serad::g(x1,x2),
+    serad::g(x2,x3)
+  )
+  }
 

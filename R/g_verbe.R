@@ -25,5 +25,5 @@
 #' g_verbe(0.79,1)   # chute de 21,0 %
 #'
 #' @export
-g_verbe = function(x1,x2,sing0=1){g_verbe0(g(x1,x2),sing0)} #sing=1 pour singulier
+g_verbe = function(x1,x2,sing0=1){g_verbe0(serad::g(x1,x2),sing0)} #sing=1 pour singulier
 

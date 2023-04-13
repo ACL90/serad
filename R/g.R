@@ -15,8 +15,11 @@
 #'
 #' @export
 g = function(x1,x2,eps=0.00000001){
-  ifelse(x2==0,
-         100*(x1/eps-1),
-         100*(x1/x2-1))}
-
+  if(x2==0){
+    #ajout d un warning
+    warning("division par 0 à l'appel de serad::g()")
+    return(100*(x1/eps-1))
+  }
+  else return(100*(x1/x2-1))
+}
 
