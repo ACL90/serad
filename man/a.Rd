@@ -19,12 +19,10 @@ L'accélération, exprimée en pourcentage.
 \description{
 Calcul d'une accélération
 }
-\details{
-Pas (encore) de gestion du cas ou g(x2,x3) est nul, mais cela ne devrait pas se rencontrer en pratique
-}
 \examples{
 a(4,2,1) #0
 a(6,2,1) #100
+a(2,1,1) #1e+12 et message d'avis
 
 }
 \seealso{

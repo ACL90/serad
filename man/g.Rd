@@ -22,9 +22,11 @@ Calcul d'une variation
 \details{
 Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
 C'est une valeur paramétrable avec eps. L'idée est de toujours sortir quelque chose.
+Un message d'avis apparait dans la console.
 }
 \examples{
 g(2,1)  #100
+g(2,0)  #2e+10 et message d'avis
 
 }
 \seealso{
