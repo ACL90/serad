@@ -9,9 +9,11 @@
 #' g_nom_simple(3,5) # en baisse de 40,0 %
 #'
 #' @export
-g_nom_simple = function(x1,x2){
-   z = case_when(g(x1,x2)>=0~"en hausse de",
-                 g(x1,x2)<0~"en baisse de")
+   g_nom_simple = function(x1,x2){
+#    z = case_when(g(x1,x2)>=0~"en hausse de",
+#                  g(x1,x2)<0~"en baisse de")
+     z = comparaison(x1,x2,"en hausse de","en hausse","en baisse de")
    return(paste(z,format_g(g(x1,x2),signe=0)))
-}
+ }
+
 
