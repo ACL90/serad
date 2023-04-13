@@ -155,7 +155,7 @@ devtools::check(cran = FALSE)
 #devtools::build_vignettes()  #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
 devtools::build()
 devtools::document()
-rmarkdown::render("vignettes/serad.Rmd")
+#rmarkdown::render("vignettes/serad.Rmd")
 
 
 #devtools::load_all()
