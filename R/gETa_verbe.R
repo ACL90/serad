@@ -25,7 +25,7 @@
 #'
 #' @export
 gETa_verbe = function(x1,x2,x3,sing=1){  #sing=1 pour singulier
-  g1= g(x1,x2)
-  g2=g(x2,x3)
+  g1= serad::g(x1,x2)
+  g2= serad::g(x2,x3)
   return(gETa_verbe0(g1,g2,sing))
 }

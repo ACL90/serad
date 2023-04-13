@@ -26,7 +26,7 @@
 
 gETa_verbe00 = function(g1,g2){
 
-  a = g(g1,g2)
+  a = serad::g(g1,g2)
   return(
   case_when((arrondi_tot(g1,1)==0) & (arrondi_tot(g2,1)==0) ~1,  #reste stable # round(g1,1)
             (arrondi_tot(g1,1)==0) & (arrondi_tot(g2,1)!=0) ~2,  #se stabilise
