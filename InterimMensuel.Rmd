@@ -31,10 +31,10 @@ EVOL_rec = x2-x3
 
 ```
 
-Fin `r MoisPROV` `r AnneePROV`, `r format_niv(x1)` personnes occupent un emploi intérimaire (données provisoires, corrigées des variations saisonnières), soit `r g_nom(x1,x2)` de `r format_g(g(x1,x2),signe = 0)` (soit `r format_delta(x1-x2)` intérimaires) par rapport au mois précédent (après `r format_g(g(x2,x3))` en `r MoisRECT` `r AnneeRECT`, soit `r format_delta(x2-x3)` ;
-après `r format_g(g(x3,x4))` en `r MoisRECT_1` `r AnneeRECT_1`, soit `r format_delta(x3-x2)` ;
-après `r format_g(g(x4,x5))` en `r MoisRECT_2` `r AnneeRECT_2`, soit `r format_delta(x4-x3)` ;
-après `r format_g(g(x5,x6))` en `r MoisRECT_3` `r AnneeRECT_3`, soit `r format_delta(x5-x4)`). 
+Fin `r MoisPROV` `r AnneePROV`, `r format_niv(x1)` personnes occupent un emploi intérimaire (données provisoires, corrigées des variations saisonnières), soit `r g_nom(x1,x2)` de `r format_g(serad::g(x1,x2),signe = 0)` (soit `r format_delta(x1-x2)` intérimaires) par rapport au mois précédent (après `r format_g(serad::g(x2,x3))` en `r MoisRECT` `r AnneeRECT`, soit `r format_delta(x2-x3)` ;
+après `r format_g(serad::g(x3,x4))` en `r MoisRECT_1` `r AnneeRECT_1`, soit `r format_delta(x3-x2)` ;
+après `r format_g(serad::g(x4,x5))` en `r MoisRECT_2` `r AnneeRECT_2`, soit `r format_delta(x4-x3)` ;
+après `r format_g(serad::g(x5,x6))` en `r MoisRECT_3` `r AnneeRECT_3`, soit `r format_delta(x5-x4)`). 
 
 
 ```{r, echo=FALSE, include=FALSE}
@@ -63,9 +63,9 @@ ggplot(Nombre%>%
 
 ```{r, echo=FALSE, include=FALSE}
 Secteurs2 = SecteursG%>%
-  mutate(gm=g(x1,x2),
+  mutate(gm=serad::g(x1,x2),
          delta_gm=x1-x2)%>%
-  mutate(gm2=g(x2,x3),
+  mutate(gm2=serad::g(x2,x3),
          delta2_gm=x2-x3)%>%
   mutate(delta_ref = delta_gm/EVOL_rec)%>%
   arrange(desc(delta_ref))
@@ -89,11 +89,11 @@ for (i in 1:nrow(Secteurs2)){
 ```
 ```{r, echo=FALSE, include=FALSE}
 Secteurs2 = Secteurs0%>%
-  mutate(gm=g(x1,x2),
+  mutate(gm=serad::g(x1,x2),
          delta_gm=x1-x2)%>%
   filter(A17 & industrie)%>%
   filter(sigle!="C2")%>%
-  mutate(gm2=g(x2,x3),
+  mutate(gm2=serad::g(x2,x3),
          delta2_gm=x2-x3)%>%
   mutate(delta_ref = delta_gm/EVOL_rec)%>%
   arrange(desc(delta_ref))%>%
@@ -122,10 +122,10 @@ for (i in 1:nrow(Secteurs2)){
 ```{r, echo=FALSE, include=FALSE}
 
 Secteurs2 = Secteurs0%>%
-  mutate(gm=g(x1,x2),
+  mutate(gm=serad::g(x1,x2),
          delta_gm=x1-x2)%>%
   filter(A17 & tertiaire)%>%
-  mutate(gm2=g(x2,x3),
+  mutate(gm2=serad::g(x2,x3),
          delta2_gm=x2-x3)%>%
   #mutate(Secteur = str_sub(Secteur,6,-1))%>%
   filter(!(abs(delta_gm)<550))%>%
@@ -156,9 +156,9 @@ for (i in 1:nrow(Secteurs2)){
 
 ```{r, echo=FALSE, include=FALSE}
 Secteurs2 = SecteursG%>%
-  mutate(gm=g(x1,x2),
+  mutate(gm=serad::g(x1,x2),
          delta_gm=x1-x2)%>%
-  mutate(gm2=g(x2,x3),
+  mutate(gm2=serad::g(x2,x3),
          delta2_gm=x2-x3)%>%
   mutate(delta_ref = delta_gm/EVOL_rec)%>%
   arrange(desc(delta_ref))
@@ -184,12 +184,12 @@ s1 <- seq(3, a0-2, 1)
 x1 = as.numeric(Regions[b,s1])
 x2 = as.numeric(Regions[(b-1),s1])
 x3 = as.numeric(Regions[(b-2),s1])
-gm=g(x1,x2)
+gm=serad::g(x1,x2)
 delta_gm=x1-x2
 
 Regions2 = data.frame(Region_nom,delta_gm,gm,x1,x2,x3)%>%
   filter(!(abs(delta_gm)<550))%>%
-  mutate(gm2=g(x2,x3),
+  mutate(gm2=serad::g(x2,x3),
          delta2_gm=x2-x3)%>%
   mutate(delta_ref = delta_gm/EVOL_rec)%>%
   arrange(desc(delta_ref))
@@ -226,7 +226,7 @@ b = length(Regions[,1])
 s1 <- seq(3, a0-2, 1)
 x1 = as.numeric(Regions[b,s1])
 x12 = as.numeric(Regions[(b-12),s1])
-ga=g(x1,x12)
+ga=serad::g(x1,x12)
 delta_ga=x1-x12
 
 Regions2 = data.frame(Region_nom,delta_ga,ga)%>%
@@ -245,7 +245,7 @@ x1 = last(Nombre$Niveau)
 x2= Nombre$Niveau[length(Nombre$mois)-1]
 x3= Nombre$Niveau[length(Nombre$mois)-2]
 ```
-**Révision**`r knitr::asis_output("\u00A0")`**:**  Par rapport à l’estimation provisoire diffusée le `r jour_publication_precendente`, l’évolution de l’emploi intérimaire entre fin `r MoisRECT_1`  `r AnneeRECT_1` et fin `r MoisRECT`  `r AnneeRECT` est révisée `r alahausse(g(x2,x3),evol_prov_mois_dernier) ` (`r format_g(g(x2,x3))`, contre `r format_g(evol_prov_mois_dernier)`).
+**Révision**`r knitr::asis_output("\u00A0")`**:**  Par rapport à l’estimation provisoire diffusée le `r jour_publication_precendente`, l’évolution de l’emploi intérimaire entre fin `r MoisRECT_1`  `r AnneeRECT_1` et fin `r MoisRECT`  `r AnneeRECT` est révisée `r alahausse(serad::g(x2,x3),evol_prov_mois_dernier) ` (`r format_g(serad::g(x2,x3))`, contre `r format_g(evol_prov_mois_dernier)`).
 
 
 **Note**`r knitr::asis_output("\u00A0")`**:** la mesure de l’emploi intérimaire en fin de mois est établie sur les 5 derniers jours ouvrés consécutifs en fin de mois. `r final_texte`
