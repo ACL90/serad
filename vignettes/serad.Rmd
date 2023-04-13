@@ -46,9 +46,7 @@ Le plus souvent, on est simplement intéressé par la variation. La fonction gé
 ?comparaison
 #Astuce : comparaison permet de modifier la marge (<0.05%) pour le cas d'egalite.
 ```
-Les options de `comparaison` sont multiples, et ce qui a permis de créer facilement des fonctions dérivées très pratiques : `alahausse(x1,x2)`, `audessus(x1,x2)`, `davantage(x1,x2)`, `depasse(x1, x2, sing)`... La liste s'allongera sûrement au fil des remontées d'utilisateurs.
-
-Par ailleurs, une comparaison nominale est codée directement avec `g_nom_simple(x1,x2)`.
+Les options de `comparaison` sont multiples, et ce qui a permis de créer facilement des fonctions dérivées très pratiques : `alahausse(x1,x2)`, `audessus(x1,x2)`, `davantage(x1,x2)`, `depasse(x1, x2, sing)`, `g_nom_simple(x1,x2)`... La liste s'allongera sûrement au fil des remontées d'utilisateurs.
 
 
 **Comparaisons plus fines**
