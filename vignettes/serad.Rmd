@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 13 avril 2022.
+Dernière mise à jour de cette documentation : 18 avril 2022.
 
 ```{r setup}
 library(serad)
@@ -53,6 +53,9 @@ Les options de `comparaison` sont multiples, et ce qui a permis de créer facile
 
 Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord : `g_nom(x1,x2)` -et son avatar `g_nom0(g)`- pour une évolution nominale, et `g_verbe(x1,x2)` -et son avatar `g_verbe0(g)`- pour une évolution verbale.
 ```{r }
+?g_nom
+?g_verbe
+#Avancé : il est possible de paramétrer leurs seuils et sorties !
 #NB : g_verbe(x1,x2) est désormais directement suivi du pourcentage.
 ```
 
@@ -62,13 +65,19 @@ Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord :
 Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut avoir un verbe qui tient compte à la fois de la variation et de l'accélération. Cela est permis par `gETa_verbe(x1,x2,x3,sing)` - et son avatar `gETa_verbe0(g1,g2,sing)`.
 ```{r }
 ?gETa_verbe
-#Astuce : la fonction sous-jacente est gETa_verbe00. 
-#Il sera ultérieurement possible de la paramétrer.
+#Avancé : il est possible de paramétrer les seuils et sorties !
+#Expert : si la partition sous-jacente ne convient pas, contactez-nous.
 ```
 
 
 ***
 **Autres**
+
+`arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester:
+```{r }
+round(0.35,1)     #0.3 <!!>
+arrondi_tot(0.35) #0.4 <:)>
+```
 
 Le pluriel n'advient en français que lorsqu'on atteint ou dépasse 2, ce que gère `s(a,sing,plur)` - privilégier la forme `serad::s(a,sing,plur)` :
 ```{r }
@@ -79,13 +88,6 @@ paste(x,serad::s(x,"chat parle", "chats parlent"))
 x=1.96
 x_format = format_niv(x,detail=1)  #2.0
 paste(x_format,serad::s(x,"chat parle", "chats parlent",seuil=1.95))
-```
-
-
-`arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester:
-```{r }
-round(0.35,1)     #0.3 <!!>
-arrondi_tot(0.35) #0.4 <:)>
 ```
 
 
