@@ -109,6 +109,34 @@
 
 
 
+  #seuils dans g_verbe0
+  #serad$seuilv
+  serad0$namse$forttttt    = (9.95)
+
+
+  #verbes utilises dans g_nom0
+  #serad$nomse
+    serad0$nomse$fortttt   = 3.95
+    serad0$nomse$forttt    = 0.95
+    serad0$nomse$fortt     = 0.35
+    serad0$nomse$fort      = 0.05
+    serad0$nomse$faible    = (-0.05)
+    serad0$nomse$faiblee   = (-0.35)
+    serad0$nomse$faibleee  = (-1.05)
+    serad0$nomse$faibleeee = (-4.05)
+
+  #serad$nm
+    serad0$nm$fortttt   = "une forte hausse"
+    serad0$nm$forttt    = "une hausse"
+    serad0$nm$fortt     = "une hausse mod\u00e9r\u00e9e"
+    serad0$nm$fort      = "une l\u00e9g\u00e8re hausse"
+    serad0$nm$faible    = "une stabilit\u00e9"
+    serad0$nm$faiblee   = "une l\u00e9g\u00e8re baisse"
+    serad0$nm$faibleee  = "une baisse mod\u00e9r\u00e9e"
+    serad0$nm$faibleeee = "une baisse"
+    serad0$nm$faibleeeee = "une forte baisse"
+
+
   options(serad = serad0)
 
   #getOption("serad")
