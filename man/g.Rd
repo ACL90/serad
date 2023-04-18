@@ -4,7 +4,7 @@
 \alias{g}
 \title{Calcul d'une variation}
 \usage{
-g(x1, x2, eps = 1e-08)
+g(x1, x2)
 }
 \arguments{
 \item{x1}{Le niveau le plus récent}
@@ -20,9 +20,14 @@ La variation, exprimée en pourcentage (si x1=2.x1, cela retourne 100).
 Calcul d'une variation
 }
 \details{
-Dans le cas improbable ou x2 = 0, on considère qu'il vaut 0.00000001.
+Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
 C'est une valeur paramétrable avec eps. L'idée est de toujours sortir quelque chose.
 Un message d'avis apparait dans la console.
+Pour un utilisateur avancé, il est possible de changer l'option par défaut de eps:
+\code{library("serad")}\cr
+\code{serad0 = getOption("serad")}\cr
+\code{serad0$eps = 0 }\cr
+\code{options(serad = serad0)}
 }
 \examples{
 g(2,1)  #100

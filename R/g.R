@@ -11,12 +11,20 @@
 #' g(2,1)  #100
 #' g(2,0)  #2e+10 et message d'avis
 #'
-#' @details Dans le cas improbable ou x2 = 0, on considère qu'il vaut 0.00000001.
+#' @details Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
 #' C'est une valeur paramétrable avec eps. L'idée est de toujours sortir quelque chose.
 #' Un message d'avis apparait dans la console.
+#' Pour un utilisateur avancé, il est possible de changer l'option par défaut de eps:
+#' \code{library("serad")}\cr
+#' \code{serad0 = getOption("serad")}\cr
+#' \code{serad0$eps = 0 }\cr
+#' \code{options(serad = serad0)}
 #'
 #' @export
-g = function(x1,x2,eps=0.00000001){
+g = function(x1,x2){
+
+  serad0 = getOption("serad")
+  eps = serad0$eps
   if(x2==0){
     #ajout d un warning
     warning("division par 0 \\u00e0 l'appel de serad::g()")

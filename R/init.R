@@ -13,6 +13,9 @@
   #pour decider si on veut de l alea dans les verbes : 0 (rd=0.5) ou 1 (rd aléatoire)
   serad0$aleaDummy = 1
 
+  #eps pour g()
+  serad0$eps=0.00000001
+
   #seuils dans g_verbe0
   #serad$seuilv
     serad0$sve$forttttt    = (9.95)
