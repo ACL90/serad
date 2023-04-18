@@ -66,6 +66,14 @@ gETa_verbe0 = function(g1,g2,sing=1){  #sing=1 pour singulier
 #\\u00e0"
 
 
+
+# gETa_verbe0: no visible global function definition for 'runif'
+# Undefined global functions or variables:
+#   runif
+# Consider adding
+# importFrom("stats", "runif")
+# to your NAMESPACE file.
+
 # return(dplyr::case_when(gETa_verbe00(g1,g2)=="A"~ifelse(sing,"reste stable","restent stables"),
 #                         gETa_verbe00(g1,g2)=="B"~ifelse(sing,"se stabilise","se stabilisent"),
 #                         gETa_verbe00(g1,g2)=="C" & rd>=0.5~ifelse(sing,"repart \u00e0 la hausse","repartent \u00e0 la hausse"),
