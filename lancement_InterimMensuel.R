@@ -141,6 +141,7 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
 ################ Modification des options par défaut du package #####################
 options(encoding = 'UTF-8')
 library("serad")
+#getOption("serad")
 #getOption("serad")$verbes$DBsing
 
 #les modifications puis assignation dans les variables globales

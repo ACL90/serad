@@ -15,16 +15,16 @@
 
   #seuils dans g_verbe0
   #serad$seuilv
-    serad0$seuilv$forttttt    = (10-0.05)
-    serad0$seuilv$fortttt     = (4-0.05)
-    serad0$seuilv$forttt      = (1-0.05)
-    serad0$seuilv$fortt       = (0.3-0.05)
-    serad0$seuilv$fort        = (0.1-0.05)
-    serad0$seuilv$faible      = (-0.1-0.05)
-    serad0$seuilv$faiblee     = (-0.3-0.05)
-    serad0$seuilv$gaibleee    = (-1-0.05)
-    serad0$seuilv$faibleeee   = (-4-0.05)
-    serad0$seuilv$faibleeeee  = (-20-0.05)
+    serad0$sve$forttttt    = (9.95)
+    serad0$sve$fortttt     = (3.95)
+    serad0$sve$forttt      = (0.95)
+    serad0$sve$fortt       = (0.25)
+    serad0$sve$fort        = (0.05)
+    serad0$sve$faible      = (-0.15)
+    serad0$sve$faiblee     = (-0.35)
+    serad0$sve$faibleee    = (-1.05)
+    serad0$sve$faibleeee   = (-4.05)
+    serad0$sve$faibleeeee  = (-20.05)
 
   #verbes utilises dans g_verbe0
   #serad$verbe0
