@@ -28,7 +28,7 @@
 #' Soit \code{g = serad::g(x1,x2)}. Si g>seuil, alors sortie où:
 #' ```{r table2, echo=FALSE, message=FALSE, warnings=FALSE, results='asis'}
 #'tabl <- "
-#'| Seuil                 | Valeur standard |Sortie              | Valeur standard             |
+#'| **Seuil**             | **Valeur standard** |**Sortie**              | **Valeur standard**             |
 #'| --------------------- |:---------------:| ------------------:|----------------------------:|
 #'| serad0$nomse$fortttt  | 3.95            |serad0$nm$fortttt   | une forte hausse            |
 #'| serad0$nomse$forttt   | 0.95            |serad0$nm$forttt    | une hausse                  |

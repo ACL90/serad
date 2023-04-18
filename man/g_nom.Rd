@@ -28,7 +28,7 @@ sorties. Par exemple :
 \code{options(serad = serad0)}
 
 Soit \code{g = serad::g(x1,x2)}. Si g>seuil, alors sortie où:\tabular{lcrr}{
-   Seuil \tab Valeur standard \tab Sortie \tab Valeur standard \cr
+   \strong{Seuil} \tab \strong{Valeur standard} \tab \strong{Sortie} \tab \strong{Valeur standard} \cr
    serad0$nomse$fortttt \tab 3.95 \tab serad0$nm$fortttt \tab une forte hausse \cr
    serad0$nomse$forttt \tab 0.95 \tab serad0$nm$forttt \tab une hausse \cr
    serad0$nomse$fortt \tab 0.35 \tab serad0$nm$fortt \tab une hausse modérée \cr
