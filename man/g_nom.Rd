@@ -17,6 +17,29 @@ L'évolution, par exemple: "une forte hausse".
 \description{
 Evolution décrite de facon nominale, non suivie d'une évolution.
 }
+\details{
+Pour un \strong{utilisateur avancé}, il est possible de paramétrer seuils et
+sorties. Par exemple :
+
+\code{library("serad")}\cr
+\code{serad0 = getOption("serad")}\cr
+\code{serad0$nomse$fortttt   = 7.95 #à la place de : 3.95}\cr
+\code{serad0$nm$fortttt = "un bond" #à la place de : "une forte hausse"}\cr
+\code{options(serad = serad0)}
+
+Soit \code{g = serad::g(x1,x2)}. Si g>seuil, alors sortie où:\tabular{lcrr}{
+   Seuil \tab Valeur standard \tab Sortie \tab Valeur standard \cr
+   serad0$nomse$fortttt \tab 3.95 \tab serad0$nm$fortttt \tab une forte hausse \cr
+   serad0$nomse$forttt \tab 0.95 \tab serad0$nm$forttt \tab une hausse \cr
+   serad0$nomse$fortt \tab 0.35 \tab serad0$nm$fortt \tab une hausse modérée \cr
+   serad0$nomse$fort \tab 0.05 \tab serad0$nm$fort \tab une légère hausse \cr
+   serad0$nomse$faible \tab (-0.05) \tab serad0$nm$faible \tab une stabilité \cr
+   serad0$nomse$faiblee \tab (-0.35) \tab serad0$nm$faiblee \tab une légère baisse \cr
+   serad0$nomse$faibleee \tab (-1.05) \tab serad0$nm$faibleee \tab une baisse modérée \cr
+   serad0$nomse$faibleeee \tab (-4.05) \tab serad0$nm$faibleeee \tab une baisse \cr
+   Et en dessous: \tab  \tab serad0$nm$faibleeeee \tab une forte baisse \cr
+}
+}
 \examples{
 g_nom(1.04,1)  # une forte hausse
 g_nom(1.01,1)  # une hausse
@@ -27,5 +50,6 @@ g_nom(0.997,1) # une légère baisse
 g_nom(0.99,1)  # une baisse modérée
 g_nom(0.96,1)  # une baisse
 g_nom(0.95,1)  # une forte baisse
+
 
 }
