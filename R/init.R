@@ -13,6 +13,45 @@
   #pour decider si on veut de l alea dans les verbes : 0 (rd=0.5) ou 1 (rd aléatoire)
   serad0$aleaDummy = 1
 
+  #seuils dans g_verbe0
+  #serad$seuilv
+    serad0$seuilv$forttttt    = (10-0.05)
+    serad0$seuilv$fortttt     = (4-0.05)
+    serad0$seuilv$forttt      = (1-0.05)
+    serad0$seuilv$fortt       = (0.3-0.05)
+    serad0$seuilv$fort        = (0.1-0.05)
+    serad0$seuilv$faible      = (-0.1-0.05)
+    serad0$seuilv$faiblee     = (-0.3-0.05)
+    serad0$seuilv$gaibleee    = (-1-0.05)
+    serad0$seuilv$faibleeee   = (-4-0.05)
+    serad0$seuilv$faibleeeee  = (-20-0.05)
+
+  #verbes utilises dans g_verbe0
+  #serad$verbe0
+    serad0$verbev$forttttt_sing    = "bondit de"
+    serad0$verbev$forttttt_plur    = "bondissent de"
+    serad0$verbev$fortttt_sing    = "s'accroit de"
+    serad0$verbev$fortttt_plur    = "s'acroissent de"
+    serad0$verbev$forttt_sing    = "est en hausse de"
+    serad0$verbev$forttt_plur    = "sont en hausse de"
+    serad0$verbev$fortt_sing    = "augmente de"
+    serad0$verbev$fortt_plur    = "augmentent de"
+    serad0$verbev$fort_sing    = "s'accroit tr\u00e8s l\u00e9g\u00e8rement de"
+    serad0$verbev$fort_plur    = "s'acroissent tr\u00e8s l\u00e9g\u00e8rement de"
+    serad0$verbev$faible_sing    = "est stable \u00e0"
+    serad0$verbev$faible_plur    = "sont stables \u00e0"
+    serad0$verbev$faiblee_sing    = "diminue l\u00e9g\u00e8rement de"
+    serad0$verbev$faiblee_plur    = "diminuent l\u00e9g\u00e8rement de"
+    serad0$verbev$faibleee_sing    = "recule l\u00e9g\u00e8rement de"
+    serad0$verbev$faibleee_plur    = "reculent l\u00e9g\u00e8rement de"
+    serad0$verbev$faibleeee_sing    = "baisse de"
+    serad0$verbev$faibleeee_plur    = "baissent de"
+    serad0$verbev$faibleeeee_sing    = "recule de"
+    serad0$verbev$faibleeeee_plur    = "reculent de"
+    serad0$verbev$faibleeeeee_sing    = "chute de"
+    serad0$verbev$faibleeeeee_plur    = "chutent de"
+
+
 
   #seuils dans gETa_verbe00
   #serad$seuil #heuristique
