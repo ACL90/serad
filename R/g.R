@@ -11,7 +11,7 @@
 #' g(2,1)  #100
 #' g(2,0)  #2e+10 et message d'avis
 #'
-#' @details Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
+#' @details Dans le cas improbable ou x2 = 0, on considère qu'il vaut 0.00000001.
 #' C'est une valeur paramétrable avec eps. L'idée est de toujours sortir quelque chose.
 #' Un message d'avis apparait dans la console.
 #'
@@ -19,9 +19,12 @@
 g = function(x1,x2,eps=0.00000001){
   if(x2==0){
     #ajout d un warning
-    warning("division par 0 à l'appel de serad::g()")
+    warning("division par 0 \\u00e0 l'appel de serad::g()")
     return(100*(x1/eps-1))
   }
   else return(100*(x1/x2-1))
 }
 
+#Rappel
+#stringi::stri_escape_unicode("à")  #\\u00e0
+#stringi::stri_escape_unicode("ù") #\\u00f9
