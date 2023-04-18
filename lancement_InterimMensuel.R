@@ -178,3 +178,5 @@ devtools::document()
 devtools::install(build_vignettes = T) #Il faudrait avoir TRUE
 vignette("serad")
 ?g_nom #Si: Internal Server Error, relancer R.
+library("serad")
+?g_verbe

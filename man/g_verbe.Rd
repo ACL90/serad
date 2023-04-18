@@ -14,13 +14,39 @@ g_verbe(x1, x2, sing0 = 1)
 \item{sing0}{1 si le sujet du verbe est singulier (défault), 0 sinon}
 }
 \value{
-l'evolution, par exemple: "bondit de 10,0 \%"
+L'évolution, par exemple: "bondit de 10,0 \%"
 }
 \description{
 Evolution verbale ne tenant pas compte de l'acceleration et suivie de 'ga'
 }
 \details{
-Fonction dérivant de g_verbe0 (avec x1/x2 en paramètre, contre g pour g_verbe0)
+Fonction dérivant de g_verbe0 - avec x1 et x2 en paramètres, contre un seul paramètre g pour g_verbe0().
+
+Pour un \strong{utilisateur avancé}, il est possible de paramétrer seuils et
+sorties. Par exemple :
+
+\code{library("serad")}\cr
+\code{serad0 = getOption("serad")}\cr
+\code{serad0$sve$forttttt   = 15.95 }\cr
+\code{serad0$verbev$forttttt_sing = "bondit fortement" }\cr
+\code{serad0$verbev$forttttt_plur = "bondissent fortement" }\cr
+\code{options(serad = serad0)}
+
+Soit \code{g = serad::g(x1,x2)}. Si g>seuil, alors sortie (au singulier).\cr
+\emph{Nota Bene} : Bien penser à changer aussi les sorties au pluriel.\tabular{lcrr}{
+   \strong{Seuil} \tab \strong{Valeur standard} \tab \strong{Sortie} \tab \strong{Valeur standard} \cr
+   serad0$sve$forttttt \tab (9.95) \tab serad0$verbev$forttttt_sing \tab bondit de \cr
+   serad0$sve$fortttt \tab (3.95) \tab serad0$verbev$forttttt_sing \tab s'accroit de \cr
+   serad0$sve$forttt \tab (0.95) \tab serad0$verbev$forttttt_sing \tab est en hausse de \cr
+   serad0$sve$fortt \tab (0.25) \tab serad0$verbev$forttttt_sing \tab augmente de \cr
+   serad0$sve$fort \tab (0.05) \tab serad0$verbev$forttttt_sing \tab s'accroit très légèrement de \cr
+   serad0$sve$faible \tab (-0.15) \tab serad0$verbev$faible_sing \tab est stable à \cr
+   serad0$sve$faiblee \tab (-0.35) \tab serad0$verbev$faiblee_sing \tab diminue légèrement de \cr
+   serad0$sve$faibleee \tab (-1.05) \tab serad0$verbev$faibleee_sing \tab recule légèrement de \cr
+   serad0$sve$faibleeee \tab (-4.05) \tab serad0$verbev$faibleeee_sing \tab baisse de \cr
+   serad0$sve$faibleeeee \tab (-20.05) \tab serad0$verbev$faibleeeee_sing \tab recule de \cr
+   Et en dessous: \tab  \tab serad0$verbev$faibleeeeee_sing \tab chute de \cr
+}
 }
 \examples{
 g_verbe(1.1,1,1)  # bondit de 10,0 \%
@@ -34,6 +60,7 @@ g_verbe(0.99,1)   # recule légèrement de 1,0 \%
 g_verbe(0.96,1)   # baisse de 4,0 \%
 g_verbe(0.8,1)    # recule de 20,0 \%
 g_verbe(0.79,1)   # chute de 21,0 \%
+
 
 }
 \seealso{
