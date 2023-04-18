@@ -6,21 +6,21 @@
 #'
 #' @return Une modalité (un nombre). gETa_verbe0 indiquera concrètement le verbe
 #'
-#' @examples
-#' gETa_verbe00(0.049,0.049) #1
-#' gETa_verbe00(0.049,2)     #2
-#' gETa_verbe00(10,1)        #5
-#' gETa_verbe00(4,1)         #5
-#' gETa_verbe00(1,1)         #7
-#' gETa_verbe00(0.3,1)       #6
-#' gETa_verbe00(0.1,-1)      #3
-#' gETa_verbe00(-0.1,-1)     #11
-#' gETa_verbe00(-0.3,-1)     #11
-#' gETa_verbe00(-1,-1)       #11
-#' gETa_verbe00(-4,-1)       #10
-#' gETa_verbe00(-4,1)        #8
-#' gETa_verbe00(-20,1)       #13
-#' gETa_verbe00(-21,1)       #12
+# @examples
+# gETa_verbe00(0.049,0.049) #1
+# gETa_verbe00(0.049,2)     #2
+# gETa_verbe00(10,1)        #5
+# gETa_verbe00(4,1)         #5
+# gETa_verbe00(1,1)         #7
+# gETa_verbe00(0.3,1)       #6
+# gETa_verbe00(0.1,-1)      #3
+# gETa_verbe00(-0.1,-1)     #11
+# gETa_verbe00(-0.3,-1)     #11
+# gETa_verbe00(-1,-1)       #11
+# gETa_verbe00(-4,-1)       #10
+# gETa_verbe00(-4,1)        #8
+# gETa_verbe00(-20,1)       #13
+# gETa_verbe00(-21,1)       #12
 #'
 # pas utilisable par l'utilisateur donc pas le mot cle export
 gETa_verbe00 = function(g1,g2){
