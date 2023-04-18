@@ -16,19 +16,23 @@
 #'
 #' @export
 g_nom0 = function(g){
-  dplyr::case_when(g>4-0.05~"une forte hausse",
-            g>1-0.05~"une hausse",
-            g>0.4-0.05~"une hausse mod\u00e9r\u00e9e",
-            g>0.1-0.05~"une l\u00e9g\u00e8re hausse",
-            g>0-0.05~"une stabilit\u00e9",
-            g>-0.3-0.05~"une l\u00e9g\u00e8re baisse",
-            g>-1-0.05~"une baisse mod\u00e9r\u00e9e",
-            g>-4-0.05~"une baisse",
-            g<=-4-0.05~"une forte baisse")
-}
 
-#TO-DO pour la suite: avoir tous les parametres en une seule matriceparametre avec deux colonnes: la fonction utilisee, le qualificatif texte, le seuil bas
-#que cette matrice soit facile a appeler, et a changer de fa?on 'permanente' par l'utilisateur
+
+  serad0 = getOption("serad")
+  seuil = serad0$nomse
+
+  z = dplyr::case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
+                       g>seuil$forttt   ~serad0$nm$forttt,
+                       g>seuil$fortt    ~serad0$nm$fortt,
+                       g>seuil$fort     ~serad0$nm$fort,
+                       g>seuil$faible   ~serad0$nm$faible,
+                       g>seuil$faiblee  ~serad0$nm$faiblee,
+                       g>seuil$faibleee ~serad0$nm$faibleee,
+                       g>seuil$faibleeee~serad0$nm$faibleeee,
+                      g<=seuil$faibleeee~serad0$nm$faibleeeee)
+
+  return(z)
+}
 
 #quelques rappels
 #stringi::stri_escape_unicode("?")
