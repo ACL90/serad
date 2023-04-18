@@ -73,7 +73,7 @@ Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut a
 ***
 **Autres**
 
-`arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester:
+`arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester :
 ```{r }
 round(0.35,1)     #0.3 <!!>
 arrondi_tot(0.35) #0.4 <:)>
@@ -109,7 +109,7 @@ A <- data.frame(as.matrix(Seatbelts), date=time(Seatbelts))
 #du port de la ceinture de sécurité (`r format_g(serad::g(x1,x168))`, soit 
 #`r format_delta(x1-x168)` décès).
 ```
-Cela produit :
+*Cela produit :*
 
 En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'automobiles sont décédés en Grande-Bretagne, soit `r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(serad::g(x1,x2))`, soit `r format_delta(x1-x2)` décès). Le niveau atteint `r depasse(x1,x168,1)` celui de décembre 1982 - avant l'obligation du port de la ceinture de sécurité (`r format_g(serad::g(x1,x168))`, soit `r format_delta(x1-x168)` décès).
 
@@ -127,7 +127,7 @@ En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'au
 #Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)`
 #(soit `r format_delta(y1-y2)` décès).
 ```
-Cela produit :
+*Cela produit :*
 
 En glissements annuels, le nombre de décès de passagers à l'avant `r gETa_verbe(y1,y2,y3,1)` (`r format_g(serad::g(y1,y2))`, soit `r format_delta(y1-y2)` décès, après `r format_g(serad::g(y2,y3))`, soit `r format_delta(y2-y3)`). Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)` (soit `r format_delta(y1-y2)` décès).
 
