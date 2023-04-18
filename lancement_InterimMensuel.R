@@ -135,15 +135,28 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
              "en Provence-Alpes-Côte d'Azur")
 
 
-################Lancement du Rmarkdown a proprement parler - #####################
+
+
+
+################ Modification des options par défaut du package #####################
 options(encoding = 'UTF-8')
 library("serad")
-#render("InterimMensuel.Rmd", output_format = "word_document")
+#getOption("serad")$verbes$DBsing
+
+#les modifications puis assignation dans les variables globales
+serad0 = getOption("serad")
+  serad0$aleaDummy = 0 #pas d'aléatoire
+  serad0$verbes$IAsing = "s'infléchit"
+  options(serad = serad0)
+  #getOption("serad")$verbes$DBsing
+#pour revenir aux options standards de base
+  detach("package:serad", unload = TRUE)
+  library("serad")
+
+################Lancement du Rmarkdown a proprement parler - #####################
 render("InterimMensuel.Rmd",
        word_document(reference_docx="word-template_adaptations.docx"))
-
-
-
+#render("InterimMensuel.Rmd", output_format = "word_document")
 
 
 ################ Pendant le developpement du package #####################
@@ -156,6 +169,7 @@ devtools::check(cran = FALSE)
 devtools::build()
 devtools::document()
 #rmarkdown::render("vignettes/serad.Rmd")
+#https://stackoverflow.com/questions/10373098/error-in-fetchkey-internal-error-3-in-r-decompress1
 
 
 #devtools::load_all()
