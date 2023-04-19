@@ -14,6 +14,8 @@
 #' g_nom0(-4)      # une baisse
 #' g_nom0(-5)      # une forte baisse
 #'
+#' @importFrom dplyr case_when
+#'
 #' @export
 g_nom_taux = function(g){
 
@@ -21,7 +23,7 @@ g_nom_taux = function(g){
   serad0 = getOption("serad")
   seuil = serad0$nomse
 
-  z = dplyr::case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
+         z = case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
                        g>seuil$forttt   ~serad0$nm$forttt,
                        g>seuil$fortt    ~serad0$nm$fortt,
                        g>seuil$fort     ~serad0$nm$fort,

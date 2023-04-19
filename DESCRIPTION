@@ -1,6 +1,6 @@
 Package: serad
 Title: Synthèse d'Ecrits avec les Règles en vigueur A la Dares
-Version: 0.0.0.9001
+Version: 0.1.1
 Authors@R: 
     person("Alexandre", "Cazenave-Lacroutz", , "alexandre.cazenave-lacroutz@travail.gouv.fr", 
     role = c("aut", "cre"),
@@ -8,7 +8,6 @@ Authors@R:
 Description: Fournit des fonctions simples pour realiser des ecrits Rmarkdown dynamiques et respectant les regles d ecritures en usage.
 License: GPL-3
 Encoding: UTF-8
-Imports: dplyr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Suggests: 

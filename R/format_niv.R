@@ -7,7 +7,7 @@
 #'
 #' @return Le niveau formaté
 #'
-#' @import dplyr
+#' @importFrom dplyr last
 #'
 #' @examples
 #' format_niv(365484)  # 365 500

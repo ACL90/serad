@@ -2,7 +2,9 @@
 #' @param g1 La dernière evolution, exprimée en pourcent
 #' @param g2 L'évolution précédente, exprimée en pourcent
 #'
-#' @seealso gETa_verbe0
+#' @seealso gETa_verbe_taux
+#'
+#' @importFrom dplyr case_when
 #'
 #' @return Une modalité (un nombre). gETa_verbe0 indiquera concrètement le verbe
 #'
@@ -29,7 +31,7 @@ gETa_verbe00 = function(g1,g2){
   seuil = getOption("serad")$seuil
 
   return(
-    dplyr::case_when((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ~"A",  #reste stable
+    case_when((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ~"A",  #reste stable
             (arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)!=0) ~"B",  #se stabilise
             g1>0 & g2<(seuil$g2bas)         ~"C",  #repart à la hausse #se redresse
             g1>0 & g2<0                     ~"D",  #augmente, est en hausse

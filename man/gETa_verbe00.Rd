@@ -18,5 +18,5 @@ Une modalité (un nombre). gETa_verbe0 indiquera concrètement le verbe
 Pour une évolution verbale tenant compte de l'acceleration et non suivi de g
 }
 \seealso{
-gETa_verbe0
+gETa_verbe_taux
 }

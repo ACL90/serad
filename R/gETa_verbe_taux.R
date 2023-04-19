@@ -23,6 +23,9 @@
 #' gETa_verbe_taux(-20,1)       #se replie fortement
 #' gETa_verbe_taux(-21,1)       #chute
 #'
+#' @importFrom dplyr case_when
+#' @importFrom stats runif
+#'
 #' @export
 gETa_verbe_taux = function(g1,g2,sing=1){  #sing=1 pour singulier
 
@@ -33,7 +36,7 @@ gETa_verbe_taux = function(g1,g2,sing=1){  #sing=1 pour singulier
 
   rd = aleaDummy*runif(1) + (1-aleaDummy)*0.5
 
-  return(dplyr::case_when(gETa_verbe00(g1,g2)=="A"    ~ifelse(sing,verbes$AAsing,verbes$AAplur),
+  return(case_when(gETa_verbe00(g1,g2)=="A"           ~ifelse(sing,verbes$AAsing,verbes$AAplur),
                    gETa_verbe00(g1,g2)=="B"           ~ifelse(sing,verbes$BAsing,verbes$BAplur),
                    gETa_verbe00(g1,g2)=="C" & rd>=0.5 ~ifelse(sing,verbes$CAsing,verbes$CAplur),
                    gETa_verbe00(g1,g2)=="C" & rd<0.5  ~ifelse(sing,verbes$CBsing,verbes$CBplur),

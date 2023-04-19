@@ -39,7 +39,7 @@
 #' \code{options(serad = serad0)}
 #'
 #' *Pour comprendre la partition utilisée:*\cr
-#' Elle reposent sur 13 cas, étiquettés de A à M.
+#' Elle repose sur 13 cas, étiquettés de A à M.
 #' Soient:\cr
 #' - \code{g1 = serad::g(x1,x2)}\cr
 #' - \code{g2 = g(x2,x32)}\cr

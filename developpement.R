@@ -27,6 +27,8 @@ devtools::document()
 #devtools::load_all()
 #Le suivant nécessite de faire skip en ligne de commande
 devtools::install(build_vignettes = T)
+#Si: ans runHook(".onLoad", env, package.lib, package) :internal error -3 in R_decompress1
+#Alors relancer R
 vignette("serad")
 ?g_nom #Si: Internal Server Error, relancer R.
 ?g_verbe

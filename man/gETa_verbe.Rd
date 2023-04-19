@@ -37,7 +37,7 @@ un courriel à l'adresse de contact.
 \code{options(serad = serad0)}
 
 \emph{Pour comprendre la partition utilisée:}\cr
-Elle reposent sur 13 cas, étiquettés de A à M.
+Elle repose sur 13 cas, étiquettés de A à M.
 Soient:\cr
 \itemize{
 \item \code{g1 = serad::g(x1,x2)}\cr
