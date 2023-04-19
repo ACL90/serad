@@ -1,3 +1,7 @@
+#
+#Ce fichier presente un exemple d'utilisation typique du package serad
+
+
 #https://rmarkdown.rstudio.com/lesson-1.html
 # install.packages("rmarkdown")
 # install.packages("knitr")
@@ -135,10 +139,14 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
              "en Provence-Alpes-Côte d'Azur")
 
 
+################Lancement du Rmarkdown a proprement parler - #####################
+render("InterimMensuel.Rmd",
+       word_document(reference_docx="word-template_adaptations.docx"))
+#render("InterimMensuel.Rmd", output_format = "word_document")
 
 
 
-################ Modification des options par défaut du package #####################
+################ Experts : modification des options par défaut du package #####################
 options(encoding = 'UTF-8')
 library("serad")
 #getOption("serad")
@@ -160,24 +168,4 @@ render("InterimMensuel.Rmd",
 #render("InterimMensuel.Rmd", output_format = "word_document")
 
 
-################ Pendant le developpement du package #####################
-#il faudra décommenter et tester avec TRUE
-devtools::check(cran = FALSE)
-#https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
-#usethis::use_vignette("serad")
-#https://community.rstudio.com/t/bypass-qpdf-checks/115691
-#devtools::build_vignettes()  #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
-devtools::build()
-devtools::document()
-#rmarkdown::render("vignettes/serad.Rmd")
-#https://stackoverflow.com/questions/10373098/error-in-fetchkey-internal-error-3-in-r-decompress1
 
-
-#devtools::load_all()
-#Le suivant nécessite de faire skip en ligne de commande
-devtools::install(build_vignettes = T)
-vignette("serad")
-?g_nom #Si: Internal Server Error, relancer R.
-?g_verbe
-library("serad")
-?gETa_verbe
