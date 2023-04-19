@@ -7,7 +7,7 @@
 #' @param x2 Le niveau le plus ancien
 #' @param sing0 1 si le sujet du verbe est singulier (défault), 0 sinon
 #'
-#' @seealso g_verbe0
+#' @seealso g_verbe_taux
 #'
 #' @return L'évolution, par exemple: "bondit de 10,0 %"
 #'
@@ -57,5 +57,5 @@
 #'```
 #'
 #' @export
-g_verbe = function(x1,x2,sing0=1){g_verbe0(serad::g(x1,x2),sing0)} #sing=1 pour singulier
+g_verbe = function(x1,x2,sing0=1){g_verbe_taux(serad::g(x1,x2),sing0)} #sing=1 pour singulier
 

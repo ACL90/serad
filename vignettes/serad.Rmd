@@ -51,7 +51,7 @@ Les options de `comparaison` sont multiples, et ce qui a permis de créer facile
 
 **Comparaisons plus fines**
 
-Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord : `g_nom(x1,x2)` -et son avatar `g_nom_taux(g)`- pour une évolution nominale, et `g_verbe(x1,x2)` -et son avatar `g_verbe0(g)`- pour une évolution verbale.
+Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord : `g_nom(x1,x2)` -et son avatar `g_nom_taux(g)`- pour une évolution nominale, et `g_verbe(x1,x2)` -et son avatar `g_verbe_taux(g)`- pour une évolution verbale.
 ```{r }
 ?g_nom
 ?g_verbe

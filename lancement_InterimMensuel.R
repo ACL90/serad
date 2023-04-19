@@ -1,5 +1,5 @@
 #
-#Ce fichier presente un exemple d'utilisation typique du package serad
+#Ce fichier introduit l'exemple d'utilisation typique du package serad
 
 
 #https://rmarkdown.rstudio.com/lesson-1.html

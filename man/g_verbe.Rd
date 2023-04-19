@@ -64,5 +64,5 @@ g_verbe(0.79,1)   # chute de 21,0 \%
 
 }
 \seealso{
-g_verbe0
+g_verbe_taux
 }
