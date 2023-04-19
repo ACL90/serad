@@ -1,7 +1,6 @@
 #' Calcul d'une variation
 #' @param x1 Le niveau le plus récent
 #' @param x2 Le niveau le plus ancien
-#' @param eps Gestion du cas du denominateur nul
 #'
 #' @seealso format_g
 #'
@@ -24,7 +23,7 @@
 g = function(x1,x2){
 
   serad0 = getOption("serad")
-  eps = serad0$eps
+  eps = serad0$eps #eps Gestion du cas du denominateur nul
   if(x2==0){
     #ajout d un warning
     warning("division par 0 \\u00e0 l'appel de serad::g()")

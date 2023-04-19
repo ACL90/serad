@@ -10,8 +10,6 @@ g(x1, x2)
 \item{x1}{Le niveau le plus récent}
 
 \item{x2}{Le niveau le plus ancien}
-
-\item{eps}{Gestion du cas du denominateur nul}
 }
 \value{
 La variation, exprimée en pourcentage (si x1=2.x1, cela retourne 100).

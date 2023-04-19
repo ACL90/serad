@@ -16,14 +16,14 @@ L'évolution, par exemple: "une forte hausse".
 Evolution décrite de facon nominale, non suivie d'une évolution.
 }
 \examples{
-g_nom0(4)       # une forte hausse
-g_nom0(1)       # une hausse
-g_nom0(0.4)     # une hausse modérée
-g_nom0(0.1)     # une légère hausse
-g_nom0(0)       # une stabilité
-g_nom0(-0.3)    # une légère baisse
-g_nom0(-1)      # une baisse modérée
-g_nom0(-4)      # une baisse
-g_nom0(-5)      # une forte baisse
+g_nom_taux(4)       # une forte hausse
+g_nom_taux(1)       # une hausse
+g_nom_taux(0.4)     # une hausse modérée
+g_nom_taux(0.1)     # une légère hausse
+g_nom_taux(0)       # une stabilité
+g_nom_taux(-0.3)    # une légère baisse
+g_nom_taux(-1)      # une baisse modérée
+g_nom_taux(-4)      # une baisse
+g_nom_taux(-5)      # une forte baisse
 
 }
