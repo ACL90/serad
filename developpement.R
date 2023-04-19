@@ -13,7 +13,7 @@ library(rlang)
 
 ################ Pendant le developpement du package #####################
 #il faudra décommenter et tester avec TRUE
-devtools::check(cran = FALSE)
+devtools::check(cran = TRUE)
 #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
 #usethis::use_vignette("serad")
 #https://community.rstudio.com/t/bypass-qpdf-checks/115691
