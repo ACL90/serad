@@ -10,9 +10,9 @@
 #' @param egalite1 Formulation différente si egalite, dépendant de param
 #' @param baisse1 Formulation différente si baisse, dépendant de param
 #'
-#' @details Utilise comparaison0.R
+#' @details Utilise comparaison_taux.R
 #'
-#' @seealso comparaison0 alahausse audessus davantage depasse g_nom_simple
+#' @seealso comparaison_taux alahausse audessus davantage depasse g_nom_simple
 #'
 #' @return Un mot.
 #'
@@ -27,7 +27,7 @@
 comparaison  = function(x1,x2,hausse0,egalite0,baisse0,seuil=0.1,
                         param=0,
                         hausse1=hausse0,egalite1=egalite0,baisse1=baisse0){
-  return(comparaison0(g(x1,x2),
+  return(comparaison_taux(g(x1,x2),
                       hausse0,egalite0,baisse0,
                       seuil,param,
                       hausse1,egalite1,baisse1))

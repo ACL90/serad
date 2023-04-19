@@ -45,7 +45,7 @@ Un mot.
 comparaison : fonction générique basée sur x1 et x2
 }
 \details{
-Utilise comparaison0.R
+Utilise comparaison_taux.R
 }
 \examples{
 comparaison(1.04,1,"augmente","reste stable","diminue")             #augmente
@@ -56,5 +56,5 @@ comparaison(1,1,"augmente","reste égal","diminue",seuil = 0)        #augmente
 
 }
 \seealso{
-comparaison0 alahausse audessus davantage depasse g_nom_simple
+comparaison_taux alahausse audessus davantage depasse g_nom_simple
 }
