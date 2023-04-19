@@ -175,8 +175,9 @@ devtools::document()
 
 #devtools::load_all()
 #Le suivant nécessite de faire skip en ligne de commande
-devtools::install(build_vignettes = T) #Il faudrait avoir TRUE
+devtools::install(build_vignettes = T)
 vignette("serad")
 ?g_nom #Si: Internal Server Error, relancer R.
-library("serad")
 ?g_verbe
+library("serad")
+?gETa_verbe
