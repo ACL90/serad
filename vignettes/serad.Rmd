@@ -14,14 +14,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 18 avril 2022.
+Dernière mise à jour de cette documentation : 19 avril 2022.
 
 ```{r setup}
 library(serad)
 ```
 
 
-Le package **serad** (**S**ynthese d'**E**crits avec les **R**egles en vigueur **A** la **D**ares) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage en vigueur à la Dares.
+Le package **serad** (**S**ynthese d'**E**crits avec les **R**egles en vigueur **A** la **D**ares) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage de publications statistiques.
 
 ***
 **Fonctions de base et formatage**
