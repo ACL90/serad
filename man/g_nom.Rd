@@ -53,3 +53,6 @@ g_nom(0.95,1)  # une forte baisse
 
 
 }
+\seealso{
+g_nom_taux
+}

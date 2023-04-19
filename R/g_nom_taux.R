@@ -15,7 +15,7 @@
 #' g_nom0(-5)      # une forte baisse
 #'
 #' @export
-g_nom0 = function(g){
+g_nom_taux = function(g){
 
 
   serad0 = getOption("serad")

@@ -47,8 +47,8 @@ Soient:\cr
 }
 
 \emph{Nota Bene} : Seules les sorties au singulier sont présentées ci-dessous.\cr
-Sont d'abord traités séparemment les cas où g1 est proche de zéro:
 
+Sont d'abord traités séparemment les cas où g1 est proche de zéro :
 -> \strong{Si} arrondi_tot(g1, \strong{seuil$stable})==0 :\tabular{llcr}{
    \strong{Cas} \tab \strong{Condition supplémentaire} \tab \strong{Sortie} \tab \strong{Valeur standard} \cr
    A \tab arrondi_tot(g2, seuil$stable)==0 \tab seuil$verbes$AAsing \tab reste stable \cr

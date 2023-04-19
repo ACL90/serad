@@ -4,6 +4,8 @@
 #'
 #' @return L'évolution, par exemple: "une forte hausse".
 #'
+#' @seealso g_nom_taux
+#'
 #' @examples
 #' g_nom(1.04,1)  # une forte hausse
 #' g_nom(1.01,1)  # une hausse
@@ -46,7 +48,7 @@
 #' @export
 g_nom = function(x1,x2){
   g = g(x1,x2)
-  return(g_nom0(g))
+  return(g_nom_taux(g))
 }
 
 #quelques rappels
