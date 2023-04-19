@@ -19,7 +19,7 @@ library(stringr)
 library(rlang)
 
 #################A modifier avant chaque lancement#####################
-Fichier = "Fichier.xlsx"
+Fichier = "Example/Fichier.xlsx"
 jour_publication_precendente = "8 septembre 2022"
 evol_prov_mois_dernier = -0.2 #%
 final_texte = "Pour le mois de juillet 2022, il s'agit de la semaine du 25 au 29, et pour le mois d'août 2022, de celle du 22 au 26."
@@ -140,8 +140,8 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
 
 
 ################Lancement du Rmarkdown a proprement parler - #####################
-render("InterimMensuel.Rmd",
-       word_document(reference_docx="word-template_adaptations.docx"))
+render("Example/InterimMensuel.Rmd",
+       word_document(reference_docx="Example/word-template_adaptations.docx"))
 #render("InterimMensuel.Rmd", output_format = "word_document")
 
 
@@ -163,8 +163,8 @@ serad0 = getOption("serad")
   library("serad")
 
 ################Lancement du Rmarkdown a proprement parler - #####################
-render("InterimMensuel.Rmd",
-       word_document(reference_docx="word-template_adaptations.docx"))
+render("Example/InterimMensuel.Rmd",
+       word_document(reference_docx="Example/word-template_adaptations.docx"))
 #render("InterimMensuel.Rmd", output_format = "word_document")
 
 
