@@ -62,7 +62,7 @@ Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord :
 
 **Comparaisons verbales tenant compte de la variation et de l'accélération**
 
-Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut avoir un verbe qui tient compte à la fois de la variation et de l'accélération. Cela est permis par `gETa_verbe(x1,x2,x3,sing)` - et son avatar `gETa_verbe0(g1,g2,sing)`.
+Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut avoir un verbe qui tient compte à la fois de la variation et de l'accélération. Cela est permis par `gETa_verbe(x1,x2,x3,sing)` - et son avatar `gETa_verbe_taux(g1,g2,sing)`.
 ```{r }
 ?gETa_verbe
 #Avancé : il est possible de paramétrer les seuils et sorties !

@@ -8,23 +8,23 @@
 #' @return Une modalité (un nombre). gETa_verbe0 indiquera concrètement le verbe
 #'
 #' @examples
-#' gETa_verbe0(0.049,0.049) #reste stable
-#' gETa_verbe0(0.049,2)     #se stabilise
-#' gETa_verbe0(10,1)        #accélère
-#' gETa_verbe0(4,1,0)       #accélèrent
-#' gETa_verbe0(1,1)         #poursuit sa progression
-#' gETa_verbe0(0.3,1)       #ralentit
-#' gETa_verbe0(0.1,-1)      #repart à la hausse
-#' gETa_verbe0(-0.1,-1)     #poursuit sa baisse
-#' gETa_verbe0(-0.3,-1)     #poursuit sa baisse
-#' gETa_verbe0(-1,-1)       #poursuit sa baisse
-#' gETa_verbe0(-4,-1)       #recule à nouveau
-#' gETa_verbe0(-4,1)        #recule
-#' gETa_verbe0(-20,1)       #se replie fortement
-#' gETa_verbe0(-21,1)       #chute
+#' gETa_verbe_taux(0.049,0.049) #reste stable
+#' gETa_verbe_taux(0.049,2)     #se stabilise
+#' gETa_verbe_taux(10,1)        #accélère
+#' gETa_verbe_taux(4,1,0)       #accélèrent
+#' gETa_verbe_taux(1,1)         #poursuit sa progression
+#' gETa_verbe_taux(0.3,1)       #ralentit
+#' gETa_verbe_taux(0.1,-1)      #repart à la hausse
+#' gETa_verbe_taux(-0.1,-1)     #poursuit sa baisse
+#' gETa_verbe_taux(-0.3,-1)     #poursuit sa baisse
+#' gETa_verbe_taux(-1,-1)       #poursuit sa baisse
+#' gETa_verbe_taux(-4,-1)       #recule à nouveau
+#' gETa_verbe_taux(-4,1)        #recule
+#' gETa_verbe_taux(-20,1)       #se replie fortement
+#' gETa_verbe_taux(-21,1)       #chute
 #'
 #' @export
-gETa_verbe0 = function(g1,g2,sing=1){  #sing=1 pour singulier
+gETa_verbe_taux = function(g1,g2,sing=1){  #sing=1 pour singulier
 
 
   serad = getOption("serad")

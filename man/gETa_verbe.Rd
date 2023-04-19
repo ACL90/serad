@@ -101,5 +101,5 @@ gETa_verbe(0.79,1,0.99)      #chute
 
 }
 \seealso{
-gETa_verbe0
+gETa_verbe_taux
 }

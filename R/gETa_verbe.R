@@ -4,7 +4,7 @@
 #' @param x3 Le niveau le plus ancien
 #' @param sing 1 si le sujet du verbe est singulier (défault), 0 sinon
 #'
-#' @seealso gETa_verbe0
+#' @seealso gETa_verbe_taux
 #'
 #' @return Le verbe.
 #'
@@ -86,6 +86,6 @@
 gETa_verbe = function(x1,x2,x3,sing=1){  #sing=1 pour singulier ; =0 pour pluriel
   g1= serad::g(x1,x2)
   g2= serad::g(x2,x3)
-  return(gETa_verbe0(g1,g2,sing))
+  return(gETa_verbe_taux(g1,g2,sing))
 }
 
