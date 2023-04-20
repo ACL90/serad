@@ -32,9 +32,9 @@ EVOL_rec = x2-x3
 ```
 
 Fin `r MoisPROV` `r AnneePROV`, `r format_niv(x1)` personnes occupent un emploi intérimaire (données provisoires, corrigées des variations saisonnières), soit `r g_nom(x1,x2)` de `r format_g(serad::g(x1,x2),signe = 0)` (soit `r format_delta(x1-x2)` intérimaires) par rapport au mois précédent (après `r format_g(serad::g(x2,x3))` en `r MoisRECT` `r AnneeRECT`, soit `r format_delta(x2-x3)` ;
-après `r format_g(serad::g(x3,x4))` en `r MoisRECT_1` `r AnneeRECT_1`, soit `r format_delta(x3-x2)` ;
-après `r format_g(serad::g(x4,x5))` en `r MoisRECT_2` `r AnneeRECT_2`, soit `r format_delta(x4-x3)` ;
-après `r format_g(serad::g(x5,x6))` en `r MoisRECT_3` `r AnneeRECT_3`, soit `r format_delta(x5-x4)`). 
+après `r format_g(serad::g(x3,x4))` en `r MoisRECT_1` `r AnneeRECT_1`, soit `r format_delta(x3-x4)` ;
+après `r format_g(serad::g(x4,x5))` en `r MoisRECT_2` `r AnneeRECT_2`, soit `r format_delta(x4-x5)` ;
+après `r format_g(serad::g(x5,x6))` en `r MoisRECT_3` `r AnneeRECT_3`, soit `r format_delta(x5-x6)`). 
 
 
 ```{r, echo=FALSE, include=FALSE}
