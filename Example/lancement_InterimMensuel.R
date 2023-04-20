@@ -141,8 +141,8 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
 
 ################Lancement du Rmarkdown a proprement parler - #####################
 render("Example/InterimMensuel.Rmd",
-       word_document(reference_docx="Example/word-template_adaptations.docx"))
-#render("InterimMensuel.Rmd", output_format = "word_document")
+       word_document(reference_docx="word-template_adaptations.docx"))
+render("Example/InterimMensuel.Rmd", output_format = "word_document")
 
 
 
