@@ -19,7 +19,7 @@ library(stringr)
 library(rlang)
 
 #################A modifier avant chaque lancement#####################
-Fichier = "Example/Fichier.xlsx"
+Fichier = "Fichier.xlsx"
 jour_publication_precendente = "8 septembre 2022"
 evol_prov_mois_dernier = -0.2 #%
 final_texte = "Pour le mois de juillet 2022, il s'agit de la semaine du 25 au 29, et pour le mois d'août 2022, de celle du 22 au 26."
@@ -140,11 +140,13 @@ Region_nom=c("en Île-de-France","dans le Grand Est","dans les Hauts-de-France",
 
 
 ################Lancement du Rmarkdown a proprement parler - #####################
-render("Example/InterimMensuel.Rmd",
+options(encoding = 'UTF-8')
+library("serad")
+render("InterimMensuel.Rmd",
        word_document(reference_docx="word-template_adaptations.docx"))
-render("Example/InterimMensuel.Rmd", output_format = "word_document")
+#render("Example/InterimMensuel.Rmd", output_format = "word_document")
 
-
+#rlang::last_trace(drop = FALSE)
 
 ################ Experts : modification des options par défaut du package #####################
 options(encoding = 'UTF-8')

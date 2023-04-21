@@ -24,12 +24,13 @@ g = function(x1,x2){
 
   serad0 = getOption("serad")
   eps = serad0$eps #eps Gestion du cas du denominateur nul
-  if(x2==0){
-    #ajout d un warning
-    warning("division par 0 \\u00e0 l'appel de serad::g()")
-    return(100*(x1/eps-1))
-  }
-  else return(100*(x1/x2-1))
+  #if(x2==0){
+  #  #ajout d un warning
+  #  warning("division par 0 \\u00e0 l'appel de serad::g()")
+  #  return(100*(x1/eps-1))
+  #}
+  #else return(100*(x1/x2-1))
+  return(100*(x1/x2-1))
 }
 
 #Rappel
