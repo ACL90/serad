@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 19 avril 2022.
+Dernière mise à jour de cette documentation : 21 avril 2022.
 
 ```{r setup}
 library(serad)
@@ -132,6 +132,21 @@ En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` conducteurs d'au
 En glissements annuels, le nombre de décès de passagers à l'avant `r gETa_verbe(y1,y2,y3,1)` (`r format_g(serad::g(y1,y2))`, soit `r format_delta(y1-y2)` décès, après `r format_g(serad::g(y2,y3))`, soit `r format_delta(y2-y3)`). Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)` (soit `r format_delta(y1-y2)` décès).
 
 
+***
+**Et si je veux montrer Serad à un collègue ? **
 
+- Je lui fais installer serad_0.1.1.tar.gz dans un dossier. Disons que ce dossier s'appelle A:
+- Puis: ```install.packages("A/serad_0.1.1.tar.gz")```
+- Puis: ```vignette("serad")```
+
+***
+**Et où est ce que je peux trouver un vrai exemple ?**
+
+- Dans le dossier serad (décompressé 2 fois ), je copie-colle dans mon *working directory* -```getwd()```- les 4 fichiers du dossier *Example*.
+- Je lance **lancement_InterimMensuel.R** jusqu'au premier ```render``` : il crée **InterimMensuel.docx**
+- Deux possibilités s'offrent alors à moi :
+
+1. Je suis convaincu et je m'inspire de **InterimMensuel.Rmd**...
+2. Je ne suis pas convaincu, et j'écris à l'adresse de contact - ```maintainer("serad")```.
 
 
