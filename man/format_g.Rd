@@ -4,15 +4,19 @@
 \alias{format_g}
 \title{Formatage Dares des variations, exprimées en pourcentage ('g')}
 \usage{
-format_g(y, signe = 1)
+format_g(y, signe = 1, detail)
 }
 \arguments{
 \item{y}{La variation à formater.}
 
 \item{signe}{1 si on veut le signe, 0 sinon. Par défaut signe = 1.}
+
+\item{detail}{Combien de chiffre après la virgule. Par défaut 1.}
 }
 \value{
 La variation mise en forme.
+
+#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
 }
 \description{
 signe = 0 permet de retirer le signe, que ce soit un + ou un - (par exemple pour dire: diminue de 5 \\%).
@@ -26,6 +30,8 @@ format_g(5.3654,1)  # "+5,4 \%"
 format_g(-5.3654,0) # "5,4 \%"
 format_g(-5.3654,1) # "−5,4 \%"
 format_g(-5.3654)   # "−5,4 \%"
+format_g(-5.3654,detail = 2)   # "−5,37 \%"
+format_g(0.35)      # "0.4 \%"
 }
 \seealso{
 g

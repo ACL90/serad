@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 21 avril 2022.
+Dernière mise à jour de cette documentation : 24 avril 2022.
 
 ```{r setup}
 library(serad)
@@ -36,6 +36,7 @@ Les autres fonctions de formatage sont :
 ```{r }
 ?format_niv   #pour un niveau
 ?format_delta #pour une diférence
+#Astuce : pour les 3 fonctions de formattage, il est possible de modifier le niveau d'arrondi. Il est même possible de modifier le comportement par défaut.
 ```
 
 

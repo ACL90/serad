@@ -10,6 +10,13 @@
 
   serad0 = list()
 
+  #quel est le niveau par defaut d'arrondi ?
+  serad0$arrondi_niv = -2 #soit à la centaine dns format_niv et format_delta
+  serad0$arrondi_pourcent = 1
+
+  #gestion du -
+  serad0$moins = "\U2212"
+
   #pour decider si on veut de l alea dans les verbes : 0 (rd=0.5) ou 1 (rd aléatoire)
   serad0$aleaDummy = 1
 

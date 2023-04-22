@@ -4,7 +4,7 @@
 \alias{format_niv}
 \title{Formatage Dares des niveaux, exprimés en nombres}
 \usage{
-format_niv(y, detail = -2)
+format_niv(y, detail)
 }
 \arguments{
 \item{y}{Le niveau à formater.}
@@ -19,6 +19,8 @@ Formatage Dares des niveaux, exprimés en nombres
 }
 \examples{
 format_niv(365484)  # 365 500
+
+#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
 
 }
 \seealso{

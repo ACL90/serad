@@ -158,16 +158,18 @@ library("serad")
 serad0 = getOption("serad")
   serad0$aleaDummy = 0 #pas d'aléatoire
   serad0$verbes$IAsing = "s'infléchit"
+  serad0$arrondi_niv = -1 #arrondi à la dizaine
+  serad0$arrondi_pourcent = 2 #arrondi avec 2 chiffres après la virgule
   options(serad = serad0)
   #getOption("serad")$verbes$DBsing
+
+#Lancement du Rmarkdown
+render("InterimMensuel.Rmd",
+       word_document(reference_docx="word-template_adaptations.docx"))
+#render("InterimMensuel.Rmd", output_format = "word_document")
+
 #pour revenir aux options standards de base
   detach("package:serad", unload = TRUE)
   library("serad")
-
-################Lancement du Rmarkdown a proprement parler - #####################
-render("Example/InterimMensuel.Rmd",
-       word_document(reference_docx="Example/word-template_adaptations.docx"))
-#render("InterimMensuel.Rmd", output_format = "word_document")
-
 
 

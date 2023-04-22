@@ -13,8 +13,16 @@
 #' format_delta(-365484)      #−365 500
 #' format_delta(-365484,0,-1) #365 480
 #'
+#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
+#'
 #' @export
-format_delta =function(y, signe =1, detail=-2){
+format_delta =function(y, signe =1, detail){
+
+  if(missing(detail)) {
+    serad0 = getOption("serad")
+    detail = serad0$arrondi_niv #-2 pour arrondir à la centaine
+  }
+
   z = format_niv(y, detail)
   if(signe ==1) {
     return(ifelse(y>=0,

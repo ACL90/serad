@@ -4,7 +4,7 @@
 \alias{format_delta}
 \title{Formatage Dares des variations (exprimées en nombre, avec signe)}
 \usage{
-format_delta(y, signe = 1, detail = -2)
+format_delta(y, signe = 1, detail)
 }
 \arguments{
 \item{y}{La différence à formater.}
@@ -18,6 +18,9 @@ Le niveau formaté.
 }
 \description{
 Formatage Dares des variations (exprimées en nombre, avec signe)
+}
+\details{
+Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
 }
 \examples{
 format_delta(365484)       #+365 500
