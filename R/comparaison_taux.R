@@ -36,5 +36,3 @@ comparaison_taux  = function(g,hausse0,egalite0,baisse0,
             (((abs(g)<seuil)|(g=0))&(param==0))~egalite0,
             (((abs(g)<seuil)|(g=0))&(param==1))~egalite1    )
 }
-
-
