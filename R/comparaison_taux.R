@@ -20,19 +20,33 @@
 #' comparaison_taux(0.05,"augmente","reste stable","diminue")          #reste stable
 #' comparaison_taux(0.05,"augmente","reste stable","diminue",seuil=0)  #augmente
 #' comparaison_taux(0,"augmente","reste égal","diminue", seuil=0)      #augmente
-#' comparaison_taux(0,"as","bs","cs",seuil=0,param=1,"a","b","c")      #a
-#' comparaison_taux(0,"as","bs","cs",seuil=0,param=0,"a","b","c")      #as
-#' comparaison_taux(0,"as","bs","cs",seuil=0,"a","b","c")              #as
+#' comparaison_taux(0,"as","bs","cs",seuil=0,param=1,hausse1="a",egalite1="b",baisse1="c")      #a
+#' comparaison_taux(0,"as","bs","cs",seuil=0,param=0,hausse1="a",egalite1="b",baisse1="c")      #as
+#' comparaison_taux(0,"as","bs","cs",seuil=0,hausse1="a",egalite1="b",baisse1="c") #as
 #'
 #'
 #' @export
 comparaison_taux  = function(g,hausse0,egalite0,baisse0,
                          seuil=0.1,param=0,
                          hausse1=hausse0,egalite1=egalite0,baisse1=baisse0){
-  dplyr::case_when(((g>=seuil)&(param==0))~hausse0,
-            ((g>=seuil)&(param==1))~hausse1,
-            ((g<=-seuil)&(param==0))~baisse0,
-            ((g<=-seuil)&(param==1))~baisse1,
-            (((abs(g)<seuil)|(g=0))&(param==0))~egalite0,
-            (((abs(g)<seuil)|(g=0))&(param==1))~egalite1    )
+  # dplyr::case_when(((g>=seuil)&(param==0))~hausse0,
+  #           ((g>=seuil)&(param==1))~hausse1,
+  #           ((g<=-seuil)&(param==0))~baisse0,
+  #           ((g<=-seuil)&(param==1))~baisse1,
+  #           (((abs(g)<seuil)|(g=0))&(param==0))~egalite0,
+  #           (((abs(g)<seuil)|(g=0))&(param==1))~egalite1    )
+
+  ifelse((g>=seuil)&(param==0),hausse0,
+    ifelse((g>=seuil)&(param==1),hausse1,
+      ifelse((g<=-seuil)&(param==0),baisse0,
+        ifelse((g<=-seuil)&(param==1),baisse1,
+          ifelse(((abs(g)<seuil)|(g=0))&(param==0),egalite0,
+            egalite1 #ifelse(((abs(g)<seuil)|(g=0))&(param==1),
+          )
+        )
+      )
+    )
+  )
+
 }
+

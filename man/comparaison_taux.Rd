@@ -49,9 +49,9 @@ comparaison_taux(5,"augmente","reste stable","diminue")             #augmente
 comparaison_taux(0.05,"augmente","reste stable","diminue")          #reste stable
 comparaison_taux(0.05,"augmente","reste stable","diminue",seuil=0)  #augmente
 comparaison_taux(0,"augmente","reste égal","diminue", seuil=0)      #augmente
-comparaison_taux(0,"as","bs","cs",seuil=0,param=1,"a","b","c")      #a
-comparaison_taux(0,"as","bs","cs",seuil=0,param=0,"a","b","c")      #as
-comparaison_taux(0,"as","bs","cs",seuil=0,"a","b","c")              #as
+comparaison_taux(0,"as","bs","cs",seuil=0,param=1,hausse1="a",egalite1="b",baisse1="c")      #a
+comparaison_taux(0,"as","bs","cs",seuil=0,param=0,hausse1="a",egalite1="b",baisse1="c")      #as
+comparaison_taux(0,"as","bs","cs",seuil=0,hausse1="a",egalite1="b",baisse1="c") #as
 
 
 }
