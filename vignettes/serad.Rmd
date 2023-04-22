@@ -14,7 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-Dernière mise à jour de cette documentation : 24 avril 2022.
+```{r out.width="20%", echo=FALSE, include=TRUE}
+knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/man/figures/logo.png")
+#knitr::include_graphics("~/logo.png") 
+```
+
+[Dernière mise à jour de cette documentation : 24 avril 2022]
 
 ```{r setup}
 library(serad)

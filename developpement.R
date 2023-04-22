@@ -35,3 +35,31 @@ vignette("serad")
 ?g_verbe
 library("serad")
 ?gETa_verbe
+
+
+#sticker
+#?sticker
+#https://shixiangwang.github.io/home/en/post/2019-06-20-how-i-create-ucscxenatools-logo/
+library(hexSticker)
+library(ggplot2)
+p <- ggplot(aes(x = mpg, y = wt), data = mtcars[mtcars$mpg==21,]) + geom_point()
+p <- p + theme_void() + theme_transparent()
+outfile <- tempfile(fileext=".png")
+file = "C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/man/figures/logo.png"
+#file = "logo.png"
+sticker(p,
+        package="serad ",
+        u_color = "white", u_size = 1,
+        h_fill="aquamarine3", h_color="white",
+        p_size = 30,p_family="mono", #I would prefer : Futura Std Extra Bold"
+        #http://www.sthda.com/french/wiki/couleurs-dans-r
+        p_color = "blue4",
+        filename=file)
+
+#tentative pour obtenir la police du logo de la Dares
+# "Futura Std Extra Bold"
+# library(extrafont) https://github.com/wch/extrafont
+# font_import()
+
+library(usethis)
+use_logo(img = file)
