@@ -22,7 +22,7 @@
 #' format_g(-5.3654,1) # "−5,4 %"
 #' format_g(-5.3654)   # "−5,4 %"
 #' format_g(-5.3654,detail = 2)   # "−5,37 %"
-#' format_g(0.35)      # "0.4 %"
+#' format_g(0.35)      # "+0.4 %"
 #' @export
 format_g = function(y,signe = 1, detail){
 
