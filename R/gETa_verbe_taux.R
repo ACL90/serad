@@ -14,11 +14,11 @@
 #' gETa_verbe_taux(4,1,0)       #accélèrent
 #' gETa_verbe_taux(1,1)         #poursuit sa progression
 #' gETa_verbe_taux(0.3,1)       #ralentit
-#' gETa_verbe_taux(0.1,-1)      #repart à la hausse
-#' gETa_verbe_taux(-0.1,-1)     #poursuit sa baisse
-#' gETa_verbe_taux(-0.3,-1)     #poursuit sa baisse
-#' gETa_verbe_taux(-1,-1)       #poursuit sa baisse
-#' gETa_verbe_taux(-4,-1)       #recule à nouveau
+#' gETa_verbe_taux(0.1,-1)      #repart à la hausse // se redresse
+#' gETa_verbe_taux(-0.1,-1)     #poursuit sa baisse // continue à baisser
+#' gETa_verbe_taux(-0.3,-1)     #poursuit sa baisse // continue à baisser
+#' gETa_verbe_taux(-1,-1)       #poursuit sa baisse // continue à baisser
+#' gETa_verbe_taux(-4,-1)       #recule à nouveau // poursuit son recul
 #' gETa_verbe_taux(-4,1)        #recule
 #' gETa_verbe_taux(-20,1)       #se replie fortement
 #' gETa_verbe_taux(-21,1)       #chute
@@ -34,31 +34,59 @@ gETa_verbe_taux = function(g1,g2,sing=1){  #sing=1 pour singulier
   verbes = serad$verbes
   aleaDummy = serad$aleaDummy
 
-  random = sample(seq(0, 1, length.out = 1000), 1) #it emulates stats::runif
+  random = sample(seq(0, 1, length.out = 1000), 1) #it emulates stats::runif (suffisant ici)
   rd = aleaDummy*random + (1-aleaDummy)*0.5
 
-  return(case_when(gETa_verbe00(g1,g2)=="A"           ~ifelse(sing,verbes$AAsing,verbes$AAplur),
-                   gETa_verbe00(g1,g2)=="B"           ~ifelse(sing,verbes$BAsing,verbes$BAplur),
-                   gETa_verbe00(g1,g2)=="C" & rd>=0.5 ~ifelse(sing,verbes$CAsing,verbes$CAplur),
-                   gETa_verbe00(g1,g2)=="C" & rd<0.5  ~ifelse(sing,verbes$CBsing,verbes$CBplur),
-                   gETa_verbe00(g1,g2)=="D" & rd>=0.5 ~ifelse(sing,verbes$DAsing,verbes$DAplur),
-                   gETa_verbe00(g1,g2)=="D" & rd<0.5  ~ifelse(sing,verbes$DBsing,verbes$DBplur),
-                   gETa_verbe00(g1,g2)=="E"           ~ifelse(sing,verbes$EAsing,verbes$EAplur),
-                   gETa_verbe00(g1,g2)=="F" & rd>=0.5 ~ifelse(sing,verbes$FAsing,verbes$FAplur),
-                   gETa_verbe00(g1,g2)=="F" & rd<0.5  ~ifelse(sing,verbes$FBsing,verbes$FBplur),
-                   gETa_verbe00(g1,g2)=="G"           ~ifelse(sing,verbes$GAsing,verbes$GAplur),
-                   gETa_verbe00(g1,g2)=="H" & rd>=0.5 ~ifelse(sing,verbes$HAsing,verbes$HAplur),
-                   gETa_verbe00(g1,g2)=="H" & rd<0.5  ~ifelse(sing,verbes$HBsing,verbes$HBplur),
-                   gETa_verbe00(g1,g2)=="I" & rd>=0.5 ~ifelse(sing,verbes$IAsing,verbes$IAplur),
-                   gETa_verbe00(g1,g2)=="I" & rd<0.5  ~ifelse(sing,verbes$IBsing,verbes$IBplur),
-                   gETa_verbe00(g1,g2)=="J" & rd>=0.5 ~ifelse(sing,verbes$JAsing,verbes$JAplur),
-                   gETa_verbe00(g1,g2)=="J" & rd<0.5  ~ifelse(sing,verbes$JBsing,verbes$JBplur),
-                   gETa_verbe00(g1,g2)=="K" & rd>=0.5 ~ifelse(sing,verbes$KAsing,verbes$KAplur),
-                   gETa_verbe00(g1,g2)=="K" & rd<0.5  ~ifelse(sing,verbes$KBsing,verbes$KBplur),
-                   gETa_verbe00(g1,g2)=="L"           ~ifelse(sing,verbes$LAsing,verbes$LAplur),
-                   gETa_verbe00(g1,g2)=="M"           ~ifelse(sing,verbes$MAsing,verbes$MAplur)
-  ))
-  }
+
+
+  return(   ifelse(gETa_verbe00(g1,g2)=="A"           ,ifelse(sing,verbes$AAsing,verbes$AAplur),
+            ifelse(gETa_verbe00(g1,g2)=="B"           ,ifelse(sing,verbes$BAsing,verbes$BAplur),
+            ifelse(gETa_verbe00(g1,g2)=="C" & rd>=0.5 ,ifelse(sing,verbes$CAsing,verbes$CAplur),
+            ifelse(gETa_verbe00(g1,g2)=="C" & rd<0.5  ,ifelse(sing,verbes$CBsing,verbes$CBplur),
+            ifelse(gETa_verbe00(g1,g2)=="D" & rd>=0.5 ,ifelse(sing,verbes$DAsing,verbes$DAplur),
+            ifelse(gETa_verbe00(g1,g2)=="D" & rd<0.5  ,ifelse(sing,verbes$DBsing,verbes$DBplur),
+            ifelse(gETa_verbe00(g1,g2)=="E"           ,ifelse(sing,verbes$EAsing,verbes$EAplur),
+            ifelse(gETa_verbe00(g1,g2)=="F" & rd>=0.5 ,ifelse(sing,verbes$FAsing,verbes$FAplur),
+            ifelse(gETa_verbe00(g1,g2)=="F" & rd<0.5  ,ifelse(sing,verbes$FBsing,verbes$FBplur),
+            ifelse(gETa_verbe00(g1,g2)=="G"           ,ifelse(sing,verbes$GAsing,verbes$GAplur),
+            ifelse(gETa_verbe00(g1,g2)=="H" & rd>=0.5 ,ifelse(sing,verbes$HAsing,verbes$HAplur),
+            ifelse(gETa_verbe00(g1,g2)=="H" & rd<0.5  ,ifelse(sing,verbes$HBsing,verbes$HBplur),
+            ifelse(gETa_verbe00(g1,g2)=="I" & rd>=0.5 ,ifelse(sing,verbes$IAsing,verbes$IAplur),
+            ifelse(gETa_verbe00(g1,g2)=="I" & rd<0.5  ,ifelse(sing,verbes$IBsing,verbes$IBplur),
+            ifelse(gETa_verbe00(g1,g2)=="J" & rd>=0.5 ,ifelse(sing,verbes$JAsing,verbes$JAplur),
+            ifelse(gETa_verbe00(g1,g2)=="J" & rd<0.5  ,ifelse(sing,verbes$JBsing,verbes$JBplur),
+            ifelse(gETa_verbe00(g1,g2)=="K" & rd>=0.5 ,ifelse(sing,verbes$KAsing,verbes$KAplur),
+            ifelse(gETa_verbe00(g1,g2)=="K" & rd<0.5  ,ifelse(sing,verbes$KBsing,verbes$KBplur),
+            ifelse(gETa_verbe00(g1,g2)=="L"           ,ifelse(sing,verbes$LAsing,verbes$LAplur),
+                ifelse(sing,verbes$MAsing,verbes$MAplur) #gETa_verbe00(g1,g2)=="M"
+                )))))))))))))))))))
+  )
+}
+
+
+
+#   return(case_when(gETa_verbe00(g1,g2)=="A"           ~ifelse(sing,verbes$AAsing,verbes$AAplur),
+#                    gETa_verbe00(g1,g2)=="B"           ~ifelse(sing,verbes$BAsing,verbes$BAplur),
+#                    gETa_verbe00(g1,g2)=="C" & rd>=0.5 ~ifelse(sing,verbes$CAsing,verbes$CAplur),
+#                    gETa_verbe00(g1,g2)=="C" & rd<0.5  ~ifelse(sing,verbes$CBsing,verbes$CBplur),
+#                    gETa_verbe00(g1,g2)=="D" & rd>=0.5 ~ifelse(sing,verbes$DAsing,verbes$DAplur),
+#                    gETa_verbe00(g1,g2)=="D" & rd<0.5  ~ifelse(sing,verbes$DBsing,verbes$DBplur),
+#                    gETa_verbe00(g1,g2)=="E"           ~ifelse(sing,verbes$EAsing,verbes$EAplur),
+#                    gETa_verbe00(g1,g2)=="F" & rd>=0.5 ~ifelse(sing,verbes$FAsing,verbes$FAplur),
+#                    gETa_verbe00(g1,g2)=="F" & rd<0.5  ~ifelse(sing,verbes$FBsing,verbes$FBplur),
+#                    gETa_verbe00(g1,g2)=="G"           ~ifelse(sing,verbes$GAsing,verbes$GAplur),
+#                    gETa_verbe00(g1,g2)=="H" & rd>=0.5 ~ifelse(sing,verbes$HAsing,verbes$HAplur),
+#                    gETa_verbe00(g1,g2)=="H" & rd<0.5  ~ifelse(sing,verbes$HBsing,verbes$HBplur),
+#                    gETa_verbe00(g1,g2)=="I" & rd>=0.5 ~ifelse(sing,verbes$IAsing,verbes$IAplur),
+#                    gETa_verbe00(g1,g2)=="I" & rd<0.5  ~ifelse(sing,verbes$IBsing,verbes$IBplur),
+#                    gETa_verbe00(g1,g2)=="J" & rd>=0.5 ~ifelse(sing,verbes$JAsing,verbes$JAplur),
+#                    gETa_verbe00(g1,g2)=="J" & rd<0.5  ~ifelse(sing,verbes$JBsing,verbes$JBplur),
+#                    gETa_verbe00(g1,g2)=="K" & rd>=0.5 ~ifelse(sing,verbes$KAsing,verbes$KAplur),
+#                    gETa_verbe00(g1,g2)=="K" & rd<0.5  ~ifelse(sing,verbes$KBsing,verbes$KBplur),
+#                    gETa_verbe00(g1,g2)=="L"           ~ifelse(sing,verbes$LAsing,verbes$LAplur),
+#                    gETa_verbe00(g1,g2)=="M"           ~ifelse(sing,verbes$MAsing,verbes$MAplur)
+#   ))
+
 
 
 #quelques rappels
