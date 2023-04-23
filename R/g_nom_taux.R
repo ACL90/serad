@@ -14,7 +14,7 @@
 #' g_nom_taux(-4)      # une baisse
 #' g_nom_taux(-5)      # une forte baisse
 #'
-#' @importFrom dplyr case_when
+# @importFrom dplyr case_when
 #'
 #' @export
 g_nom_taux = function(g){
@@ -23,15 +23,26 @@ g_nom_taux = function(g){
   serad0 = getOption("serad")
   seuil = serad0$nomse
 
-         z = case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
-                       g>seuil$forttt   ~serad0$nm$forttt,
-                       g>seuil$fortt    ~serad0$nm$fortt,
-                       g>seuil$fort     ~serad0$nm$fort,
-                       g>seuil$faible   ~serad0$nm$faible,
-                       g>seuil$faiblee  ~serad0$nm$faiblee,
-                       g>seuil$faibleee ~serad0$nm$faibleee,
-                       g>seuil$faibleeee~serad0$nm$faibleeee,
-                      g<=seuil$faibleeee~serad0$nm$faibleeeee)
+         # z = case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
+         #               g>seuil$forttt   ~serad0$nm$forttt,
+         #               g>seuil$fortt    ~serad0$nm$fortt,
+         #               g>seuil$fort     ~serad0$nm$fort,
+         #               g>seuil$faible   ~serad0$nm$faible,
+         #               g>seuil$faiblee  ~serad0$nm$faiblee,
+         #               g>seuil$faibleee ~serad0$nm$faibleee,
+         #               g>seuil$faibleeee~serad0$nm$faibleeee,
+         #              g<=seuil$faibleeee~serad0$nm$faibleeeee)
+
+         z =    ifelse(g>seuil$fortttt  ,serad0$nm$fortttt,
+                ifelse(g>seuil$forttt   ,serad0$nm$forttt,
+                ifelse(g>seuil$fortt    ,serad0$nm$fortt,
+                ifelse(g>seuil$fort     ,serad0$nm$fort,
+                ifelse(g>seuil$faible   ,serad0$nm$faible,
+                ifelse( g>seuil$faiblee ,serad0$nm$faiblee,
+                ifelse(g>seuil$faibleee ,serad0$nm$faibleee,
+                ifelse(g>seuil$faibleeee,serad0$nm$faibleeee,
+                                        serad0$nm$faibleeeee #g<=seuil$faibleeee~
+                       ))))))))
 
   return(z)
 }
