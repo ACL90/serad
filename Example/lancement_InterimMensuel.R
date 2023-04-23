@@ -1,22 +1,27 @@
 #
 #Ce fichier introduit l'exemple d'utilisation typique du package serad
 
+#utilisés pour l'import du fichier xlsx
+ library(dplyr)
+ library(readxl)
+ library(sjmisc)
+ library(stringr)
+
+#utilisés par serad.Rmd
+ library(rmarkdown)
+ library(ggplot2)
 
 #https://rmarkdown.rstudio.com/lesson-1.html
-# install.packages("rmarkdown")
-# install.packages("knitr")
-# install.packages("sjmisc")
+ # install.packages("rmarkdown")
+ # install.packages("knitr")
+ # install.packages("sjmisc")
 
-library(rmarkdown)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(lubridate)
-library(stringr)
-library(readxl)
-library(sjmisc)
-library(stringr)
-library(rlang)
+#visiblement ne sont plus utiles
+ # library(rlang)
+ # library(tidyr)
+ # library(lubridate)
+ # library(stringr)
+
 
 #################A modifier avant chaque lancement#####################
 Fichier = "Fichier.xlsx"

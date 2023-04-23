@@ -1,6 +1,6 @@
 
 ```{r Rlang, echo=FALSE, include=FALSE} 
-lang <- c("EN", "FR")[2] 
+#lang <- c("EN", "FR")[2] 
 MoisPROV = Nombre$mois[length(Nombre$mois)]
 AnneePROV = Nombre$annee[length(Nombre$mois)]
 MoisRECT = Nombre$mois[length(Nombre$mois)-1]
