@@ -16,7 +16,7 @@
 #' #' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
 #'
 #' @examples
-#' format_g(5.3654,0)  # "5,4 %"
+#' format_g(5.3654,signe =0)  # "5,4 %"
 #' format_g(5.3654,1)  # "+5,4 %"
 #' format_g(-5.3654,0) # "5,4 %"
 #' format_g(-5.3654,1) # "−5,4 %"
@@ -24,7 +24,8 @@
 #' format_g(-5.3654,detail = 2)   # "−5,37 %"
 #' format_g(0.35)      # "+0.4 %"
 #' @export
-format_g = function(y,signe = 1, detail){
+format_g_new = function(y,signe = 1, detail){
+
 
   serad0 = getOption("serad")
   if(missing(detail)) {
@@ -41,8 +42,10 @@ format_g = function(y,signe = 1, detail){
   }
   else {
     w =  gsub("\\.", ",",sprintf(formattage,y0))  #pas de + ici
-    return(gsub('-+',"",w))
+    w = gsub('\\+',"",w)
+    return(gsub('-',"",w))
   }
+
 }
 
 # NOTE sur format_g : peut s'utiliser typiquement en combinaison avec g(x1,x2)
