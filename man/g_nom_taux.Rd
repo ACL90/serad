@@ -26,4 +26,5 @@ g_nom_taux(-1)      # une baisse modérée
 g_nom_taux(-4)      # une baisse
 g_nom_taux(-5)      # une forte baisse
 
+
 }

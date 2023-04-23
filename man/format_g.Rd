@@ -25,7 +25,7 @@ signe = 0 permet de retirer le signe, que ce soit un + ou un - (par exemple pour
 Le symbole 'moins' n'est pas correctement rendu en Word lorsque utilisé avec cat. (on obtient le tiret du milieu)
 }
 \examples{
-format_g(5.3654,0)  # "5,4 \%"
+format_g(5.3654,signe =0)  # "5,4 \%"
 format_g(5.3654,1)  # "+5,4 \%"
 format_g(-5.3654,0) # "5,4 \%"
 format_g(-5.3654,1) # "−5,4 \%"
