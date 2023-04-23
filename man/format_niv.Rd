@@ -17,10 +17,12 @@ Le niveau formaté
 \description{
 Formatage Dares des niveaux, exprimés en nombres
 }
+\details{
+Pour changer le comportement par défaut d'arrondi,
+modifier getOption("serad")$arrondi_niv
+}
 \examples{
 format_niv(365484)  # 365 500
-
-#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
 
 }
 \seealso{

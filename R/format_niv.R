@@ -12,7 +12,8 @@
 #' @examples
 #' format_niv(365484)  # 365 500
 #'
-#' #' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
+#' @details Pour changer le comportement par défaut d'arrondi,
+#' modifier getOption("serad")$arrondi_niv
 #'
 #' @export
 format_niv =function(y,detail){
