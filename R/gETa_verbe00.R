@@ -4,25 +4,25 @@
 #'
 #' @seealso gETa_verbe_taux
 #'
-#' @importFrom dplyr case_when
+# @importFrom dplyr case_when
 #'
 #' @return Une modalité (un nombre). gETa_verbe0 indiquera concrètement le verbe
 #'
 # @examples
-# gETa_verbe00(0.049,0.049) #1
-# gETa_verbe00(0.049,2)     #2
-# gETa_verbe00(10,1)        #5
-# gETa_verbe00(4,1)         #5
-# gETa_verbe00(1,1)         #7
-# gETa_verbe00(0.3,1)       #6
-# gETa_verbe00(0.1,-1)      #3
-# gETa_verbe00(-0.1,-1)     #11
-# gETa_verbe00(-0.3,-1)     #11
-# gETa_verbe00(-1,-1)       #11
-# gETa_verbe00(-4,-1)       #10
-# gETa_verbe00(-4,1)        #8
-# gETa_verbe00(-20,1)       #13
-# gETa_verbe00(-21,1)       #12
+# gETa_verbe00(0.049,0.049) #A
+# gETa_verbe00(0.049,2)     #B
+# gETa_verbe00(10,1)        #E
+# gETa_verbe00(4,1)         #E
+# gETa_verbe00(1,1)         #G
+# gETa_verbe00(0.3,1)       #F
+# gETa_verbe00(0.1,-1)      #C
+# gETa_verbe00(-0.1,-1)     #K
+# gETa_verbe00(-0.3,-1)     #K
+# gETa_verbe00(-1,-1)       #K
+# gETa_verbe00(-4,-1)       #J
+# gETa_verbe00(-4,1)        #H
+# gETa_verbe00(-20,1)       #M
+# gETa_verbe00(-21,1)       #L
 #'
 # pas utilisable par l'utilisateur donc pas le mot cle export
 gETa_verbe00 = function(g1,g2){
@@ -31,22 +31,40 @@ gETa_verbe00 = function(g1,g2){
   seuil = getOption("serad")$seuil
 
   return(
-    case_when((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ~"A",  #reste stable
-            (arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)!=0) ~"B",  #se stabilise
-            g1>0 & g2<(seuil$g2bas)         ~"C",  #repart à la hausse #se redresse
-            g1>0 & g2<0                     ~"D",  #augmente, est en hausse
-            g1>0 & a>(seuil$afort)          ~"E",  #accélère
-            g1>0 & a<(seuil$dfort)          ~"F",  #ralentit, se modère
-            g1>0                            ~"G",  #poursuit sa progression
-            g1<(seuil$g1tresbas)            ~"L",  #chute
-            g1<(seuil$g1bas)                ~"M",  #se replie fortement
-            g1<0 & g2>(seuil$g2haut)        ~"H",  #recule #se replie
-            g1<0 & g2>=0                    ~"I",  #baisse, diminue
-            g1<0 & g2<0 & a>seuil$afort2    ~"J",  #recule à nouveau, poursuit son recul
-            g1<0 & g2<0 & a<=seuil$afort2   ~"K"   #poursuit sa baisse, continue à baisser
+
+    ifelse((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ,"A",  #reste stable
+    ifelse((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)!=0) ,"B",  #se stabilise
+    ifelse(g1>0 & g2<(seuil$g2bas)         ,"C",  #repart à la hausse #se redresse
+    ifelse(g1>0 & g2<0                     ,"D",  #augmente, est en hausse
+    ifelse(g1>0 & a>(seuil$afort)          ,"E",  #accélère
+    ifelse(g1>0 & a<(seuil$dfort)          ,"F",  #ralentit, se modère
+    ifelse(g1>0                            ,"G",  #poursuit sa progression
+    ifelse(g1<(seuil$g1tresbas)            ,"L",  #chute
+    ifelse(g1<(seuil$g1bas)                ,"M",  #se replie fortement
+    ifelse(g1<0 & g2>(seuil$g2haut)        ,"H",  #recule #se replie
+    ifelse(g1<0 & g2>=0                    ,"I",  #baisse, diminue
+    ifelse(g1<0 & g2<0 & a>seuil$afort2    ,"J",  #recule à nouveau, poursuit son recul
+              "K"   # g1<0 & g2<0 & a<=seuil$afort2 #poursuit sa baisse, continue à baisser
+    ))))))))))))
   )
-  )
+
 }
+
+
+    # case_when((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ~"A",  #reste stable
+    #         (arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)!=0) ~"B",  #se stabilise
+    #         g1>0 & g2<(seuil$g2bas)         ~"C",  #repart à la hausse #se redresse
+    #         g1>0 & g2<0                     ~"D",  #augmente, est en hausse
+    #         g1>0 & a>(seuil$afort)          ~"E",  #accélère
+    #         g1>0 & a<(seuil$dfort)          ~"F",  #ralentit, se modère
+    #         g1>0                            ~"G",  #poursuit sa progression
+    #         g1<(seuil$g1tresbas)            ~"L",  #chute
+    #         g1<(seuil$g1bas)                ~"M",  #se replie fortement
+    #         g1<0 & g2>(seuil$g2haut)        ~"H",  #recule #se replie
+    #         g1<0 & g2>=0                    ~"I",  #baisse, diminue
+    #         g1<0 & g2<0 & a>seuil$afort2    ~"J",  #recule à nouveau, poursuit son recul
+    #         g1<0 & g2<0 & a<=seuil$afort2   ~"K"   #poursuit sa baisse, continue à baisser
+
 
 
 #
