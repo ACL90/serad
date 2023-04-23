@@ -25,18 +25,34 @@ g_verbe_taux = function(g,sing=1){  #sing pour singulier
   serad0 = getOption("serad")
   seuil = serad0$sve
 
-  z = dplyr::case_when(g>seuil$forttttt~ifelse(sing,serad0$verbev$forttttt_sing,   serad0$verbev$forttttt_plur),
-            g>seuil$fortttt            ~ifelse(sing,serad0$verbev$fortttt_sing,    serad0$verbev$fortttt_plur),
-            g>seuil$forttt             ~ifelse(sing,serad0$verbev$forttt_sing,     serad0$verbev$forttt_plur),
-            g>seuil$fortt              ~ifelse(sing,serad0$verbev$fortt_sing,      serad0$verbev$fortt_plur),
-            g>seuil$fort               ~ifelse(sing,serad0$verbev$fort_sing,       serad0$verbev$fort_plur),
-            g>seuil$faible             ~ifelse(sing,serad0$verbev$faible_sing,     serad0$verbev$faible_plur),
-            g>seuil$faiblee            ~ifelse(sing,serad0$verbev$faiblee_sing,    serad0$verbev$faiblee_plur),
-            g>seuil$faibleee           ~ifelse(sing,serad0$verbev$faibleee_sing,   serad0$verbev$faibleee_plur),
-            g>seuil$faibleeee          ~ifelse(sing,serad0$verbev$faibleeee_sing,  serad0$verbev$faibleeee_plur),
-            g>seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeee_sing, serad0$verbev$faibleeeee_plur),
-           g<=seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur))
-  return(paste(z,format_g(g,signe=0)))
+  # z = dplyr::case_when(g>seuil$forttttt~ifelse(sing,serad0$verbev$forttttt_sing,   serad0$verbev$forttttt_plur),
+  #           g>seuil$fortttt            ~ifelse(sing,serad0$verbev$fortttt_sing,    serad0$verbev$fortttt_plur),
+  #           g>seuil$forttt             ~ifelse(sing,serad0$verbev$forttt_sing,     serad0$verbev$forttt_plur),
+  #           g>seuil$fortt              ~ifelse(sing,serad0$verbev$fortt_sing,      serad0$verbev$fortt_plur),
+  #           g>seuil$fort               ~ifelse(sing,serad0$verbev$fort_sing,       serad0$verbev$fort_plur),
+  #           g>seuil$faible             ~ifelse(sing,serad0$verbev$faible_sing,     serad0$verbev$faible_plur),
+  #           g>seuil$faiblee            ~ifelse(sing,serad0$verbev$faiblee_sing,    serad0$verbev$faiblee_plur),
+  #           g>seuil$faibleee           ~ifelse(sing,serad0$verbev$faibleee_sing,   serad0$verbev$faibleee_plur),
+  #           g>seuil$faibleeee          ~ifelse(sing,serad0$verbev$faibleeee_sing,  serad0$verbev$faibleeee_plur),
+  #           g>seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeee_sing, serad0$verbev$faibleeeee_plur),
+  #          g<=seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur))
+
+
+  z =           ifelse(g>seuil$forttttt           ,ifelse(sing,serad0$verbev$forttttt_sing,   serad0$verbev$forttttt_plur),
+                ifelse(g>seuil$fortttt            ,ifelse(sing,serad0$verbev$fortttt_sing,    serad0$verbev$fortttt_plur),
+                ifelse(g>seuil$forttt             ,ifelse(sing,serad0$verbev$forttt_sing,     serad0$verbev$forttt_plur),
+                ifelse(g>seuil$fortt              ,ifelse(sing,serad0$verbev$fortt_sing,      serad0$verbev$fortt_plur),
+                ifelse(g>seuil$fort               ,ifelse(sing,serad0$verbev$fort_sing,       serad0$verbev$fort_plur),
+                ifelse(g>seuil$faible             ,ifelse(sing,serad0$verbev$faible_sing,     serad0$verbev$faible_plur),
+                ifelse(g>seuil$faiblee            ,ifelse(sing,serad0$verbev$faiblee_sing,    serad0$verbev$faiblee_plur),
+                ifelse(g>seuil$faibleee           ,ifelse(sing,serad0$verbev$faibleee_sing,   serad0$verbev$faibleee_plur),
+                ifelse(g>seuil$faibleeee          ,ifelse(sing,serad0$verbev$faibleeee_sing,  serad0$verbev$faibleeee_plur),
+                ifelse(g>seuil$faibleeeee         ,ifelse(sing,serad0$verbev$faibleeeee_sing, serad0$verbev$faibleeeee_plur),
+                                               ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur)  #<=seuil$faibleeeee
+                ))))))))))
+
+
+    return(paste(z,format_g(g,signe=0)))
 }
 
 
