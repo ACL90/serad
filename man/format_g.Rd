@@ -15,14 +15,14 @@ format_g(y, signe = 1, detail)
 }
 \value{
 La variation mise en forme.
-
-#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
 }
 \description{
 signe = 0 permet de retirer le signe, que ce soit un + ou un - (par exemple pour dire: diminue de 5 \\%).
 }
 \details{
 Le symbole 'moins' n'est pas correctement rendu en Word lorsque utilisé avec cat. (on obtient le tiret du milieu)
+
+Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
 }
 \examples{
 format_g(5.3654,signe =0)  # "5,4 \%"

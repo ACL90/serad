@@ -26,14 +26,15 @@ gETa_verbe_taux(10,1)        #accélère
 gETa_verbe_taux(4,1,0)       #accélèrent
 gETa_verbe_taux(1,1)         #poursuit sa progression
 gETa_verbe_taux(0.3,1)       #ralentit
-gETa_verbe_taux(0.1,-1)      #repart à la hausse
-gETa_verbe_taux(-0.1,-1)     #poursuit sa baisse
-gETa_verbe_taux(-0.3,-1)     #poursuit sa baisse
-gETa_verbe_taux(-1,-1)       #poursuit sa baisse
-gETa_verbe_taux(-4,-1)       #recule à nouveau
+gETa_verbe_taux(0.1,-1)      #repart à la hausse // se redresse
+gETa_verbe_taux(-0.1,-1)     #poursuit sa baisse // continue à baisser
+gETa_verbe_taux(-0.3,-1)     #poursuit sa baisse // continue à baisser
+gETa_verbe_taux(-1,-1)       #poursuit sa baisse // continue à baisser
+gETa_verbe_taux(-4,-1)       #recule à nouveau // poursuit son recul
 gETa_verbe_taux(-4,1)        #recule
 gETa_verbe_taux(-20,1)       #se replie fortement
 gETa_verbe_taux(-21,1)       #chute
+
 
 }
 \seealso{

@@ -13,7 +13,7 @@ library(rlang)
 
 ################ Pendant le developpement du package #####################
 #il faudra décommenter et tester avec TRUE
-#devtools::check(cran = FALSE)
+devtools::check(cran = FALSE)
 #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
 #usethis::use_vignette("serad")
 #https://community.rstudio.com/t/bypass-qpdf-checks/115691
@@ -37,7 +37,7 @@ library("serad")
 ?gETa_verbe
 
 
-#sticker
+################ !!!! sticker !!!! #####################
 #?sticker
 #https://shixiangwang.github.io/home/en/post/2019-06-20-how-i-create-ucscxenatools-logo/
 library(hexSticker)

@@ -23,7 +23,7 @@
 #' gETa_verbe_taux(-20,1)       #se replie fortement
 #' gETa_verbe_taux(-21,1)       #chute
 #'
-#' @importFrom dplyr case_when
+# @importFrom dplyr case_when
 # @importFrom stats runif
 #'
 #' @export

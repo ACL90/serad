@@ -13,7 +13,7 @@
 #'
 #' @return La variation mise en forme.
 #'
-#' #' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
+#' @details Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
 #'
 #' @examples
 #' format_g(5.3654,signe =0)  # "5,4 %"

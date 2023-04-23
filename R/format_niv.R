@@ -7,7 +7,7 @@
 #'
 #' @return Le niveau formaté
 #'
-#' @importFrom dplyr last
+# @importFrom dplyr last
 #'
 #' @examples
 #' format_niv(365484)  # 365 500
@@ -22,7 +22,10 @@ format_niv =function(y,detail){
     detail = serad0$arrondi_niv #-2 pour arrondir à la centaine
   }
 
-  w = format(arrondi_tot(last(y),detail),big.mark="\ua0", scientific=FALSE)
+
+  w = format(arrondi_tot(y,detail),big.mark="\ua0", scientific=FALSE)
+  #w = format(arrondi_tot(last(y),detail),big.mark="\ua0", scientific=FALSE)
+
   return(gsub("-","\u2212",w))
 }
 

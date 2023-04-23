@@ -47,7 +47,7 @@
 #'
 #' @export
 g_nom = function(x1,x2){
-  g = g(x1,x2)
+  g = serad::g(x1,x2)
   return(g_nom_taux(g))
 }
 
