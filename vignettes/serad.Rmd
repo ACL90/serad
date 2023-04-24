@@ -26,7 +26,7 @@ library(serad)
 ```
 
 
-Le package **serad** (**S**ynthese d'**E**crits avec les **R**egles en vigueur **A** la **D**ares) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage de publications statistiques.
+Le package **serad** (**S**ynthèse d'**É**crits avec des **R**ègles **A**utomatisées et **D**ynamiques) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage de publications statistiques.
 
 ***
 **Fonctions de base et formatage**
