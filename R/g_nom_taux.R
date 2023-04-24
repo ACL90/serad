@@ -47,6 +47,8 @@ g_nom_taux = function(g){
   return(z)
 }
 
+#usethis::use_test()
+
 #quelques rappels
 #stringi::stri_escape_unicode("?")
 #\\u00e9

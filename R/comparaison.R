@@ -33,6 +33,7 @@ comparaison  = function(x1,x2,hausse0,egalite0,baisse0,seuil=0.1,
                       hausse1,egalite1,baisse1))
 
 }
+#usethis::use_test()
 
 
 ###################

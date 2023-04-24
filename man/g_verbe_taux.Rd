@@ -23,7 +23,7 @@ g_verbe_taux(4,1)  # s'accroit de 4,0 \%
 g_verbe_taux(1,0)  # sont en hausse de 1,0 \%
 g_verbe_taux(0.3)  # augmente de 0,3 \%
 g_verbe_taux(0.1)  # s'accroit très légèrement de 0,1 \%
-g_verbe_taux(-0.1) # est stable à 0,1 \%
+g_verbe_taux(-0.1) # est stable à -0,1 \% (présence du signe pour cette expression)
 g_verbe_taux(-0.3) # diminue légèrement de 0,3 \%
 g_verbe_taux(-1)   # recule légèrement de 1,0 \%
 g_verbe_taux(-4)   # baisse de 4,0 \%

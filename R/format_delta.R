@@ -34,3 +34,4 @@ format_delta =function(y, signe =1, detail){
   }
   }
 
+#usethis::use_test()

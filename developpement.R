@@ -12,6 +12,8 @@ library(rlang)
 
 
 ################ Pendant le developpement du package #####################
+#https://iqss.github.io/dss-rbuild/package-development.html
+#https://r-pkgs.org/testing-basics.html
 devtools::test()
 #il faudra décommenter et tester avec TRUE
 devtools::check(cran = TRUE)

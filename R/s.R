@@ -7,13 +7,13 @@
 #' @return Le mot bien accordé ; par défault '-s ou rien. TEST
 #'
 #' @examples
-#' s(-7.5)             #s
-#' s(-2)               #s
-#' s(1.4,"chat parle", "chats parlent") #chat parle
-#' s(-2,"chat parle", "chats parlent")  #chats parlent
-#' s(1.97)             #NA
-#' s(round(1.97,1))    #s
-#' s(1.97, seuil=1.95) #s
+#' serad::s(-7.5)             #s
+#' serad::s(-2)               #s
+#' serad::s(1.4,"chat parle", "chats parlent") #chat parle
+#' serad::s(-2,"chat parle", "chats parlent")  #chats parlent
+#' serad::s(1.97)             #NA
+#' serad::s(arrondi_tot(1.97))    #s
+#' serad::s(1.97, seuil=1.95) #s
 #'
 #' @seealso
 #' Le [site de l'Académie française](https://www.dictionnaire-academie.fr/article/QDL057)
@@ -23,3 +23,4 @@ s=function(a,sing="",plur="s",seuil=2){
   ifelse(abs(a)>=seuil,plur,sing)
 }
 
+#usethis::use_test()

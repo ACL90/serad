@@ -52,3 +52,5 @@ format_g= function(y,signe = 1, detail){
 #https://stackoverflow.com/questions/23586741/change-decimal-character-in-sprintf/73694284#73694284
 # \ua0 permet de faire l'espace insécable, (non-breaking space)
 # \U2212 dans moins pour avoir le symbole 'moins' en typographie
+
+#usethis::use_test()

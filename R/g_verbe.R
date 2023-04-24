@@ -12,11 +12,11 @@
 #' @return L'évolution, par exemple: "bondit de 10,0 %"
 #'
 #' @examples
-#' g_verbe(1.1,1,1)  # bondit de 10,0 %
-#' g_verbe(1.04,1,1) # s'accroit de 4,0 %
-#' g_verbe(1.01,1,0) # sont en hausse de 1,0 %
+#' g_verbe(1.1,1)  # bondit de 10,0 %
+#' g_verbe(1.04,1) # s'accroit de 4,0 %
+#' g_verbe(1.01,1,sing0=0) # sont en hausse de 1,0 %
 #' g_verbe(1.003,1)  # augmente de 0,3 %
-#' g_verbe(1.001,1)  # s'accroit très légèrement de 1,0 %
+#' g_verbe(1.001,1)  # s'accroit très légèrement de 0,1 %
 #' g_verbe(0.999,1)  # est stable à 0,1 %
 #' g_verbe(0.997,1)  # diminue légèrement de 0,3 %
 #' g_verbe(0.99,1)   # recule légèrement de 1,0 %
@@ -59,3 +59,5 @@
 #' @export
 g_verbe = function(x1,x2,sing0=1){g_verbe_taux(serad::g(x1,x2),sing0)} #sing=1 pour singulier
 
+
+#usethis::use_test()

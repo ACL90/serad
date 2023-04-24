@@ -30,3 +30,4 @@ format_niv =function(y,detail){
   return(gsub("-","\u2212",w))
 }
 
+#usethis::use_test()

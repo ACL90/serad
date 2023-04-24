@@ -1,0 +1,11 @@
+test_that("multiplication works", {
+  expect_equal(g_nom_taux(4), "une forte hausse")
+  expect_equal(g_nom_taux(1), "une hausse")
+  expect_equal(g_nom_taux(0.4), "une hausse modérée")
+  expect_equal(g_nom_taux(0.1), "une légère hausse")
+  expect_equal(g_nom_taux(0), "une stabilité")
+  expect_equal(g_nom_taux(-0.3), "une légère baisse")
+  expect_equal(g_nom_taux(-1), "une baisse modérée")
+  expect_equal(g_nom_taux(-4), "une baisse")
+  expect_equal(g_nom_taux(-5), "une forte baisse")
+})

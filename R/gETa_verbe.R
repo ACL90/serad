@@ -14,12 +14,12 @@
 #' gETa_verbe(1.1,1,0.99)       #accélère
 #' gETa_verbe(1.04,1,0.99)      #accélère
 #' gETa_verbe(1.01,1,0.99)      #poursuit sa progression
-#' gETa_verbe(1.003,1,0.99,0)   #ralentissent
-#' gETa_verbe(1.001,1,1.01)     #repart à la hausse
-#' gETa_verbe(0.999,1,1.01)     #continue à baisser
-#' gETa_verbe(0.99,1,1.01)      #poursuit sa baisse // recule à nouveau
-#' gETa_verbe(0.96,1,1.01)      #poursuit sa baisse // recule à nouveau
-#' gETa_verbe(0.96,1,0.99)      #recule
+#' gETa_verbe(1.003,1,0.99,0)   #ralentissent // se modèrent
+#' gETa_verbe(1.001,1,1.01)     #repart à la hausse // se redresse
+#' gETa_verbe(0.999,1,1.01)     #poursuit sa baisse // continue à baisser
+#' gETa_verbe(0.99,1,1.01)      #poursuit sa baisse // continue à baisser
+#' gETa_verbe(0.96,1,1.01)      #poursuit son recul // recule à nouveau
+#' gETa_verbe(0.96,1,0.99)      #recule // se replie
 #' gETa_verbe(0.8,1,0.99)       #se replie fortement
 #' gETa_verbe(0.79,1,0.99)      #chute
 #'
@@ -89,3 +89,4 @@ gETa_verbe = function(x1,x2,x3,sing=1){  #sing=1 pour singulier ; =0 pour plurie
   return(gETa_verbe_taux(g1,g2,sing))
 }
 
+#usethis::use_test()

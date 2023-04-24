@@ -51,6 +51,8 @@ g_nom = function(x1,x2){
   return(g_nom_taux(g))
 }
 
+#usethis::use_test()
+
 #quelques rappels
 #stringi::stri_escape_unicode("?")
 #\\u00e9

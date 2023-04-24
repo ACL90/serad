@@ -49,4 +49,4 @@ comparaison_taux  = function(g,hausse0,egalite0,baisse0,
   )
 
 }
-
+#usethis::use_test()

@@ -35,3 +35,5 @@ g = function(x1,x2){
 #Rappel
 #stringi::stri_escape_unicode("à")  #\\u00e0
 #stringi::stri_escape_unicode("ù") #\\u00f9
+
+#usethis::use_test()

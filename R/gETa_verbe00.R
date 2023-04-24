@@ -50,6 +50,7 @@ gETa_verbe00 = function(g1,g2){
 
 }
 
+#usethis::use_test()
 
     # case_when((arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)==0) ~"A",  #reste stable
     #         (arrondi_tot(g1, seuil$stable)==0) & (arrondi_tot(g2, seuil$stable)!=0) ~"B",  #se stabilise

@@ -12,7 +12,7 @@
 #' g_verbe_taux(1,0)  # sont en hausse de 1,0 %
 #' g_verbe_taux(0.3)  # augmente de 0,3 %
 #' g_verbe_taux(0.1)  # s'accroit très légèrement de 0,1 %
-#' g_verbe_taux(-0.1) # est stable à 0,1 %
+#' g_verbe_taux(-0.1) # est stable à -0,1 % (présence du signe pour cette expression)
 #' g_verbe_taux(-0.3) # diminue légèrement de 0,3 %
 #' g_verbe_taux(-1)   # recule légèrement de 1,0 %
 #' g_verbe_taux(-4)   # baisse de 4,0 %
@@ -51,8 +51,12 @@ g_verbe_taux = function(g,sing=1){  #sing pour singulier
                                                ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur)  #<=seuil$faibleeeee
                 ))))))))))
 
+    y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
+               paste(z,format_g(g,signe=1)),
+               paste(z,format_g(g,signe=0)))
 
-    return(paste(z,format_g(g,signe=0)))
+    return(y)
+    #return(paste(z,format_g(g,signe=0)))
 }
 
 

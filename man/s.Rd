@@ -22,13 +22,13 @@ Le mot bien accordé ; par défault '-s ou rien. TEST
 Met au pluriel si la valeur absolue du nombre est supérieure ou égale a 2.
 }
 \examples{
-s(-7.5)             #s
-s(-2)               #s
-s(1.4,"chat parle", "chats parlent") #chat parle
-s(-2,"chat parle", "chats parlent")  #chats parlent
-s(1.97)             #NA
-s(round(1.97,1))    #s
-s(1.97, seuil=1.95) #s
+serad::s(-7.5)             #s
+serad::s(-2)               #s
+serad::s(1.4,"chat parle", "chats parlent") #chat parle
+serad::s(-2,"chat parle", "chats parlent")  #chats parlent
+serad::s(1.97)             #NA
+serad::s(arrondi_tot(1.97))    #s
+serad::s(1.97, seuil=1.95) #s
 
 }
 \seealso{
