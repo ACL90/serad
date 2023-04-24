@@ -12,6 +12,7 @@ library(rlang)
 
 
 ################ Pendant le developpement du package #####################
+devtools::test()
 #il faudra décommenter et tester avec TRUE
 devtools::check(cran = TRUE)
 #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r
