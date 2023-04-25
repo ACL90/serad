@@ -17,7 +17,7 @@
 #' g_verbe(1.01,1,sing0=0) # sont en hausse de 1,0 %
 #' g_verbe(1.003,1)  # augmente de 0,3 %
 #' g_verbe(1.001,1)  # s'accroit très légèrement de 0,1 %
-#' g_verbe(0.999,1)  # est stable à 0,1 %
+#' g_verbe(0.999,1)  # est stable à −0,1 %
 #' g_verbe(0.997,1)  # diminue légèrement de 0,3 %
 #' g_verbe(0.99,1)   # recule légèrement de 1,0 %
 #' g_verbe(0.96,1)   # baisse de 4,0 %
