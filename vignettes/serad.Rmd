@@ -19,7 +19,7 @@ knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/ma
 #knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 24 avril 2022]
+[Dernière mise à jour de cette documentation : 2 mai 2023]
 
 ```{r setup}
 library(serad)
@@ -96,6 +96,10 @@ x_format = format_niv(x,detail=1)  #2.0
 paste(x_format,serad::s(x,"chat parle", "chats parlent",seuil=1.95))
 ```
 
+A certains moments, revient régulièrement dans un commentaire qu'on est au point le plus haut/bas depuis un certain temps. C'est ce qu'automatise `plushautniveau(df,...)` :
+```{r }
+?plushautniveau
+```
 
 ***
 **Un exemple simpliste d'application... **
@@ -141,8 +145,8 @@ En glissements annuels, le nombre de décès de passagers à l’avant repart à
 ***
 **Et si je veux montrer serad à un collègue ? **
 
-- Je lui fais installer serad_0.1.2.tar.gz dans un dossier. Disons que ce dossier s'appelle A:
-- Puis: ```install.packages("A/serad_0.1.2.tar.gz")```
+- Je lui fais installer serad_0.1.4.tar.gz dans un dossier. Disons que ce dossier s'appelle A:
+- Puis: ```install.packages("A/serad_0.1.4.tar.gz", repos = NULL, type = "source")```
 - Puis: ```vignette("serad")```
 
 ***
