@@ -96,7 +96,7 @@ plushautniveau = function(df,
       stop("nbperiode doit etre un nombre entier")
     }
   #verification : nbperiode bien supérieur ou égal à 2
-    if(!missing(nbperiode)&&!serad_is.wholenumber(nbperiode)){
+    if(!missing(nbperiode)&&(nbperiode<2)){
       stop("nbperiode doit etre superieur ou \u00e9gal a 2")
     }
 
@@ -111,11 +111,11 @@ plushautniveau = function(df,
   if(!missing(voc_bas)&&!is.character(voc_bas)){
     stop("voc_bas doit etre une chaine de caract\u00e8res")
   }
-  if(!missing(vart)&&!is.character(vart)){
-    stop("vart doit etre une chaine de caract\u00e8res")
+  if(!missing(vart)&&!(vart%in%colnames(df0))){
+    stop("vart doit etre un nom de colonne de df")
   }
-  if(!missing(vary)&&!is.character(vary)){
-    stop("vary doit etre une chaine de caract\u00e8res")
+  if(!missing(vary)&&!(vary%in%colnames(df0)))){
+    stop("vary doit etre un nom de colonne de df")
   }
 
 
