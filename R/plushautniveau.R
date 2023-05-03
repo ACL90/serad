@@ -114,7 +114,7 @@ plushautniveau = function(df,
   if(!missing(vart)&&!(vart%in%colnames(df0))){
     stop("vart doit etre un nom de colonne de df")
   }
-  if(!missing(vary)&&!(vary%in%colnames(df0)))){
+  if(!missing(vary)&&!(vary%in%colnames(df0))){
     stop("vary doit etre un nom de colonne de df")
   }
 
