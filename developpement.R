@@ -15,6 +15,7 @@ library(rlang)
 #https://iqss.github.io/dss-rbuild/package-development.html
 #https://r-pkgs.org/testing-basics.html
 devtools::test()
+#use_mit_license()
 #il faudra décommenter et tester avec TRUE
 devtools::check(cran = TRUE)
 #https://stackoverflow.com/questions/38312576/package-vignettes-not-available-in-r

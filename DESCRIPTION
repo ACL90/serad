@@ -8,7 +8,7 @@ Authors@R:
     person("Direction de l'animation de la recherche, des études et des statistiques (Dares)",
     role = c("cph")))
 Description: Fournit des fonctions simples pour realiser des ecrits Rmarkdown dynamiques et respectant les regles d ecritures en usage.
-License: GPL-3.0-or-later
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
