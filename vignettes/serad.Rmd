@@ -91,6 +91,13 @@ Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut a
 ***
 **Autres**
 
+`quelTrim(mois,annee,...)`, `nextTrim(mois,annee,...)` et `prevTrim(mois,annee,...)` seront utiles pour tout commentaire trimestriel. Des versions mensuelles suivront.
+```{r }
+?quelTrim   
+quelTrim(3,2023,majuscule=1)     
+quelTrim(3,2023,type="chiffres") 
+```
+
 `arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester :
 ```{r }
 round(0.35,1)     #0.3 <!!>
