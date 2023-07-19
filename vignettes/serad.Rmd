@@ -19,7 +19,7 @@ knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/ma
 #knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 3 mai 2023]
+[Dernière mise à jour de cette documentation : 19 juillet 2023]
 
 ```{r setup}
 library(serad)
@@ -41,7 +41,8 @@ Les autres fonctions de formatage sont :
 ```{r }
 ?format_niv   #pour un niveau
 ?format_delta #pour une diférence
-#Astuce : pour les 3 fonctions de formattage, il est possible de modifier le niveau d'arrondi. Il est même possible de modifier le comportement par défaut.
+?format_pts   #pour une variation exprimée en points (/pts)
+#Astuce : pour les 4 fonctions de formattage, il est possible de modifier le niveau d'arrondi. Il est même possible de modifier le comportement par défaut.
 ```
 
 
