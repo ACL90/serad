@@ -17,23 +17,25 @@
 #'
 #' @export
 quelTrim = function(trim,annee,type="lettres",majuscule=0) {
+  annee=as.numeric(annee)
+  trim=as.numeric(trim)
     if(type=="lettres") {
       if(trim==1 && majuscule==1) {
         b="Premier"
       }    else if(trim==1 && majuscule==0) {
         b="premier"
       } else if(trim==2 && majuscule==1) {
-        b="Deuxième"
+        b="Deuxi\u00e8me"
       }    else if(trim==2 && majuscule==0) {
-        b="deuxième"
+        b="deuxi\u00e8me"
       }    else if(trim==3 && majuscule==1) {
-        b="Troisième"
+        b="Troisi\u00e8me"
       }    else if(trim==3 && majuscule==0) {
-        b="troisième"
+        b="troisi\u00e8me"
       }    else if(trim==4 && majuscule==1) {
-        b="Quatrième"
+        b="Quatri\u00e8me"
       }    else if(trim==4 && majuscule==0) {
-        b="quatrième"
+        b="quatri\u00e8me"
       }    else b="Autres" #mettre un message d'erreur ici
     }
     if(type=="chiffres") {
@@ -68,6 +70,8 @@ quelTrim = function(trim,annee,type="lettres",majuscule=0) {
 #'
 #' @export
 nextTrim = function(trim,annee,type="lettres",majuscule=0) {
+  annee=as.numeric(annee)
+  trim=as.numeric(trim)
   if(trim==4) {
     b = quelTrim(1,annee+1,type,majuscule)
   }
@@ -96,6 +100,8 @@ nextTrim = function(trim,annee,type="lettres",majuscule=0) {
 #'
 #' @export
 prevTrim = function(trim,annee,type="lettres",majuscule=0) {
+  annee=as.numeric(annee)
+  trim=as.numeric(trim)
   if(trim==1) {
     b = quelTrim(4,annee-1,type,majuscule)
   }

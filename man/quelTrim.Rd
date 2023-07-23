@@ -29,5 +29,5 @@ quelTrim(1,2023,type="chiffres") #1er trimestre 2023
 
 }
 \seealso{
-nextTrim
+nextTrim prevTrim
 }
