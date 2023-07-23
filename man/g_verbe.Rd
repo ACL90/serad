@@ -4,7 +4,7 @@
 \alias{g_verbe}
 \title{Evolution verbale ne tenant pas compte de l'acceleration et suivie de 'ga'}
 \usage{
-g_verbe(x1, x2, sing0 = 1)
+g_verbe(x1, x2, sing0 = 1, evolution0 = "pourcents")
 }
 \arguments{
 \item{x1}{Le niveau le plus récent}
@@ -12,6 +12,8 @@ g_verbe(x1, x2, sing0 = 1)
 \item{x2}{Le niveau le plus ancien}
 
 \item{sing0}{1 si le sujet du verbe est singulier (défault), 0 sinon}
+
+\item{evolution0}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
 }
 \value{
 L'évolution, par exemple: "bondit de 10,0 \%"

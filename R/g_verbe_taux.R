@@ -1,6 +1,7 @@
 #' Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"
 #' @param g L'evolution
 #' @param sing 1 si le sujet du verbe est singulier (défault), 0 sinon
+#' @param evolution Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"
 #'
 #' @seealso g_verbe
 #'
@@ -20,7 +21,11 @@
 #' g_verbe_taux(-21)  # chute de 21,0 %
 #'
 #' @export
-g_verbe_taux = function(g,sing=1){  #sing pour singulier
+g_verbe_taux = function(g,sing=1,evolution = "pourcents"){  #sing pour singulier
+
+  # g=3
+  # sing=1
+  # evolution = "pourcents"
 
   serad0 = getOption("serad")
   seuil = serad0$sve
@@ -51,9 +56,19 @@ g_verbe_taux = function(g,sing=1){  #sing pour singulier
                                                ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur)  #<=seuil$faibleeeee
                 ))))))))))
 
+
+  if(evolution=="pourcents") {
+    a=format_g(g,signe=1)
+    b=format_g(g,signe=0)
+  }  else {   #"points"
+    a=format_pts(g,signe=1)
+    b=format_pts(g,signe=0)
+  }
+
+
     y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
-               paste(z,format_g(g,signe=1)),
-               paste(z,format_g(g,signe=0)))
+               paste(z,a),
+               paste(z,b))
 
     return(y)
     #return(paste(z,format_g(g,signe=0)))

@@ -4,12 +4,14 @@
 \alias{g_nom}
 \title{Evolution décrite de facon nominale, non suivie d'une évolution.}
 \usage{
-g_nom(x1, x2)
+g_nom(x1, x2, evolution = "pourcents")
 }
 \arguments{
 \item{x1}{Le niveau le plus récent}
 
 \item{x2}{le niveau le plus ancien}
+
+\item{evolution}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
 }
 \value{
 L'évolution, par exemple: "une forte hausse".
@@ -18,7 +20,7 @@ L'évolution, par exemple: "une forte hausse".
 Evolution décrite de facon nominale, non suivie d'une évolution.
 }
 \details{
-Pour un \strong{utilisateur avancé}, il est possible de paramétrer seuils et
+Pour un \strong{utilisateur avancé} (ou quelqu'un utilisant: evolution="points"), il est possible de paramétrer seuils et
 sorties. Par exemple :
 
 \code{library("serad")}\cr
@@ -49,7 +51,8 @@ g_nom(1,1)     # une stabilité
 g_nom(0.997,1) # une légère baisse
 g_nom(0.99,1)  # une baisse modérée
 g_nom(0.96,1)  # une baisse
-g_nom(0.95,1)  # une forte baisse
+g_nom(0.95,1)  # une forte baisse (pour -5\%)
+g_nom(0.95,1,evolution="points") #une légère baisse (pour -0.05 point)
 
 
 }

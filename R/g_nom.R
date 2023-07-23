@@ -1,6 +1,7 @@
 #' Evolution décrite de facon nominale, non suivie d'une évolution.
 #' @param x1 Le niveau le plus récent
 #' @param x2 le niveau le plus ancien
+#' @param evolution Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"
 #'
 #' @return L'évolution, par exemple: "une forte hausse".
 #'
@@ -15,10 +16,11 @@
 #' g_nom(0.997,1) # une légère baisse
 #' g_nom(0.99,1)  # une baisse modérée
 #' g_nom(0.96,1)  # une baisse
-#' g_nom(0.95,1)  # une forte baisse
+#' g_nom(0.95,1)  # une forte baisse (pour -5%)
+#' g_nom(0.95,1,evolution="points") #une légère baisse (pour -0.05 point)
 #'
 #'
-#' @details Pour un **utilisateur avancé**, il est possible de paramétrer seuils et
+#' @details Pour un **utilisateur avancé** (ou quelqu'un utilisant: evolution="points"), il est possible de paramétrer seuils et
 #' sorties. Par exemple :
 #'
 #' \code{library("serad")}\cr
@@ -46,8 +48,13 @@
 #'```
 #'
 #' @export
-g_nom = function(x1,x2){
-  g = serad::g(x1,x2)
+g_nom = function(x1,x2,evolution = "pourcents"){
+  if(evolution=="pourcents") {
+    g = serad::g(x1,x2)
+  }
+  else{  #"points"
+    g=x1-x2
+  }
   return(g_nom_taux(g))
 }
 

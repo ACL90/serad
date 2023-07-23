@@ -6,6 +6,7 @@
 #' @param x1 Le niveau le plus récent
 #' @param x2 Le niveau le plus ancien
 #' @param sing0 1 si le sujet du verbe est singulier (défault), 0 sinon
+#' @param evolution0 Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"
 #'
 #' @seealso g_verbe_taux
 #'
@@ -57,7 +58,16 @@
 #'```
 #'
 #' @export
-g_verbe = function(x1,x2,sing0=1){g_verbe_taux(serad::g(x1,x2),sing0)} #sing=1 pour singulier
+g_verbe = function(x1,x2,sing0=1,evolution0 = "pourcents"){
+  if(evolution0=="pourcents") {
+    g_verbe_taux(serad::g(x1,x2),sing=sing0,evolution=evolution0)
+  }   else{   #"points"
+    g_verbe_taux(x1-x2,sing=sing0,evolution=evolution0)
+  }
+
+
+
+  } #sing=1 pour singulier
 
 
 #usethis::use_test()

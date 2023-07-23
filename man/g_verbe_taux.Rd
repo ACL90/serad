@@ -4,12 +4,14 @@
 \alias{g_verbe_taux}
 \title{Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"}
 \usage{
-g_verbe_taux(g, sing = 1)
+g_verbe_taux(g, sing = 1, evolution = "pourcents")
 }
 \arguments{
 \item{g}{L'evolution}
 
 \item{sing}{1 si le sujet du verbe est singulier (défault), 0 sinon}
+
+\item{evolution}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
 }
 \value{
 l'evolution, par exemple: "bondit de 10,0 \%"
