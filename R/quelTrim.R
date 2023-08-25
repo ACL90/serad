@@ -17,8 +17,8 @@
 #'
 #' @export
 quelTrim = function(trim,annee,type="lettres",majuscule=0) {
-  annee=as.numeric(annee)
-  trim=as.numeric(trim)
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
     if(type=="lettres") {
       if(trim==1 && majuscule==1) {
         b="Premier"
@@ -70,8 +70,8 @@ quelTrim = function(trim,annee,type="lettres",majuscule=0) {
 #'
 #' @export
 nextTrim = function(trim,annee,type="lettres",majuscule=0) {
-  annee=as.numeric(annee)
-  trim=as.numeric(trim)
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
   if(trim==4) {
     b = quelTrim(1,annee+1,type,majuscule)
   }
@@ -83,8 +83,8 @@ nextTrim = function(trim,annee,type="lettres",majuscule=0) {
 
 
 ###################
-#nextTrim()
-#' Fournit dynamiquement le trimestre suivant sous forme littéraire
+#prevTrim()
+#' Fournit dynamiquement le trimestre précédent sous forme littéraire
 #' @param trim Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.
 #' @param annee Un nombre positif en 4 chiffres
 #' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
@@ -100,13 +100,164 @@ nextTrim = function(trim,annee,type="lettres",majuscule=0) {
 #'
 #' @export
 prevTrim = function(trim,annee,type="lettres",majuscule=0) {
-  annee=as.numeric(annee)
-  trim=as.numeric(trim)
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
   if(trim==1) {
     b = quelTrim(4,annee-1,type,majuscule)
   }
   else {
     b= quelTrim(trim-1,annee,type,majuscule)
+  }
+  return(b)
+}
+
+
+
+
+#############################################################
+#' Fournit dynamiquement le mois sous forme littéraire
+#' @param mois Le mois sous la forme d'un chiffre : 1...12
+#' @param annee Un nombre positif en 4 chiffres
+#' @param type Par défaut: "Annee" (pour janvier XXXX). Sinon: janvier
+#' @param majuscule Par défaut 0. 1 pour avoir "Janvier" plutôt que "janvier"
+#'
+#' @return janvier XXXX (ou une variante)
+#'
+#' @examples
+#' quelMois(3,2023)                  #mars 2023
+#' quelMois(3,2023,majuscule=1)      #Mars 2023
+#' quelMois(3,2023,type="autres")    #mars
+#'
+#' @seealso
+#' quelTrim nextMois prevMois
+#'
+#' @export
+quelMois = function(mois,annee,type="Annee",majuscule=0) {
+  if(is.na(annee)){
+    type="pas d annee" #il faudrait afficher un avertissement
+  }
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
+
+    if(mois==1 && majuscule==1) {
+      b="Janvier"
+    }    else if(mois==1 && majuscule==0) {
+      b="janvier"
+    } else if(mois==2 && majuscule==1) {
+      b="F\u00e9vrier"
+    }    else if(mois==2 && majuscule==0) {
+      b="f\u00e9vrier"
+    }    else if(mois==3 && majuscule==1) {
+      b="Mars"
+    }    else if(mois==3 && majuscule==0) {
+      b="mars"
+    }    else if(mois==4 && majuscule==1) {
+      b="Avril"
+    }    else if(mois==4 && majuscule==0) {
+      b="avril"
+    }    else if(mois==5 && majuscule==1) {
+      b="Mai"
+    }    else if(mois==5 && majuscule==0) {
+      b="mai"
+    }    else if(mois==6 && majuscule==1) {
+      b="Juin"
+    }    else if(mois==6 && majuscule==0) {
+      b="juin"
+    }    else if(mois==7 && majuscule==1) {
+      b="Juillet"
+    }    else if(mois==7 && majuscule==0) {
+      b="juillet"
+    }    else if(mois==8 && majuscule==1) {
+      b="Ao\u00fbt"
+    }    else if(mois==8 && majuscule==0) {
+      b="ao\u00fbt"
+    }    else if(mois==9 && majuscule==1) {
+      b="Septembre"
+    }    else if(mois==9 && majuscule==0) {
+      b="septembre"
+    }    else if(mois==10 && majuscule==1) {
+      b="Octobre"
+    }    else if(mois==10 && majuscule==0) {
+      b="octobre"
+    }    else if(mois==11 && majuscule==1) {
+      b="Novembre"
+    }    else if(mois==11 && majuscule==0) {
+      b="novembre"
+    }    else if(mois==12 && majuscule==1) {
+      b="D\u00e9cembre"
+    }    else if(mois==12 && majuscule==0) {
+      b="d\u00e9cembre"
+    }    else b="Autres" #mettre un message d'erreur ici
+
+  if(type=="Annee") {
+    b = paste0(b," ",annee)
+  }
+  return(b)
+}
+
+#usethis::use_test()
+#quelques rappels
+#stringi::stri_escape_unicode("é")
+#\\u00e9
+#stringi::stri_escape_unicode("é")
+#\\u00fb
+
+###################
+#nextMois()
+#' Fournit dynamiquement le trimestre suivant sous forme littéraire
+#' @param mois Le mois sous la forme d'un chiffre : 1..12
+#' @param annee Un nombre positif en 4 chiffres
+#' @param type Par défaut: "Annee" (pour février XXXX). Sinon: février.
+#' @param majuscule Par défaut 0. 1 pour avoir "Février" plutôt que "février"
+#'
+#' @return Février XXXX (ou une variante)
+#'
+#' @examples
+#' nextMois(3,2023)                  #avril 2023
+#' nextMois(12,2023)                 #janvier 2024
+#'
+#' @seealso
+#' quelMois nextTrim prevMois
+#'
+#' @export
+nextMois = function(mois,annee,type="Annee",majuscule=0) {
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
+  if(mois==12) {
+    b = quelMois(1,annee+1,type,majuscule)
+  }
+  else {
+    b= quelMois(mois+1,annee,type,majuscule)
+  }
+  return(b)
+}
+
+
+###################
+#prevMois()
+#' Fournit dynamiquement le mois précédent sous forme littéraire
+#' @param mois Le mois sous la forme d'un chiffre : 1..12
+#' @param annee Un nombre positif en 4 chiffres
+#' @param type Par défaut: "Annee" (pour décembre XXXX). Sinon: décembre.
+#' @param majuscule Par défaut 0. 1 pour avoir "Décembre" plutôt que "décembre"
+#'
+#' @return décembre XXXX (ou une variante)
+#'
+#' @examples
+#' prevMois(1,2023)                  #décembre 2022
+#'
+#' @seealso
+#' prevTrim nextMois quelMois
+#'
+#' @export
+prevMois = function(mois,annee,type="Annee",majuscule=0) {
+  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
+  if(mois==1) {
+    b = quelMois(12,annee-1,type,majuscule)
+  }
+  else {
+    b= quelMois(mois-1,annee,type,majuscule)
   }
   return(b)
 }

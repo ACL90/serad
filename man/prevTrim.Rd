@@ -2,7 +2,7 @@
 % Please edit documentation in R/quelTrim.R
 \name{prevTrim}
 \alias{prevTrim}
-\title{Fournit dynamiquement le trimestre suivant sous forme littéraire}
+\title{Fournit dynamiquement le trimestre précédent sous forme littéraire}
 \usage{
 prevTrim(trim, annee, type = "lettres", majuscule = 0)
 }
@@ -19,7 +19,7 @@ prevTrim(trim, annee, type = "lettres", majuscule = 0)
 1er trimestre XXXX (ou une variante)
 }
 \description{
-Fournit dynamiquement le trimestre suivant sous forme littéraire
+Fournit dynamiquement le trimestre précédent sous forme littéraire
 }
 \examples{
 prevTrim(1,2023)                  #quatrième trimestre 2022

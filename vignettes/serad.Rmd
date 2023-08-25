@@ -19,7 +19,7 @@ knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/ma
 #knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 19 juillet 2023]
+[Dernière mise à jour de cette documentation : 28 août 2023]
 
 ```{r setup}
 library(serad)
@@ -91,7 +91,7 @@ Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut a
 ***
 **Autres**
 
-`quelTrim(mois,annee,...)`, `nextTrim(mois,annee,...)` et `prevTrim(mois,annee,...)` seront utiles pour tout commentaire trimestriel. Des versions mensuelles suivront.
+`quelTrim(trim,annee,...)`, `nextTrim(trim,annee,...)` et `prevTrim(trim,annee,...)` seront utiles pour tout commentaire trimestriel. Pour la version mensuelle, chercher `quelMois(...)`, `nextMois(...)` et `prevMois(...)`.
 ```{r }
 ?quelTrim   
 quelTrim(3,2023,majuscule=1)     

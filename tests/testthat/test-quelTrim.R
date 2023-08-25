@@ -7,4 +7,12 @@ test_that("quelTrim works", {
   expect_equal(nextTrim(3,2023) , "quatrième trimestre 2023")
   expect_equal(nextTrim(4,2023) , "premier trimestre 2024")
 
+
+  expect_equal(quelMois(3,2023),                  "mars 2023")
+  expect_equal(quelMois(3,2023,majuscule=1),      "Mars 2023")
+  expect_equal(quelMois(3,2023,type="autres"), "mars")
+  expect_equal(prevMois(1,2023) , "décembre 2022")
+  expect_equal(nextMois(3,2023) , "avril 2023")
+  expect_equal(nextMois(12,2023) , "janvier 2024")
+
 })
