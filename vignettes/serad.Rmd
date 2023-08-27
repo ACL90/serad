@@ -98,6 +98,11 @@ quelTrim(3,2023,majuscule=1)
 quelTrim(3,2023,type="chiffres") 
 ```
 
+Plus expérimentale, la fonction `whichMois(mois)` retrouve le mois de l'année à partir d'un paramètre en caractères (en français ou en anglais).
+```{r }
+?whichMois   
+whichMois("En Juil 98") #7
+```
 `arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester :
 ```{r }
 round(0.35,1)     #0.3 <!!>

@@ -261,3 +261,70 @@ prevMois = function(mois,annee,type="Annee",majuscule=0) {
   }
   return(b)
 }
+
+
+
+
+###################
+#whichMois()
+#' pour récupérer le mois dans un format littéraire
+#' @param mois Le mois en lettres
+#'
+#' @return 1..12
+#'
+#' @examples
+#' whichMois("En Juil 98")                  #7
+#'
+#' @seealso
+#' quelMois
+#'
+#' @export
+whichMois = function(mois) {
+
+  list1 = c("Jan","jan")
+  list2 = c("Fév","fév","Fev","fev","Feb","feb","F\u00e9v","f\u00e9v")
+  list3 = c("Mar","mar")
+  list4 = c("Avr","avr","Apr","apr")
+  list5 = c("Mai","mai","May","may")
+  list6 = c("Juin","juin","Jun","jun")
+  list7 = c("Juil","juil","Jul","jul")
+  list8 = list("Aug","aug","Ao","ao")
+  list9 = c("Sep","sep")
+  list10 = c("Oct","oct")
+  list11 = c("Nov","nov")
+  list12 = c("Déc","déc","Dec","dec","D\u00e9c","d\u00e9c")
+
+  # grep("ao",'août') #1
+  # grep('août',"ao") #0
+  # mois="aoutrr 2099"
+  # any(sapply(list8, grepl, mois))
+  if(any(sapply(list1, grepl, mois))==1){
+    return(1)
+  } else if(any(sapply(list2, grepl, mois))==1){
+    return(2)
+  } else if(any(sapply(list3, grepl, mois))==1){
+    return(3)
+  } else if(any(sapply(list4, grepl, mois))==1){
+    return(4)
+  } else if(any(sapply(list5, grepl, mois))==1){
+    return(5)
+  } else if(any(sapply(list6, grepl, mois))==1){
+    return(6)
+  } else if(any(sapply(list7, grepl, mois))==1){
+    return(7)
+  } else if(any(sapply(list8, grepl, mois))==1){
+    return(8)
+  } else if(any(sapply(list9, grepl, mois))==1){
+    return(9)
+  } else if(any(sapply(list10, grepl, mois))==1){
+    return(10)
+  } else if(any(sapply(list11, grepl, mois))==1){
+    return(11)
+  } else if(any(sapply(list12, grepl, mois))==1){
+    return(12)
+  } else {
+    return(0)  #ajouter message d erreur ?
+  }
+
+}
+#whichMois("June dsfdgogzb")
