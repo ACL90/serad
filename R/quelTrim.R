@@ -282,7 +282,7 @@ prevMois = function(mois,annee,type="Annee",majuscule=0) {
 whichMois = function(mois) {
 
   list1 = c("Jan","jan")
-  list2 = c("Fév","fév","Fev","fev","Feb","feb","F\u00e9v","f\u00e9v")
+  list2 = c("Fev","fev","Feb","feb","F\u00e9v","f\u00e9v")
   list3 = c("Mar","mar")
   list4 = c("Avr","avr","Apr","apr")
   list5 = c("Mai","mai","May","may")
@@ -292,7 +292,7 @@ whichMois = function(mois) {
   list9 = c("Sep","sep")
   list10 = c("Oct","oct")
   list11 = c("Nov","nov")
-  list12 = c("Déc","déc","Dec","dec","D\u00e9c","d\u00e9c")
+  list12 = c("Dec","dec","D\u00e9c","d\u00e9c")
 
   # grep("ao",'août') #1
   # grep('août',"ao") #0
