@@ -168,6 +168,7 @@ En glissements annuels, le nombre de décès de passagers à l’avant repart à
 - Je lui fais installer le package devtools (pour bénéficier de install_github)
 - Puis: ```library(devtools)```
 - Puis: ```install_github("ACL90/serad")```
+- Puis: ```vignette("serad")```
 
 **Et si je veux montrer serad à un collègue ? (mais sans accès internet) **
 - Je lui fais installer serad_[X.Y.Z].tar.gz dans un dossier. Disons que ce dossier s'appelle A:
