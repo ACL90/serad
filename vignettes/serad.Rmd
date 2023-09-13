@@ -19,7 +19,7 @@ knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/ma
 #knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 28 août 2023]
+[Dernière mise à jour de cette documentation : 13 septembre 2023]
 
 ```{r setup}
 library(serad)
