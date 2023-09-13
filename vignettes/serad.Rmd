@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r out.width="20%", echo=FALSE, include=TRUE}
-knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/man/logo.png")
-#knitr::include_graphics("~/logo.png") 
+#knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/man/logo.png")
+##knitr::include_graphics("~/logo.png") 
 ```
 
 [Dernière mise à jour de cette documentation : 13 septembre 2023]
