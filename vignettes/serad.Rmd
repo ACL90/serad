@@ -165,12 +165,14 @@ En glissements annuels, le nombre de décès de passagers à l’avant repart à
 
 ***
 **Et si je veux montrer serad à un collègue ? **
+
 - Je lui fais installer le package devtools (pour bénéficier de install_github)
 - Puis: ```library(devtools)```
-- Puis: ```install_github("ACL90/serad")```
+- Puis: ```install_github("ACL90/serad",build_opts = c("--no-resave-data","--no-manual"))```
 - Puis: ```vignette("serad")```
 
 **Et si je veux montrer serad à un collègue ? (mais sans accès internet) **
+
 - Je lui fais installer serad_[X.Y.Z].tar.gz dans un dossier. Disons que ce dossier s'appelle A:
 - Puis: ```install.packages("A/serad_[X.Y.Z].tar.gz", repos = NULL, type = "source")```
 - Puis: ```vignette("serad")```
