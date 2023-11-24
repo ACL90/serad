@@ -4,7 +4,7 @@
 \alias{prevTrim}
 \title{Fournit dynamiquement le trimestre précédent sous forme littéraire}
 \usage{
-prevTrim(trim, annee, type = "lettres", majuscule = 0)
+prevTrim(trim, annee, type = "lettres", majuscule = 0, exposant = 1)
 }
 \arguments{
 \item{trim}{Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.}
@@ -14,9 +14,11 @@ prevTrim(trim, annee, type = "lettres", majuscule = 0)
 \item{type}{Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)}
 
 \item{majuscule}{Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"}
+
+\item{exposant}{Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".}
 }
 \value{
-1er trimestre XXXX (ou une variante)
+1^er^ trimestre XXXX (ou une variante)
 }
 \description{
 Fournit dynamiquement le trimestre précédent sous forme littéraire
