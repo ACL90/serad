@@ -4,7 +4,7 @@
 \alias{nextMois}
 \title{Fournit dynamiquement le trimestre suivant sous forme littéraire}
 \usage{
-nextMois(mois, annee, type = "Annee", majuscule = 0)
+nextMois(mois, annee, type = "Annee", majuscule = 0, k = 1)
 }
 \arguments{
 \item{mois}{Le mois sous la forme d'un chiffre : 1..12}
@@ -14,6 +14,8 @@ nextMois(mois, annee, type = "Annee", majuscule = 0)
 \item{type}{Par défaut: "Annee" (pour février XXXX). Sinon: février.}
 
 \item{majuscule}{Par défaut 0. 1 pour avoir "Février" plutôt que "février"}
+
+\item{k}{Par défaut 1 pour le mois suivant. Un nombre entier relatif.}
 }
 \value{
 Février XXXX (ou une variante)
@@ -24,6 +26,7 @@ Fournit dynamiquement le trimestre suivant sous forme littéraire
 \examples{
 nextMois(3,2023)                  #avril 2023
 nextMois(12,2023)                 #janvier 2024
+nextMois(12,2023,k=2)             #février 2024
 
 }
 \seealso{

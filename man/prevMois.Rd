@@ -4,7 +4,7 @@
 \alias{prevMois}
 \title{Fournit dynamiquement le mois précédent sous forme littéraire}
 \usage{
-prevMois(mois, annee, type = "Annee", majuscule = 0)
+prevMois(mois, annee, type = "Annee", majuscule = 0, k = 1)
 }
 \arguments{
 \item{mois}{Le mois sous la forme d'un chiffre : 1..12}
@@ -14,6 +14,8 @@ prevMois(mois, annee, type = "Annee", majuscule = 0)
 \item{type}{Par défaut: "Annee" (pour décembre XXXX). Sinon: décembre.}
 
 \item{majuscule}{Par défaut 0. 1 pour avoir "Décembre" plutôt que "décembre"}
+
+\item{k}{Par défaut 1 pour le mois précédent. Un nombre entier relatif.}
 }
 \value{
 décembre XXXX (ou une variante)
@@ -23,6 +25,7 @@ Fournit dynamiquement le mois précédent sous forme littéraire
 }
 \examples{
 prevMois(1,2023)                  #décembre 2022
+prevMois(12,2023,k=2)             #octobre  2023
 
 }
 \seealso{
