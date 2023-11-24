@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ##knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 13 septembre 2023]
+[Dernière mise à jour de cette documentation : 24 novembre 2023]
 
 ```{r setup}
 library(serad)
@@ -97,6 +97,9 @@ Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut a
 quelTrim(3,2023,majuscule=1)     
 quelTrim(3,2023,type="chiffres") 
 ```
+Astuces: un paramètre `mois` peut être fourni en entrée à quelTrim(...) !
+Et les accents circonflexes permettent les exposants dans Markdown (mais peuvent être facilement enlevés).
+
 
 Plus expérimentale, la fonction `whichMois(mois)` retrouve le mois de l'année à partir d'un paramètre en caractères (en français ou en anglais).
 ```{r }
