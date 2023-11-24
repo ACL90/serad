@@ -4,22 +4,33 @@
 #' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
 #' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
 #' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
+#' @param mois : Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.
 #'
 #' @return 1er trimestre XXXX (ou une variante)
 #'
 #' @examples
-#' quelTrim(3,2023)                  #troisième trimestre 2023
-#' quelTrim(3,2023,majuscule=1)      #Troisième trimestre 2023
-#' quelTrim(3,2023,type="chiffres") #3e trimestre 2023
-#' quelTrim(1,2023,type="chiffres") #1er trimestre 2023
+#' quelTrim(3,2023)                          #troisième trimestre 2023
+#' quelTrim(3,2023,majuscule=1)              #Troisième trimestre 2023
+#' quelTrim(3,2023,type="chiffres")          #3e trimestre 2023
+#' quelTrim(1,2023,type="chiffres")          #1^er^ trimestre 2023#'
+#' quelTrim(999,2023,type="chiffres",mois=8) #3^e^ trimestre 2023
 #'
 #' @seealso
 #' nextTrim prevTrim
 #'
 #' @export
-quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1) {
+quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,mois=999) {
   annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
+  if(!(mois%in%c(1,2,3,4,5,6,7,8,9,10,11,12,"1","2","3","4","5","6","7","8","9","10","11","12","01","02","03","04","05","06","07","08","09"){
+    trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
+  } else{
+    mois=as.numeric(mois)
+    trim=ifelse(mois%in%c(1,2,3),1,
+                ifelse(mois%in%c(4,5,6),2,
+                       ifelse(mois%in%c(7,8,9),3,
+                              4)
+  }
+
     if(type=="lettres") {
       if(trim==1 && majuscule==1) {
         b="Premier"
