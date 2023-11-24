@@ -21,14 +21,17 @@
 #' @export
 quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,mois=999) {
   annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  if(!(mois%in%c(1,2,3,4,5,6,7,8,9,10,11,12,"1","2","3","4","5","6","7","8","9","10","11","12","01","02","03","04","05","06","07","08","09"){
+  if(!(mois%in%c(1,2,3,4,5,6,7,8,9,10,11,12,
+                 "1","2","3","4","5","6","7","8","9","10","11","12",
+                 "01","02","03","04","05","06","07","08","09"))) {
     trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
-  } else{
+  }
+  else {
     mois=as.numeric(mois)
     trim=ifelse(mois%in%c(1,2,3),1,
                 ifelse(mois%in%c(4,5,6),2,
                        ifelse(mois%in%c(7,8,9),3,
-                              4)
+                              4)))
   }
 
     if(type=="lettres") {
