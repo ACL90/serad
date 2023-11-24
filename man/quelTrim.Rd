@@ -18,13 +18,13 @@ quelTrim(
 
 \item{annee}{Un nombre positif en 4 chiffres}
 
-\item{type}{Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)}
+\item{type}{Par défaut "lettres" (pour 1^er^ trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)}
 
 \item{majuscule}{Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"}
 
 \item{exposant}{Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".}
 
-\item{mois}{: Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.}
+\item{mois}{Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.}
 }
 \value{
 1er trimestre XXXX (ou une variante)
@@ -33,11 +33,12 @@ quelTrim(
 Fournit dynamiquement le trimestre sous forme littéraire
 }
 \examples{
-quelTrim(3,2023)                          #troisième trimestre 2023
-quelTrim(3,2023,majuscule=1)              #Troisième trimestre 2023
-quelTrim(3,2023,type="chiffres")          #3e trimestre 2023
-quelTrim(1,2023,type="chiffres")          #1^er^ trimestre 2023#'
-quelTrim(999,2023,type="chiffres",mois=8) #3^e^ trimestre 2023
+quelTrim(3,2023)                             #troisième trimestre 2023
+quelTrim(3,2023,majuscule=1)                 #Troisième trimestre 2023
+quelTrim(3,2023,type="chiffres")             #3^e^ trimestre 2023
+quelTrim(1,2023,type="chiffres")             #1^er^ trimestre 2023#'
+quelTrim(999,2023,type="chiffres",mois=8)    #3^e^ trimestre 2023
+quelTrim(3,2023,type="chiffres",exposant=0)  #3e trimestre 2023
 
 }
 \seealso{

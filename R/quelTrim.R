@@ -1,19 +1,20 @@
 #' Fournit dynamiquement le trimestre sous forme littéraire
 #' @param trim Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.
 #' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
+#' @param type Par défaut "lettres" (pour 1^er^ trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
 #' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
 #' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
-#' @param mois : Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.
+#' @param mois Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.
 #'
 #' @return 1er trimestre XXXX (ou une variante)
 #'
 #' @examples
-#' quelTrim(3,2023)                          #troisième trimestre 2023
-#' quelTrim(3,2023,majuscule=1)              #Troisième trimestre 2023
-#' quelTrim(3,2023,type="chiffres")          #3e trimestre 2023
-#' quelTrim(1,2023,type="chiffres")          #1^er^ trimestre 2023#'
-#' quelTrim(999,2023,type="chiffres",mois=8) #3^e^ trimestre 2023
+#' quelTrim(3,2023)                             #troisième trimestre 2023
+#' quelTrim(3,2023,majuscule=1)                 #Troisième trimestre 2023
+#' quelTrim(3,2023,type="chiffres")             #3^e^ trimestre 2023
+#' quelTrim(1,2023,type="chiffres")             #1^er^ trimestre 2023#'
+#' quelTrim(999,2023,type="chiffres",mois=8)    #3^e^ trimestre 2023
+#' quelTrim(3,2023,type="chiffres",exposant=0)  #3e trimestre 2023
 #'
 #' @seealso
 #' nextTrim prevTrim
@@ -75,6 +76,7 @@ quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,mois=999) {
 #' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
 #' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
 #' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
+#' @param k Par défaut 1 pour le trimestre suivant. Un nombre entier relatif.
 #'
 #' @return 1^er^ trimestre XXXX (ou une variante)
 #'
@@ -86,16 +88,23 @@ quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,mois=999) {
 #' quelTrim prevTrim
 #'
 #' @export
-nextTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1) {
+nextTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,k=1) {
   annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
   trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
-  if(trim==4) {
-    b = quelTrim(1,annee+1,type,majuscule)
-  }
-  else {
-    b= quelTrim(trim+1,annee,type,majuscule)
-  }
+
+  quotient = (trim-1+k)%/%4
+  reste= (trim-1+k)%%4
+  b=quelTrim(1+reste,annee+quotient,type,majuscule,exposant,mois=999)
   return(b)
+
+
+    # if(trim==4) {
+  #   b = quelTrim(1,annee+1,type,majuscule)
+  # }
+  # else {
+  #   b= quelTrim(trim+1,annee,type,majuscule)
+  # }
+  #return(b)
 }
 
 
@@ -107,26 +116,32 @@ nextTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1) {
 #' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
 #' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
 #' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
+#' @param k Par défaut 1 pour le trimestre précédent. Un nombre entier relatif.
 #'
 #' @return 1^er^ trimestre XXXX (ou une variante)
 #'
 #' @examples
-#' prevTrim(1,2023)                  #quatrième trimestre 2022
+#' prevTrim(1,2023)                              #quatrième trimestre 2022
+#' prevTrim(1,2023,type="chiffres",exposant=0)   #4^e^ trimestre 2022
 #'
 #' @seealso
 #' nextTrim quelTrim
 #'
 #' @export
-prevTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1) {
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
-  if(trim==1) {
-    b = quelTrim(4,annee-1,type,majuscule)
-  }
-  else {
-    b= quelTrim(trim-1,annee,type,majuscule)
-  }
+prevTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,k=1) {
+  # annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
+  # trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
+
+  b=nextTrim(trim,annee,type,majuscule,exposant,-k)
   return(b)
+
+  # if(trim==1) {
+  #   b = quelTrim(4,annee-1,type,majuscule)
+  # }
+  # else {
+  #   b= quelTrim(trim-1,annee,type,majuscule)
+  # }
+  # return(b)
 }
 
 

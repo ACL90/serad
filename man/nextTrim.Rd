@@ -4,7 +4,7 @@
 \alias{nextTrim}
 \title{Fournit dynamiquement le trimestre suivant sous forme littéraire}
 \usage{
-nextTrim(trim, annee, type = "lettres", majuscule = 0, exposant = 1)
+nextTrim(trim, annee, type = "lettres", majuscule = 0, exposant = 1, k = 1)
 }
 \arguments{
 \item{trim}{Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.}
@@ -16,6 +16,8 @@ nextTrim(trim, annee, type = "lettres", majuscule = 0, exposant = 1)
 \item{majuscule}{Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"}
 
 \item{exposant}{Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".}
+
+\item{k}{Par défaut 1 pour le trimestre suivant. Un nombre entier relatif.}
 }
 \value{
 1^er^ trimestre XXXX (ou une variante)
