@@ -227,6 +227,7 @@ quelMois = function(mois,annee,type="Annee",majuscule=0) {
 #' @param annee Un nombre positif en 4 chiffres
 #' @param type Par défaut: "Annee" (pour février XXXX). Sinon: février.
 #' @param majuscule Par défaut 0. 1 pour avoir "Février" plutôt que "février"
+#' @param k Par défaut 1 pour le mois suivant. Un nombre entier relatif.
 #'
 #' @return Février XXXX (ou une variante)
 #'
@@ -238,16 +239,23 @@ quelMois = function(mois,annee,type="Annee",majuscule=0) {
 #' quelMois nextTrim prevMois
 #'
 #' @export
-nextMois = function(mois,annee,type="Annee",majuscule=0) {
+nextMois = function(mois,annee,type="Annee",majuscule=0, k=1) {
+
   annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
   mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
-  if(mois==12) {
-    b = quelMois(1,annee+1,type,majuscule)
-  }
-  else {
-    b= quelMois(mois+1,annee,type,majuscule)
-  }
+
+  quotient = (mois-1+k)%/%12
+  reste= (mois-1+k)%%12
+  b=quelMois(1+reste,annee+quotient,type,majuscule)
   return(b)
+
+  # if(mois==12) {
+  #   b = quelMois(1,annee+1,type,majuscule)
+  # }
+  # else {
+  #   b= quelMois(mois+1,annee,type,majuscule)
+  # }
+  # return(b)
 }
 
 
