@@ -234,6 +234,7 @@ quelMois = function(mois,annee,type="Annee",majuscule=0) {
 #' @examples
 #' nextMois(3,2023)                  #avril 2023
 #' nextMois(12,2023)                 #janvier 2024
+#' nextMois(12,2023,k=2)             #février 2024
 #'
 #' @seealso
 #' quelMois nextTrim prevMois
@@ -266,26 +267,21 @@ nextMois = function(mois,annee,type="Annee",majuscule=0, k=1) {
 #' @param annee Un nombre positif en 4 chiffres
 #' @param type Par défaut: "Annee" (pour décembre XXXX). Sinon: décembre.
 #' @param majuscule Par défaut 0. 1 pour avoir "Décembre" plutôt que "décembre"
+#' @param k Par défaut 1 pour le mois précédent. Un nombre entier relatif.
+#'
 #'
 #' @return décembre XXXX (ou une variante)
 #'
 #' @examples
 #' prevMois(1,2023)                  #décembre 2022
+#' prevMois(12,2023,k=2)             #octobre  2023
 #'
 #' @seealso
 #' prevTrim nextMois quelMois
 #'
 #' @export
-prevMois = function(mois,annee,type="Annee",majuscule=0) {
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
-  if(mois==1) {
-    b = quelMois(12,annee-1,type,majuscule)
-  }
-  else {
-    b= quelMois(mois-1,annee,type,majuscule)
-  }
-  return(b)
+prevMois = function(mois,annee,type="Annee",majuscule=0,k=1) {
+  nextMois(mois,annee,type,majuscule,-k)
 }
 
 
