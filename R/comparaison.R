@@ -22,15 +22,48 @@
 #' comparaison(0.999,1,"augmente","reste stable","diminue")            #diminue
 #' comparaison(0.9991,1,"augmente","reste stable","diminue",seuil = 0) #diminue
 #' comparaison(1,1,"augmente","reste égal","diminue",seuil = 0)        #augmente
+#' comparaison(-3,1,"augmente","reste égal","diminue",seuil = 0)        #diminue
+#' comparaison(-3,-5,"augmente","reste égal","diminue",seuil = 1)       #augmente
 #'
 #' @export
 comparaison  = function(x1,x2,hausse0,egalite0,baisse0,seuil=0.1,
                         param=0,
                         hausse1=hausse0,egalite1=egalite0,baisse1=baisse0){
-  return(comparaison_taux(g(x1,x2),
-                      hausse0,egalite0,baisse0,
-                      seuil,param,
-                      hausse1,egalite1,baisse1))
+
+  if(x2==0){  #cas limite : seuil passe en valeur absolue
+    if(x1>abs(seuil)){
+      a = ifelse(param==0,hausse0,hausse1)
+    }
+    else if(x1<(-abs(seuil))){
+      a = ifelse(param==0,egalite0,egalite1)
+    }
+    else {
+      a = ifelse(param==0,baisse0,baisse1)
+    }
+  }
+  else if(x2>0){
+    a = comparaison_taux(g(x1,x2),
+                         hausse0,egalite0,baisse0,
+                         seuil,param,
+                         hausse1,egalite1,baisse1)
+  }
+  else if(x2<0 & x1>0){
+    a = comparaison_taux(g(-x2,-x1),
+                         hausse0,egalite0,baisse0,
+                         seuil,param,
+                         hausse1,egalite1,baisse1)
+  }
+  else {  #cas facile où x2 < 0  < x1  : stable ou augmente ! La limite de la stabilité est arbitraire
+    if(x1-x2<=abs(seuil)){  #cas de la stabilité
+      a = ifelse(param==0,egalite0,egalite1)
+    }
+    else {  #cas de l'augmentation
+      a = ifelse(param==0,hausse0,hausse1)
+    }
+  }
+
+
+  return(a)
 
 }
 #usethis::use_test()
