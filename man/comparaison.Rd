@@ -53,6 +53,8 @@ comparaison(0.9991,1,"augmente","reste stable","diminue")           #reste stabl
 comparaison(0.999,1,"augmente","reste stable","diminue")            #diminue
 comparaison(0.9991,1,"augmente","reste stable","diminue",seuil = 0) #diminue
 comparaison(1,1,"augmente","reste égal","diminue",seuil = 0)        #augmente
+comparaison(-3,1,"augmente","reste égal","diminue",seuil = 0)        #diminue
+comparaison(-3,-5,"augmente","reste égal","diminue",seuil = 1)       #augmente
 
 }
 \seealso{
