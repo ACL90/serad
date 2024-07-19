@@ -1,6 +1,6 @@
 Package: serad
 Title: Synthèse d'Écrits avec des Règles Automatisées et Dynamiques
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: 
     c(person("Alexandre", "Cazenave-Lacroutz", , "alexandre.cazenave-lacroutz@travail.gouv.fr", 
     role = c("aut","cre"),

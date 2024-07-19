@@ -5,6 +5,8 @@ test_that("test g_verbe", {
   expect_equal(g_verbe(1.003,1), paste0("augmente de 0,3","\ua0","%"))
   expect_equal(g_verbe(1.001,1), paste0("s'accroit très légèrement de 0,1","\ua0","%"))
   expect_equal(g_verbe(0.999,1,stableras=0), paste0("est stable à ","\U2212","0,1","\ua0","%"))
+  expect_equal(g_verbe(0.999,1,stableras=1), paste0("est stable"))
+  expect_equal(g_verbe(0.999,1), paste0("est stable"))
   expect_equal(g_verbe(0.997,1), paste0("diminue légèrement de 0,3","\ua0","%"))
   expect_equal(g_verbe(0.99,1), paste0("recule légèrement de 1,0","\ua0","%"))
   expect_equal(g_verbe(0.96,1), paste0("baisse de 4,0","\ua0","%"))

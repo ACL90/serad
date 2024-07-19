@@ -14,7 +14,8 @@
 #' g_verbe_taux(1,0)  # sont en hausse de 1,0 %
 #' g_verbe_taux(0.3)  # augmente de 0,3 %
 #' g_verbe_taux(0.1)  # s'accroit très légèrement de 0,1 %
-#' g_verbe_taux(-0.1) # est stable à −0,1 % (présence du signe pour cette expression)
+#' g_verbe_taux(-0.1) # est stable
+#' g_verbe_taux(-0.1,stableras=0) # est stable à −0,1 % (présence du signe pour cette expression)
 #' g_verbe_taux(-0.3) # diminue légèrement de 0,3 %
 #' g_verbe_taux(-1)   # recule légèrement de 1,0 %
 #' g_verbe_taux(-4)   # baisse de 4,0 %
@@ -27,6 +28,7 @@ g_verbe_taux = function(g,sing=1,evolution = "pourcents",stableras=1){  #sing po
   # g=3
   # sing=1
   # evolution = "pourcents"
+  # g=g(0.999,1)
 
   serad0 = getOption("serad")
   seuil = serad0$sve
@@ -82,8 +84,8 @@ g_verbe_taux = function(g,sing=1,evolution = "pourcents",stableras=1){  #sing po
                      paste(z,a),
                      paste(z,b))
           }
-      return(y)
     }
+  return(y)
 }
 
 
