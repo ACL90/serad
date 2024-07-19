@@ -2,6 +2,7 @@
 #' @param g L'evolution
 #' @param sing 1 si le sujet du verbe est singulier (défault), 0 sinon
 #' @param evolution Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"
+#' @param stableras Par défaut 1. Si mis à 0, alors évolution indiquée après une stabilité (et à).  
 #'
 #' @seealso g_verbe
 #'
@@ -21,7 +22,7 @@
 #' g_verbe_taux(-21)  # chute de 21,0 %
 #'
 #' @export
-g_verbe_taux = function(g,sing=1,evolution = "pourcents"){  #sing pour singulier
+g_verbe_taux = function(g,sing=1,evolution = "pourcents",stableras=1){  #sing pour singulier
 
   # g=3
   # sing=1
@@ -64,14 +65,25 @@ g_verbe_taux = function(g,sing=1,evolution = "pourcents"){  #sing pour singulier
     a=format_pts(g,signe=1)
     b=format_pts(g,signe=0)
   }
-
-
-    y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
-               paste(z,a),
-               paste(z,b))
-
-    return(y)
-    #return(paste(z,format_g(g,signe=0)))
+  
+  
+  #traitement si stabilité et stableras
+  if((stableras==1) & (g<seuil$fort)&(g>seuil$faible)){
+    y = z
+    } else {
+    #on commence par le cas de la stabilité
+      if((g<seuil$fort)&(g>seuil$faible)){
+        y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
+                   paste(z,"\u00e0",a),
+                   paste(z,"\u00e0",b))
+        #on poursuit sipas stabilité (le cas général)
+        } else {
+          y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
+                     paste(z,a),
+                     paste(z,b))
+          }
+      return(y)
+    }
 }
 
 

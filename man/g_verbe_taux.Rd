@@ -4,7 +4,7 @@
 \alias{g_verbe_taux}
 \title{Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"}
 \usage{
-g_verbe_taux(g, sing = 1, evolution = "pourcents")
+g_verbe_taux(g, sing = 1, evolution = "pourcents", stableras = 1)
 }
 \arguments{
 \item{g}{L'evolution}
@@ -12,6 +12,8 @@ g_verbe_taux(g, sing = 1, evolution = "pourcents")
 \item{sing}{1 si le sujet du verbe est singulier (défault), 0 sinon}
 
 \item{evolution}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
+
+\item{stableras}{Par défaut 1. Si mis à 0, alors évolution indiquée après une stabilité (et à).}
 }
 \value{
 l'evolution, par exemple: "bondit de 10,0 \%"
