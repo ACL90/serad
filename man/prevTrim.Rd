@@ -2,34 +2,47 @@
 % Please edit documentation in R/quelTrim.R
 \name{prevTrim}
 \alias{prevTrim}
-\title{Fournit dynamiquement le trimestre précédent sous forme littéraire}
+\title{Fournit dynamiquement le trimestre precedent}
 \usage{
-prevTrim(trim, annee, type = "lettres", majuscule = 0, exposant = 1, k = 1)
+prevTrim(
+  trim,
+  annee,
+  type = c("lettres", "chiffres"),
+  majuscule = FALSE,
+  exposant = TRUE,
+  k = 1
+)
 }
 \arguments{
-\item{trim}{Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.}
+\item{trim}{Trimestre sous forme numerique : 1, 2, 3 ou 4.}
 
-\item{annee}{Un nombre positif en 4 chiffres}
+\item{annee}{Annee sur 4 chiffres.}
 
-\item{type}{Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)}
+\item{type}{"lettres" (par defaut) ou "chiffres".}
 
-\item{majuscule}{Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"}
+\item{majuscule}{Indicateur logique : TRUE pour une majuscule initiale,
+FALSE sinon.}
 
-\item{exposant}{Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".}
+\item{exposant}{Indicateur logique : TRUE pour afficher
+les exposants Markdown (ex. "1^er^"),
+FALSE pour afficher "1er".}
 
-\item{k}{Par défaut 1 pour le trimestre précédent. Un nombre entier relatif.}
+\item{k}{Decalage en nombre de trimestres.
+Par defaut : 1 (trimestre precedent).}
 }
 \value{
-1^er^ trimestre XXXX (ou une variante)
+Une chaine de caracteres correspondant au trimestre
+precedent (par exemple : "quatrieme trimestre 2022").
 }
 \description{
-Fournit dynamiquement le trimestre précédent sous forme littéraire
+Retourne la formulation du trimestre situe k periodes
+avant le trimestre indique.
 }
 \examples{
-prevTrim(1,2023)                              #quatrième trimestre 2022
-prevTrim(1,2023,type="chiffres",exposant=0)   #4^e^ trimestre 2022
+prevTrim(1, 2023)
+prevTrim(1, 2023, type = "chiffres", exposant = FALSE)
 
 }
 \seealso{
-nextTrim quelTrim
+\code{\link{nextTrim}}, \code{\link{quelTrim}}
 }

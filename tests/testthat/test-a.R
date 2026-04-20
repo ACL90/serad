@@ -1,15 +1,21 @@
-test_that("ex1", {
-  expect_equal(a(4,2,1), 0)
+test_that("a - cas sans acceleration", {
+  expect_equal(
+    a(4, 2, 1),
+    0
+  )
 })
 
-test_that("ex2", {
-  expect_equal(a(6,2,1), 100)
+test_that("a - cas acceleration positive", {
+  expect_equal(
+    a(6, 2, 1),
+    100
+  )
 })
 
-
-test_that("ex3", {
-  #it depend on the default value of serad0$eps=0.00000001
-  #expect_equal(a(2,1,1), 1e+12)
-  expect_warning(a(2,1,1),"division par 0 dans serad::g()")
+test_that("a - division par zero", {
+  # depend de la valeur par defaut de serad0$eps = 1e-8
+  expect_warning(
+    a(2, 1, 1),
+    "division par 0 dans serad::g()"
+  )
 })
-

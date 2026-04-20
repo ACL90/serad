@@ -1,367 +1,387 @@
-#' Fournit dynamiquement le trimestre sous forme littéraire
-#' @param trim Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut "lettres" (pour 1^er^ trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
-#' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
-#' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
-#' @param mois Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.
+#' Fournit dynamiquement le trimestre en toutes lettres ou en chiffres
 #'
-#' @return 1er trimestre XXXX (ou une variante)
+#' Retourne une formulation litteraire du trimestre
+#' pour une annee donnee.
 #'
-#' @examples
-#' quelTrim(3,2023)                             #troisième trimestre 2023
-#' quelTrim(3,2023,majuscule=1)                 #Troisième trimestre 2023
-#' quelTrim(3,2023,type="chiffres")             #3^e^ trimestre 2023
-#' quelTrim(1,2023,type="chiffres")             #1^er^ trimestre 2023#'
-#' quelTrim(999,2023,type="chiffres",mois=8)    #3^e^ trimestre 2023
-#' quelTrim(3,2023,type="chiffres",exposant=0)  #3e trimestre 2023
+#' @param trim Trimestre sous forme numerique : 1, 2, 3 ou 4.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "lettres" (par defaut) ou "chiffres".
+#' @param majuscule Indicateur logique : TRUE pour une majuscule initiale
+#'   (ex. "Premier"), FALSE sinon.
+#' @param exposant Indicateur logique : TRUE pour afficher
+#'   les exposants Markdown (ex. "1^er^"),
+#'   FALSE pour afficher "1er".
+#' @param mois Si renseigne (entier entre 1 et 12),
+#'   remplace trim en deduisant le trimestre correspondant.
 #'
-#' @seealso
-#' nextTrim prevTrim
-#'
-#' @export
-quelTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,mois=999) {
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  if(!(mois%in%c(1,2,3,4,5,6,7,8,9,10,11,12,
-                 "1","2","3","4","5","6","7","8","9","10","11","12",
-                 "01","02","03","04","05","06","07","08","09"))) {
-    trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
-  }
-  else {
-    mois=as.numeric(mois)
-    trim=ifelse(mois%in%c(1,2,3),1,
-                ifelse(mois%in%c(4,5,6),2,
-                       ifelse(mois%in%c(7,8,9),3,
-                              4)))
-  }
-
-    if(type=="lettres") {
-      if(trim==1 && majuscule==1) {
-        b="Premier"
-      }    else if(trim==1 && majuscule==0) {
-        b="premier"
-      } else if(trim==2 && majuscule==1) {
-        b="Deuxi\u00e8me"
-      }    else if(trim==2 && majuscule==0) {
-        b="deuxi\u00e8me"
-      }    else if(trim==3 && majuscule==1) {
-        b="Troisi\u00e8me"
-      }    else if(trim==3 && majuscule==0) {
-        b="troisi\u00e8me"
-      }    else if(trim==4 && majuscule==1) {
-        b="Quatri\u00e8me"
-      }    else if(trim==4 && majuscule==0) {
-        b="quatri\u00e8me"
-      }    else b="Autres" #mettre un message d'erreur ici
-    }
-    if(type=="chiffres") {
-      b=ifelse(exposant==1,
-               ifelse(trim==1,"1^er^",paste0(trim,"^e^")),
-               ifelse(trim==1,"1er",paste0(trim,"e")))
-
-    }
-    b = paste0(b, " ","trimestre"," ",annee)
-    return(b)
-}
-
-#usethis::use_test()
-
-
-
-###################
-#nextTrim()
-#' Fournit dynamiquement le trimestre suivant sous forme littéraire
-#' @param trim Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
-#' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
-#' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
-#' @param k Par défaut 1 pour le trimestre suivant. Un nombre entier relatif.
-#'
-#' @return 1^er^ trimestre XXXX (ou une variante)
+#' @return
+#' Une chaine de caracteres du type
+#' "troisieme trimestre 2023"
+#' ou "3^e^ trimestre 2023".
 #'
 #' @examples
-#' nextTrim(3,2023)                  #quatrième trimestre 2023
-#' nextTrim(4,2023)                  #premier trimestre 2024
+#' quelTrim(3, 2023)
+#' quelTrim(3, 2023, majuscule = TRUE)
+#' quelTrim(3, 2023, type = "chiffres")
+#' quelTrim(1, 2023, type = "chiffres")
+#' quelTrim(999, 2023, type = "chiffres", mois = 8)
+#' quelTrim(3, 2023, type = "chiffres", exposant = FALSE)
 #'
-#' @seealso
-#' quelTrim prevTrim
-#'
-#' @export
-nextTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,k=1) {
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
-
-  quotient = (trim-1+k)%/%4
-  reste= (trim-1+k)%%4
-  b=quelTrim(1+reste,annee+quotient,type,majuscule,exposant,mois=999)
-  return(b)
-
-
-    # if(trim==4) {
-  #   b = quelTrim(1,annee+1,type,majuscule)
-  # }
-  # else {
-  #   b= quelTrim(trim+1,annee,type,majuscule)
-  # }
-  #return(b)
-}
-
-
-###################
-#prevTrim()
-#' Fournit dynamiquement le trimestre précédent sous forme littéraire
-#' @param trim Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "lettres" (pour 1er trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)
-#' @param majuscule Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"
-#' @param exposant Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".
-#' @param k Par défaut 1 pour le trimestre précédent. Un nombre entier relatif.
-#'
-#' @return 1^er^ trimestre XXXX (ou une variante)
-#'
-#' @examples
-#' prevTrim(1,2023)                              #quatrième trimestre 2022
-#' prevTrim(1,2023,type="chiffres",exposant=0)   #4^e^ trimestre 2022
-#'
-#' @seealso
-#' nextTrim quelTrim
+#' @seealso \code{\link{nextTrim}}, \code{\link{prevTrim}}
 #'
 #' @export
-prevTrim = function(trim,annee,type="lettres",majuscule=0,exposant=1,k=1) {
-  # annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  # trim=as.numeric(trim) #il faudrait une erreur si pas possible de transformer
+quelTrim <- function(trim,
+                     annee,
+                     type = c("lettres", "chiffres"),
+                     majuscule = FALSE,
+                     exposant = TRUE,
+                     mois = NULL) {
 
-  b=nextTrim(trim,annee,type,majuscule,exposant,-k)
-  return(b)
+  type <- match.arg(type)
 
-  # if(trim==1) {
-  #   b = quelTrim(4,annee-1,type,majuscule)
-  # }
-  # else {
-  #   b= quelTrim(trim-1,annee,type,majuscule)
-  # }
-  # return(b)
-}
+  annee <- as.numeric(annee)
+  if (is.na(annee)) stop("annee doit \u00eatre num\u00e9rique")
 
-
-
-
-#############################################################
-#' Fournit dynamiquement le mois sous forme littéraire
-#' @param mois Le mois sous la forme d'un chiffre : 1...12
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "Annee" (pour janvier XXXX). Sinon: janvier
-#' @param majuscule Par défaut 0. 1 pour avoir "Janvier" plutôt que "janvier"
-#'
-#' @return janvier XXXX (ou une variante)
-#'
-#' @examples
-#' quelMois(3,2023)                  #mars 2023
-#' quelMois(3,2023,majuscule=1)      #Mars 2023
-#' quelMois(3,2023,type="autres")    #mars
-#'
-#' @seealso
-#' quelTrim nextMois prevMois
-#'
-#' @export
-quelMois = function(mois,annee,type="Annee",majuscule=0) {
-  if(is.na(annee)){
-    type="pas d annee" #il faudrait afficher un avertissement
-  }
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
-
-    if(mois==1 && majuscule==1) {
-      b="Janvier"
-    }    else if(mois==1 && majuscule==0) {
-      b="janvier"
-    } else if(mois==2 && majuscule==1) {
-      b="F\u00e9vrier"
-    }    else if(mois==2 && majuscule==0) {
-      b="f\u00e9vrier"
-    }    else if(mois==3 && majuscule==1) {
-      b="Mars"
-    }    else if(mois==3 && majuscule==0) {
-      b="mars"
-    }    else if(mois==4 && majuscule==1) {
-      b="Avril"
-    }    else if(mois==4 && majuscule==0) {
-      b="avril"
-    }    else if(mois==5 && majuscule==1) {
-      b="Mai"
-    }    else if(mois==5 && majuscule==0) {
-      b="mai"
-    }    else if(mois==6 && majuscule==1) {
-      b="Juin"
-    }    else if(mois==6 && majuscule==0) {
-      b="juin"
-    }    else if(mois==7 && majuscule==1) {
-      b="Juillet"
-    }    else if(mois==7 && majuscule==0) {
-      b="juillet"
-    }    else if(mois==8 && majuscule==1) {
-      b="Ao\u00fbt"
-    }    else if(mois==8 && majuscule==0) {
-      b="ao\u00fbt"
-    }    else if(mois==9 && majuscule==1) {
-      b="Septembre"
-    }    else if(mois==9 && majuscule==0) {
-      b="septembre"
-    }    else if(mois==10 && majuscule==1) {
-      b="Octobre"
-    }    else if(mois==10 && majuscule==0) {
-      b="octobre"
-    }    else if(mois==11 && majuscule==1) {
-      b="Novembre"
-    }    else if(mois==11 && majuscule==0) {
-      b="novembre"
-    }    else if(mois==12 && majuscule==1) {
-      b="D\u00e9cembre"
-    }    else if(mois==12 && majuscule==0) {
-      b="d\u00e9cembre"
-    }    else b="Autres" #mettre un message d'erreur ici
-
-  if(type=="Annee") {
-    b = paste0(b," ",annee)
-  }
-  return(b)
-}
-
-#usethis::use_test()
-#quelques rappels
-#stringi::stri_escape_unicode("é")
-#\\u00e9
-#stringi::stri_escape_unicode("é")
-#\\u00fb
-
-###################
-#nextMois()
-#' Fournit dynamiquement le trimestre suivant sous forme littéraire
-#' @param mois Le mois sous la forme d'un chiffre : 1..12
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "Annee" (pour février XXXX). Sinon: février.
-#' @param majuscule Par défaut 0. 1 pour avoir "Février" plutôt que "février"
-#' @param k Par défaut 1 pour le mois suivant. Un nombre entier relatif.
-#'
-#' @return Février XXXX (ou une variante)
-#'
-#' @examples
-#' nextMois(3,2023)                  #avril 2023
-#' nextMois(12,2023)                 #janvier 2024
-#' nextMois(12,2023,k=2)             #février 2024
-#'
-#' @seealso
-#' quelMois nextTrim prevMois
-#'
-#' @export
-nextMois = function(mois,annee,type="Annee",majuscule=0, k=1) {
-
-  annee=as.numeric(annee) #il faudrait une erreur si pas possible de transformer
-  mois=as.numeric(mois) #il faudrait une erreur si pas possible de transformer
-
-  quotient = (mois-1+k)%/%12
-  reste= (mois-1+k)%%12
-  b=quelMois(1+reste,annee+quotient,type,majuscule)
-  return(b)
-
-  # if(mois==12) {
-  #   b = quelMois(1,annee+1,type,majuscule)
-  # }
-  # else {
-  #   b= quelMois(mois+1,annee,type,majuscule)
-  # }
-  # return(b)
-}
-
-
-###################
-#prevMois()
-#' Fournit dynamiquement le mois précédent sous forme littéraire
-#' @param mois Le mois sous la forme d'un chiffre : 1..12
-#' @param annee Un nombre positif en 4 chiffres
-#' @param type Par défaut: "Annee" (pour décembre XXXX). Sinon: décembre.
-#' @param majuscule Par défaut 0. 1 pour avoir "Décembre" plutôt que "décembre"
-#' @param k Par défaut 1 pour le mois précédent. Un nombre entier relatif.
-#'
-#'
-#' @return décembre XXXX (ou une variante)
-#'
-#' @examples
-#' prevMois(1,2023)                  #décembre 2022
-#' prevMois(12,2023,k=2)             #octobre  2023
-#'
-#' @seealso
-#' prevTrim nextMois quelMois
-#'
-#' @export
-prevMois = function(mois,annee,type="Annee",majuscule=0,k=1) {
-  nextMois(mois,annee,type,majuscule,-k)
-}
-
-
-
-
-###################
-#whichMois()
-#' pour récupérer le mois dans un format littéraire
-#' @param mois Le mois en lettres
-#'
-#' @return 1..12
-#'
-#' @examples
-#' whichMois("En Juil 98")                  #7
-#'
-#' @seealso
-#' quelMois
-#'
-#' @export
-whichMois = function(mois) {
-
-  list1 = c("Jan","jan")
-  list2 = c("Fev","fev","Feb","feb","F\u00e9v","f\u00e9v")
-  list3 = c("Mar","mar")
-  list4 = c("Avr","avr","Apr","apr")
-  list5 = c("Mai","mai","May","may")
-  list6 = c("Juin","juin","Jun","jun")
-  list7 = c("Juil","juil","Jul","jul")
-  list8 = list("Aug","aug","Ao","ao")
-  list9 = c("Sep","sep")
-  list10 = c("Oct","oct")
-  list11 = c("Nov","nov")
-  list12 = c("Dec","dec","D\u00e9c","d\u00e9c")
-
-  # grep("ao",'août') #1
-  # grep('août',"ao") #0
-  # mois="aoutrr 2099"
-  # any(sapply(list8, grepl, mois))
-  if(any(sapply(list1, grepl, mois))==1){
-    return(1)
-  } else if(any(sapply(list2, grepl, mois))==1){
-    return(2)
-  } else if(any(sapply(list3, grepl, mois))==1){
-    return(3)
-  } else if(any(sapply(list4, grepl, mois))==1){
-    return(4)
-  } else if(any(sapply(list5, grepl, mois))==1){
-    return(5)
-  } else if(any(sapply(list6, grepl, mois))==1){
-    return(6)
-  } else if(any(sapply(list7, grepl, mois))==1){
-    return(7)
-  } else if(any(sapply(list8, grepl, mois))==1){
-    return(8)
-  } else if(any(sapply(list9, grepl, mois))==1){
-    return(9)
-  } else if(any(sapply(list10, grepl, mois))==1){
-    return(10)
-  } else if(any(sapply(list11, grepl, mois))==1){
-    return(11)
-  } else if(any(sapply(list12, grepl, mois))==1){
-    return(12)
+  # Si mois fourni → déduction du trimestre
+  if (!is.null(mois)) {
+    mois <- as.numeric(mois)
+    if (is.na(mois) || !(mois %in% 1:12))
+      stop("mois doit \u00eatre entre 1 et 12")
+    trim <- ceiling(mois / 3)
   } else {
-    return(0)  #ajouter message d erreur ?
+    trim <- as.numeric(trim)
+    if (is.na(trim) || !(trim %in% 1:4))
+      stop("trim doit \u00eatre entre 1 et 4")
   }
 
+  # ---- Version lettres ----
+  if (type == "lettres") {
+
+    noms <- c("premier", "deuxi\u00e8me", "troisi\u00e8me", "quatri\u00e8me")
+    b <- noms[trim]
+
+    if (majuscule)
+      b <- paste0(toupper(substr(b, 1, 1)), substr(b, 2, nchar(b)))
+
+  } else {
+
+    # ---- Version chiffres ----
+    if (exposant) {
+      b <- if (trim == 1) "1^er^" else paste0(trim, "^e^")
+    } else {
+      b <- if (trim == 1) "1er" else paste0(trim, "e")
+    }
+  }
+
+  paste(b, "trimestre", annee)
 }
-#whichMois("June dsfdgogzb")
+
+#' Fournit dynamiquement le trimestre suivant
+#'
+#' Retourne la formulation du trimestre situe k periodes
+#' apres le trimestre indique.
+#'
+#' @param trim Trimestre sous forme numerique : 1, 2, 3 ou 4.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "lettres" (par defaut) ou "chiffres".
+#' @param majuscule Indicateur logique : TRUE pour une majuscule initiale,
+#'   FALSE sinon.
+#' @param exposant Indicateur logique : TRUE pour afficher
+#'   les exposants Markdown (ex. "1^er^"),
+#'   FALSE pour afficher "1er".
+#' @param k Decalage en nombre de trimestres.
+#'   Par defaut : 1 (trimestre suivant).
+#'
+#' @return
+#' Une chaine de caracteres correspondant au trimestre
+#' suivant (par exemple : "quatrieme trimestre 2023").
+#'
+#' @examples
+#' nextTrim(3, 2023) # "quatrième trimestre 2023"
+#' nextTrim(4, 2023) # "premier trimestre 2024"
+#'
+#' @seealso \code{\link{quelTrim}}, \code{\link{prevTrim}}
+#'
+#' @export
+nextTrim <- function(trim,
+                     annee,
+                     type = c("lettres", "chiffres"),
+                     majuscule = FALSE,
+                     exposant = TRUE,
+                     k = 1) {
+
+  type <- match.arg(type)
+
+  trim  <- as.numeric(trim)
+  annee <- as.numeric(annee)
+
+  if (is.na(trim) || !(trim %in% 1:4))
+    stop("trim doit \u00eatre entre 1 et 4")
+
+  if (is.na(annee))
+    stop("annee doit \u00eatre num\u00e9rique")
+
+  if (!is.numeric(k))
+    stop("k doit \u00eatre num\u00e9rique")
+
+  total <- trim - 1 + k
+
+  new_trim  <- (total %% 4) + 1
+  new_annee <- annee + (total %/% 4)
+
+  quelTrim(new_trim,
+           new_annee,
+           type = type,
+           majuscule = majuscule,
+           exposant = exposant)
+}
+
+
+#' Fournit dynamiquement le trimestre precedent
+#'
+#' Retourne la formulation du trimestre situe k periodes
+#' avant le trimestre indique.
+#'
+#' @param trim Trimestre sous forme numerique : 1, 2, 3 ou 4.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "lettres" (par defaut) ou "chiffres".
+#' @param majuscule Indicateur logique : TRUE pour une majuscule initiale,
+#'   FALSE sinon.
+#' @param exposant Indicateur logique : TRUE pour afficher
+#'   les exposants Markdown (ex. "1^er^"),
+#'   FALSE pour afficher "1er".
+#' @param k Decalage en nombre de trimestres.
+#'   Par defaut : 1 (trimestre precedent).
+#'
+#' @return
+#' Une chaine de caracteres correspondant au trimestre
+#' precedent (par exemple : "quatrieme trimestre 2022").
+#'
+#' @examples
+#' prevTrim(1, 2023)
+#' prevTrim(1, 2023, type = "chiffres", exposant = FALSE)
+#'
+#' @seealso \code{\link{nextTrim}}, \code{\link{quelTrim}}
+#'
+#' @export
+prevTrim <- function(trim,
+                     annee,
+                     type = c("lettres", "chiffres"),
+                     majuscule = FALSE,
+                     exposant = TRUE,
+                     k = 1) {
+
+  type <- match.arg(type)
+
+  nextTrim(trim,
+           annee,
+           type = type,
+           majuscule = majuscule,
+           exposant = exposant,
+           k = -k)
+}
+
+#' Fournit dynamiquement le mois en toutes lettres
+#'
+#' Retourne une formulation litteraire du mois,
+#' avec ou sans annee.
+#'
+#' @param mois Mois sous forme numerique : 1 a 12.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "Annee" (par defaut, ex. "janvier 2023")
+#'   ou "autres" (ex. "janvier").
+#' @param majuscule Indicateur logique : TRUE pour une majuscule
+#'   initiale (ex. "Janvier"), FALSE sinon.
+#'
+#' @return
+#' Une chaine de caracteres correspondant au mois,
+#' avec ou sans annee.
+#'
+#' @examples
+#' quelMois(3, 2023)
+#' quelMois(3, 2023, majuscule = TRUE)
+#' quelMois(3, 2023, type = "autres")
+#'
+#' @seealso \code{\link{quelTrim}}, \code{\link{nextMois}}, \code{\link{prevMois}}
+#'
+#' @export
+quelMois <- function(mois,
+                     annee,
+                     type = c("Annee", "autres"),
+                     majuscule = FALSE) {
+
+  type <- match.arg(type)
+
+  mois  <- as.numeric(mois)
+  annee <- as.numeric(annee)
+
+  if (is.na(mois) || !(mois %in% 1:12))
+    stop("mois doit \u00eatre entre 1 et 12")
+
+  noms <- c(
+    "janvier", "f\u00e9vrier", "mars", "avril", "mai", "juin",
+    "juillet", "ao\u00dbt", "septembre", "octobre", "novembre", "d\u00e9cembre"
+  )
+
+  b <- noms[mois]
+
+  if (majuscule)
+    b <- paste0(toupper(substr(b, 1, 1)), substr(b, 2, nchar(b)))
+
+  if (type == "Annee") {
+    if (is.na(annee))
+      stop("annee doit \u00eatre num\u00e9rique")
+    b <- paste(b, annee)
+  }
+
+  b
+}
+
+#' Fournit dynamiquement le mois suivant
+#'
+#' Retourne la formulation du mois situe k periodes
+#' apres le mois indique.
+#'
+#' @param mois Mois sous forme numerique : 1 a 12.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "Annee" (par defaut, ex. "fevrier 2023")
+#'   ou "autres" (ex. "fevrier").
+#' @param majuscule Indicateur logique : TRUE pour une majuscule
+#'   initiale (ex. "Fevrier"), FALSE sinon.
+#' @param k Decalage en nombre de mois.
+#'   Par defaut : 1 (mois suivant).
+#'
+#' @return
+#' Une chaine de caracteres correspondant au mois
+#' suivant (par exemple : "avril 2023").
+#'
+#' @examples
+#' nextMois(3, 2023)
+#' nextMois(12, 2023)
+#' nextMois(12, 2023, k = 2)
+#'
+#' @seealso \code{\link{quelMois}}, \code{\link{prevMois}}, \code{\link{nextTrim}}
+#'
+#' @export
+nextMois <- function(mois,
+                     annee,
+                     type = c("Annee", "autres"),
+                     majuscule = FALSE,
+                     k = 1) {
+
+  type <- match.arg(type)
+
+  mois  <- as.numeric(mois)
+  annee <- as.numeric(annee)
+
+  if (is.na(mois) || !(mois %in% 1:12))
+    stop("mois doit \u00eatre entre 1 et 12")
+
+  if (is.na(annee))
+    stop("annee doit \u00eatre num\u00e9rique")
+
+  total <- mois - 1 + k
+
+  new_mois  <- (total %% 12) + 1
+  new_annee <- annee + (total %/% 12)
+
+  quelMois(new_mois,
+           new_annee,
+           type = type,
+           majuscule = majuscule)
+}
+
+
+#' Fournit dynamiquement le mois precedent
+#'
+#' Retourne la formulation du mois situe k periodes
+#' avant le mois indique.
+#'
+#' @param mois Mois sous forme numerique : 1 a 12.
+#' @param annee Annee sur 4 chiffres.
+#' @param type "Annee" (par defaut, ex. "decembre 2023")
+#'   ou "autres" (ex. "decembre").
+#' @param majuscule Indicateur logique : TRUE pour une majuscule
+#'   initiale (ex. "Decembre"), FALSE sinon.
+#' @param k Decalage en nombre de mois.
+#'   Par defaut : 1 (mois precedent).
+#'
+#' @return
+#' Une chaine de caracteres correspondant au mois
+#' precedent (par exemple : "decembre 2022").
+#'
+#' @examples
+#' prevMois(1, 2023)         # "décembre 2022"
+#' prevMois(12, 2023, k = 2) # "octobre 2023"
+#'
+#' @seealso \code{\link{prevTrim}}, \code{\link{nextMois}}, \code{\link{quelMois}}
+#'
+#' @export
+prevMois <- function(mois,
+                     annee,
+                     type = c("Annee", "autres"),
+                     majuscule = FALSE,
+                     k = 1) {
+
+  type <- match.arg(type)
+
+  nextMois(mois,
+           annee,
+           type = type,
+           majuscule = majuscule,
+           k = -k)
+}
+
+#' Recupere le numero du mois a partir d'un texte
+#'
+#' Extrait le numero du mois (1 a 12) a partir
+#' d'une chaine de caracteres contenant un mois
+#' en format abrege ou litteraire.
+#'
+#' @param mois Chaine de caracteres contenant un mois
+#'   (ex. "En Juil 98").
+#'
+#' @return
+#' Un entier entre 1 et 12 si un mois est detecte,
+#' 0 sinon. NA si l'entree est NA.
+#'
+#' @examples
+#' whichMois("En Juil 98")
+#'
+#' @seealso \code{\link{quelMois}}
+#'
+#' @export
+whichMois <- function(mois) {
+
+  if (is.na(mois))
+    return(NA_integer_)
+
+  # Normalisation
+  mois_clean <- tolower(mois)
+
+  # Suppression des accents
+  mois_clean <- iconv(mois_clean, from = "UTF-8", to = "ASCII//TRANSLIT")
+
+  # Dictionnaire
+  dict <- list(
+    "1"  = c("jan"),
+    "2"  = c("fev", "feb"),
+    "3"  = c("mar"),
+    "4"  = c("avr", "apr"),
+    "5"  = c("mai", "may"),
+    "6"  = c("juin", "jun"),
+    "7"  = c("juil", "jul"),
+    "8"  = c("aou", "aug"),
+    "9"  = c("sep"),
+    "10" = c("oct"),
+    "11" = c("nov"),
+    "12" = c("dec")
+  )
+
+  for (i in seq_along(dict)) {
+    if (any(sapply(dict[[i]], grepl, mois_clean)))
+      return(as.numeric(i))
+  }
+
+  return(0L)
+}

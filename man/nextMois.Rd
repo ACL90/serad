@@ -2,33 +2,38 @@
 % Please edit documentation in R/quelTrim.R
 \name{nextMois}
 \alias{nextMois}
-\title{Fournit dynamiquement le trimestre suivant sous forme littéraire}
+\title{Fournit dynamiquement le mois suivant}
 \usage{
-nextMois(mois, annee, type = "Annee", majuscule = 0, k = 1)
+nextMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE, k = 1)
 }
 \arguments{
-\item{mois}{Le mois sous la forme d'un chiffre : 1..12}
+\item{mois}{Mois sous forme numerique : 1 a 12.}
 
-\item{annee}{Un nombre positif en 4 chiffres}
+\item{annee}{Annee sur 4 chiffres.}
 
-\item{type}{Par défaut: "Annee" (pour février XXXX). Sinon: février.}
+\item{type}{"Annee" (par defaut, ex. "fevrier 2023")
+ou "autres" (ex. "fevrier").}
 
-\item{majuscule}{Par défaut 0. 1 pour avoir "Février" plutôt que "février"}
+\item{majuscule}{Indicateur logique : TRUE pour une majuscule
+initiale (ex. "Fevrier"), FALSE sinon.}
 
-\item{k}{Par défaut 1 pour le mois suivant. Un nombre entier relatif.}
+\item{k}{Decalage en nombre de mois.
+Par defaut : 1 (mois suivant).}
 }
 \value{
-Février XXXX (ou une variante)
+Une chaine de caracteres correspondant au mois
+suivant (par exemple : "avril 2023").
 }
 \description{
-Fournit dynamiquement le trimestre suivant sous forme littéraire
+Retourne la formulation du mois situe k periodes
+apres le mois indique.
 }
 \examples{
-nextMois(3,2023)                  #avril 2023
-nextMois(12,2023)                 #janvier 2024
-nextMois(12,2023,k=2)             #février 2024
+nextMois(3, 2023)
+nextMois(12, 2023)
+nextMois(12, 2023, k = 2)
 
 }
 \seealso{
-quelMois nextTrim prevMois
+\code{\link{quelMois}}, \code{\link{prevMois}}, \code{\link{nextTrim}}
 }

@@ -2,30 +2,35 @@
 % Please edit documentation in R/comparaison.R
 \name{depasse}
 \alias{depasse}
-\title{verbe pour exprimer le sens de l'évolution, pouvant gérer si le nom est singulier ou pluriel}
+\title{Verbe pour exprimer le sens de l'evolution}
 \usage{
-depasse(x1, x2, sing = 0)
+depasse(x1, x2, sing = FALSE)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Le niveau le plus recent.}
 
-\item{x2}{Le niveau le plus ancien}
+\item{x2}{Le niveau le plus ancien.}
 
-\item{sing}{0 si le nom est un pluriel, 1 si un singulier. Par défaut un pluriel.}
+\item{sing}{Indicateur logique : FALSE si le sujet est pluriel,
+TRUE s'il est singulier (par defaut : pluriel).}
 }
 \value{
-'excéde//-nt' ou 'est//sont au niveau de' ou 'est//sont en dessous de'
+Une chaine de caracteres :
+"excedent"/"excede",
+"sont au niveau de"/"est au niveau de",
+ou "sont en dessous de"/"est en dessous de".
 }
 \description{
-verbe pour exprimer le sens de l'évolution, pouvant gérer si le nom est singulier ou pluriel
+Indique si \code{x1} excede, est au niveau de ou est en dessous de
+\code{x2}, en tenant compte du nombre grammatical.
 }
 \examples{
-depasse(1.04,1)          # excédent
-depasse(1.04,1,sing=1)   # excéde
-depasse(0.96,1)          # sont en dessous de
-depasse(0.9991,1)        # sont au niveau de
+depasse(1.04, 1)               # "excèdent"
+depasse(1.04, 1, sing = TRUE)  # "excède"
+depasse(0.96, 1)               # "sont en dessous de"
+depasse(0.9991, 1)             # "sont au niveau de"
 
 }
 \seealso{
-comparaison
+\code{\link{comparaison}}
 }

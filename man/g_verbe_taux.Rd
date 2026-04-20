@@ -2,40 +2,63 @@
 % Please edit documentation in R/g_verbe_taux.R
 \name{g_verbe_taux}
 \alias{g_verbe_taux}
-\title{Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"}
+\title{Evolution verbale d'un taux}
 \usage{
-g_verbe_taux(g, sing = 1, evolution = "pourcents", stableras = 1)
+g_verbe_taux(
+  g,
+  sing = TRUE,
+  evolution = c("pourcents", "points"),
+  stable_sans_valeur = TRUE
+)
 }
 \arguments{
-\item{g}{L'evolution}
+\item{g}{L'evolution.}
 
-\item{sing}{1 si le sujet du verbe est singulier (défault), 0 sinon}
+\item{sing}{Indicateur logique : TRUE si le sujet est singulier
+(par defaut), FALSE sinon.}
 
-\item{evolution}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
+\item{evolution}{Type d'evolution :
+"pourcents" (variation relative) ou "points".}
 
-\item{stableras}{Par défaut 1. Si mis à 0, alors évolution indiquée après une stabilité (et à).}
+\item{stable_sans_valeur}{Indicateur logique : TRUE (par defaut)
+pour ne rien ajouter apres une stabilite.
+Si FALSE, ajoute la valeur apres "a".}
 }
 \value{
-l'evolution, par exemple: "bondit de 10,0 \%"
+Une chaine de caracteres decrivant l'evolution,
+par exemple "bondit de 10,0 \%".
 }
 \description{
-Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"
+Decrit une evolution sous forme verbale, sans tenir compte
+d'une eventuelle acceleration, et suivie de l'expression
+"de \if{html}{\out{<variation>}}".
+}
+\details{
+La fonction selectionne d'abord, dans la table
+\code{getOption("serad")$evo_simple}, la premiere ligne dont
+le seuil est inferieur strictement a \code{g}.
+
+Si \code{sing = TRUE}, la fonction renvoie la colonne
+\code{verbe_sing}. Sinon, elle renvoie \code{verbe_plur}.
+
+La valeur numerique est ensuite formatee avec \code{\link{format_g}}
+ou \code{\link{format_pts}} selon l'argument \code{evolution}.
+
+Si la formulation correspond a une stabilite et que
+\code{stable_sans_valeur = TRUE}, seule la formulation verbale
+est renvoyee. Sinon, la valeur formatee est ajoutee.
 }
 \examples{
-g_verbe_taux(10,1) # bondit de 10,0 \%
-g_verbe_taux(4,1)  # s'accroit de 4,0 \%
-g_verbe_taux(1,0)  # sont en hausse de 1,0 \%
-g_verbe_taux(0.3)  # augmente de 0,3 \%
-g_verbe_taux(0.1)  # s'accroit très légèrement de 0,1 \%
-g_verbe_taux(-0.1) # est stable
-g_verbe_taux(-0.1,stableras=0) # est stable à −0,1 \% (présence du signe pour cette expression)
-g_verbe_taux(-0.3) # diminue légèrement de 0,3 \%
-g_verbe_taux(-1)   # recule légèrement de 1,0 \%
-g_verbe_taux(-4)   # baisse de 4,0 \%
-g_verbe_taux(-20)  # recule de 20,0 \%
-g_verbe_taux(-21)  # chute de 21,0 \%
+g_verbe_taux(10, TRUE)
+g_verbe_taux(4, TRUE)
+g_verbe_taux(1, FALSE)
+g_verbe_taux(0.3)
+g_verbe_taux(-0.1)
+g_verbe_taux(-0.1, stable_sans_valeur = FALSE)
+g_verbe_taux(-4)
+g_verbe_taux(-21)
 
 }
 \seealso{
-g_verbe
+\code{\link{g_verbe}}
 }

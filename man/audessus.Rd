@@ -2,27 +2,27 @@
 % Please edit documentation in R/comparaison.R
 \name{audessus}
 \alias{audessus}
-\title{au-dessus ou en dessous}
+\title{Position relative entre deux niveaux}
 \usage{
 audessus(x1, x2)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Niveau le plus recent.}
 
-\item{x2}{Le niveau le plus ancien}
+\item{x2}{Niveau le plus ancien.}
 }
 \value{
-au-dessus // en dessous
+Une chaine de caracteres : "au-dessus" ou "en dessous".
 }
 \description{
-au-dessus ou en dessous
+Indique si \code{x1} est au-dessus ou en dessous de \code{x2}.
 }
 \examples{
-audessus(1.04,1)    # au-dessus
-audessus(1.04,1.04) # au-dessus
-audessus(0.96,1)    # en dessous
+audessus(1.04, 1)     # "au-dessus"
+audessus(1.04, 1.04)  # "au-dessus"
+audessus(0.96, 1)     # "en dessous"
 
 }
 \seealso{
-comparaison
+\code{\link{comparaison}}
 }

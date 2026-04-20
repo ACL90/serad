@@ -2,31 +2,35 @@
 % Please edit documentation in R/quelTrim.R
 \name{quelMois}
 \alias{quelMois}
-\title{Fournit dynamiquement le mois sous forme littéraire}
+\title{Fournit dynamiquement le mois en toutes lettres}
 \usage{
-quelMois(mois, annee, type = "Annee", majuscule = 0)
+quelMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE)
 }
 \arguments{
-\item{mois}{Le mois sous la forme d'un chiffre : 1...12}
+\item{mois}{Mois sous forme numerique : 1 a 12.}
 
-\item{annee}{Un nombre positif en 4 chiffres}
+\item{annee}{Annee sur 4 chiffres.}
 
-\item{type}{Par défaut: "Annee" (pour janvier XXXX). Sinon: janvier}
+\item{type}{"Annee" (par defaut, ex. "janvier 2023")
+ou "autres" (ex. "janvier").}
 
-\item{majuscule}{Par défaut 0. 1 pour avoir "Janvier" plutôt que "janvier"}
+\item{majuscule}{Indicateur logique : TRUE pour une majuscule
+initiale (ex. "Janvier"), FALSE sinon.}
 }
 \value{
-janvier XXXX (ou une variante)
+Une chaine de caracteres correspondant au mois,
+avec ou sans annee.
 }
 \description{
-Fournit dynamiquement le mois sous forme littéraire
+Retourne une formulation litteraire du mois,
+avec ou sans annee.
 }
 \examples{
-quelMois(3,2023)                  #mars 2023
-quelMois(3,2023,majuscule=1)      #Mars 2023
-quelMois(3,2023,type="autres")    #mars
+quelMois(3, 2023)
+quelMois(3, 2023, majuscule = TRUE)
+quelMois(3, 2023, type = "autres")
 
 }
 \seealso{
-quelTrim nextMois prevMois
+\code{\link{quelTrim}}, \code{\link{nextMois}}, \code{\link{prevMois}}
 }

@@ -1,33 +1,31 @@
-#' Formatage Dares des niveaux, exprimés en nombres
+#' Formatage des niveaux en nombres
 #'
-#' @param y Le niveau à formater.
-#' @param detail Par défaut -2 pour arrondir à la centaine.
+#' Formate un niveau numerique selon les regles d'arrondi
+#' definies dans le package.
 #'
-#' @seealso arrondi_tot
+#' @param y Le niveau a formater.
+#' @param detail Precision d'arrondi. Par defaut, on utilise
+#'   getOption("serad")$arrondi_niv.
 #'
-#' @return Le niveau formaté
+#' @return
+#' Une chaine de caracteres correspondant au niveau formate.
 #'
-# @importFrom dplyr last
+#' @seealso \code{\link{arrondi_tot}}
 #'
 #' @examples
-#' format_niv(365484)  # 365 500
-#'
-#' @details Pour changer le comportement par défaut d'arrondi,
-#' modifier getOption("serad")$arrondi_niv
+#' format_niv(365484)  # "365 500"
 #'
 #' @export
-format_niv =function(y,detail){
+format_niv <- function(y, detail = getOption("serad")$arrondi_niv) {
 
-  if(missing(detail)) {
-    serad0 = getOption("serad")
-    detail = serad0$arrondi_niv #-2 pour arrondir à la centaine
-  }
+  y0 <- arrondi_tot(y, detail)
 
+  w <- format(
+    y0,
+    big.mark = "\u00a0",   # espace insécable
+    scientific = FALSE,
+    trim = TRUE
+  )
 
-  w = format(arrondi_tot(y,detail),big.mark="\ua0", scientific=FALSE)
-  #w = format(arrondi_tot(last(y),detail),big.mark="\ua0", scientific=FALSE)
-
-  return(gsub("-","\u2212",w))
+  gsub("-", "\u2212", w)
 }
-
-#usethis::use_test()

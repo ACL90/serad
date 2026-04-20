@@ -2,60 +2,53 @@
 % Please edit documentation in R/g_nom.R
 \name{g_nom}
 \alias{g_nom}
-\title{Evolution décrite de facon nominale, non suivie d'une évolution.}
+\title{Evolution nominale non suivie d'une valeur}
 \usage{
-g_nom(x1, x2, evolution = "pourcents")
+g_nom(x1, x2, evolution = c("pourcents", "points"), titre = FALSE)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Le niveau le plus recent.}
 
-\item{x2}{le niveau le plus ancien}
+\item{x2}{Le niveau le plus ancien.}
 
-\item{evolution}{Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"}
+\item{evolution}{Type d'evolution :
+"pourcents" (variation relative, par defaut) ou "points".}
+
+\item{titre}{Indicateur logique : TRUE pour supprimer l'article
+initial et mettre une majuscule, notamment en debut de titre.}
 }
 \value{
-L'évolution, par exemple: "une forte hausse".
+Une chaine de caracteres correspondant a la formulation nominale
+retenue (par exemple : "une forte hausse").
 }
 \description{
-Evolution décrite de facon nominale, non suivie d'une évolution.
+Decrit une evolution sous forme nominale a partir de deux niveaux,
+sans ajouter la valeur de variation.
 }
 \details{
-Pour un \strong{utilisateur avancé} (ou quelqu'un utilisant: evolution="points"), il est possible de paramétrer seuils et
-sorties. Par exemple :
-
-\code{library("serad")}\cr
-\code{serad0 = getOption("serad")}\cr
-\code{serad0$nomse$fortttt   = 7.95 #à la place de : 3.95}\cr
-\code{serad0$nm$fortttt = "un bond" #à la place de : "une forte hausse"}\cr
-\code{options(serad = serad0)}
-
-Soit \code{g = serad::g(x1,x2)}. Si g>seuil, alors sortie où:\tabular{lcrr}{
-   \strong{Seuil} \tab \strong{Valeur standard} \tab \strong{Sortie} \tab \strong{Valeur standard} \cr
-   serad0$nomse$fortttt \tab 3.95 \tab serad0$nm$fortttt \tab une forte hausse \cr
-   serad0$nomse$forttt \tab 0.95 \tab serad0$nm$forttt \tab une hausse \cr
-   serad0$nomse$fortt \tab 0.35 \tab serad0$nm$fortt \tab une hausse modérée \cr
-   serad0$nomse$fort \tab 0.05 \tab serad0$nm$fort \tab une légère hausse \cr
-   serad0$nomse$faible \tab (-0.05) \tab serad0$nm$faible \tab une stabilité \cr
-   serad0$nomse$faiblee \tab (-0.35) \tab serad0$nm$faiblee \tab une légère baisse \cr
-   serad0$nomse$faibleee \tab (-1.05) \tab serad0$nm$faibleee \tab une baisse modérée \cr
-   serad0$nomse$faibleeee \tab (-4.05) \tab serad0$nm$faibleeee \tab une baisse \cr
-   Et en dessous: \tab  \tab serad0$nm$faibleeeee \tab une forte baisse \cr
+La fonction calcule d'abord une evolution a partir de \code{x1}
+et \code{x2} :
+\itemize{
+\item si \code{evolution = "pourcents"}, elle utilise
+\code{\link{g}} ;
+\item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
 }
+
+La valeur obtenue est ensuite transmise a \code{\link{g_nom_taux}},
+qui determine la formulation a partir de la table
+\code{getOption("serad")$evo_simple}.
 }
 \examples{
-g_nom(1.04,1)  # une forte hausse
-g_nom(1.01,1)  # une hausse
-g_nom(1.004,1) # une hausse modérée
-g_nom(1.001,1) # une légère hausse
-g_nom(1,1)     # une stabilité
-g_nom(0.997,1) # une légère baisse
-g_nom(0.99,1)  # une baisse modérée
-g_nom(0.96,1)  # une baisse
-g_nom(0.95,1)  # une forte baisse (pour -5\%)
-g_nom(0.95,1,evolution="points") #une légère baisse (pour -0.05 point)
-
+g_nom(1.04, 1)
+g_nom(1.01, 1)
+g_nom(1.004, 1)
+g_nom(1.001, 1)
+g_nom(1, 1)
+g_nom(0.997, 1)
+g_nom(0.95, 1)
+g_nom(0.95, 1, evolution = "points")
 
 }
 \seealso{
-g_nom_taux
+\code{\link{g_nom_taux}}, \code{\link{g}}
 }

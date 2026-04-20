@@ -9,7 +9,7 @@ contributions(df, temps = "croissant", vart, Tglissement = 1, seuilpc = 20)
 \arguments{
 \item{df}{Le dataframe en entrée}
 
-\item{temps}{"croissant" par défaut si du passé vers le présent. "décroissant" sinon.}
+\item{temps}{"croissant" par défaut si du passé vers le présent. "decroissant" sinon.}
 
 \item{vart}{La variable de temps du dataframe. La première valeur par défaut.}
 
@@ -45,12 +45,14 @@ col3 = c( 10,     20,      3,         66,     90,     54)
 col4 = c( 29,     12,      4,         16,     40,     94)
 col5 = c( 58,     76,      1,          3,     34,     19)
 df1 = data.frame(col0,col1,col2,col3,col4,col5)
+
 contributions(df1)
-###col2 contribue pour +92,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
-###col3 contribue pour +45,6 \% à l'évolution entre Y2T1 et Y2-T2 ;
-###col4 contribue pour −68,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
+# col2 contribue pour +92,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
+# col3 contribue pour +45,6 \% à l'évolution entre Y2T1 et Y2-T2 ;
+# col4 contribue pour −68,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
+
 contributions(df1, Tglissement = 4, seuilpc = 50)
-###col4 contribue pour +118,8 \% à l'évolution entre Y1T2 et Y2-T2 ;
-###col5 contribue pour −82,6 \% à l'évolution entre Y1T2 et Y2-T2 ;
+# col4 contribue pour +118,8 \% à l'évolution entre Y1T2 et Y2-T2 ;
+# col5 contribue pour −82,6 \% à l'évolution entre Y1T2 et Y2-T2 ;
 
 }

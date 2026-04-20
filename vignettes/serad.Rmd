@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ##knitr::include_graphics("~/logo.png") 
 ```
 
-[Dernière mise à jour de cette documentation : 24 novembre 2023]
+Dernière mise à jour : `r format(Sys.Date(), "%d %B %Y")`
 
 ```{r setup}
 library(serad)

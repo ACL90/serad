@@ -1,12 +1,12 @@
-#' Evolution verbale tenant compte de l'acceleration
+#' Evolution nominale tenant compte de l'acceleration
 #'
-#' Decrit l'evolution sous forme verbale en tenant compte
-#' de l'acceleration entre deux variations successives.
+#' Decrit l'evolution en tenant compte de l'acceleration
+#' entre deux variations successives.
 #'
 #' @param g1 Derniere evolution, exprimee en pourcentage.
 #' @param g2 Evolution precedente, exprimee en pourcentage.
-#' @param sing Indicateur logique : TRUE si le sujet est singulier
-#'   (par defaut), FALSE sinon.
+#' @param titre Indicateur logique : TRUE pour supprimer l'article
+#'   initial et mettre une majuscule, notamment en debut de titre.
 #' @param alea Parametre numerique compris entre 0 et 1 controlant
 #' l'utilisation de formulations alternatives. Si \code{alea = 0},
 #' la formulation est deterministe. Si \code{alea = 1}, la formulation
@@ -15,7 +15,8 @@
 #'
 #' @return
 #' Une chaine de caracteres correspondant a la formulation
-#' verbale retenue (par exemple : "accelere", "se stabilise").
+#' nominale retenue (par exemple : "une acceleration",
+#' "une stabilisation").
 #'
 #' @details
 #' La fonction calcule d'abord l'acceleration entre \code{g1}
@@ -28,26 +29,25 @@
 #' retenue.
 #'
 #' Une formulation alternative peut etre utilisee via la table
-#' \code{getOption("serad")$evo_accel_alt}. Le choix entre la
-#' formulation principale et la variante depend du parametre
-#' \code{alea}.
+#' \code{getOption("serad")$evo_accel_alt}, qui contient une variante
+#' pour chaque ligne de \code{evo_accel}. Le choix entre la formulation
+#' principale et la variante depend du parametre \code{alea}.
 #'
-#' Si \code{sing = TRUE}, la fonction renvoie la colonne
-#' \code{verbe_sing}. Sinon, elle renvoie \code{verbe_plur}.
+#' Si \code{titre = TRUE}, l'article initial est supprime et la
+#' premiere lettre restante est mise en majuscule.
 #'
 #' @examples
-#' gETa_verbe_taux(0.049, 0.049)
-#' gETa_verbe_taux(10, 1)
-#' gETa_verbe_taux(4, 1, FALSE)
-#' gETa_verbe_taux(-4, 1)
-#' gETa_verbe_taux(-21, 1)
-#' gETa_verbe_taux(10, 1, alea = 0.5)
+#' gETa_nom_taux(0.049, 0.049)
+#' gETa_nom_taux(10, 1)
+#' gETa_nom_taux(-4, 1, titre = TRUE)
+#' gETa_nom_taux(-21, 1)
+#' gETa_nom_taux(10, 1, alea = 0.5)
 #'
-#' @seealso \code{\link{g}}, \code{\link{gETa_nom_taux}}
+#' @seealso \code{\link{g}}, \code{\link{gETa_verbe_taux}}
 #'
 #' @importFrom stats runif
 #' @export
-gETa_verbe_taux <- function(g1, g2, sing = TRUE, alea = 0) {
+gETa_nom_taux <- function(g1, g2, titre = FALSE, alea = 0) {
 
   serad <- getOption("serad")
   tab   <- serad$evo_accel
@@ -56,15 +56,10 @@ gETa_verbe_taux <- function(g1, g2, sing = TRUE, alea = 0) {
 
   a <- serad::g(g1, g2)
 
-  # fonction locale
+  # fonction locale (évite dépendance au init)
   pick <- function(base, alt, alea) {
     if (alea == 0 || is.na(alt) || alt == "") return(base)
     if (runif(1) < alea) alt else base
-  }
-
-  # sécurité
-  if (nrow(tab) != nrow(tab_alt)) {
-    stop("evo_accel et evo_accel_alt doivent avoir le meme nombre de lignes")
   }
 
   env <- list2env(c(
@@ -90,12 +85,26 @@ gETa_verbe_taux <- function(g1, g2, sing = TRUE, alea = 0) {
 
     if (length(results) == 0 || all(results)) {
 
-      if (sing) {
-        return(pick(tab$verbe_sing[i], tab_alt$verbe_sing_alt[i], alea))
-      } else {
-        return(pick(tab$verbe_plur[i], tab_alt$verbe_plur_alt[i], alea))
+      res <- pick(
+        base = as.character(tab$nom[i]),
+        alt  = as.character(tab_alt$nom_alt[i]),
+        alea = alea
+      )
+
+      if (titre) {
+        res <- sub(
+          "^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*",
+          "",
+          res
+        )
+
+        res <- paste0(
+          toupper(substr(res, 1, 1)),
+          substr(res, 2, nchar(res))
+        )
       }
 
+      return(res)
     }
   }
 

@@ -2,45 +2,52 @@
 % Please edit documentation in R/quelTrim.R
 \name{quelTrim}
 \alias{quelTrim}
-\title{Fournit dynamiquement le trimestre sous forme littéraire}
+\title{Fournit dynamiquement le trimestre en toutes lettres ou en chiffres}
 \usage{
 quelTrim(
   trim,
   annee,
-  type = "lettres",
-  majuscule = 0,
-  exposant = 1,
-  mois = 999
+  type = c("lettres", "chiffres"),
+  majuscule = FALSE,
+  exposant = TRUE,
+  mois = NULL
 )
 }
 \arguments{
-\item{trim}{Le trimestre sous la forme d'un chiffre : 1, 2, 3 ou 4.}
+\item{trim}{Trimestre sous forme numerique : 1, 2, 3 ou 4.}
 
-\item{annee}{Un nombre positif en 4 chiffres}
+\item{annee}{Annee sur 4 chiffres.}
 
-\item{type}{Par défaut "lettres" (pour 1^er^ trimestre XXXX). Sinon: "chiffres" (pour premier trimestre XXXX)}
+\item{type}{"lettres" (par defaut) ou "chiffres".}
 
-\item{majuscule}{Par défaut 0. 1 pour avoir "Premier" plutôt que "premier"}
+\item{majuscule}{Indicateur logique : TRUE pour une majuscule initiale
+(ex. "Premier"), FALSE sinon.}
 
-\item{exposant}{Par défaut 1. Permet d'avoir les exposants sous Markdown , e.g."^1er^". Si 0: "1er".}
+\item{exposant}{Indicateur logique : TRUE pour afficher
+les exposants Markdown (ex. "1^er^"),
+FALSE pour afficher "1er".}
 
-\item{mois}{Par défaut 999. Si mois est un nombre entier compris entre 1 et 12, il remplace le parametre trim.}
+\item{mois}{Si renseigne (entier entre 1 et 12),
+remplace trim en deduisant le trimestre correspondant.}
 }
 \value{
-1er trimestre XXXX (ou une variante)
+Une chaine de caracteres du type
+"troisieme trimestre 2023"
+ou "3^e^ trimestre 2023".
 }
 \description{
-Fournit dynamiquement le trimestre sous forme littéraire
+Retourne une formulation litteraire du trimestre
+pour une annee donnee.
 }
 \examples{
-quelTrim(3,2023)                             #troisième trimestre 2023
-quelTrim(3,2023,majuscule=1)                 #Troisième trimestre 2023
-quelTrim(3,2023,type="chiffres")             #3^e^ trimestre 2023
-quelTrim(1,2023,type="chiffres")             #1^er^ trimestre 2023#'
-quelTrim(999,2023,type="chiffres",mois=8)    #3^e^ trimestre 2023
-quelTrim(3,2023,type="chiffres",exposant=0)  #3e trimestre 2023
+quelTrim(3, 2023)
+quelTrim(3, 2023, majuscule = TRUE)
+quelTrim(3, 2023, type = "chiffres")
+quelTrim(1, 2023, type = "chiffres")
+quelTrim(999, 2023, type = "chiffres", mois = 8)
+quelTrim(3, 2023, type = "chiffres", exposant = FALSE)
 
 }
 \seealso{
-nextTrim prevTrim
+\code{\link{nextTrim}}, \code{\link{prevTrim}}
 }

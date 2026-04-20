@@ -2,29 +2,27 @@
 % Please edit documentation in R/format_niv.R
 \name{format_niv}
 \alias{format_niv}
-\title{Formatage Dares des niveaux, exprimés en nombres}
+\title{Formatage des niveaux en nombres}
 \usage{
-format_niv(y, detail)
+format_niv(y, detail = getOption("serad")$arrondi_niv)
 }
 \arguments{
-\item{y}{Le niveau à formater.}
+\item{y}{Le niveau a formater.}
 
-\item{detail}{Par défaut -2 pour arrondir à la centaine.}
+\item{detail}{Precision d'arrondi. Par defaut, on utilise
+getOption("serad")$arrondi_niv.}
 }
 \value{
-Le niveau formaté
+Une chaine de caracteres correspondant au niveau formate.
 }
 \description{
-Formatage Dares des niveaux, exprimés en nombres
-}
-\details{
-Pour changer le comportement par défaut d'arrondi,
-modifier getOption("serad")$arrondi_niv
+Formate un niveau numerique selon les regles d'arrondi
+definies dans le package.
 }
 \examples{
-format_niv(365484)  # 365 500
+format_niv(365484)  # "365 500"
 
 }
 \seealso{
-arrondi_tot
+\code{\link{arrondi_tot}}
 }

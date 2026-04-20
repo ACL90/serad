@@ -2,33 +2,30 @@
 % Please edit documentation in R/arrondi_tot.R
 \name{arrondi_tot}
 \alias{arrondi_tot}
-\title{Arrondit un nombre.}
+\title{Arrondi arithmetique}
 \usage{
-arrondi_tot(x, digit = 1)
+arrondi_tot(x, digits = 1)
 }
 \arguments{
-\item{x}{Le nombre à arrondir.}
+\item{x}{Nombre a arrondir.}
 
-\item{digit}{Un entier positif (pour arrondir après la virgule) ou négatif (pour arrondir à la centaine ou au millier par exemple). Par défaut digit = 1.}
+\item{digits}{Entier indiquant le nombre de decimales.
+Positif pour les decimales, negatif pour les dizaines, centaines, etc.
+Par defaut : 1.}
 }
 \value{
-Le nombre arrondi.
+Un nombre numerique arrondi.
 }
 \description{
-Arrondit un nombre.
-}
-\details{
-Notoirement utile car round(0.35) donne...0.3.
-Merci a Chloe Pariset et Gaetan Guillermin pour cette fonction.
+Arrondit un nombre selon la regle arithmetique (0.5 vers le haut),
+contrairement a \code{round()} qui utilise l'arrondi bancaire.
 }
 \examples{
-arrondi_tot(1877.85,digit=0)  #1878
-arrondi_tot(1877.85,digit=1)  #1877.9
-arrondi_tot(1877.85,digit=2)  #1877.85
-arrondi_tot(1877.85,digit=-1) #1880
-arrondi_tot(1877.85,digit=-2) #1900
+arrondi_tot(1877.85, digits = 0)   # 1878
+arrondi_tot(1877.85, digits = 1)   # 1877.9
+arrondi_tot(1877.85, digits = -1)  # 1880
 
 }
 \seealso{
-format_niv
+\code{\link{format_niv}}
 }

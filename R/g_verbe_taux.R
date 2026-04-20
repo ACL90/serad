@@ -1,112 +1,91 @@
-#' Evoluation verbale ne tenant pas compte de l'acceleration et suivi de "de 'ga'"
-#' @param g L'evolution
-#' @param sing 1 si le sujet du verbe est singulier (défault), 0 sinon
-#' @param evolution Par defaut une variation en pourcentages ("pourcents"), sinon en points "points"
-#' @param stableras Par défaut 1. Si mis à 0, alors évolution indiquée après une stabilité (et à).  
+#' Evolution verbale d'un taux
 #'
-#' @seealso g_verbe
+#' Decrit une evolution sous forme verbale, sans tenir compte
+#' d'une eventuelle acceleration, et suivie de l'expression
+#' "de <variation>".
 #'
-#' @return l'evolution, par exemple: "bondit de 10,0 %"
+#' @param g L'evolution.
+#' @param sing Indicateur logique : TRUE si le sujet est singulier
+#'   (par defaut), FALSE sinon.
+#' @param evolution Type d'evolution :
+#'   "pourcents" (variation relative) ou "points".
+#' @param stable_sans_valeur Indicateur logique : TRUE (par defaut)
+#'   pour ne rien ajouter apres une stabilite.
+#'   Si FALSE, ajoute la valeur apres "a".
+#'
+#' @return
+#' Une chaine de caracteres decrivant l'evolution,
+#' par exemple "bondit de 10,0 %".
+#'
+#' @details
+#' La fonction selectionne d'abord, dans la table
+#' \code{getOption("serad")$evo_simple}, la premiere ligne dont
+#' le seuil est inferieur strictement a \code{g}.
+#'
+#' Si \code{sing = TRUE}, la fonction renvoie la colonne
+#' \code{verbe_sing}. Sinon, elle renvoie \code{verbe_plur}.
+#'
+#' La valeur numerique est ensuite formatee avec \code{\link{format_g}}
+#' ou \code{\link{format_pts}} selon l'argument \code{evolution}.
+#'
+#' Si la formulation correspond a une stabilite et que
+#' \code{stable_sans_valeur = TRUE}, seule la formulation verbale
+#' est renvoyee. Sinon, la valeur formatee est ajoutee.
+#'
+#' @seealso \code{\link{g_verbe}}
 #'
 #' @examples
-#' g_verbe_taux(10,1) # bondit de 10,0 %
-#' g_verbe_taux(4,1)  # s'accroit de 4,0 %
-#' g_verbe_taux(1,0)  # sont en hausse de 1,0 %
-#' g_verbe_taux(0.3)  # augmente de 0,3 %
-#' g_verbe_taux(0.1)  # s'accroit très légèrement de 0,1 %
-#' g_verbe_taux(-0.1) # est stable
-#' g_verbe_taux(-0.1,stableras=0) # est stable à −0,1 % (présence du signe pour cette expression)
-#' g_verbe_taux(-0.3) # diminue légèrement de 0,3 %
-#' g_verbe_taux(-1)   # recule légèrement de 1,0 %
-#' g_verbe_taux(-4)   # baisse de 4,0 %
-#' g_verbe_taux(-20)  # recule de 20,0 %
-#' g_verbe_taux(-21)  # chute de 21,0 %
+#' g_verbe_taux(10, TRUE)
+#' g_verbe_taux(4, TRUE)
+#' g_verbe_taux(1, FALSE)
+#' g_verbe_taux(0.3)
+#' g_verbe_taux(-0.1)
+#' g_verbe_taux(-0.1, stable_sans_valeur = FALSE)
+#' g_verbe_taux(-4)
+#' g_verbe_taux(-21)
 #'
 #' @export
-g_verbe_taux = function(g,sing=1,evolution = "pourcents",stableras=1){  #sing pour singulier
+g_verbe_taux <- function(g,
+                         sing = TRUE,
+                         evolution = c("pourcents", "points"),
+                         stable_sans_valeur = TRUE) {
 
-  # g=3
-  # sing=1
-  # evolution = "pourcents"
-  # g=g(0.999,1)
+  evolution <- match.arg(evolution)
 
-  serad0 = getOption("serad")
-  seuil = serad0$sve
+  serad0 <- getOption("serad")
+  tab <- serad0$evo_simple
 
-  # z = dplyr::case_when(g>seuil$forttttt~ifelse(sing,serad0$verbev$forttttt_sing,   serad0$verbev$forttttt_plur),
-  #           g>seuil$fortttt            ~ifelse(sing,serad0$verbev$fortttt_sing,    serad0$verbev$fortttt_plur),
-  #           g>seuil$forttt             ~ifelse(sing,serad0$verbev$forttt_sing,     serad0$verbev$forttt_plur),
-  #           g>seuil$fortt              ~ifelse(sing,serad0$verbev$fortt_sing,      serad0$verbev$fortt_plur),
-  #           g>seuil$fort               ~ifelse(sing,serad0$verbev$fort_sing,       serad0$verbev$fort_plur),
-  #           g>seuil$faible             ~ifelse(sing,serad0$verbev$faible_sing,     serad0$verbev$faible_plur),
-  #           g>seuil$faiblee            ~ifelse(sing,serad0$verbev$faiblee_sing,    serad0$verbev$faiblee_plur),
-  #           g>seuil$faibleee           ~ifelse(sing,serad0$verbev$faibleee_sing,   serad0$verbev$faibleee_plur),
-  #           g>seuil$faibleeee          ~ifelse(sing,serad0$verbev$faibleeee_sing,  serad0$verbev$faibleeee_plur),
-  #           g>seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeee_sing, serad0$verbev$faibleeeee_plur),
-  #          g<=seuil$faibleeeee         ~ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur))
-
-
-  z =           ifelse(g>seuil$forttttt           ,ifelse(sing,serad0$verbev$forttttt_sing,   serad0$verbev$forttttt_plur),
-                ifelse(g>seuil$fortttt            ,ifelse(sing,serad0$verbev$fortttt_sing,    serad0$verbev$fortttt_plur),
-                ifelse(g>seuil$forttt             ,ifelse(sing,serad0$verbev$forttt_sing,     serad0$verbev$forttt_plur),
-                ifelse(g>seuil$fortt              ,ifelse(sing,serad0$verbev$fortt_sing,      serad0$verbev$fortt_plur),
-                ifelse(g>seuil$fort               ,ifelse(sing,serad0$verbev$fort_sing,       serad0$verbev$fort_plur),
-                ifelse(g>seuil$faible             ,ifelse(sing,serad0$verbev$faible_sing,     serad0$verbev$faible_plur),
-                ifelse(g>seuil$faiblee            ,ifelse(sing,serad0$verbev$faiblee_sing,    serad0$verbev$faiblee_plur),
-                ifelse(g>seuil$faibleee           ,ifelse(sing,serad0$verbev$faibleee_sing,   serad0$verbev$faibleee_plur),
-                ifelse(g>seuil$faibleeee          ,ifelse(sing,serad0$verbev$faibleeee_sing,  serad0$verbev$faibleeee_plur),
-                ifelse(g>seuil$faibleeeee         ,ifelse(sing,serad0$verbev$faibleeeee_sing, serad0$verbev$faibleeeee_plur),
-                                               ifelse(sing,serad0$verbev$faibleeeeee_sing,serad0$verbev$faibleeeeee_plur)  #<=seuil$faibleeeee
-                ))))))))))
-
-
-  if(evolution=="pourcents") {
-    a=format_g(g,signe=1)
-    b=format_g(g,signe=0)
-  }  else {   #"points"
-    a=format_pts(g,signe=1)
-    b=format_pts(g,signe=0)
+  if (!is.data.frame(tab)) {
+    stop("serad$evo_simple doit etre une data.frame.")
   }
-  
-  
-  #traitement si stabilité et stableras
-  if((stableras==1) & (g<seuil$fort)&(g>seuil$faible)){
-    y = z
-    } else {
-    #on commence par le cas de la stabilité
-      if((g<seuil$fort)&(g>seuil$faible)){
-        y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
-                   paste(z,"\u00e0",a),
-                   paste(z,"\u00e0",b))
-        #on poursuit sipas stabilité (le cas général)
-        } else {
-          y = ifelse((g<=seuil$fort)&(g>seuil$faible)&g<0,
-                     paste(z,a),
-                     paste(z,b))
-          }
-    }
-  return(y)
+
+  cols_attendues <- c("seuil", "verbe_sing", "verbe_plur")
+  if (!all(cols_attendues %in% names(tab))) {
+    stop("serad$evo_simple doit contenir : seuil, verbe_sing, verbe_plur.")
+  }
+
+  i <- which(g > tab$seuil)[1]
+  if (is.na(i)) i <- nrow(tab)
+
+  verbe <- if (sing) as.character(tab$verbe_sing[i]) else as.character(tab$verbe_plur[i])
+
+  est_stable <- verbe %in% c("est stable", "sont stables")
+
+  format_fun <- if (evolution == "pourcents") format_g else format_pts
+
+  val <- if (g < 0 && est_stable) {
+    format_fun(g, signe = TRUE)
+  } else {
+    format_fun(g, signe = FALSE)
+  }
+
+  if (est_stable && stable_sans_valeur) {
+    return(verbe)
+  }
+
+  if (est_stable) {
+    return(paste(verbe, "\u00e0", val))
+  }
+
+  paste(verbe, val)
 }
-
-
-#quelques rappels
-#stringi::stri_escape_unicode("é")
-#\\u00e9
-#stringi::stri_escape_unicode("è")
-#\\u00e8
-#stringi::stri_escape_unicode("à")
-#\\u00e0"
-
-
-# z = dplyr::case_when(g>10-0.05~ifelse(sing,"bondit de","bondissent de"),
-#                      g>4-0.05~ifelse(sing,"s'accroit de","s'acroissent de"),
-#                      g>1-0.05~ifelse(sing,"est en hausse de","sont en hausse de"),
-#                      g>0.3-0.05~ifelse(sing,"augmente de","augmentent de"),
-#                      g>0.1-0.05~ifelse(sing,"s'accroit tr\u00e8s l\u00e9g\u00e8rement de","s'acroissent tr\u00e8s l\u00e9g\u00e8rement de"),
-#                      g>(-0.1-0.05)~ifelse(sing,"est stable \u00e0","sont stables \u00e0"),
-#                      g>(-0.3-0.05)~ifelse(sing,"diminue l\u00e9g\u00e8rement de","diminuent l\u00e9g\u00e8rement de"),
-#                      g>(-1-0.05)~ifelse(sing,"recule l\u00e9g\u00e8rement de","reculent l\u00e9g\u00e8rement de"),
-#                      g>(-4-0.05)~ifelse(sing,"baisse de","baissent de"),
-#                      g>(-20-0.05)~ifelse(sing,"recule de","reculent de"),
-#                      g<=(-20-0.05)~ifelse(sing,"chute de","chutent de"))
-# return(paste(z,format_g(g,signe=0)))

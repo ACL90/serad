@@ -2,37 +2,40 @@
 % Please edit documentation in R/format_g.R
 \name{format_g}
 \alias{format_g}
-\title{Formatage Dares des variations, exprimées en pourcentage ('g')}
+\title{Formatage des variations en pourcentage}
 \usage{
-format_g(y, signe = 1, detail)
+format_g(y, signe = TRUE, detail = getOption("serad")$arrondi_pourcent)
 }
 \arguments{
-\item{y}{La variation à formater.}
+\item{y}{La variation a formater.}
 
-\item{signe}{1 si on veut le signe, 0 sinon. Par défaut signe = 1.}
+\item{signe}{Indicateur logique : TRUE pour afficher le signe,
+FALSE pour le retirer (par defaut : TRUE).}
 
-\item{detail}{Combien de chiffre après la virgule. Par défaut 1.}
+\item{detail}{Nombre de chiffres apres la virgule.
+Par defaut, on utilise getOption("serad")$arrondi_pourcent.}
 }
 \value{
-La variation mise en forme.
+Une chaine de caracteres correspondant a la variation formatee
+(ex. "+5,4 \%", "-5,4 \%").
 }
 \description{
-signe = 0 permet de retirer le signe, que ce soit un + ou un - (par exemple pour dire: diminue de 5 \\%).
+Formate une variation exprimee en pourcentage selon les regles
+d'arrondi et d'affichage du package.
 }
 \details{
-Le symbole 'moins' n'est pas correctement rendu en Word lorsque utilisé avec cat. (on obtient le tiret du milieu)
-
-Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
+Le symbole "moins" peut etre personnalise via
+getOption("serad")$moins.
 }
 \examples{
-format_g(5.3654,signe =0)  # "5,4 \%"
-format_g(5.3654,1)  # "+5,4 \%"
-format_g(-5.3654,0) # "5,4 \%"
-format_g(-5.3654,1) # "−5,4 \%"
-format_g(-5.3654)   # "−5,4 \%"
-format_g(-5.3654,detail = 2)   # "−5,37 \%"
-format_g(0.35)      # "+0.4 \%"
+format_g(5.3654, signe = FALSE)  # "5,4 \%"
+format_g(5.3654)                 # "+5,4 \%"
+format_g(-5.3654, FALSE)         # "5,4 \%"
+format_g(-5.3654)                # "-5,4 \%"
+format_g(-5.3654, detail = 2)    # "-5,37 \%"
+format_g(0.35)                   # "+0,4 \%"
+
 }
 \seealso{
-g
+\code{\link{g}}, \code{\link{arrondi_tot}}
 }

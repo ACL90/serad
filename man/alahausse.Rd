@@ -2,29 +2,32 @@
 % Please edit documentation in R/comparaison.R
 \name{alahausse}
 \alias{alahausse}
-\title{à la hausse //  à la baisse // inchangé}
+\title{Evolution a la hausse, a la baisse ou inchangee}
 \usage{
 alahausse(x1, x2, seuil = 0.1)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Niveau le plus recent.}
 
-\item{x2}{Le niveau le plus ancien}
+\item{x2}{Niveau le plus ancien.}
 
-\item{seuil}{La limite pour l'égalite (par défaut 0.1, c'est-à-dire 0.1\%)}
+\item{seuil}{Seuil d'egalite en valeur absolue.
+Par defaut : 0.1 (soit 0.1 \%).}
 }
 \value{
-à la hausse // inchangé // à la baisse
+Une chaine de caracteres : "a la hausse", "a la baisse"
+ou "inchange".
 }
 \description{
-à la hausse //  à la baisse // inchangé
+Indique si \code{x1} evolue a la hausse, a la baisse ou reste
+inchange par rapport a \code{x2}.
 }
 \examples{
-alahausse(1.004,1)   # à la hausse
-alahausse(0.996,1)   # à la baisse
-alahausse(1,1.0004)  # inchangé
+alahausse(1.004, 1)    # "à la hausse"
+alahausse(0.996, 1)    # "à la baisse"
+alahausse(1, 1.0004)   # "inchangé"
 
 }
 \seealso{
-comparaison
+\code{\link{comparaison}}
 }

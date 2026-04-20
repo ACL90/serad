@@ -1,39 +1,47 @@
-#' Calcul d'une variation
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
+#' Calcul d'une variation relative
 #'
-#' @seealso format_g
+#' Calcule la variation relative entre \code{x1} et \code{x2},
+#' exprimee en pourcentage.
 #'
-#' @return La variation, exprimée en pourcentage (si x1=2.x1, cela retourne 100).
+#' @param x1 Niveau le plus recent.
+#' @param x2 Niveau le plus ancien.
+#' @param eps Valeur utilisee a la place de \code{x2} lorsque
+#'   \code{x2 = 0}, afin d'eviter une division par zero.
+#'   Par defaut : \code{1e-8}.
+#'
+#' @return
+#' Une valeur numerique correspondant a la variation en pourcentage
+#' (par exemple, si x1 = 2 * x2, la fonction retourne 100).
+#'
+#' @seealso \code{\link{format_g}}
+#'
+#' @details
+#' Si \code{x2 = 0}, la valeur epsilon definie par
+#' getOption("serad")$eps est utilisee afin d'eviter une division
+#' par zero. Un message d'avertissement est emis dans ce cas.
+#'
+#' Il est possible de modifier cette valeur :
+#'
+#' \code{
+#' serad0 <- getOption("serad")
+#' serad0$eps <- 0
+#' options(serad = serad0)
+#' }
 #'
 #' @examples
-#' g(2,1)  #100
-#' g(2,0)  #2e+10 et message d'avis
-#'
-#' @details Dans le cas improbable où x2 = 0, on considère qu'il vaut 0.00000001.
-#' C'est une valeur paramétrable avec eps. L'idée est de toujours sortir quelque chose.
-#' Un message d'avis apparait dans la console.
-#' Pour un utilisateur avancé, il est possible de changer l'option par défaut de eps:
-#' \code{library("serad")}\cr
-#' \code{serad0 = getOption("serad")}\cr
-#' \code{serad0$eps = 0 }\cr
-#' \code{options(serad = serad0)}
+#' g(2, 1)  # 100
+#' g(2, 0)  # valeur tres elevee et avertissement
 #'
 #' @export
-g = function(x1,x2){
+g <- function(x1, x2, eps = 1e-8) {
 
-  serad0 = getOption("serad")
-  eps = serad0$eps #eps Gestion du cas du denominateur nul
-  if(any(x2==0)){
-    #ajout d un warning
+  zero_denom <- (x2 == 0)
+
+  if (any(zero_denom, na.rm = TRUE)) {
     warning("division par 0 dans serad::g()")
   }
-  x2bis = x2 + (x2==0)*eps
-  return(100*(x1/x2bis-1))
+
+  x2_adj <- ifelse(zero_denom, eps, x2)
+
+  100 * (x1 / x2_adj - 1)
 }
-
-#Rappel
-#stringi::stri_escape_unicode("à")  #\\u00e0
-#stringi::stri_escape_unicode("ù") #\\u00f9
-
-#usethis::use_test()

@@ -2,33 +2,33 @@
 % Please edit documentation in R/format_delta.R
 \name{format_delta}
 \alias{format_delta}
-\title{Formatage Dares des variations (exprimées en nombre, avec signe)}
+\title{Formatage des variations en niveau}
 \usage{
-format_delta(y, signe = 1, detail)
+format_delta(y, signe = TRUE, detail = getOption("serad")$arrondi_niv)
 }
 \arguments{
-\item{y}{La différence à formater.}
+\item{y}{La difference a formater.}
 
-\item{signe}{1 si on veut le signe, 0 sinon. Par défaut signe = 1.}
+\item{signe}{Indicateur logique : TRUE pour afficher le signe,
+FALSE sinon (par defaut : TRUE).}
 
-\item{detail}{Par défaut -2 pour arrondir à la centaine.}
+\item{detail}{Precision d'arrondi. Par defaut, on utilise
+getOption("serad")$arrondi_niv.}
 }
 \value{
-Le niveau formaté.
+Une chaine de caracteres correspondant a la variation formatee.
 }
 \description{
-Formatage Dares des variations (exprimées en nombre, avec signe)
-}
-\details{
-Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_niv
+Formate une difference numerique selon les regles d'arrondi
+et d'affichage utilisees dans le package.
 }
 \examples{
-format_delta(365484)       #+365 500
-format_delta(365484,0)     #365 500
-format_delta(-365484)      #−365 500
-format_delta(-365484,0,-1) #365 480
+format_delta(365484)           # "+365 500"
+format_delta(365484, FALSE)    # "365 500"
+format_delta(-365484)          # "-365 500"
+format_delta(-365484, FALSE)   # "365 500"
 
 }
 \seealso{
-arrondi_tot
+\code{\link{arrondi_tot}}, \code{\link{format_niv}}
 }

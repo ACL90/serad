@@ -2,41 +2,49 @@
 % Please edit documentation in R/format_pts.R
 \name{format_pts}
 \alias{format_pts}
-\title{Formatage des variations, exprimées en points}
+\title{Formatage des variations en points}
 \usage{
-format_pts(y, signe = 1, detail, abrev = 0)
+format_pts(
+  y,
+  signe = TRUE,
+  detail = getOption("serad")$arrondi_pourcent,
+  abrev = FALSE
+)
 }
 \arguments{
-\item{y}{La variation à formater.}
+\item{y}{La variation a formater.}
 
-\item{signe}{1 si on veut le signe, 0 sinon. Par défaut signe = 1.}
+\item{signe}{Indicateur logique : TRUE pour afficher le signe,
+FALSE pour le retirer (par defaut : TRUE).}
 
-\item{detail}{Combien de chiffre après la virgule. Par défaut 1.}
+\item{detail}{Nombre de chiffres apres la virgule.
+Par defaut, on utilise getOption("serad")$arrondi_pourcent.}
 
-\item{abrev}{1 si on préfère l'abréviation. Par défaut abrev = 0.}
+\item{abrev}{Indicateur logique : TRUE pour utiliser l'abreviation
+("pt"/"pts"), FALSE pour afficher "point(s)" (par defaut : FALSE).}
 }
 \value{
-La variation mise en forme.
+Une chaine de caracteres correspondant a la variation formatee
+(ex. "+5,4 points", "+5,4 pts").
 }
 \description{
-signe = 0 permet de retirer le signe, que ce soit un + ou un - (par exemple pour dire: diminue de 5 points).
+Formate une variation exprimee en points selon les regles
+d'arrondi et d'affichage du package.
 }
 \details{
-Le symbole 'moins' n'est pas correctement rendu en Word lorsque utilisé avec cat. (on obtient le tiret du milieu)
-
-Pour changer le comportement par défaut d'arrondi, modifier getOption("serad")$arrondi_pourcent
+Le symbole "moins" peut etre personnalise via
+getOption("serad")$moins.
 }
 \examples{
-format_pts(5.3654,signe =0)  # "5,4 points"
-format_pts(1.3654,signe =0)  # "1,4 point"
-format_pts(5.3654,abrev = 1) # "+5,4 pts"
-format_pts(5.3654,1)  # "+5,4 points"
-format_pts(-5.3654,0) # "5,4 points"
-format_pts(-5.3654,1) # "−5,4 points"
-format_pts(-5.3654)   # "−5,4 points"
-format_pts(-5.3654,detail = 2)   # "−5,37 points"
-format_pts(0.35)      # "+0.4 point"
+format_pts(5.3654, signe = FALSE)   # "5,4 points"
+format_pts(1.3654, signe = FALSE)   # "1,4 point"
+format_pts(5.3654, abrev = TRUE)    # "+5,4 pts"
+format_pts(-5.3654, FALSE)          # "5,4 points"
+format_pts(-5.3654)                 # "-5,4 points"
+format_pts(-5.3654, detail = 2)     # "-5,37 points"
+format_pts(0.35)                    # "+0,4 point"
+
 }
 \seealso{
-format_g
+\code{\link{format_g}}
 }

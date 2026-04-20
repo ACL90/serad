@@ -2,23 +2,27 @@
 % Please edit documentation in R/quelTrim.R
 \name{whichMois}
 \alias{whichMois}
-\title{pour récupérer le mois dans un format littéraire}
+\title{Recupere le numero du mois a partir d'un texte}
 \usage{
 whichMois(mois)
 }
 \arguments{
-\item{mois}{Le mois en lettres}
+\item{mois}{Chaine de caracteres contenant un mois
+(ex. "En Juil 98").}
 }
 \value{
-1..12
+Un entier entre 1 et 12 si un mois est detecte,
+0 sinon. NA si l'entree est NA.
 }
 \description{
-pour récupérer le mois dans un format littéraire
+Extrait le numero du mois (1 a 12) a partir
+d'une chaine de caracteres contenant un mois
+en format abrege ou litteraire.
 }
 \examples{
-whichMois("En Juil 98")                  #7
+whichMois("En Juil 98")
 
 }
 \seealso{
-quelMois
+\code{\link{quelMois}}
 }

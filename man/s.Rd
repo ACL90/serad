@@ -2,35 +2,38 @@
 % Please edit documentation in R/s.R
 \name{s}
 \alias{s}
-\title{Met au pluriel si la valeur absolue du nombre est supérieure ou égale a 2.}
+\title{Met au pluriel selon la valeur numerique}
 \usage{
 s(a, sing = "", plur = "s", seuil = 2)
 }
 \arguments{
-\item{a}{Le nombre}
+\item{a}{Valeur numerique.}
 
-\item{sing}{Le mot à indiquer au singulier, rien par défaut.}
+\item{sing}{Forme au singulier. Par defaut : chaine vide.}
 
-\item{plur}{Le mot à indiquer au pluriel, -s par défaut (d'ou le nom de la fonction)}
+\item{plur}{Forme au pluriel. Par defaut : "s".}
 
-\item{seuil}{Pour gérer un arrondi à 2 depuis l'inférieur.}
+\item{seuil}{Seuil a partir duquel la forme plurielle
+est utilisee (par defaut : 2).}
 }
 \value{
-Le mot bien accordé ; par défault '-s ou rien. TEST
+Une chaine de caracteres correspondant a la forme
+correctement accordee. NA si l'entree est NA.
 }
 \description{
-Met au pluriel si la valeur absolue du nombre est supérieure ou égale a 2.
+Retourne la forme singuliere ou plurielle
+selon la valeur absolue du nombre.
 }
 \examples{
-serad::s(-7.5)             #s
-serad::s(-2)               #s
-serad::s(1.4,"chat parle", "chats parlent") #chat parle
-serad::s(-2,"chat parle", "chats parlent")  #chats parlent
-serad::s(1.97)             #NA
-serad::s(arrondi_tot(1.97))    #s
-serad::s(1.97, seuil=1.95) #s
+serad::s(-7.5)
+serad::s(-2)
+serad::s(1.4, "chat parle", "chats parlent")
+serad::s(-2, "chat parle", "chats parlent")
+serad::s(1.97)
+serad::s(arrondi_tot(1.97))
+serad::s(1.97, seuil = 1.95)
 
 }
 \seealso{
-Le \href{https://www.dictionnaire-academie.fr/article/QDL057}{site de l'Académie française}
+\url{https://www.dictionnaire-academie.fr/article/QDL057}
 }

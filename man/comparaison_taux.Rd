@@ -2,59 +2,57 @@
 % Please edit documentation in R/comparaison_taux.R
 \name{comparaison_taux}
 \alias{comparaison_taux}
-\title{comparaison_taux : fonction générique basée sur la variation}
+\title{Comparaison d'une variation a un seuil}
 \usage{
 comparaison_taux(
   g,
-  hausse0,
-  egalite0,
-  baisse0,
+  hausse_defaut,
+  egalite_defaut,
+  baisse_defaut,
   seuil = 0.1,
-  param = 0,
-  hausse1 = hausse0,
-  egalite1 = egalite0,
-  baisse1 = baisse0
+  alt = 0,
+  hausse_alt = hausse_defaut,
+  egalite_alt = egalite_defaut,
+  baisse_alt = baisse_defaut
 )
 }
 \arguments{
-\item{g}{La variation, exprimée en pourcentage (0.1 signifie 0.1\%)}
+\item{g}{Variation exprimee en pourcentage
+(5 signifie 5 \%, 0.1 signifie 0.1 \%).}
 
-\item{hausse0}{Mot si hausse}
+\item{hausse_defaut}{Mot si hausse (forme par defaut).}
 
-\item{egalite0}{Mot si egalite}
+\item{egalite_defaut}{Mot si egalite (forme par defaut).}
 
-\item{baisse0}{Mot si baisse}
+\item{baisse_defaut}{Mot si baisse (forme par defaut).}
 
-\item{seuil}{La limite pour l'egalite (par defaut 0.1\%)}
+\item{seuil}{Limite pour l'egalite (0.1 par defaut).}
 
-\item{param}{Un parametre supplementaire égal à 0 ou 1 (par exemple pour singulier)}
+\item{alt}{Parametre supplementaire egal a 0 ou 1
+(par exemple pour distinguer singulier/pluriel).}
 
-\item{hausse1}{Formulation différente dépendant de param ; par défaut hausse0}
+\item{hausse_alt}{Formulation alternative si alt = 1.}
 
-\item{egalite1}{Formulation différente dépendant de param ; par défaut egalite0}
+\item{egalite_alt}{Formulation alternative si alt = 1.}
 
-\item{baisse1}{Formulation différente dépendant de param ; par défaut baisse0}
+\item{baisse_alt}{Formulation alternative si alt = 1.}
 }
 \value{
-Un mot
+Une chaine de caracteres correspondant a la modalite choisie.
 }
 \description{
-comparaison_taux : fonction générique basée sur la variation
+Comparaison d'une variation a un seuil
 }
 \details{
-Aussi fonction de base pour comparaison.R
+Fonction interne utilisee par \code{\link{comparaison}}.
 }
 \examples{
-comparaison_taux(5,"augmente","reste stable","diminue")             #augmente
-comparaison_taux(0.05,"augmente","reste stable","diminue")          #reste stable
-comparaison_taux(0.05,"augmente","reste stable","diminue",seuil=0)  #augmente
-comparaison_taux(0,"augmente","reste égal","diminue", seuil=0)      #augmente
-comparaison_taux(0,"as","bs","cs",seuil=0,param=1,hausse1="a",egalite1="b",baisse1="c")      #a
-comparaison_taux(0,"as","bs","cs",seuil=0,param=0,hausse1="a",egalite1="b",baisse1="c")      #as
-comparaison_taux(0,"as","bs","cs",seuil=0,hausse1="a",egalite1="b",baisse1="c") #as
-
+comparaison_taux(5,"augmente","reste stable","diminue")
+comparaison_taux(0.05,"augmente","reste stable","diminue")
+comparaison_taux(0,"as","bs","cs",seuil=0,alt=1,
+                 hausse_alt="a",egalite_alt="b",baisse_alt="c")
 
 }
 \seealso{
-comparaison
+\code{\link{comparaison}}
 }

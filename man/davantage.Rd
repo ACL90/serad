@@ -2,27 +2,27 @@
 % Please edit documentation in R/comparaison.R
 \name{davantage}
 \alias{davantage}
-\title{davantage ou moins}
+\title{Davantage ou moins}
 \usage{
 davantage(x1, x2)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Niveau le plus recent.}
 
-\item{x2}{Le niveau le plus ancien}
+\item{x2}{Niveau le plus ancien.}
 }
 \value{
-davantage ou moins
+Une chaine de caracteres : "davantage" ou "moins".
 }
 \description{
-davantage ou moins
+Indique si \code{x1} est davantage ou moins eleve que \code{x2}.
 }
 \examples{
-davantage(1.04,1)    # davantage
-davantage(1.04,1.04) # davantage
-davantage(0.96,1)    # moins
+davantage(1.04, 1)     # "davantage"
+davantage(1.04, 1.04)  # "davantage"
+davantage(0.96, 1)     # "moins"
 
 }
 \seealso{
-comparaison
+\code{\link{comparaison}}
 }

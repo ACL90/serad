@@ -2,23 +2,26 @@
 % Please edit documentation in R/comparaison.R
 \name{g_nom_simple}
 \alias{g_nom_simple}
-\title{Evolution décrite (simplement) de facon nominale, suivie d'une évolution}
+\title{Evolution nominale simple}
 \usage{
 g_nom_simple(x1, x2)
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Le niveau le plus recent.}
 
-\item{x2}{Le niveau le plus ancien}
+\item{x2}{Le niveau le plus ancien.}
 }
 \value{
-en hausse de//en baisse de + pourcentage
+Une chaine de caracteres de type
+"en hausse de" ou "en baisse de"
+suivie du pourcentage formate.
 }
 \description{
-Evolution décrite (simplement) de facon nominale, suivie d'une évolution
+Decrit l'evolution entre \code{x1} et \code{x2}
+sous forme nominale suivie du pourcentage correspondant.
 }
 \examples{
-g_nom_simple(3,1) # en hausse de 200,0 \%
-g_nom_simple(3,5) # en baisse de 40,0 \%
+g_nom_simple(3, 1)  # "en hausse de 200,0 \%"
+g_nom_simple(3, 5)  # "en baisse de 40,0 \%"
 
 }

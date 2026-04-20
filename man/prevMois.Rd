@@ -2,32 +2,37 @@
 % Please edit documentation in R/quelTrim.R
 \name{prevMois}
 \alias{prevMois}
-\title{Fournit dynamiquement le mois précédent sous forme littéraire}
+\title{Fournit dynamiquement le mois precedent}
 \usage{
-prevMois(mois, annee, type = "Annee", majuscule = 0, k = 1)
+prevMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE, k = 1)
 }
 \arguments{
-\item{mois}{Le mois sous la forme d'un chiffre : 1..12}
+\item{mois}{Mois sous forme numerique : 1 a 12.}
 
-\item{annee}{Un nombre positif en 4 chiffres}
+\item{annee}{Annee sur 4 chiffres.}
 
-\item{type}{Par défaut: "Annee" (pour décembre XXXX). Sinon: décembre.}
+\item{type}{"Annee" (par defaut, ex. "decembre 2023")
+ou "autres" (ex. "decembre").}
 
-\item{majuscule}{Par défaut 0. 1 pour avoir "Décembre" plutôt que "décembre"}
+\item{majuscule}{Indicateur logique : TRUE pour une majuscule
+initiale (ex. "Decembre"), FALSE sinon.}
 
-\item{k}{Par défaut 1 pour le mois précédent. Un nombre entier relatif.}
+\item{k}{Decalage en nombre de mois.
+Par defaut : 1 (mois precedent).}
 }
 \value{
-décembre XXXX (ou une variante)
+Une chaine de caracteres correspondant au mois
+precedent (par exemple : "decembre 2022").
 }
 \description{
-Fournit dynamiquement le mois précédent sous forme littéraire
+Retourne la formulation du mois situe k periodes
+avant le mois indique.
 }
 \examples{
-prevMois(1,2023)                  #décembre 2022
-prevMois(12,2023,k=2)             #octobre  2023
+prevMois(1, 2023)         # "décembre 2022"
+prevMois(12, 2023, k = 2) # "octobre 2023"
 
 }
 \seealso{
-prevTrim nextMois quelMois
+\code{\link{prevTrim}}, \code{\link{nextMois}}, \code{\link{quelMois}}
 }

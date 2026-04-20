@@ -1,20 +1,26 @@
 Package: serad
-Title: Synthèse d'Écrits avec des Règles Automatisées et Dynamiques
-Version: 0.1.8
-Authors@R: 
-    c(person("Alexandre", "Cazenave-Lacroutz", , "alexandre.cazenave-lacroutz@travail.gouv.fr", 
-    role = c("aut","cre"),
-           comment = c(ORCID = "0000-0003-3488-6092")),
+Title: Synthese d'Ecrits avec des Regles Automatisees et Dynamiques
+Version: 0.2.0
+Authors@R: c(
+    person("Alexandre", "Cazenave-Lacroutz", email = "alexandre.cazenave-lacroutz@sante.gouv.fr",
+           role = c("aut"), comment = c(ORCID = "0000-0003-3488-6092")),
+    person("Jules", "Lejas", email = "jules.lejas@gmail.com",
+           role = c("cre")),
     person("Direction de l'animation de la recherche, des études et des statistiques (Dares)",
-    role = c("cph")))
-Description: Fournit des fonctions simples pour realiser des ecrits Rmarkdown dynamiques et respectant les regles d ecritures en usage.
+           role = c("cph")))
+Description: Fournit des fonctions simples pour realiser des ecrits R Markdown dynamiques respectant les regles d'ecriture en usage.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
+Imports:
+    utils
 Suggests: 
+    dplyr,
     knitr,
+    lubridate,
     rmarkdown,
+    tibble,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3

@@ -1,157 +1,153 @@
-#' Précise si le plus haut/niveau de la série et depuis quelle date
-#' @description
-#' Un dataframe en entrée.\cr
-#' Si pas indiqué, la date est considérée comme étant la première colonne.
-#' Pas besoin de la formater.\cr
-#' Si pas indiqué, on suppose les valeurs les plus anciennes en haut
-#' (temps croissant).\cr
-#' Si pas indiqué, la série d'intérêt, numérique, est considérée comme étant la
-#' seconde colonne.\cr
-#' Sauf si le paramètre diffère, la fonction ne ressort rien si pas la plus
-#' haute/basse valeur depuis au moins 3 périodes.
+#' Indique si le niveau est le plus haut ou le plus bas de la serie
 #'
-#' @details
-#' Fonction ecrite sur demande d'un utilisateur.
+#' Determine si la derniere valeur d'une serie correspond
+#' au plus haut ou au plus bas niveau observe depuis
+#' un certain nombre de periodes.
 #'
-#' @param df Le dataframe en entrée
-#' @param temps "croissant" par défaut si du passé vers le présent. "décroissant" sinon.
-#' @param voc_haut "C'est le plus haut niveau de la série depuis" par défaut
-#' @param voc_bas "C'est le plus bas niveau de la série depuis" par défaut
-#' @param vart La variable de temps du dataframe. La première valeur par défaut.
-#' @param vary La variable numérique du dataframe. La seconde valeur par défaut.
-#' @param nbperiode Le nombre de périodes dépassée à partir duquel c'est utile
-#' de sortir une valeur. 3 par défaut.
+#' @param df Data frame en entree.
+#' @param temps Ordre temporel : "croissant" (par defaut)
+#'   si les valeurs vont du passe vers le present,
+#'   "decroissant" sinon.
+#' @param voc_haut Formulation utilisee pour un plus haut niveau.
+#' @param voc_bas Formulation utilisee pour un plus bas niveau.
+#' @param vart Variable de temps du data frame.
+#'   Par defaut : premiere colonne.
+#' @param vary Variable numerique du data frame.
+#'   Par defaut : seconde colonne.
+#' @param nbperiode Nombre minimal de periodes depuis
+#'   lesquelles le niveau doit etre extremum pour
+#'   retourner une phrase (par defaut : 3).
 #'
-#' @return La phrase. Rien si rien de notable.
+#' @return
+#' Une chaine de caracteres indiquant le plus haut
+#' ou le plus bas niveau depuis une date donnee.
+#' Retourne une chaine vide si rien de notable.
 #'
 #' @examples
 #' col0 = c("Y1T1", "Y1T2", "Y1trim3", "Y1T4","Y2T1","Y2-T2")
-#' col1 = c( 12,     11,      7,         6,     9,     10)
-#' col2 = c( 12,     11,      7,         6,     9,     14)
-#' col3 = c( 12,     11,      3,         6,     9,     4)
-#' col4 = c( 12,     11,      7,         6,     9,     4)
-#' col5 = c( 12,     11,      7,         3,     9,     4)
-#' df1 = data.frame(col0,col1,col2,col3,col4,col5)
-#' plushautniveau(df1) #"C'est le plus haut niveau depuis Y1T2."
-#' #plushautniveau(df1,nbperiode = 5.000000000000001)  #erreur: nbperiode doit etre un nombre entier
-#' plushautniveau(df1,nbperiode = 5)  #NA
-#' plushautniveau(df1,vary="col2") #"C'est le plus haut niveau depuis le début de la série."
-#' plushautniveau(df1,vary="col3") #"C'est le plus bas niveau depuis Y1trim3."
-#' plushautniveau(df1,vary="col4") #"C'est le plus bas niveau depuis le début de la série."
+#' col1 = c(12, 11, 7, 6, 9, 10)
+#' col2 = c(12, 11, 7, 6, 9, 14)
+#' col3 = c(12, 11, 3, 6, 9, 4)
+#' col4 = c(12, 11, 7, 6, 9, 4)
+#' col5 = c(12, 11, 7, 3, 9, 4)
+#' df1 = data.frame(col0, col1, col2, col3, col4, col5)
+#'
+#' plushautniveau(df1)
+#' # "C'est le plus haut niveau depuis Y1T2."
+#'
+#' plushautniveau(df1, nbperiode = 5)
+#' # ""
+#'
+#' plushautniveau(df1, vary = "col2")
+#' # "C'est le plus haut niveau depuis le debut de la serie."
+#'
+#' plushautniveau(df1, vary = "col3")
+#' # "C'est le plus bas niveau depuis Y1trim3."
+#'
+#' plushautniveau(df1, vary = "col4")
+#' # "C'est le plus bas niveau depuis le debut de la serie."
 #'
 #' @export
-plushautniveau = function(df,
-                          temps = "croissant",
-                          voc_haut = "C'est le plus haut niveau depuis",
-                          voc_bas  = "C'est le plus bas niveau depuis",
-                          vart,
-                          vary,
-                          nbperiode = 3){
+plushautniveau <- function(df,
+                           temps = "croissant",
+                           voc_haut = "C'est le plus haut niveau depuis",
+                           voc_bas  = "C'est le plus bas niveau depuis",
+                           vart,
+                           vary,
+                           nbperiode = 3) {
 
-  df0 = df
+  # ---- Vérifications ----
+  if (!is.data.frame(df) || ncol(df) < 2)
+    stop("df doit \u00eatre un dataframe avec au moins 2 colonnes")
 
+  if (!temps %in% c("croissant", "decroissant"))
+    stop("temps doit \u00eatre 'croissant' ou 'decroissant'")
 
-  #verification: un dataframe, en entree
-  if(is.data.frame(df0)==FALSE){
-    stop("plushautniveau() requiert un dataframe en entr\u00e9e")
+  if (!is.numeric(nbperiode) || length(nbperiode) != 1 ||
+      nbperiode < 2 ||
+      abs(nbperiode - round(nbperiode)) > .Machine$double.eps) {
+    stop("nbperiode doit etre un entier >= 2")
   }
 
-  #verification : le datafame en entree a au moins 2 colonnes
-  if(ncol(df0)<=1){
-    stop("le dataframe dans plushautniveau() requiert au moins 2 colonnes")
+  if (!missing(vart) && !(vart %in% names(df)))
+    stop("vart doit \u00eatre un nom de variable du dataframe")
+
+  if (!missing(vary) && !(vary %in% names(df)))
+    stop("vary doit \u00eatre un nom de variable du dataframe")
+
+  # ---- Extraction des variables ----
+  xt <- if (missing(vart)) df[[1]] else df[[vart]]
+  xy <- if (missing(vary)) df[[2]] else df[[vary]]
+
+  if (!is.numeric(xy))
+    stop("La s\u00e9rie d'int\u00e9r\u00eat doit \u00eatre num\u00e9rique")
+
+  if (temps == "decroissant") {
+    xt <- rev(xt)
+    xy <- rev(xy)
   }
 
-  #verification que, si spécifié, temps comporte croissont ou decroissant
-  if(!missing(temps) && !(temps%in%c("croissant","decroissant"))){
-    stop("temps peut prendre 2 valeurs: croissant ou decroissant")
-  }
-
-  #definition de xt et xy ; on les ordonne par ordre croissant
-  #xy
-  if(missing(vary)){
-      xy = df0[, 2]
-    } else{
-      xy = df0[, vary]
-    }
-  #xt
-  if(missing(vart)){
-    xt = df0[, 1]
-  } else{
-    xt = df0[, vart]
-  }
-  #on re-ordonne l'echelle du temps si besoin
-  if(temps == "decroissant"){
-      xy = rev(xy)
-      xt = rev(xt)
-    }
-
-  #verification : xy est bien numerique
-    if(!all(is.numeric(xy))){
-      stop("La s\u00e9rie d interet (precis\u00e9e par vary ou 2eme colonne de df) doit
-           etre entierement num\u00e9rique.")
-    }
-
-  #verification : si rempli, nbperiode bien un nombre entier
-    if(!missing(nbperiode)&&!serad_is.wholenumber(nbperiode)){
-      stop("nbperiode doit etre un nombre entier")
-    }
-  #verification : nbperiode bien supérieur ou égal à 2
-    if(!missing(nbperiode)&&(nbperiode<2)){
-      stop("nbperiode doit etre superieur ou \u00e9gal a 2")
-    }
-
-  #verification : si rempli, temps est bien un string.
-    #Idem voc_haut, voc_bas, vart,vary
-    if(!missing(temps)&&!is.character(temps)){
-      stop("temps est une chaine de caract\u00e8res : croissant ou decroissant")
-    }
-  if(!missing(voc_haut)&&!is.character(voc_haut)){
-    stop("voc_haut doit etre une chaine de caract\u00e8res")
-  }
-  if(!missing(voc_bas)&&!is.character(voc_bas)){
-    stop("voc_bas doit etre une chaine de caract\u00e8res")
-  }
-  if(!missing(vart)&&!(vart%in%colnames(df0))){
-    stop("vart doit etre un nom de colonne de df")
-  }
-  if(!missing(vary)&&!(vary%in%colnames(df0))){
-    stop("vary doit etre un nom de colonne de df")
-  }
-
-
-  #première variation : va-t-on viser le plus haut/plus bas
-  xy1 = xy[1:length(xy)-1] - rep(1, length(xy)-1) * xy[length(xy)]
-  d = xy1[length(xy1)]
-  xy1bis = xy1[1:length(xy1)]
-
-  y1bis = rev(d*xy1bis>=0)
-  occ = which.min(y1bis)
-
-  #nbperiode : sur un temps significatif
-  if(!all(y1bis) && occ<nbperiode) {
-    #paste("")
+  if (length(xy) < 2)
     return("")
+
+  last_val  <- utils::tail(xy, 1)
+  prev_vals <- utils::head(xy, -1)
+
+  if (all(is.na(prev_vals)))
+    return("")
+
+  # =========================
+  # CAS PLUS HAUT
+  # =========================
+  if (all(last_val >= utils::tail(prev_vals, nbperiode - 1))) {
+
+    idx_candidates <- which(prev_vals > last_val)
+
+    if (length(idx_candidates) == 0) {
+      idx <- 0
+    } else {
+      idx <- max(idx_candidates)
+    }
+
+    nb <- length(prev_vals) - idx
+
+    if (nb < nbperiode - 1)
+      return("")
+
+    if (idx == 0)
+      return(paste0(voc_haut, " le d\u00e9but de la s\u00e9rie."))
+    else
+      return(paste0(voc_haut, " ", xt[idx], "."))
+
   }
 
-  if(d<=0){ #si plus haut
-    if(all(y1bis)){
-      #paste(voc_haut,"depuis le d\u00e9but de la s\u00e9rie")
-      return(paste0(voc_haut," ","le d\u00e9but de la s\u00e9rie","."))
-    } else{
-      #paste(voc_haut,xt[length(xt)-occ])
-      return(paste0(voc_haut," ",xt[length(xt)-occ],"."))
-      }
-    }   else{  #d>0 si plus bas
-      if(all(y1bis)){
-        #paste(voc_bas,"depuis le d\u00e9but de la s\u00e9rie")
-        return(paste0(voc_bas," ","le d\u00e9but de la s\u00e9rie","."))
-        } else{
-          #paste(voc_bas,xt[length(xt)-occ])
-          return(paste0(voc_bas," ",xt[length(xt)-occ],"."))
-        }
-      }
+  # =========================
+  # CAS PLUS BAS
+  # =========================
+  if (all(last_val <= utils::tail(prev_vals, nbperiode - 1))) {
+
+    idx_candidates <- which(prev_vals < last_val)
+
+    if (length(idx_candidates) == 0) {
+      idx <- 0
+    } else {
+      idx <- max(idx_candidates)
+    }
+
+    nb <- length(prev_vals) - idx
+
+    if (nb < nbperiode - 1)
+      return("")
+
+    if (idx == 0)
+      return(paste0(voc_bas, " le d\u00e9but de la s\u00e9rie."))
+    else
+      return(paste0(voc_bas, " ", xt[idx], "."))
 
   }
+
+  return("")
+}
 
 
 #pendant la phase de test
@@ -164,9 +160,3 @@ plushautniveau = function(df,
 # xt = df0[, 1]
 
 #usethis::use_test()
-
-
-#voir ?is.integer, exemple a la fin
-serad_is.wholenumber =  function(x, tol = .Machine$double.eps)  {
-  return(abs(x - round(x)) < tol)
-}

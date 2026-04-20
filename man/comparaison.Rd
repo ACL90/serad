@@ -2,61 +2,60 @@
 % Please edit documentation in R/comparaison.R
 \name{comparaison}
 \alias{comparaison}
-\title{comparaison : fonction générique basée sur x1 et x2}
+\title{Comparaison qualitative entre deux niveaux}
 \usage{
 comparaison(
   x1,
   x2,
-  hausse0,
-  egalite0,
-  baisse0,
+  hausse_defaut,
+  egalite_defaut,
+  baisse_defaut,
   seuil = 0.1,
-  param = 0,
-  hausse1 = hausse0,
-  egalite1 = egalite0,
-  baisse1 = baisse0
+  alt = 0,
+  hausse_alt = hausse_defaut,
+  egalite_alt = egalite_defaut,
+  baisse_alt = baisse_defaut
 )
 }
 \arguments{
-\item{x1}{Le niveau le plus récent}
+\item{x1}{Niveau le plus recent.}
 
-\item{x2}{le niveau le plus ancien}
+\item{x2}{Niveau le plus ancien.}
 
-\item{hausse0}{Mot si hausse}
+\item{hausse_defaut}{Formulation en cas de hausse.}
 
-\item{egalite0}{Mot si egalite}
+\item{egalite_defaut}{Formulation en cas de stabilite.}
 
-\item{baisse0}{Mot si baisse}
+\item{baisse_defaut}{Formulation en cas de baisse.}
 
-\item{seuil}{La limite pour l'egalite (par defaut 0.1\%)}
+\item{seuil}{Seuil d'egalite en valeur absolue. Par defaut : 0.1.}
 
-\item{param}{Un parametre supplementaire égal à 0 ou 1 (par exemple pour singulier)}
+\item{alt}{Indicateur logique permettant d'utiliser
+une formulation alternative.}
 
-\item{hausse1}{Formulation différente si hausse, dépendant de param}
+\item{hausse_alt}{Formulation alternative en cas de hausse.}
 
-\item{egalite1}{Formulation différente si egalite, dépendant de param}
+\item{egalite_alt}{Formulation alternative en cas de stabilite.}
 
-\item{baisse1}{Formulation différente si baisse, dépendant de param}
+\item{baisse_alt}{Formulation alternative en cas de baisse.}
 }
 \value{
-Un mot.
+Une chaine de caracteres correspondant a la formulation retenue.
 }
 \description{
-comparaison : fonction générique basée sur x1 et x2
+Compare deux niveaux successifs et retourne une formulation
+selon l'evolution observee.
 }
 \details{
-Utilise comparaison_taux.R
+La comparaison repose sur le taux de variation calcule via \code{\link{g}}.
+Des cas particuliers sont traites lorsque \code{x2} est nul ou negatif.
 }
 \examples{
-comparaison(1.04,1,"augmente","reste stable","diminue")             #augmente
-comparaison(0.9991,1,"augmente","reste stable","diminue")           #reste stable
-comparaison(0.999,1,"augmente","reste stable","diminue")            #diminue
-comparaison(0.9991,1,"augmente","reste stable","diminue",seuil = 0) #diminue
-comparaison(1,1,"augmente","reste égal","diminue",seuil = 0)        #augmente
-comparaison(-3,1,"augmente","reste égal","diminue",seuil = 0)        #diminue
-comparaison(-3,-5,"augmente","reste égal","diminue",seuil = 1)       #augmente
+comparaison(1.04, 1, "augmente", "reste stable", "diminue")
+comparaison(0.9991, 1, "augmente", "reste stable", "diminue")
+comparaison(1, 1, "augmente", "reste egal", "diminue", seuil = 0)
 
 }
 \seealso{
-comparaison_taux alahausse audessus davantage depasse g_nom_simple
+\code{\link{comparaison_taux}}, \code{\link{g}}
 }

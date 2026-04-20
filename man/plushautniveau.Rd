@@ -2,7 +2,7 @@
 % Please edit documentation in R/plushautniveau.R
 \name{plushautniveau}
 \alias{plushautniveau}
-\title{Précise si le plus haut/niveau de la série et depuis quelle date}
+\title{Indique si le niveau est le plus haut ou le plus bas de la serie}
 \usage{
 plushautniveau(
   df,
@@ -15,51 +15,58 @@ plushautniveau(
 )
 }
 \arguments{
-\item{df}{Le dataframe en entrée}
+\item{df}{Data frame en entree.}
 
-\item{temps}{"croissant" par défaut si du passé vers le présent. "décroissant" sinon.}
+\item{temps}{Ordre temporel : "croissant" (par defaut)
+si les valeurs vont du passe vers le present,
+"decroissant" sinon.}
 
-\item{voc_haut}{"C'est le plus haut niveau de la série depuis" par défaut}
+\item{voc_haut}{Formulation utilisee pour un plus haut niveau.}
 
-\item{voc_bas}{"C'est le plus bas niveau de la série depuis" par défaut}
+\item{voc_bas}{Formulation utilisee pour un plus bas niveau.}
 
-\item{vart}{La variable de temps du dataframe. La première valeur par défaut.}
+\item{vart}{Variable de temps du data frame.
+Par defaut : premiere colonne.}
 
-\item{vary}{La variable numérique du dataframe. La seconde valeur par défaut.}
+\item{vary}{Variable numerique du data frame.
+Par defaut : seconde colonne.}
 
-\item{nbperiode}{Le nombre de périodes dépassée à partir duquel c'est utile
-de sortir une valeur. 3 par défaut.}
+\item{nbperiode}{Nombre minimal de periodes depuis
+lesquelles le niveau doit etre extremum pour
+retourner une phrase (par defaut : 3).}
 }
 \value{
-La phrase. Rien si rien de notable.
+Une chaine de caracteres indiquant le plus haut
+ou le plus bas niveau depuis une date donnee.
+Retourne une chaine vide si rien de notable.
 }
 \description{
-Un dataframe en entrée.\cr
-Si pas indiqué, la date est considérée comme étant la première colonne.
-Pas besoin de la formater.\cr
-Si pas indiqué, on suppose les valeurs les plus anciennes en haut
-(temps croissant).\cr
-Si pas indiqué, la série d'intérêt, numérique, est considérée comme étant la
-seconde colonne.\cr
-Sauf si le paramètre diffère, la fonction ne ressort rien si pas la plus
-haute/basse valeur depuis au moins 3 périodes.
-}
-\details{
-Fonction ecrite sur demande d'un utilisateur.
+Determine si la derniere valeur d'une serie correspond
+au plus haut ou au plus bas niveau observe depuis
+un certain nombre de periodes.
 }
 \examples{
 col0 = c("Y1T1", "Y1T2", "Y1trim3", "Y1T4","Y2T1","Y2-T2")
-col1 = c( 12,     11,      7,         6,     9,     10)
-col2 = c( 12,     11,      7,         6,     9,     14)
-col3 = c( 12,     11,      3,         6,     9,     4)
-col4 = c( 12,     11,      7,         6,     9,     4)
-col5 = c( 12,     11,      7,         3,     9,     4)
-df1 = data.frame(col0,col1,col2,col3,col4,col5)
-plushautniveau(df1) #"C'est le plus haut niveau depuis Y1T2."
-#plushautniveau(df1,nbperiode = 5.000000000000001)  #erreur: nbperiode doit etre un nombre entier
-plushautniveau(df1,nbperiode = 5)  #NA
-plushautniveau(df1,vary="col2") #"C'est le plus haut niveau depuis le début de la série."
-plushautniveau(df1,vary="col3") #"C'est le plus bas niveau depuis Y1trim3."
-plushautniveau(df1,vary="col4") #"C'est le plus bas niveau depuis le début de la série."
+col1 = c(12, 11, 7, 6, 9, 10)
+col2 = c(12, 11, 7, 6, 9, 14)
+col3 = c(12, 11, 3, 6, 9, 4)
+col4 = c(12, 11, 7, 6, 9, 4)
+col5 = c(12, 11, 7, 3, 9, 4)
+df1 = data.frame(col0, col1, col2, col3, col4, col5)
+
+plushautniveau(df1)
+# "C'est le plus haut niveau depuis Y1T2."
+
+plushautniveau(df1, nbperiode = 5)
+# ""
+
+plushautniveau(df1, vary = "col2")
+# "C'est le plus haut niveau depuis le debut de la serie."
+
+plushautniveau(df1, vary = "col3")
+# "C'est le plus bas niveau depuis Y1trim3."
+
+plushautniveau(df1, vary = "col4")
+# "C'est le plus bas niveau depuis le debut de la serie."
 
 }

@@ -1,58 +1,70 @@
-#' Evolution décrite de facon nominale, non suivie d'une évolution.
-#' @param g L'évolution, en pourcentage.
+#' Evolution nominale d'un taux
 #'
-#' @return L'évolution, par exemple: "une forte hausse".
+#' Decrit une evolution exprimee en pourcentage sous forme nominale
+#' (par exemple : "une forte hausse").
+#'
+#' @param g L'evolution en pourcentage.
+#' @param titre Indicateur logique : TRUE pour supprimer l'article
+#'   initial et mettre une majuscule, notamment en debut de titre.
+#'
+#' @return
+#' Une chaine de caracteres decrivant l'evolution
+#' (par exemple : "une forte hausse", "une stabilite").
+#'
+#' @details
+#' La fonction selectionne d'abord, dans la table
+#' \code{getOption("serad")$evo_simple}, la premiere ligne dont
+#' le seuil est inferieur strictement a \code{g}.
+#'
+#' La fonction renvoie alors la colonne \code{nom} correspondante.
+#' Si \code{titre = TRUE}, l'article initial est supprime et la
+#' premiere lettre restante est mise en majuscule.
 #'
 #' @examples
-#' g_nom_taux(4)       # une forte hausse
-#' g_nom_taux(1)       # une hausse
-#' g_nom_taux(0.4)     # une hausse modérée
-#' g_nom_taux(0.1)     # une légère hausse
-#' g_nom_taux(0)       # une stabilité
-#' g_nom_taux(-0.3)    # une légère baisse
-#' g_nom_taux(-1)      # une baisse modérée
-#' g_nom_taux(-4)      # une baisse
-#' g_nom_taux(-5)      # une forte baisse
+#' g_nom_taux(4)
+#' g_nom_taux(1)
+#' g_nom_taux(0.4)
+#' g_nom_taux(0.1)
+#' g_nom_taux(0)
+#' g_nom_taux(-0.3)
+#' g_nom_taux(-1)
+#' g_nom_taux(-4)
+#' g_nom_taux(-5)
 #'
-# @importFrom dplyr case_when
+#' @seealso \code{\link{g_verbe_taux}}
 #'
 #' @export
-g_nom_taux = function(g){
+g_nom_taux <- function(g, titre = FALSE) {
 
+  serad0 <- getOption("serad")
+  tab    <- serad0$evo_simple
 
-  serad0 = getOption("serad")
-  seuil = serad0$nomse
+  if (!is.data.frame(tab)) {
+    stop("serad$evo_simple doit etre une data.frame.")
+  }
 
-         # z = case_when(g>seuil$fortttt  ~serad0$nm$fortttt,
-         #               g>seuil$forttt   ~serad0$nm$forttt,
-         #               g>seuil$fortt    ~serad0$nm$fortt,
-         #               g>seuil$fort     ~serad0$nm$fort,
-         #               g>seuil$faible   ~serad0$nm$faible,
-         #               g>seuil$faiblee  ~serad0$nm$faiblee,
-         #               g>seuil$faibleee ~serad0$nm$faibleee,
-         #               g>seuil$faibleeee~serad0$nm$faibleeee,
-         #              g<=seuil$faibleeee~serad0$nm$faibleeeee)
+  cols_attendues <- c("seuil", "nom")
+  if (!all(cols_attendues %in% names(tab))) {
+    stop("serad$evo_simple doit contenir : seuil, nom.")
+  }
 
-         z =    ifelse(g>seuil$fortttt  ,serad0$nm$fortttt,
-                ifelse(g>seuil$forttt   ,serad0$nm$forttt,
-                ifelse(g>seuil$fortt    ,serad0$nm$fortt,
-                ifelse(g>seuil$fort     ,serad0$nm$fort,
-                ifelse(g>seuil$faible   ,serad0$nm$faible,
-                ifelse( g>seuil$faiblee ,serad0$nm$faiblee,
-                ifelse(g>seuil$faibleee ,serad0$nm$faibleee,
-                ifelse(g>seuil$faibleeee,serad0$nm$faibleeee,
-                                        serad0$nm$faibleeeee #g<=seuil$faibleeee~
-                       ))))))))
+  i <- which(g > tab$seuil)[1]
+  if (is.na(i)) i <- nrow(tab)
 
-  return(z)
+  res <- as.character(tab$nom[i])
+
+  if (titre) {
+    res <- sub(
+      "^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*",
+      "",
+      res
+    )
+
+    res <- paste0(
+      toupper(substr(res, 1, 1)),
+      substr(res, 2, nchar(res))
+    )
+  }
+
+  res
 }
-
-#usethis::use_test()
-
-#quelques rappels
-#stringi::stri_escape_unicode("?")
-#\\u00e9
-#stringi::stri_escape_unicode("?")
-#\\u00e8
-#stringi::stri_escape_unicode("?")
-#\\u00e0"

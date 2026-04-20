@@ -1,198 +1,255 @@
-#' comparaison : fonction générique basée sur x1 et x2
-#' @param x1 Le niveau le plus récent
-#' @param x2 le niveau le plus ancien
-#' @param hausse0 Mot si hausse
-#' @param egalite0 Mot si egalite
-#' @param baisse0 Mot si baisse
-#' @param seuil La limite pour l'egalite (par defaut 0.1%)
-#' @param param Un parametre supplementaire égal à 0 ou 1 (par exemple pour singulier)
-#' @param hausse1 Formulation différente si hausse, dépendant de param
-#' @param egalite1 Formulation différente si egalite, dépendant de param
-#' @param baisse1 Formulation différente si baisse, dépendant de param
+#' Comparaison qualitative entre deux niveaux
 #'
-#' @details Utilise comparaison_taux.R
+#' Compare deux niveaux successifs et retourne une formulation
+#' selon l'evolution observee.
 #'
-#' @seealso comparaison_taux alahausse audessus davantage depasse g_nom_simple
+#' @param x1 Niveau le plus recent.
+#' @param x2 Niveau le plus ancien.
+#' @param hausse_defaut Formulation en cas de hausse.
+#' @param egalite_defaut Formulation en cas de stabilite.
+#' @param baisse_defaut Formulation en cas de baisse.
+#' @param seuil Seuil d'egalite en valeur absolue. Par defaut : 0.1.
+#' @param alt Indicateur logique permettant d'utiliser
+#'   une formulation alternative.
+#' @param hausse_alt Formulation alternative en cas de hausse.
+#' @param egalite_alt Formulation alternative en cas de stabilite.
+#' @param baisse_alt Formulation alternative en cas de baisse.
 #'
-#' @return Un mot.
+#' @details
+#' La comparaison repose sur le taux de variation calcule via \code{\link{g}}.
+#' Des cas particuliers sont traites lorsque \code{x2} est nul ou negatif.
+#'
+#' @return
+#' Une chaine de caracteres correspondant a la formulation retenue.
+#'
+#' @seealso \code{\link{comparaison_taux}}, \code{\link{g}}
 #'
 #' @examples
-#' comparaison(1.04,1,"augmente","reste stable","diminue")             #augmente
-#' comparaison(0.9991,1,"augmente","reste stable","diminue")           #reste stable
-#' comparaison(0.999,1,"augmente","reste stable","diminue")            #diminue
-#' comparaison(0.9991,1,"augmente","reste stable","diminue",seuil = 0) #diminue
-#' comparaison(1,1,"augmente","reste égal","diminue",seuil = 0)        #augmente
-#' comparaison(-3,1,"augmente","reste égal","diminue",seuil = 0)        #diminue
-#' comparaison(-3,-5,"augmente","reste égal","diminue",seuil = 1)       #augmente
+#' comparaison(1.04, 1, "augmente", "reste stable", "diminue")
+#' comparaison(0.9991, 1, "augmente", "reste stable", "diminue")
+#' comparaison(1, 1, "augmente", "reste egal", "diminue", seuil = 0)
 #'
 #' @export
-comparaison  = function(x1,x2,hausse0,egalite0,baisse0,seuil=0.1,
-                        param=0,
-                        hausse1=hausse0,egalite1=egalite0,baisse1=baisse0){
+comparaison <- function(x1, x2,
+                        hausse_defaut,
+                        egalite_defaut,
+                        baisse_defaut,
+                        seuil = 0.1,
+                        alt = 0,
+                        hausse_alt  = hausse_defaut,
+                        egalite_alt = egalite_defaut,
+                        baisse_alt  = baisse_defaut) {
 
-  if(x2==0){  #cas limite : seuil passe en valeur absolue
-    if(x1>abs(seuil)){
-      a = ifelse(param==0,hausse0,hausse1)
-    }
-    else if(x1<(-abs(seuil))){
-      a = ifelse(param==0,egalite0,egalite1)
-    }
-    else {
-      a = ifelse(param==0,baisse0,baisse1)
-    }
-  }
-  else if(x2>0){
-    a = comparaison_taux(g(x1,x2),
-                         hausse0,egalite0,baisse0,
-                         seuil,param,
-                         hausse1,egalite1,baisse1)
-  }
-  else if(x2<0 & x1>0){
-    a = comparaison_taux(g(-x2,-x1),
-                         hausse0,egalite0,baisse0,
-                         seuil,param,
-                         hausse1,egalite1,baisse1)
-  }
-  else {  #cas facile où x2 < 0  < x1  : stable ou augmente ! La limite de la stabilité est arbitraire
-    if(x1-x2<=abs(seuil)){  #cas de la stabilité
-      a = ifelse(param==0,egalite0,egalite1)
-    }
-    else {  #cas de l'augmentation
-      a = ifelse(param==0,hausse0,hausse1)
+  # Choix des libelles selon alt
+  hausse  <- if (alt == 0) hausse_defaut  else hausse_alt
+  egalite <- if (alt == 0) egalite_defaut else egalite_alt
+  baisse  <- if (alt == 0) baisse_defaut  else baisse_alt
+
+  # ---- Cas 1 : x2 == 0 ----
+  if (x2 == 0) {
+
+    if (x1 > abs(seuil)) {
+      return(hausse)
+
+    } else if (x1 < -abs(seuil)) {
+      return(baisse)
+
+    } else {
+      return(egalite)
     }
   }
 
+  # ---- Cas 2 : x2 > 0 ----
+  if (x2 > 0) {
+    return(
+      comparaison_taux(
+        g(x1, x2),
+        hausse_defaut, egalite_defaut, baisse_defaut,
+        seuil, alt,
+        hausse_alt, egalite_alt, baisse_alt
+      )
+    )
+  }
 
-  return(a)
+  # ---- Cas 3 : x2 < 0 & x1 > 0 ----
+  if (x2 < 0 && x1 > 0) {
+    return(
+      comparaison_taux(
+        g(-x2, -x1),
+        hausse_defaut, egalite_defaut, baisse_defaut,
+        seuil, alt,
+        hausse_alt, egalite_alt, baisse_alt
+      )
+    )
+  }
 
-}
-#usethis::use_test()
-
-
-###################
-#audessus()
-#' au-dessus ou en dessous
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
-#'
-#' @seealso comparaison
-#'
-#' @return au-dessus // en dessous
-#'
-#' @examples
-#' audessus(1.04,1)    # au-dessus
-#' audessus(1.04,1.04) # au-dessus
-#' audessus(0.96,1)    # en dessous
-#'
-#' @export
-audessus = function(x1,x2){
-  return(comparaison(x1,x2,"au-dessus","au-dessus","en dessous",0))
-}
-
-###################
-#alahausse()
-#' à la hausse //  à la baisse // inchangé
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
-#' @param seuil La limite pour l'égalite (par défaut 0.1, c'est-à-dire 0.1%)
-#'
-#' @seealso comparaison
-#'
-#' @return à la hausse // inchangé // à la baisse
-#'
-#' @examples
-#' alahausse(1.004,1)   # à la hausse
-#' alahausse(0.996,1)   # à la baisse
-#' alahausse(1,1.0004)  # inchangé
-#'
-#' @export
-alahausse  = function(x1,x2,seuil=0.1){
-  return(comparaison(x1,x2,"\u00e0 la hausse","inchang\u00e9","\u00e0 la baisse",seuil))
-}
-#quelques rappels
-#stringi::stri_escape_unicode("?")
-#\\u00e9
-#stringi::stri_escape_unicode("?")
-#\\u00e8
-#stringi::stri_escape_unicode("?")
-#\\u00e0"
-
-
-
-###################
-#davantage()
-#' davantage ou moins
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
-#'
-#' @seealso comparaison
-#'
-#' @return davantage ou moins
-#'
-#' @examples
-#' davantage(1.04,1)    # davantage
-#' davantage(1.04,1.04) # davantage
-#' davantage(0.96,1)    # moins
-#'
-#' @export
-davantage = function(x1,x2){
-  return(comparaison(x1,x2,"davantage","davantage","moins",0))
+  # ---- Cas 4 : x2 < 0 & x1 <= 0 ----
+  if ((x1 - x2) <= abs(seuil)) {
+    return(egalite)
+  } else {
+    return(hausse)
+  }
 }
 
 
-###################
-#depasse()
-#' verbe pour exprimer le sens de l'évolution, pouvant gérer si le nom est singulier ou pluriel
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
-#' @param sing 0 si le nom est un pluriel, 1 si un singulier. Par défaut un pluriel.
+#' Position relative entre deux niveaux
 #'
-#' @seealso comparaison
+#' Indique si \code{x1} est au-dessus ou en dessous de \code{x2}.
 #'
-#' @return 'excéde//-nt' ou 'est//sont au niveau de' ou 'est//sont en dessous de'
+#' @param x1 Niveau le plus recent.
+#' @param x2 Niveau le plus ancien.
+#'
+#' @return
+#' Une chaine de caracteres : "au-dessus" ou "en dessous".
+#'
+#' @seealso \code{\link{comparaison}}
 #'
 #' @examples
-#' depasse(1.04,1)          # excédent
-#' depasse(1.04,1,sing=1)   # excéde
-#' depasse(0.96,1)          # sont en dessous de
-#' depasse(0.9991,1)        # sont au niveau de
+#' audessus(1.04, 1)     # "au-dessus"
+#' audessus(1.04, 1.04)  # "au-dessus"
+#' audessus(0.96, 1)     # "en dessous"
 #'
 #' @export
-depasse = function(x1,x2,sing=0){  #sing=1 pour singulier
-  return(comparaison(x1,x2,param=sing,
-                     hausse0="exc\u00e8dent",hausse1="exc\u00e8de",
-                     egalite0="sont au niveau de",egalite1="est au niveau de",
-                     baisse0="sont en dessous de",baisse1="est en dessous de"
-  )
+audessus <- function(x1, x2) {
+  comparaison(
+    x1, x2,
+    hausse_defaut  = "au-dessus",
+    egalite_defaut = "au-dessus",
+    baisse_defaut  = "en dessous",
+    seuil = 0
   )
 }
-#quelques rappels
-#stringi::stri_escape_unicode("é")
-#\\u00e9
-#stringi::stri_escape_unicode("è")
-#\\u00e8
-#stringi::stri_escape_unicode("à")
-#\\u00e0"
 
 
-###################
-#g_nom_simple()
-#' Evolution décrite (simplement) de facon nominale, suivie d'une évolution
-#' @param x1 Le niveau le plus récent
-#' @param x2 Le niveau le plus ancien
+#' Evolution a la hausse, a la baisse ou inchangee
 #'
-#' @return en hausse de//en baisse de + pourcentage
+#' Indique si \code{x1} evolue a la hausse, a la baisse ou reste
+#' inchange par rapport a \code{x2}.
+#'
+#' @param x1 Niveau le plus recent.
+#' @param x2 Niveau le plus ancien.
+#' @param seuil Seuil d'egalite en valeur absolue.
+#'   Par defaut : 0.1 (soit 0.1 %).
+#'
+#' @return
+#' Une chaine de caracteres : "a la hausse", "a la baisse"
+#' ou "inchange".
+#'
+#' @seealso \code{\link{comparaison}}
 #'
 #' @examples
-#' g_nom_simple(3,1) # en hausse de 200,0 %
-#' g_nom_simple(3,5) # en baisse de 40,0 %
+#' alahausse(1.004, 1)    # "à la hausse"
+#' alahausse(0.996, 1)    # "à la baisse"
+#' alahausse(1, 1.0004)   # "inchangé"
 #'
 #' @export
-g_nom_simple = function(x1,x2){
-  #    z = case_when(g(x1,x2)>=0~"en hausse de",
-  #                  g(x1,x2)<0~"en baisse de")
-  z = comparaison(x1,x2,"en hausse de","en hausse","en baisse de")
-  return(paste(z,format_g(g(x1,x2),signe=0)))
+alahausse <- function(x1, x2, seuil = 0.1) {
+  comparaison(
+    x1, x2,
+    hausse_defaut  = "\u00e0 la hausse",
+    egalite_defaut = "inchang\u00e9",
+    baisse_defaut  = "\u00e0 la baisse",
+    seuil    = seuil
+  )
+}
+
+#' Davantage ou moins
+#'
+#' Indique si \code{x1} est davantage ou moins eleve que \code{x2}.
+#'
+#' @param x1 Niveau le plus recent.
+#' @param x2 Niveau le plus ancien.
+#'
+#' @return
+#' Une chaine de caracteres : "davantage" ou "moins".
+#'
+#' @seealso \code{\link{comparaison}}
+#'
+#' @examples
+#' davantage(1.04, 1)     # "davantage"
+#' davantage(1.04, 1.04)  # "davantage"
+#' davantage(0.96, 1)     # "moins"
+#'
+#' @export
+davantage <- function(x1, x2) {
+  comparaison(
+    x1, x2,
+    hausse_defaut  = "davantage",
+    egalite_defaut = "davantage",
+    baisse_defaut  = "moins",
+    seuil = 0
+  )
+}
+
+#' Verbe pour exprimer le sens de l'evolution
+#'
+#' Indique si \code{x1} excede, est au niveau de ou est en dessous de
+#' \code{x2}, en tenant compte du nombre grammatical.
+#'
+#' @param x1 Le niveau le plus recent.
+#' @param x2 Le niveau le plus ancien.
+#' @param sing Indicateur logique : FALSE si le sujet est pluriel,
+#'   TRUE s'il est singulier (par defaut : pluriel).
+#'
+#' @return
+#' Une chaine de caracteres :
+#' "excedent"/"excede",
+#' "sont au niveau de"/"est au niveau de",
+#' ou "sont en dessous de"/"est en dessous de".
+#'
+#' @seealso \code{\link{comparaison}}
+#'
+#' @examples
+#' depasse(1.04, 1)               # "excèdent"
+#' depasse(1.04, 1, sing = TRUE)  # "excède"
+#' depasse(0.96, 1)               # "sont en dessous de"
+#' depasse(0.9991, 1)             # "sont au niveau de"
+#'
+#' @export
+depasse <- function(x1, x2, sing = FALSE) {
+  comparaison(
+    x1, x2,
+    hausse_defaut  = "exc\u00e8dent",
+    egalite_defaut = "sont au niveau de",
+    baisse_defaut  = "sont en dessous de",
+    alt = as.integer(sing),
+    hausse_alt  = "exc\u00e8de",
+    egalite_alt = "est au niveau de",
+    baisse_alt  = "est en dessous de"
+  )
+}
+
+
+#' Evolution nominale simple
+#'
+#' Decrit l'evolution entre \code{x1} et \code{x2}
+#' sous forme nominale suivie du pourcentage correspondant.
+#'
+#' @param x1 Le niveau le plus recent.
+#' @param x2 Le niveau le plus ancien.
+#'
+#' @return
+#' Une chaine de caracteres de type
+#' "en hausse de" ou "en baisse de"
+#' suivie du pourcentage formate.
+#'
+#' @examples
+#' g_nom_simple(3, 1)  # "en hausse de 200,0 %"
+#' g_nom_simple(3, 5)  # "en baisse de 40,0 %"
+#'
+#' @export
+g_nom_simple <- function(x1, x2) {
+
+  variation <- g(x1, x2)
+
+  z <- comparaison(
+    x1, x2,
+    hausse_defaut  = "en hausse de",
+    egalite_defaut = "en hausse",
+    baisse_defaut  = "en baisse de"
+  )
+
+  paste(z, format_g(variation, signe = 0))
 }
 
 
