@@ -17,9 +17,7 @@ RoxygenNote: 7.3.3
 Imports:
     utils
 Suggests: 
-    dplyr,
     knitr,
-    lubridate,
     rmarkdown,
     tibble,
     testthat (>= 3.0.0)

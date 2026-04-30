@@ -33,30 +33,28 @@ tps <- time(presidents)
 
 annee <- floor(tps)
 trimestre <- round((tps - annee) * 4) + 1
-
-# convertir trimestre en mois (début de trimestre)
 mois <- (trimestre - 1) * 3 + 1
 
 df_pres <- data.frame(
   date = as.Date(paste(annee, mois, 1, sep = "-")),
-  taux = as.numeric(presidents)) %>% 
-  mutate(
-  delta = taux - lag(taux),
-  taux_evolution = round(g(taux, lag(taux)))
-) %>% 
-  tail(24)
+  taux = as.numeric(presidents)
+)
+
+taux_prec <- c(NA, head(df_pres$taux, -1))
+
+df_pres$delta <- df_pres$taux - taux_prec
+df_pres$taux_evolution <- round(g(df_pres$taux, taux_prec))
+
+df_pres <- tail(df_pres, 24)
 
 last_row <- nrow(df_pres)
 taux_actuel <- df_pres$taux[last_row]
 
-# 1 an
 taux_1_an <- df_pres$taux[last_row - 4]
 evo_1_an_pts <- taux_actuel - taux_1_an
 evo_1_an_pct <- g(taux_actuel, taux_1_an)
 
-# Mandat
 taux_debut <- df_pres$taux[1]
-
 evo_mandat_pts <- taux_actuel - taux_debut
 
 moy_mandat <- mean(df_pres$taux, na.rm = TRUE)
@@ -80,7 +78,6 @@ Le dataset `UKDriverDeaths` recense le nombre mensuel de conducteurs tués dans 
 ```{r ukdriver_data}
 data(UKDriverDeaths)
 
-# Construction table mensuelle
 start_year  <- start(UKDriverDeaths)[1]
 start_month <- start(UKDriverDeaths)[2]
 
@@ -88,36 +85,48 @@ n <- length(UKDriverDeaths)
 
 dates <- seq(
   from = as.Date(paste0(start_year, "-", start_month, "-01")),
-  by   = "month",
+  by = "month",
   length.out = n
 )
 
 df_driverdeath <- data.frame(
-  date   = dates,
+  date = dates,
   deaths = as.numeric(UKDriverDeaths)
-) %>%
-  mutate(
-    delta = deaths - lag(deaths),
-    taux_evolution = round(g(deaths, lag(deaths)), 1)
-  )
+)
 
-# Construction table annuelle
-df_annuel_driverdeath <- df_driverdeath %>%
-  mutate(annee = lubridate::year(date)) %>%
-  group_by(annee) %>%
-  summarise(
-    deaths_moy_annuelle = round(mean(deaths, na.rm = TRUE), 1),
-    deaths_total = sum(deaths, na.rm = TRUE)
-  ) %>%
-  mutate(
-    delta_annuel = deaths_moy_annuelle - lag(deaths_moy_annuelle),
-    taux_evolution_annuel = round(
-      g(deaths_moy_annuelle, lag(deaths_moy_annuelle)), 1
-    )
+deaths_prec <- c(NA, head(df_driverdeath$deaths, -1))
+
+df_driverdeath$delta <- df_driverdeath$deaths - deaths_prec
+df_driverdeath$taux_evolution <- round(g(df_driverdeath$deaths, deaths_prec), 1)
+
+df_driverdeath$annee <- as.integer(format(df_driverdeath$date, "%Y"))
+
+df_annuel_driverdeath <- aggregate(
+  deaths ~ annee,
+  data = df_driverdeath,
+  FUN = function(x) c(
+    deaths_moy_annuelle = round(mean(x, na.rm = TRUE), 1),
+    deaths_total = sum(x, na.rm = TRUE)
   )
+)
+
+df_annuel_driverdeath <- data.frame(
+  annee = df_annuel_driverdeath$annee,
+  deaths_moy_annuelle = df_annuel_driverdeath$deaths[, "deaths_moy_annuelle"],
+  deaths_total = df_annuel_driverdeath$deaths[, "deaths_total"]
+)
+
+deaths_moy_prec <- c(NA, head(df_annuel_driverdeath$deaths_moy_annuelle, -1))
+
+df_annuel_driverdeath$delta_annuel <-
+  df_annuel_driverdeath$deaths_moy_annuelle - deaths_moy_prec
+
+df_annuel_driverdeath$taux_evolution_annuel <- round(
+  g(df_annuel_driverdeath$deaths_moy_annuelle, deaths_moy_prec),
+  1
+)
 
 last_row <- nrow(df_annuel_driverdeath)
-
 ```
 
 En `r df_annuel_driverdeath[[1]][last_row]`, le nombre de décès liés aux accidents de la route `r gETa_verbe(df_annuel_driverdeath[["deaths_total"]][last_row], df_annuel_driverdeath[["deaths_total"]][last_row - 1], df_annuel_driverdeath[["deaths_total"]][last_row - 2])` avec `r format_niv(df_annuel_driverdeath[[4]][last_row], detail = 1)` décès en plus par rapport à `r df_annuel_driverdeath[[1]][last_row - 1]`, soit `r format_g(df_annuel_driverdeath[["taux_evolution_annuel"]][last_row])`.
