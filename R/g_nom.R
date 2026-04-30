@@ -1,33 +1,45 @@
-#' Evolution nominale non suivie d'une valeur
+#' Évolution nominale non suivie d'une valeur
 #'
-#' Decrit une evolution sous forme nominale a partir de deux niveaux,
+#' @description
+#' Décrit une évolution sous forme nominale à partir de deux niveaux,
 #' sans ajouter la valeur de variation.
 #'
-#' @param x1 Le niveau le plus recent.
+#' @param x1 Le niveau le plus récent.
 #' @param x2 Le niveau le plus ancien.
-#' @param evolution Type d'evolution :
-#'   "pourcents" (variation relative, par defaut) ou "points".
+#' @param evolution Type d'évolution :
+#'   `"pourcents"` (variation relative, par défaut) ou `"points"`.
 #' @param titre Indicateur logique : TRUE pour supprimer l'article
-#'   initial et mettre une majuscule, notamment en debut de titre.
+#'   initial et mettre une majuscule, notamment en début de titre.
+#' @param lang Langue de sortie : "fr" ou "en".
 #'
 #' @return
-#' Une chaine de caracteres correspondant a la formulation nominale
+#' Une chaîne de caractères correspondant à la formulation nominale
 #' retenue (par exemple : "une forte hausse").
 #'
 #' @details
-#' La fonction calcule d'abord une evolution a partir de \code{x1}
-#' et \code{x2} :
+#' La fonction calcule d'abord une évolution à partir de `x1`
+#' et `x2` :
 #' \itemize{
-#'   \item si \code{evolution = "pourcents"}, elle utilise
+#'   \item si `evolution = "pourcents"`, elle utilise
 #'   \code{\link{g}} ;
-#'   \item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
+#'   \item si `evolution = "points"`, elle calcule `x1 - x2`.
 #' }
 #'
-#' La valeur obtenue est ensuite transmise a \code{\link{g_nom_taux}},
-#' qui determine la formulation a partir de la table
-#' \code{getOption("serad")$evo_simple}.
+#' La valeur obtenue est ensuite transmise à \code{\link{g_nom_taux}},
+#' qui détermine la formulation à partir de la table
+#' `getOption("serad")$evo_simple`.
 #'
-#' @seealso \code{\link{g_nom_taux}}, \code{\link{g}}
+#' @section Personnalisation:
+#' Les formulations utilisées par cette fonction proviennent de la table
+#' `getOption("serad")$evo_simple`.
+#'
+#' Pour modifier les seuils ou les libellés, voir
+#' \code{\link{init_serad}}.
+#'
+#' @seealso
+#' \code{\link{g_nom_taux}},
+#' \code{\link{g}},
+#' \code{\link{init_serad}}
 #'
 #' @examples
 #' g_nom(1.04, 1)
@@ -42,14 +54,20 @@
 #' @export
 g_nom <- function(x1, x2,
                   evolution = c("pourcents", "points"),
-                  titre = FALSE) {
+                  titre = FALSE,
+                  lang = get_serad_language()) {
 
   evolution <- match.arg(evolution)
 
-  valeur <- switch(evolution,
-                   pourcents = serad::g(x1, x2),
-                   points    = x1 - x2
+  valeur <- switch(
+    evolution,
+    pourcents = serad::g(x1, x2),
+    points    = x1 - x2
   )
 
-  g_nom_taux(g = valeur, titre = titre)
+  g_nom_taux(
+    g = valeur,
+    titre = titre,
+    lang = lang
+  )
 }

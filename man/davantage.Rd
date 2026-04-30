@@ -4,24 +4,20 @@
 \alias{davantage}
 \title{Davantage ou moins}
 \usage{
-davantage(x1, x2)
+davantage(x1, x2, lang = get_serad_language())
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
 \item{x2}{Niveau le plus ancien.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres : "davantage" ou "moins".
+Une chaîne de caractères.
 }
 \description{
-Indique si \code{x1} est davantage ou moins eleve que \code{x2}.
-}
-\examples{
-davantage(1.04, 1)     # "davantage"
-davantage(1.04, 1.04)  # "davantage"
-davantage(0.96, 1)     # "moins"
-
+Indique si \code{x1} est davantage ou moins élevé que \code{x2}.
 }
 \seealso{
 \code{\link{comparaison}}

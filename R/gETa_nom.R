@@ -1,41 +1,51 @@
-#' Evolution nominale tenant compte de l'acceleration
+#' Évolution nominale tenant compte de l'accélération
 #'
-#' Decrit l'evolution sous forme nominale a partir de trois niveaux,
-#' en tenant compte de l'acceleration entre deux variations successives.
+#' @description
+#' Décrit l'évolution sous forme nominale à partir de trois niveaux,
+#' en tenant compte de l'accélération entre deux variations successives.
 #'
-#' @param x1 Niveau le plus recent.
-#' @param x2 Niveau precedent.
+#' @param x1 Niveau le plus récent.
+#' @param x2 Niveau précédent.
 #' @param x3 Niveau le plus ancien.
 #' @param titre Indicateur logique : TRUE pour supprimer l'article
-#'   initial et mettre une majuscule, notamment en debut de titre.
-#' @param alea Parametre numerique compris entre 0 et 1 controlant
-#' l'utilisation de formulations alternatives. Si \code{alea = 0},
-#' la formulation est deterministe. Si \code{alea = 1}, la formulation
-#' alternative est toujours utilisee. Des valeurs intermediaires
-#' permettent un tirage aleatoire.
+#'   initial et mettre une majuscule, notamment en début de titre.
+#' @param alea Paramètre numérique compris entre 0 et 1 contrôlant
+#'   l'utilisation de formulations alternatives. Si `alea = 0`,
+#'   la formulation est déterministe. Si `alea = 1`, la formulation
+#'   alternative est toujours utilisée. Des valeurs intermédiaires
+#'   permettent un tirage aléatoire.
+#' @param lang Langue de sortie : "fr" ou "en".
 #'
 #' @return
-#' Une chaine de caracteres correspondant a la formulation nominale
+#' Une chaîne de caractères correspondant à la formulation nominale
 #' retenue.
 #'
 #' @details
-#' La fonction calcule d'abord deux evolutions successives :
-#' \code{g1 <- serad::g(x1, x2)} et \code{g2 <- serad::g(x2, x3)}.
+#' La fonction calcule d'abord deux évolutions successives :
+#' `g1 <- serad::g(x1, x2)` et `g2 <- serad::g(x2, x3)`.
 #'
-#' Ces deux variations sont ensuite transmises a
-#' \code{\link{gETa_nom_taux}}, qui calcule leur acceleration a l'aide
-#' de \code{\link{g}} et determine la formulation nominale appropriee
-#' a partir de la table \code{getOption("serad")$evo_accel}.
+#' Ces deux variations sont ensuite transmises à
+#' \code{\link{gETa_nom_taux}}, qui calcule leur accélération à l'aide
+#' de \code{\link{a}} et détermine la formulation nominale appropriée
+#' à partir de la table `getOption("serad")$evo_accel`.
 #'
-#' Une formulation alternative peut etre utilisee via la table
-#' \code{getOption("serad")$evo_accel_alt}. Le choix entre la
-#' formulation principale et la variante depend du parametre
-#' \code{alea}.
+#' Une formulation alternative peut être utilisée via la table
+#' `getOption("serad")$evo_accel_alt`. Le choix entre la
+#' formulation principale et la variante dépend du paramètre `alea`.
 #'
-#' Si \code{titre = TRUE}, l'article initial est supprime et la
-#' premiere lettre restante est mise en majuscule.
+#' @section Personnalisation:
+#' Les formulations utilisées par cette fonction proviennent des tables
+#' `getOption("serad")$evo_accel` et
+#' `getOption("serad")$evo_accel_alt`.
 #'
-#' @seealso \code{\link{gETa_nom_taux}}, \code{\link{g}}
+#' Pour modifier les seuils, les conditions ou les libellés, voir
+#' \code{\link{init_serad}}.
+#'
+#' @seealso
+#' \code{\link{gETa_nom_taux}},
+#' \code{\link{g}},
+#' \code{\link{a}},
+#' \code{\link{init_serad}}
 #'
 #' @examples
 #' gETa_nom(1.00049, 1, 0.9996)
@@ -46,10 +56,19 @@
 #' gETa_nom(1.1, 1, 0.99, alea = 0.5)
 #'
 #' @export
-gETa_nom <- function(x1, x2, x3, titre = FALSE, alea = 0) {
+gETa_nom <- function(x1, x2, x3,
+                     titre = FALSE,
+                     alea = 0,
+                     lang = get_serad_language()) {
 
   g1 <- serad::g(x1, x2)
   g2 <- serad::g(x2, x3)
 
-  gETa_nom_taux(g1, g2, titre = titre, alea = alea)
+  gETa_nom_taux(
+    g1,
+    g2,
+    titre = titre,
+    alea = alea,
+    lang = lang
+  )
 }

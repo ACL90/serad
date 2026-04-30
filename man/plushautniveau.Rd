@@ -2,71 +2,67 @@
 % Please edit documentation in R/plushautniveau.R
 \name{plushautniveau}
 \alias{plushautniveau}
-\title{Indique si le niveau est le plus haut ou le plus bas de la serie}
+\title{Indique si le niveau est le plus haut ou le plus bas de la série}
 \usage{
 plushautniveau(
   df,
   temps = "croissant",
-  voc_haut = "C'est le plus haut niveau depuis",
-  voc_bas = "C'est le plus bas niveau depuis",
+  voc_haut,
+  voc_bas,
   vart,
   vary,
-  nbperiode = 3
+  nbperiode = 3,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{df}{Data frame en entree.}
+\item{df}{Data frame en entrée.}
 
-\item{temps}{Ordre temporel : "croissant" (par defaut)
-si les valeurs vont du passe vers le present,
-"decroissant" sinon.}
+\item{temps}{Ordre temporel : "croissant" (par défaut)
+si les valeurs vont du passé vers le présent,
+"décroissant" sinon.}
 
-\item{voc_haut}{Formulation utilisee pour un plus haut niveau.}
+\item{voc_haut}{Formulation utilisée pour un plus haut niveau.
+Si omis, dépend de la langue.}
 
-\item{voc_bas}{Formulation utilisee pour un plus bas niveau.}
+\item{voc_bas}{Formulation utilisée pour un plus bas niveau.
+Si omis, dépend de la langue.}
 
 \item{vart}{Variable de temps du data frame.
-Par defaut : premiere colonne.}
+Par défaut : première colonne.}
 
-\item{vary}{Variable numerique du data frame.
-Par defaut : seconde colonne.}
+\item{vary}{Variable numérique du data frame.
+Par défaut : seconde colonne.}
 
-\item{nbperiode}{Nombre minimal de periodes depuis
-lesquelles le niveau doit etre extremum pour
-retourner une phrase (par defaut : 3).}
+\item{nbperiode}{Nombre minimal de périodes depuis
+lesquelles le niveau doit être un extremum pour
+retourner une phrase (par défaut : 3).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres indiquant le plus haut
-ou le plus bas niveau depuis une date donnee.
-Retourne une chaine vide si rien de notable.
+Une chaîne de caractères indiquant le plus haut
+ou le plus bas niveau depuis une date donnée.
+Retourne une chaîne vide si rien de notable.
 }
 \description{
-Determine si la derniere valeur d'une serie correspond
-au plus haut ou au plus bas niveau observe depuis
-un certain nombre de periodes.
+Détermine si la dernière valeur d'une série correspond
+au plus haut ou au plus bas niveau observé depuis
+un certain nombre de périodes.
 }
 \examples{
-col0 = c("Y1T1", "Y1T2", "Y1trim3", "Y1T4","Y2T1","Y2-T2")
-col1 = c(12, 11, 7, 6, 9, 10)
-col2 = c(12, 11, 7, 6, 9, 14)
-col3 = c(12, 11, 3, 6, 9, 4)
-col4 = c(12, 11, 7, 6, 9, 4)
-col5 = c(12, 11, 7, 3, 9, 4)
-df1 = data.frame(col0, col1, col2, col3, col4, col5)
+col0 <- c("Y1T1", "Y1T2", "Y1trim3", "Y1T4", "Y2T1", "Y2-T2")
+col1 <- c(12, 11, 7, 6, 9, 10)
+col2 <- c(12, 11, 7, 6, 9, 14)
+col3 <- c(12, 11, 3, 6, 9, 4)
+col4 <- c(12, 11, 7, 6, 9, 4)
+col5 <- c(12, 11, 7, 3, 9, 4)
+df1 <- data.frame(col0, col1, col2, col3, col4, col5)
 
 plushautniveau(df1)
-# "C'est le plus haut niveau depuis Y1T2."
-
 plushautniveau(df1, nbperiode = 5)
-# ""
-
 plushautniveau(df1, vary = "col2")
-# "C'est le plus haut niveau depuis le debut de la serie."
-
 plushautniveau(df1, vary = "col3")
-# "C'est le plus bas niveau depuis Y1trim3."
-
 plushautniveau(df1, vary = "col4")
-# "C'est le plus bas niveau depuis le debut de la serie."
 
 }

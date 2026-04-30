@@ -1,15 +1,15 @@
-#' Arrondi arithmetique
+#' Arrondi arithmétique
 #'
-#' Arrondit un nombre selon la regle arithmetique (0.5 vers le haut),
-#' contrairement a \code{round()} qui utilise l'arrondi bancaire.
+#' Arrondit un nombre selon la règle arithmétique (0.5 vers le haut),
+#' contrairement à \code{round()} qui utilise l'arrondi bancaire.
 #'
-#' @param x Nombre a arrondir.
-#' @param digits Entier indiquant le nombre de decimales.
-#'   Positif pour les decimales, negatif pour les dizaines, centaines, etc.
-#'   Par defaut : 1.
+#' @param x Nombre à arrondir.
+#' @param digits Entier indiquant le nombre de décimales.
+#'   Positif pour les décimales, négatif pour les dizaines, centaines, etc.
+#'   Par défaut : 1.
 #'
 #' @return
-#' Un nombre numerique arrondi.
+#' Un nombre numérique arrondi.
 #'
 #' @seealso \code{\link{format_niv}}
 #'

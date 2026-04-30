@@ -1,5 +1,5 @@
 Package: serad
-Title: Synthese d'Ecrits avec des Regles Automatisees et Dynamiques
+Title: Synthèse d'Écrits Avec des Règles Automatisées et Dynamiques
 Version: 0.2.0
 Authors@R: c(
     person("Alexandre", "Cazenave-Lacroutz", email = "alexandre.cazenave-lacroutz@sante.gouv.fr",
@@ -8,9 +8,10 @@ Authors@R: c(
            role = c("cre")),
     person("Direction de l'animation de la recherche, des études et des statistiques (Dares)",
            role = c("cph")))
-Description: Fournit des fonctions simples pour realiser des ecrits R Markdown dynamiques respectant les regles d'ecriture en usage.
+Description: Fournit des fonctions simples pour réaliser des écrits R Markdown dynamiques respectant les règles d'écriture en usage.
 License: MIT + file LICENSE
 Encoding: UTF-8
+Language: fr-FR
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports:

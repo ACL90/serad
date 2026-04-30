@@ -1,8 +1,8 @@
 ---
-title: "Exemples d’utilisation du package {serad}"
+title: "Exemples d'utilisation du package {serad}"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Exemples d’utilisation du package serad}
+  %\VignetteIndexEntry{Exemples d'utilisation du package serad}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,7 +24,7 @@ library(dplyr)
 
 # 1. Exemple en taux : dataset `presidents`
 
-Le dataset `presidents` contient des taux d’approbation.
+Le dataset `presidents` contient des taux d'approbation.
 
 ```{r presidents_data}
 data(presidents)
@@ -67,11 +67,11 @@ max_mandat <- max(df_pres$taux, na.rm = TRUE)
 
 En `r format(as.Date(df_pres[[1]][last_row]), "%B %Y")`, le taux approbation du président des USA Richard Nixon  `r gETa_verbe_taux(df_pres[["taux_evolution"]][last_row], df_pres[["taux_evolution"]][last_row - 1])` par rapport au mois précédent (`r format_g(df_pres[["taux_evolution"]][last_row], signe = FALSE, detail = 0)` après `r format_g(df_pres[["taux_evolution"]][last_row-1], signe = FALSE, detail = 0)` en `r format(as.Date(df_pres[[1]][last_row-1]), "%B %Y")`).
 
-Sur un an, le taux d’approbation `r g_verbe(taux_actuel, taux_1_an, evolution = "points")`, passant de `r taux_1_an` % à `r taux_actuel` %.
+Sur un an, le taux d'approbation `r g_verbe(taux_actuel, taux_1_an, evolution = "points")`, passant de `r taux_1_an` % à `r taux_actuel` %.
 
-Sur l’ensemble du mandat, le taux d’approbation `r g_verbe(taux_actuel, taux_debut, evolution = "points")` passant de `r format_g(taux_debut, signe = FALSE, detail = 0)` au début du mandat à `r format_g(taux_actuel, signe = FALSE, detail = 0)` à la fin.
+Sur l'ensemble du mandat, le taux d'approbation `r g_verbe(taux_actuel, taux_debut, evolution = "points")` passant de `r format_g(taux_debut, signe = FALSE, detail = 0)` au début du mandat à `r format_g(taux_actuel, signe = FALSE, detail = 0)` à la fin.
 
-En moyenne, il s’établit à `r format_g(round(moy_mandat,1), signe = FALSE, detail = 0)`, avec un point bas à `r format_g(min_mandat, signe = FALSE, detail = 0)` et un point haut à `r format_g(max_mandat, signe = FALSE, detail = 0)`.
+En moyenne, il s'établit à `r format_g(round(moy_mandat,1), signe = FALSE, detail = 0)`, avec un point bas à `r format_g(min_mandat, signe = FALSE, detail = 0)` et un point haut à `r format_g(max_mandat, signe = FALSE, detail = 0)`.
 
 # 2. Exemple en niveaux : dataset `UKDriverDeaths`
 
@@ -124,7 +124,7 @@ En `r df_annuel_driverdeath[[1]][last_row]`, le nombre de décès liés aux acci
 
 # Conclusion
 
-Ce document illustre l’utilisation du package `{serad}` sur :
+Ce document illustre l'utilisation du package `{serad}` sur :
 
 - un **taux** (`presidents`)
 - un **niveau en nombre** (`UKDriverDeaths`)

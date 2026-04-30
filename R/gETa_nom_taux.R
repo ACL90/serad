@@ -1,40 +1,50 @@
-#' Evolution nominale tenant compte de l'acceleration
+#' Évolution nominale tenant compte de l'accélération
 #'
-#' Decrit l'evolution en tenant compte de l'acceleration
-#' entre deux variations successives.
+#' @description
+#' Décrit l'évolution sous forme nominale en tenant compte
+#' de l'accélération entre deux variations successives.
 #'
-#' @param g1 Derniere evolution, exprimee en pourcentage.
-#' @param g2 Evolution precedente, exprimee en pourcentage.
+#' @param g1 Dernière évolution, exprimée en pourcentage.
+#' @param g2 Évolution précédente, exprimée en pourcentage.
 #' @param titre Indicateur logique : TRUE pour supprimer l'article
-#'   initial et mettre une majuscule, notamment en debut de titre.
-#' @param alea Parametre numerique compris entre 0 et 1 controlant
-#' l'utilisation de formulations alternatives. Si \code{alea = 0},
-#' la formulation est deterministe. Si \code{alea = 1}, la formulation
-#' alternative est toujours utilisee. Des valeurs intermediaires
-#' permettent un tirage aleatoire.
+#'   initial et mettre une majuscule, notamment en début de titre.
+#' @param alea Paramètre numérique compris entre 0 et 1 contrôlant
+#'   l'utilisation de formulations alternatives. Si `alea = 0`,
+#'   la formulation est déterministe. Si `alea = 1`, la formulation
+#'   alternative est toujours utilisée. Des valeurs intermédiaires
+#'   permettent un tirage aléatoire.
+#' @param lang Langue de sortie : "fr" ou "en".
 #'
 #' @return
-#' Une chaine de caracteres correspondant a la formulation
-#' nominale retenue (par exemple : "une acceleration",
+#' Une chaîne de caractères correspondant à la formulation
+#' nominale retenue (par exemple : "une accélération",
 #' "une stabilisation").
 #'
 #' @details
-#' La fonction calcule d'abord l'acceleration entre \code{g1}
-#' et \code{g2} a l'aide de \code{\link{g}}.
+#' La fonction calcule d'abord l'accélération entre `g1`
+#' et `g2` à l'aide de \code{\link{a}}.
 #'
 #' Elle parcourt ensuite la table \code{getOption("serad")$evo_accel}
 #' ligne par ligne. Chaque ligne contient un ensemble de conditions
-#' sur \code{g1}, \code{g2} et l'acceleration. La premiere ligne dont
-#' toutes les conditions sont verifiees determine la formulation
+#' sur `g1`, `g2` et l'accélération. La première ligne dont
+#' toutes les conditions sont vérifiées détermine la formulation
 #' retenue.
 #'
-#' Une formulation alternative peut etre utilisee via la table
+#' Une formulation alternative peut être utilisée via la table
 #' \code{getOption("serad")$evo_accel_alt}, qui contient une variante
-#' pour chaque ligne de \code{evo_accel}. Le choix entre la formulation
-#' principale et la variante depend du parametre \code{alea}.
+#' pour chaque ligne de `evo_accel`. Le choix entre la formulation
+#' principale et la variante dépend du paramètre `alea`.
 #'
-#' Si \code{titre = TRUE}, l'article initial est supprime et la
-#' premiere lettre restante est mise en majuscule.
+#' Si `titre = TRUE`, l'article initial est supprimé et la
+#' première lettre restante est mise en majuscule.
+#'
+#' @section Personnalisation:
+#' Les formulations utilisées par cette fonction proviennent des tables
+#' \code{getOption("serad")$evo_accel} et
+#' \code{getOption("serad")$evo_accel_alt}.
+#'
+#' Pour modifier les seuils, les conditions ou les libellés, voir
+#' \code{\link{init_serad}}.
 #'
 #' @examples
 #' gETa_nom_taux(0.049, 0.049)
@@ -43,20 +53,25 @@
 #' gETa_nom_taux(-21, 1)
 #' gETa_nom_taux(10, 1, alea = 0.5)
 #'
-#' @seealso \code{\link{g}}, \code{\link{gETa_verbe_taux}}
+#' @seealso
+#' \code{\link{a}},
+#' \code{\link{gETa_verbe_taux}},
+#' \code{\link{init_serad}}
 #'
 #' @importFrom stats runif
 #' @export
-gETa_nom_taux <- function(g1, g2, titre = FALSE, alea = 0) {
+gETa_nom_taux <- function(g1, g2,
+                          titre = FALSE,
+                          alea = 0,
+                          lang = get_serad_language()) {
 
   serad <- getOption("serad")
-  tab   <- serad$evo_accel
+  tab <- serad$evo_accel
   tab_alt <- serad$evo_accel_alt
   seuil <- serad$seuil
 
   a <- serad::g(g1, g2)
 
-  # fonction locale (évite dépendance au init)
   pick <- function(base, alt, alea) {
     if (alea == 0 || is.na(alt) || alt == "") return(base)
     if (runif(1) < alea) alt else base
@@ -92,11 +107,22 @@ gETa_nom_taux <- function(g1, g2, titre = FALSE, alea = 0) {
       )
 
       if (titre) {
-        res <- sub(
-          "^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*",
-          "",
-          res
-        )
+
+        if (lang == "en") {
+          res <- sub(
+            "^(a|an|the)\\s+",
+            "",
+            res,
+            ignore.case = TRUE
+          )
+        } else {
+          res <- sub(
+            "^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*",
+            "",
+            res,
+            ignore.case = TRUE
+          )
+        }
 
         res <- paste0(
           toupper(substr(res, 1, 1)),

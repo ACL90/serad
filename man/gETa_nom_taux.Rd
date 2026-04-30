@@ -2,51 +2,63 @@
 % Please edit documentation in R/gETa_nom_taux.R
 \name{gETa_nom_taux}
 \alias{gETa_nom_taux}
-\title{Evolution nominale tenant compte de l'acceleration}
+\title{Évolution nominale tenant compte de l'accélération}
 \usage{
-gETa_nom_taux(g1, g2, titre = FALSE, alea = 0)
+gETa_nom_taux(g1, g2, titre = FALSE, alea = 0, lang = get_serad_language())
 }
 \arguments{
-\item{g1}{Derniere evolution, exprimee en pourcentage.}
+\item{g1}{Dernière évolution, exprimée en pourcentage.}
 
-\item{g2}{Evolution precedente, exprimee en pourcentage.}
+\item{g2}{Évolution précédente, exprimée en pourcentage.}
 
 \item{titre}{Indicateur logique : TRUE pour supprimer l'article
-initial et mettre une majuscule, notamment en debut de titre.}
+initial et mettre une majuscule, notamment en début de titre.}
 
-\item{alea}{Parametre numerique compris entre 0 et 1 controlant
+\item{alea}{Paramètre numérique compris entre 0 et 1 contrôlant
 l'utilisation de formulations alternatives. Si \code{alea = 0},
-la formulation est deterministe. Si \code{alea = 1}, la formulation
-alternative est toujours utilisee. Des valeurs intermediaires
-permettent un tirage aleatoire.}
+la formulation est déterministe. Si \code{alea = 1}, la formulation
+alternative est toujours utilisée. Des valeurs intermédiaires
+permettent un tirage aléatoire.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la formulation
-nominale retenue (par exemple : "une acceleration",
+Une chaîne de caractères correspondant à la formulation
+nominale retenue (par exemple : "une accélération",
 "une stabilisation").
 }
 \description{
-Decrit l'evolution en tenant compte de l'acceleration
-entre deux variations successives.
+Décrit l'évolution sous forme nominale en tenant compte
+de l'accélération entre deux variations successives.
 }
 \details{
-La fonction calcule d'abord l'acceleration entre \code{g1}
-et \code{g2} a l'aide de \code{\link{g}}.
+La fonction calcule d'abord l'accélération entre \code{g1}
+et \code{g2} à l'aide de \code{\link{a}}.
 
 Elle parcourt ensuite la table \code{getOption("serad")$evo_accel}
 ligne par ligne. Chaque ligne contient un ensemble de conditions
-sur \code{g1}, \code{g2} et l'acceleration. La premiere ligne dont
-toutes les conditions sont verifiees determine la formulation
+sur \code{g1}, \code{g2} et l'accélération. La première ligne dont
+toutes les conditions sont vérifiées détermine la formulation
 retenue.
 
-Une formulation alternative peut etre utilisee via la table
+Une formulation alternative peut être utilisée via la table
 \code{getOption("serad")$evo_accel_alt}, qui contient une variante
 pour chaque ligne de \code{evo_accel}. Le choix entre la formulation
-principale et la variante depend du parametre \code{alea}.
+principale et la variante dépend du paramètre \code{alea}.
 
-Si \code{titre = TRUE}, l'article initial est supprime et la
-premiere lettre restante est mise en majuscule.
+Si \code{titre = TRUE}, l'article initial est supprimé et la
+première lettre restante est mise en majuscule.
 }
+\section{Personnalisation}{
+
+Les formulations utilisées par cette fonction proviennent des tables
+\code{getOption("serad")$evo_accel} et
+\code{getOption("serad")$evo_accel_alt}.
+
+Pour modifier les seuils, les conditions ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
 gETa_nom_taux(0.049, 0.049)
 gETa_nom_taux(10, 1)
@@ -56,5 +68,7 @@ gETa_nom_taux(10, 1, alea = 0.5)
 
 }
 \seealso{
-\code{\link{g}}, \code{\link{gETa_verbe_taux}}
+\code{\link{a}},
+\code{\link{gETa_verbe_taux}},
+\code{\link{init_serad}}
 }

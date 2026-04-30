@@ -2,34 +2,26 @@
 % Please edit documentation in R/comparaison.R
 \name{depasse}
 \alias{depasse}
-\title{Verbe pour exprimer le sens de l'evolution}
+\title{Verbe pour exprimer le sens de l'évolution}
 \usage{
-depasse(x1, x2, sing = FALSE)
+depasse(x1, x2, sing = FALSE, lang = get_serad_language())
 }
 \arguments{
-\item{x1}{Le niveau le plus recent.}
+\item{x1}{Le niveau le plus récent.}
 
 \item{x2}{Le niveau le plus ancien.}
 
 \item{sing}{Indicateur logique : FALSE si le sujet est pluriel,
-TRUE s'il est singulier (par defaut : pluriel).}
+TRUE s'il est singulier (par défaut : pluriel).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres :
-"excedent"/"excede",
-"sont au niveau de"/"est au niveau de",
-ou "sont en dessous de"/"est en dessous de".
+Une chaîne de caractères.
 }
 \description{
-Indique si \code{x1} excede, est au niveau de ou est en dessous de
+Indique si \code{x1} excède, est au niveau de ou est en dessous de
 \code{x2}, en tenant compte du nombre grammatical.
-}
-\examples{
-depasse(1.04, 1)               # "excèdent"
-depasse(1.04, 1, sing = TRUE)  # "excède"
-depasse(0.96, 1)               # "sont en dessous de"
-depasse(0.9991, 1)             # "sont au niveau de"
-
 }
 \seealso{
 \code{\link{comparaison}}

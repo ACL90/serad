@@ -1,24 +1,33 @@
-#' Evolution nominale d'un taux
+#' Évolution nominale d'un taux
 #'
-#' Decrit une evolution exprimee en pourcentage sous forme nominale
+#' @description
+#' Décrit une évolution exprimée en pourcentage sous forme nominale
 #' (par exemple : "une forte hausse").
 #'
-#' @param g L'evolution en pourcentage.
+#' @param g L'évolution en pourcentage.
 #' @param titre Indicateur logique : TRUE pour supprimer l'article
-#'   initial et mettre une majuscule, notamment en debut de titre.
+#'   initial et mettre une majuscule, notamment en début de titre.
+#' @param lang Langue de sortie : "fr" ou "en".
 #'
 #' @return
-#' Une chaine de caracteres decrivant l'evolution
-#' (par exemple : "une forte hausse", "une stabilite").
+#' Une chaîne de caractères décrivant l'évolution
+#' (par exemple : "une forte hausse", "une stabilité").
 #'
 #' @details
-#' La fonction selectionne d'abord, dans la table
-#' \code{getOption("serad")$evo_simple}, la premiere ligne dont
-#' le seuil est inferieur strictement a \code{g}.
+#' La fonction sélectionne, dans la table
+#' `getOption("serad")$evo_simple`, la première ligne dont
+#' le seuil est strictement inférieur à `g`.
 #'
-#' La fonction renvoie alors la colonne \code{nom} correspondante.
-#' Si \code{titre = TRUE}, l'article initial est supprime et la
-#' premiere lettre restante est mise en majuscule.
+#' Elle renvoie ensuite la colonne `nom` correspondante.
+#' Si `titre = TRUE`, l'article initial est supprimé et la
+#' première lettre restante est mise en majuscule.
+#'
+#' @section Personnalisation:
+#' Les formulations utilisées par cette fonction proviennent de la table
+#' `getOption("serad")$evo_simple`.
+#'
+#' Pour modifier les seuils ou les libellés, voir
+#' \code{\link{init_serad}}.
 #'
 #' @examples
 #' g_nom_taux(4)
@@ -31,16 +40,23 @@
 #' g_nom_taux(-4)
 #' g_nom_taux(-5)
 #'
-#' @seealso \code{\link{g_verbe_taux}}
+#' @seealso
+#' \code{\link{g_verbe_taux}},
+#' \code{\link{init_serad}}
 #'
 #' @export
-g_nom_taux <- function(g, titre = FALSE) {
+g_nom_taux <- function(g, titre = FALSE, lang = get_serad_language()) {
 
   serad0 <- getOption("serad")
-  tab    <- serad0$evo_simple
+
+  if (is.null(serad0) || is.null(serad0$evo_simple)) {
+    stop("Les options serad ne sont pas initialis\u00E9es. Utiliser init_serad_fr() ou init_serad_en().")
+  }
+
+  tab <- serad0$evo_simple
 
   if (!is.data.frame(tab)) {
-    stop("serad$evo_simple doit etre une data.frame.")
+    stop("serad$evo_simple doit \u00EAtre une data.frame.")
   }
 
   cols_attendues <- c("seuil", "nom")
@@ -54,11 +70,11 @@ g_nom_taux <- function(g, titre = FALSE) {
   res <- as.character(tab$nom[i])
 
   if (titre) {
-    res <- sub(
-      "^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*",
-      "",
-      res
-    )
+    if (lang == "en") {
+      res <- sub("^(a|an|the)\\s+", "", res, ignore.case = TRUE)
+    } else {
+      res <- sub("^(une|un|des|la|le|les|du|de la|de l'|d'|l')\\s*", "", res, ignore.case = TRUE)
+    }
 
     res <- paste0(
       toupper(substr(res, 1, 1)),

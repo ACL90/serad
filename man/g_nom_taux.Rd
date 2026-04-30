@@ -2,33 +2,44 @@
 % Please edit documentation in R/g_nom_taux.R
 \name{g_nom_taux}
 \alias{g_nom_taux}
-\title{Evolution nominale d'un taux}
+\title{Évolution nominale d'un taux}
 \usage{
-g_nom_taux(g, titre = FALSE)
+g_nom_taux(g, titre = FALSE, lang = get_serad_language())
 }
 \arguments{
-\item{g}{L'evolution en pourcentage.}
+\item{g}{L'évolution en pourcentage.}
 
 \item{titre}{Indicateur logique : TRUE pour supprimer l'article
-initial et mettre une majuscule, notamment en debut de titre.}
+initial et mettre une majuscule, notamment en début de titre.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres decrivant l'evolution
-(par exemple : "une forte hausse", "une stabilite").
+Une chaîne de caractères décrivant l'évolution
+(par exemple : "une forte hausse", "une stabilité").
 }
 \description{
-Decrit une evolution exprimee en pourcentage sous forme nominale
+Décrit une évolution exprimée en pourcentage sous forme nominale
 (par exemple : "une forte hausse").
 }
 \details{
-La fonction selectionne d'abord, dans la table
-\code{getOption("serad")$evo_simple}, la premiere ligne dont
-le seuil est inferieur strictement a \code{g}.
+La fonction sélectionne, dans la table
+\code{getOption("serad")$evo_simple}, la première ligne dont
+le seuil est strictement inférieur à \code{g}.
 
-La fonction renvoie alors la colonne \code{nom} correspondante.
-Si \code{titre = TRUE}, l'article initial est supprime et la
-premiere lettre restante est mise en majuscule.
+Elle renvoie ensuite la colonne \code{nom} correspondante.
+Si \code{titre = TRUE}, l'article initial est supprimé et la
+première lettre restante est mise en majuscule.
 }
+\section{Personnalisation}{
+
+Les formulations utilisées par cette fonction proviennent de la table
+\code{getOption("serad")$evo_simple}.
+
+Pour modifier les seuils ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
 g_nom_taux(4)
 g_nom_taux(1)
@@ -42,5 +53,6 @@ g_nom_taux(-5)
 
 }
 \seealso{
-\code{\link{g_verbe_taux}}
+\code{\link{g_verbe_taux}},
+\code{\link{init_serad}}
 }

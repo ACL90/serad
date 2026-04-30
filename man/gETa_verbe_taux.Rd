@@ -2,50 +2,61 @@
 % Please edit documentation in R/gETa_verbe_taux.R
 \name{gETa_verbe_taux}
 \alias{gETa_verbe_taux}
-\title{Evolution verbale tenant compte de l'acceleration}
+\title{Évolution verbale tenant compte de l'accélération}
 \usage{
-gETa_verbe_taux(g1, g2, sing = TRUE, alea = 0)
+gETa_verbe_taux(g1, g2, sing = TRUE, alea = 0, lang = get_serad_language())
 }
 \arguments{
-\item{g1}{Derniere evolution, exprimee en pourcentage.}
+\item{g1}{Dernière évolution, exprimée en pourcentage.}
 
-\item{g2}{Evolution precedente, exprimee en pourcentage.}
+\item{g2}{Évolution précédente, exprimée en pourcentage.}
 
 \item{sing}{Indicateur logique : TRUE si le sujet est singulier
-(par defaut), FALSE sinon.}
+(par défaut), FALSE sinon.}
 
-\item{alea}{Parametre numerique compris entre 0 et 1 controlant
+\item{alea}{Nombre réel compris entre 0 et 1 contrôlant
 l'utilisation de formulations alternatives. Si \code{alea = 0},
-la formulation est deterministe. Si \code{alea = 1}, la formulation
-alternative est toujours utilisee. Des valeurs intermediaires
-permettent un tirage aleatoire.}
+la formulation est déterministe. Si \code{alea = 1}, la formulation
+alternative est toujours utilisée. Des valeurs intermédiaires
+permettent un tirage aléatoire.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la formulation
-verbale retenue (par exemple : "accelere", "se stabilise").
+Une chaîne de caractères correspondant à la formulation
+verbale retenue (par exemple : "accélère", "se stabilise").
 }
 \description{
-Decrit l'evolution sous forme verbale en tenant compte
-de l'acceleration entre deux variations successives.
+Décrit l'évolution sous forme verbale en tenant compte
+de l'accélération entre deux variations successives.
 }
 \details{
-La fonction calcule d'abord l'acceleration entre \code{g1}
-et \code{g2} a l'aide de \code{\link{g}}.
+La fonction calcule d'abord l'accélération entre \code{g1}
+et \code{g2} à l'aide de \code{\link{a}}.
 
 Elle parcourt ensuite la table \code{getOption("serad")$evo_accel}
 ligne par ligne. Chaque ligne contient un ensemble de conditions
-sur \code{g1}, \code{g2} et l'acceleration. La premiere ligne dont
-toutes les conditions sont verifiees determine la formulation
+sur \code{g1}, \code{g2} et l'accélération. La première ligne pour laquelle
+toutes les conditions sont vérifiées détermine la formulation
 retenue.
 
-Une formulation alternative peut etre utilisee via la table
+Une formulation alternative peut être utilisée via la table
 \code{getOption("serad")$evo_accel_alt}. Le choix entre la
-formulation principale et la variante depend du parametre
-\code{alea}.
+formulation principale et la variante dépend du paramètre \code{alea}.
 
-Si \code{sing = TRUE}, la fonction renvoie la colonne
-\code{verbe_sing}. Sinon, elle renvoie \code{verbe_plur}.
+Si \code{sing = TRUE}, la fonction renvoie la colonne \code{verbe_sing}.
+Sinon, elle renvoie \code{verbe_plur}.
 }
+\section{Personnalisation}{
+
+Les formulations utilisées par cette fonction proviennent des tables
+\code{getOption("serad")$evo_accel} et
+\code{getOption("serad")$evo_accel_alt}.
+
+Pour modifier les seuils, les conditions ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
 gETa_verbe_taux(0.049, 0.049)
 gETa_verbe_taux(10, 1)
@@ -56,5 +67,7 @@ gETa_verbe_taux(10, 1, alea = 0.5)
 
 }
 \seealso{
-\code{\link{g}}, \code{\link{gETa_nom_taux}}
+\code{\link{a}},
+\code{\link{gETa_nom_taux}},
+\code{\link{init_serad}}
 }

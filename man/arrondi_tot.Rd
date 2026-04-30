@@ -2,23 +2,23 @@
 % Please edit documentation in R/arrondi_tot.R
 \name{arrondi_tot}
 \alias{arrondi_tot}
-\title{Arrondi arithmetique}
+\title{Arrondi arithmétique}
 \usage{
 arrondi_tot(x, digits = 1)
 }
 \arguments{
-\item{x}{Nombre a arrondir.}
+\item{x}{Nombre à arrondir.}
 
-\item{digits}{Entier indiquant le nombre de decimales.
-Positif pour les decimales, negatif pour les dizaines, centaines, etc.
-Par defaut : 1.}
+\item{digits}{Entier indiquant le nombre de décimales.
+Positif pour les décimales, négatif pour les dizaines, centaines, etc.
+Par défaut : 1.}
 }
 \value{
-Un nombre numerique arrondi.
+Un nombre numérique arrondi.
 }
 \description{
-Arrondit un nombre selon la regle arithmetique (0.5 vers le haut),
-contrairement a \code{round()} qui utilise l'arrondi bancaire.
+Arrondit un nombre selon la règle arithmétique (0.5 vers le haut),
+contrairement à \code{round()} qui utilise l'arrondi bancaire.
 }
 \examples{
 arrondi_tot(1877.85, digits = 0)   # 1878

@@ -2,26 +2,21 @@
 % Please edit documentation in R/comparaison.R
 \name{g_nom_simple}
 \alias{g_nom_simple}
-\title{Evolution nominale simple}
+\title{Évolution nominale simple}
 \usage{
-g_nom_simple(x1, x2)
+g_nom_simple(x1, x2, lang = get_serad_language())
 }
 \arguments{
-\item{x1}{Le niveau le plus recent.}
+\item{x1}{Le niveau le plus récent.}
 
 \item{x2}{Le niveau le plus ancien.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres de type
-"en hausse de" ou "en baisse de"
-suivie du pourcentage formate.
+Une chaîne de caractères.
 }
 \description{
-Decrit l'evolution entre \code{x1} et \code{x2}
+Décrit l'évolution entre \code{x1} et \code{x2}
 sous forme nominale suivie du pourcentage correspondant.
-}
-\examples{
-g_nom_simple(3, 1)  # "en hausse de 200,0 \%"
-g_nom_simple(3, 5)  # "en baisse de 40,0 \%"
-
 }

@@ -2,30 +2,39 @@
 % Please edit documentation in R/contributions.R
 \name{contributions}
 \alias{contributions}
-\title{Documente les contributions à une évolution.}
+\title{Documente les contributions à une évolution}
 \usage{
-contributions(df, temps = "croissant", vart, Tglissement = 1, seuilpc = 20)
+contributions(
+  df,
+  temps = "croissant",
+  vart,
+  Tglissement = 1,
+  seuilpc = 20,
+  lang = get_serad_language()
+)
 }
 \arguments{
 \item{df}{Le dataframe en entrée}
 
-\item{temps}{"croissant" par défaut si du passé vers le présent. "decroissant" sinon.}
+\item{temps}{"croissant" par défaut si du passé vers le présent. "décroissant" sinon.}
 
 \item{vart}{La variable de temps du dataframe. La première valeur par défaut.}
 
 \item{Tglissement}{Sur combien de périodes faut-il remonter pour calculer l'évolution à 1 par défaut.}
 
 \item{seuilpc}{Un seuil en dessous duquel la contribution (en valeur absolue)
-n'est pas prise en compte. 5\% par défaut.}
+n'est pas prise en compte. 5 \% par défaut.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Un descriptif ordonné des différents glissements.
+Un descriptif ordonné des différentes glissements.
 }
 \description{
 Un dataframe en entrée.\cr
-Si pas indiqué, la date est considérée comme étant la première colonne.
+Si non indiqué, la date est considérée comme étant la première colonne.
 Pas besoin de la formater.\cr
-Si pas indiqué, on suppose les valeurs les plus anciennes en haut
+Si non indiqué, on suppose les valeurs les plus anciennes en haut
 (temps croissant).\cr
 Toutes les autres colonnes sont considérées comme les composantes dont les
 contributions doivent être analysées. Elles doivent être numériques.\cr
@@ -34,7 +43,7 @@ contributions doivent être analysées. Elles doivent être numériques.\cr
 Fonction écrite sur demande d'une utilisatrice.
 
 Si aucune contribution n'est supérieure à seuilpc en valeur absolue,
-contributions() retourne à minima la plus grande contribution de même sens
+contributions() retourne a minima la plus grande contribution de même sens
 que la contribution totale.
 }
 \examples{
@@ -47,12 +56,5 @@ col5 = c( 58,     76,      1,          3,     34,     19)
 df1 = data.frame(col0,col1,col2,col3,col4,col5)
 
 contributions(df1)
-# col2 contribue pour +92,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
-# col3 contribue pour +45,6 \% à l'évolution entre Y2T1 et Y2-T2 ;
-# col4 contribue pour −68,4 \% à l'évolution entre Y2T1 et Y2-T2 ;
-
-contributions(df1, Tglissement = 4, seuilpc = 50)
-# col4 contribue pour +118,8 \% à l'évolution entre Y1T2 et Y2-T2 ;
-# col5 contribue pour −82,6 \% à l'évolution entre Y1T2 et Y2-T2 ;
 
 }

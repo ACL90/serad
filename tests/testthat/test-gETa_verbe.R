@@ -86,7 +86,9 @@ test_that("gETa_verbe - aléatoire", {
   expect_true(res %in% c("se stabilise", "se fige"))
 
   # ---- Hausse ----
-  res <- gETa_verbe(1.01, 1, 1, alea = 0.5)
+  expect_warning(gETa_verbe(1.01, 1, 1, alea = 0.5),
+                 regexp = "division par 0 dans serad::g()")
+  res <- suppressWarnings(gETa_verbe(1.01, 1, 1, alea = 0.5))
   expect_true(res %in% c("augmente", "progresse"))
 
   # ---- Rebond ----

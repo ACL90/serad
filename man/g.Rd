@@ -7,26 +7,26 @@
 g(x1, x2, eps = 1e-08)
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
 \item{x2}{Niveau le plus ancien.}
 
-\item{eps}{Valeur utilisee a la place de \code{x2} lorsque
-\code{x2 = 0}, afin d'eviter une division par zero.
-Par defaut : \code{1e-8}.}
+\item{eps}{Valeur utilisée à la place de \code{x2} lorsque
+\code{x2 = 0}, afin d'éviter une division par zéro.
+Par défaut : \code{1e-8}.}
 }
 \value{
-Une valeur numerique correspondant a la variation en pourcentage
+Une valeur numérique correspondant à la variation en pourcentage
 (par exemple, si x1 = 2 * x2, la fonction retourne 100).
 }
 \description{
 Calcule la variation relative entre \code{x1} et \code{x2},
-exprimee en pourcentage.
+exprimée en pourcentage.
 }
 \details{
-Si \code{x2 = 0}, la valeur epsilon definie par
-getOption("serad")$eps est utilisee afin d'eviter une division
-par zero. Un message d'avertissement est emis dans ce cas.
+Si \code{x2 = 0}, la valeur epsilon définie par
+\code{getOption("serad")$eps} est utilisée afin d'éviter une division
+par zéro. Un message d'avertissement est émis dans ce cas.
 
 Il est possible de modifier cette valeur :
 
@@ -38,7 +38,7 @@ options(serad = serad0)
 }
 \examples{
 g(2, 1)  # 100
-g(2, 0)  # valeur tres elevee et avertissement
+g(2, 0)  # valeur très élevée et avertissement
 
 }
 \seealso{

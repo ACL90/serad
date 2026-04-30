@@ -4,24 +4,20 @@
 \alias{audessus}
 \title{Position relative entre deux niveaux}
 \usage{
-audessus(x1, x2)
+audessus(x1, x2, lang = get_serad_language())
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
 \item{x2}{Niveau le plus ancien.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres : "au-dessus" ou "en dessous".
+Une chaîne de caractères.
 }
 \description{
 Indique si \code{x1} est au-dessus ou en dessous de \code{x2}.
-}
-\examples{
-audessus(1.04, 1)     # "au-dessus"
-audessus(1.04, 1.04)  # "au-dessus"
-audessus(0.96, 1)     # "en dessous"
-
 }
 \seealso{
 \code{\link{comparaison}}

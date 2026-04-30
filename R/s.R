@@ -1,17 +1,17 @@
-#' Met au pluriel selon la valeur numerique
+#' Met au pluriel selon la valeur numérique
 #'
-#' Retourne la forme singuliere ou plurielle
+#' Retourne la forme singulière ou plurielle
 #' selon la valeur absolue du nombre.
 #'
-#' @param a Valeur numerique.
-#' @param sing Forme au singulier. Par defaut : chaine vide.
-#' @param plur Forme au pluriel. Par defaut : "s".
-#' @param seuil Seuil a partir duquel la forme plurielle
-#'   est utilisee (par defaut : 2).
+#' @param a Valeur numérique.
+#' @param sing Forme au singulier. Par défaut : chaîne vide.
+#' @param plur Forme au pluriel. Par défaut : "s".
+#' @param seuil Seuil à partir duquel la forme plurielle
+#'   est utilisée (par défaut : 2).
 #'
 #' @return
-#' Une chaine de caracteres correspondant a la forme
-#' correctement accordee. NA si l'entree est NA.
+#' Une chaîne de caractères correspondant à la forme
+#' correctement accordée. NA si l'entrée est NA.
 #'
 #' @examples
 #' serad::s(-7.5)

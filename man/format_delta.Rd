@@ -4,29 +4,37 @@
 \alias{format_delta}
 \title{Formatage des variations en niveau}
 \usage{
-format_delta(y, signe = TRUE, detail = getOption("serad")$arrondi_niv)
+format_delta(
+  y,
+  signe = TRUE,
+  detail = getOption("serad")$arrondi_niv,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{y}{La difference a formater.}
+\item{y}{La différence à formater.}
 
 \item{signe}{Indicateur logique : TRUE pour afficher le signe,
-FALSE sinon (par defaut : TRUE).}
+FALSE sinon (par défaut : TRUE).}
 
-\item{detail}{Precision d'arrondi. Par defaut, on utilise
+\item{detail}{Précision d'arrondi. Par défaut, on utilise
 getOption("serad")$arrondi_niv.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la variation formatee.
+Une chaîne de caractères correspondant à la variation formatée.
 }
 \description{
-Formate une difference numerique selon les regles d'arrondi
-et d'affichage utilisees dans le package.
+Formate une différence numérique selon les règles d'arrondi
+et d'affichage utilisées dans le package.
 }
 \examples{
-format_delta(365484)           # "+365 500"
-format_delta(365484, FALSE)    # "365 500"
-format_delta(-365484)          # "-365 500"
-format_delta(-365484, FALSE)   # "365 500"
+format_delta(365484)              # "+365 500"
+format_delta(365484, FALSE)       # "365 500"
+format_delta(-365484)             # "-365 500"
+format_delta(-365484, FALSE)      # "365 500"
+format_delta(365484, lang = "en") # "+365,500"
 
 }
 \seealso{

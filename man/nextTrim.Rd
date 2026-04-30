@@ -10,15 +10,16 @@ nextTrim(
   type = c("lettres", "chiffres"),
   majuscule = FALSE,
   exposant = TRUE,
-  k = 1
+  k = 1,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{trim}{Trimestre sous forme numerique : 1, 2, 3 ou 4.}
+\item{trim}{Trimestre sous forme numérique : 1, 2, 3 ou 4.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"lettres" (par defaut) ou "chiffres".}
+\item{type}{"lettres" (par défaut) ou "chiffres".}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule initiale,
 FALSE sinon.}
@@ -27,20 +28,21 @@ FALSE sinon.}
 les exposants Markdown (ex. "1^er^"),
 FALSE pour afficher "1er".}
 
-\item{k}{Decalage en nombre de trimestres.
-Par defaut : 1 (trimestre suivant).}
+\item{k}{Décalage en nombre de trimestres.
+Par défaut : 1 (trimestre suivant).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au trimestre
-suivant (par exemple : "quatrieme trimestre 2023").
+Une chaîne de caractères correspondant au trimestre suivant.
 }
 \description{
-Retourne la formulation du trimestre situe k periodes
-apres le trimestre indique.
+Retourne la formulation du trimestre situé à \code{k} périodes
+après le trimestre indiqué.
 }
 \examples{
-nextTrim(3, 2023) # "quatrième trimestre 2023"
-nextTrim(4, 2023) # "premier trimestre 2024"
+nextTrim(3, 2023)
+nextTrim(4, 2023)
 
 }
 \seealso{

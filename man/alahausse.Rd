@@ -2,31 +2,25 @@
 % Please edit documentation in R/comparaison.R
 \name{alahausse}
 \alias{alahausse}
-\title{Evolution a la hausse, a la baisse ou inchangee}
+\title{Évolution à la hausse, à la baisse ou inchangée}
 \usage{
-alahausse(x1, x2, seuil = 0.1)
+alahausse(x1, x2, seuil = 0.1, lang = get_serad_language())
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
 \item{x2}{Niveau le plus ancien.}
 
-\item{seuil}{Seuil d'egalite en valeur absolue.
-Par defaut : 0.1 (soit 0.1 \%).}
+\item{seuil}{Seuil d'égalité en valeur absolue.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres : "a la hausse", "a la baisse"
-ou "inchange".
+Une chaîne de caractères.
 }
 \description{
-Indique si \code{x1} evolue a la hausse, a la baisse ou reste
-inchange par rapport a \code{x2}.
-}
-\examples{
-alahausse(1.004, 1)    # "à la hausse"
-alahausse(0.996, 1)    # "à la baisse"
-alahausse(1, 1.0004)   # "inchangé"
-
+Indique si \code{x1} évolue à la hausse, à la baisse ou reste
+inchangé par rapport à \code{x2}.
 }
 \seealso{
 \code{\link{comparaison}}

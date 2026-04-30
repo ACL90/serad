@@ -79,7 +79,9 @@ test_that("gETa_nom - aléatoire", {
   expect_true(res %in% c("une stabilisation", "un essoufflement"))
 
   # ---- Hausse ----
-  res <- gETa_nom(1.01, 1, 1, alea = 0.5)
+  expect_warning(gETa_nom(1.01, 1, 1, alea = 0.5),
+                 regexp = "division par 0 dans serad::g()")
+  res <- suppressWarnings(gETa_nom(1.01, 1, 1, alea = 0.5))
   expect_true(res %in% c("une hausse", "une progression"))
 
   # ---- Rebond ----

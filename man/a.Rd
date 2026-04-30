@@ -2,26 +2,26 @@
 % Please edit documentation in R/a.R
 \name{a}
 \alias{a}
-\title{Calcul d'une acceleration}
+\title{Calcul d'une accélération}
 \usage{
 a(x1, x2, x3)
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
-\item{x2}{Niveau precedent.}
+\item{x2}{Niveau précédent.}
 
 \item{x3}{Niveau le plus ancien.}
 }
 \value{
-Un nombre numerique correspondant a l'acceleration en pourcentage.
+Un nombre numérique correspondant à l'accélération en pourcentage.
 }
 \description{
-Calcule l'acceleration entre trois niveaux successifs en comparant
-les taux de variation consecutifs.
+Calcule l'accélération entre trois niveaux successifs en comparant
+les taux de variation consécutifs.
 }
 \details{
-L'acceleration correspond a la variation du taux entre
+L'accélération correspond à la variation du taux entre
 \code{(x1, x2)} et \code{(x2, x3)}.
 }
 \examples{
@@ -29,7 +29,7 @@ a(4, 2, 1)  # 0
 a(6, 2, 1)  # 100
 
 \dontrun{
-a(2, 1, 1)  # valeur tres elevee si taux precedent proche de zero
+a(2, 1, 1)  # valeur très élevée si taux précédent proche de zéro
 }
 
 }

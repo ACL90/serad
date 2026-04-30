@@ -4,23 +4,30 @@
 \alias{format_niv}
 \title{Formatage des niveaux en nombres}
 \usage{
-format_niv(y, detail = getOption("serad")$arrondi_niv)
+format_niv(
+  y,
+  detail = getOption("serad")$arrondi_niv,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{y}{Le niveau a formater.}
+\item{y}{Le niveau à formater.}
 
-\item{detail}{Precision d'arrondi. Par defaut, on utilise
+\item{detail}{Précision d'arrondi. Par défaut, on utilise
 getOption("serad")$arrondi_niv.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au niveau formate.
+Une chaîne de caractères correspondant au niveau formaté.
 }
 \description{
-Formate un niveau numerique selon les regles d'arrondi
-definies dans le package.
+Formate un niveau numérique selon les règles d'arrondi
+définies dans le package.
 }
 \examples{
-format_niv(365484)  # "365 500"
+format_niv(365484)                # "365 500"
+format_niv(365484, lang = "en")   # "365,500"
 
 }
 \seealso{

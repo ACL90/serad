@@ -1,8 +1,9 @@
 ---
-title: "serad"
+title: "Prise en main de {serad}"
+author: ""
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{serad}
+  %\VignetteIndexEntry{Prise en main de {serad}}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,184 +11,422 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
-```{r out.width="20%", echo=FALSE, include=TRUE}
-#knitr::include_graphics("C:/Users/alexandre.cazenave-l/Documents/GitHub/Serad/man/logo.png")
-##knitr::include_graphics("~/logo.png") 
-```
+# Introduction
 
-Dernière mise à jour : `r format(Sys.Date(), "%d %B %Y")`
+Le package `{serad}` a pour objectif de faciliter la rédaction automatisée de textes de conjoncture à partir de séries statistiques. Il fournit des fonctions pour :
+
+- calculer des évolutions en pourcentage ou en niveau ;
+- formater proprement les valeurs numériques ;
+- choisir une formulation nominale ou verbale ;
+- tenir compte, si nécessaire, d'une accélération ou d'un ralentissement ;
+- produire des sorties en français ou en anglais.
+
+L'idée générale est de séparer :
+
+1. la **logique économique** (hausse, baisse, stabilité, accélération, ralentissement) ;
+2. la **mise en forme** (pourcentage, points, niveaux, dates) ;
+3. la **rédaction** proprement dite.
 
 ```{r setup}
 library(serad)
 ```
 
+# Initialisation et choix de la langue
 
-Le package **serad** (**S**ynthèse d'**É**crits avec des **R**ègles **A**utomatisées et **D**ynamiques) fournit quelques fonctions facilitant l'écriture de textes dynamiques et respectant les règles de formattage de publications statistiques.
+Par défaut, le package est chargé en français. Il est toutefois possible de basculer en anglais.
 
-***
-**Fonctions de base et formatage**
-
-Les fonctions `serad::g(x1,x2)` et `serad::a(x1,x2,x3)` permettent d'obtenir une variation, ou une accélération, exprimée en pourcentage.
-Elles se combinent avec la fonction `format_g` pour obtenir facilement le formatage idoine d'une variation (ou d'une accélération).
-```{r }
-#Astuce : il est possible d enlever le signe avec format_g(g,signe=0).
-?format_g
-```
-Les autres fonctions de formatage sont :
-```{r }
-?format_niv   #pour un niveau
-?format_delta #pour une diférence
-?format_pts   #pour une variation exprimée en points (/pts)
-#Astuce : pour les 4 fonctions de formattage, il est possible de modifier le niveau d'arrondi. Il est même possible de modifier le comportement par défaut.
+```{r}
+get_serad_language()
 ```
 
+Pour passer en anglais :
 
-**Comparaisons binaires**
-
-Le plus souvent, on est simplement intéressé par la variation. La fonction générique qui fait cela est `comparaison(x1,x2,...)`.
-```{r }
-?comparaison
-#Astuce : comparaison permet de modifier la marge (<0.05%) pour le cas d'egalite.
-```
-Les options de `comparaison` sont multiples, et ce qui a permis de créer facilement des fonctions dérivées très pratiques : `alahausse(x1,x2)`, `audessus(x1,x2)`, `davantage(x1,x2)`, `depasse(x1, x2, sing)`, `g_nom_simple(x1,x2)`... La liste s'allongera sûrement au fil des remontées d'utilisateurs.
-
-
-**Comparaisons plus fines**
-
-Pour nuancer l'ampleur de l'évolution, deux fonctions s'imposent tout d'abord : `g_nom(x1,x2)` -et son avatar `g_nom_taux(g)`- pour une évolution nominale, et `g_verbe(x1,x2)` -et son avatar `g_verbe_taux(g)`- pour une évolution verbale.
-```{r }
-?g_nom
-?g_verbe
-#Avancé : il est possible de paramétrer leurs seuils et sorties !
-#NB : g_verbe(x1,x2) est désormais directement suivi du pourcentage.
+```{r, eval = FALSE}
+set_serad_language("en")
 ```
 
+Pour revenir au français :
 
-**Comparaisons verbales tenant compte de la variation et de l'accélération**
-
-Au plus raffiné (mais sans faire directement suivre de l'évolution), on peut avoir un verbe qui tient compte à la fois de la variation et de l'accélération. Cela est permis par `gETa_verbe(x1,x2,x3,sing)` - et son avatar `gETa_verbe_taux(g1,g2,sing)`.
-```{r }
-?gETa_verbe
-#Avancé : il est possible de paramétrer les seuils et sorties !
-#Expert : si la partition sous-jacente ne convient pas, contactez-nous.
+```{r, eval = FALSE}
+set_serad_language("fr")
 ```
 
-***
-**Outils de diagnostic pour les commentaires**
+On peut également choisir la langue avant le chargement du package :
 
-`contributions(df,...)` permet d'obtenir les contributions les plus importantes. Un *dataframe* est requis en entrée.
-
-`plushautniveau(df,...)` permet d'indiquer si on est au point le plus haut/bas depuis un certain temps (et depuis combien de temps).
-```{r }
-?contributions
-?plushautniveau
+```{r, eval = FALSE}
+options(serad.lang = "en")
+library(serad)
 ```
 
+# Calculer une évolution
 
-***
-**Autres**
+La fonction de base est `g()`. Elle calcule une variation relative entre deux niveaux et renvoie le résultat en pourcentage.
 
-`quelTrim(trim,annee,...)`, `nextTrim(trim,annee,...)` et `prevTrim(trim,annee,...)` seront utiles pour tout commentaire trimestriel. Pour la version mensuelle, chercher `quelMois(...)`, `nextMois(...)` et `prevMois(...)`.
-```{r }
-?quelTrim   
-quelTrim(3,2023,majuscule=1)     
-quelTrim(3,2023,type="chiffres") 
-```
-Astuces: un paramètre `mois` peut être fourni en entrée à quelTrim(...) !
-Et les accents circonflexes permettent les exposants dans Markdown (mais peuvent être facilement enlevés).
-
-
-Plus expérimentale, la fonction `whichMois(mois)` retrouve le mois de l'année à partir d'un paramètre en caractères (en français ou en anglais).
-```{r }
-?whichMois   
-whichMois("En Juil 98") #7
-```
-`arrondi_tot(x,digit)` est à la base des fonctions de formattage, et est plus adapté à nos usages que `round`. Notablement, on peut tester :
-```{r }
-round(0.35,1)     #0.3 <!!>
-arrondi_tot(0.35) #0.4 <:)>
+```{r}
+g(2, 1)
+g(105, 100)
+g(95, 100)
 ```
 
-Le pluriel n'advient en français que lorsqu'on atteint ou dépasse 2, ce que gère `s(a,sing,plur)` - privilégier la forme `serad::s(a,sing,plur)` :
-```{r }
-x=-1.4
-paste(x,serad::s(x,"chat parle", "chats parlent"))
-#Avec gestion (paramétrable) du cas limite où...
-#un arrondi à 2 depuis l'inférieur, comme ci-dessous :
-x=1.96
-x_format = format_niv(x,detail=1)  #2.0
-paste(x_format,serad::s(x,"chat parle", "chats parlent",seuil=1.95))
+Par convention :
+
+- `x1` est le niveau le plus récent ;
+- `x2` est le niveau le plus ancien.
+
+Si `x2 = 0`, une valeur epsilon est utilisée pour éviter une division par zéro.
+
+# Formater les résultats
+
+## Pourcentages
+
+`format_g()` formate une variation en pourcentage.
+
+```{r}
+format_g(5.3654)
+format_g(-5.3654)
+format_g(5.3654, signe = FALSE)
 ```
 
+En anglais :
 
-
-***
-**Un exemple simpliste d'application... **
-*à ne pas reproduire en l'état.*
-
-```{r, echo=TRUE, include=TRUE  }
-#A <- data.frame(as.matrix(Seatbelts), date=time(Seatbelts))
-#   x1=dplyr::last(A$DriversKilled)
-#   x2=A$DriversKilled[length(A$law)-12]
-#   x168 = A$DriversKilled[168]
-   
-#En décembre `r trunc(dplyr::last(A$date))`, `r format_niv(x1)` 
-#conducteurs d'automobiles sont décédes en Grande-Bretagne, soit 
-#`r g_nom(x1,x2)` par rapport à 12 mois avant (`r format_g(serad::g(x1,x2))`,
-#soit `r format_delta(x1-x2)` décès). Le niveau atteint 
-#`r depasse(x1,x168,1)` celui de décembre 1982 - avant l'obligation 
-#du port de la ceinture de sécurité (`r format_g(serad::g(x1,x168))`, soit 
-#`r format_delta(x1-x168)` décès).
+```{r}
+set_serad_language("en")
+format_g(5.3654)
+format_g(-5.3654)
 ```
-*Cela produit :*
 
-En décembre 1984, 200 conducteurs d’automobiles sont décédés en Grande-Bretagne, soit une forte hausse par rapport à 12 mois avant (+30,5 %, soit +0 décès). Le niveau atteint excède celui de décembre 1982 - avant l’obligation du port de la ceinture de sécurité (+1,3 %, soit +0 décès).
+Puis on revient en français pour la suite.
 
-```{r, echo=TRUE, include=TRUE }
-#   y1 = A$front[length(A$law)]
-#   y2 = A$front[length(A$law)-12]
-#   y3 = A$front[length(A$law)-24]
-#   z1 = A$rear[length(A$law)]
-#   z2 = A$rear[length(A$law)-12]
-   
-#En glissements annuels, le nombre de décès de passagers à l'avant 
-#`r gETa_verbe(y1,y2,y3,1)` (`r format_g(serad::g(y1,y2))`, soit 
-#`r format_delta(y1-y2)` décès, après `r format_g(serad::g(y2,y3))`, 
-#soit `r format_delta(y2-y3)`).
-#Le nombre de décès de passagers à l'arrière `r g_verbe(z1,z2,1)`
-#(soit `r format_delta(y1-y2)` décès).
+```{r}
+set_serad_language("fr")
 ```
-*Cela produit :*
 
-En glissements annuels, le nombre de décès de passagers à l’avant repart à la hausse (+23,2 %, soit +100 décès, après −35,8 %, soit −300). Le nombre de décès de passagers à l’arrière bondit de 42,3 % (soit +100 décès).
+## Variations en points
 
+`format_pts()` permet de formater une variation en points.
 
-***
-**Et si je veux montrer serad à un collègue ? **
+```{r}
+format_pts(5.3654)
+format_pts(-1.2)
+format_pts(1.3654, signe = FALSE)
+format_pts(5.3654, abrev = TRUE)
+```
 
-- Je lui fais installer le package devtools (pour bénéficier de install_github)
-- Puis: ```library(devtools)```
-- Puis: ```install_github("ACL90/serad",build_opts = c("--no-resave-data","--no-manual"))```
-- Puis: ```vignette("serad")```
+## Niveaux et différences de niveau
 
-**Et si je veux montrer serad à un collègue ? (mais sans accès internet) **
+`format_niv()` formate un niveau et `format_delta()` une différence de niveau.
 
-- Je lui fais installer serad_[X.Y.Z].tar.gz dans un dossier. Disons que ce dossier s'appelle A:
-- Puis: ```install.packages("A/serad_[X.Y.Z].tar.gz", repos = NULL, type = "source")```
-- Puis: ```vignette("serad")```
+```{r}
+format_niv(365484)
+format_delta(365484)
+format_delta(-365484)
+```
 
-***
-**Et où est ce que je peux trouver un vrai exemple ?**
+# Décrire une évolution simple
 
-- Dans le dossier serad (décompressé 2 fois ), je copie-colle dans mon *working directory* -```getwd()```- les 4 fichiers du dossier *Example*.
-- Je lance **lancement_InterimMensuel.R** jusqu'au premier ```render``` : il crée **InterimMensuel.docx**
-- Deux possibilités s'offrent alors à moi :
+Pour nuancer l'ampleur d'une évolution, deux fonctions sont utilisées :
 
-1. Je suis convaincu et je m'inspire de **InterimMensuel.Rmd**...
-2. Je ne suis pas convaincu, et j'écris à l'adresse de contact - ```maintainer("serad")```.
+- `g_nom(x1, x2)` — et sa variante `g_nom_taux(g)` — pour une formulation nominale ;
+- `g_verbe(x1, x2)` — et sa variante `g_verbe_taux(g)` — pour une formulation verbale.
 
+## Formulation nominale
 
+```{r}
+g_nom(1.04, 1)
+g_nom(1.001, 1)
+g_nom(0.95, 1)
+```
+
+On peut aussi travailler directement à partir d'un taux déjà calculé :
+
+```{r}
+g_nom_taux(4)
+g_nom_taux(0)
+g_nom_taux(-4)
+```
+
+Avec `titre = TRUE`, l'article initial est supprimé et la première lettre est mise en majuscule.
+
+```{r}
+g_nom_taux(4, titre = TRUE)
+g_nom_taux(-4, titre = TRUE)
+```
+
+## Formulation verbale
+
+```{r}
+g_verbe(1.10, 1)
+g_verbe(1.003, 1)
+g_verbe(0.96, 1)
+```
+
+Directement à partir d'un taux :
+
+```{r}
+g_verbe_taux(10)
+g_verbe_taux(0)
+g_verbe_taux(-4)
+```
+
+En cas de stabilité, il est possible de conserver ou non la valeur.
+
+```{r}
+g_verbe_taux(-0.1)
+g_verbe_taux(-0.1, stable_sans_valeur = FALSE)
+```
+
+# Comparaisons qualitatives
+
+Le package propose aussi plusieurs fonctions pour comparer deux niveaux de façon qualitative.
+
+## Hausse, baisse ou stabilité
+
+```{r}
+alahausse(1.004, 1)
+alahausse(0.996, 1)
+alahausse(1, 1.0004)
+```
+
+## Au-dessus / en dessous
+
+```{r}
+audessus(1.04, 1)
+audessus(0.96, 1)
+```
+
+## Davantage / moins
+
+```{r}
+davantage(1.04, 1)
+davantage(0.96, 1)
+```
+
+## Dépassement avec accord grammatical
+
+```{r}
+depasse(1.04, 1)
+depasse(1.04, 1, sing = TRUE)
+depasse(0.96, 1)
+```
+
+# Tenir compte de l'accélération
+
+Lorsque deux évolutions successives sont disponibles, `{serad}` permet de qualifier non seulement le sens de l'évolution, mais aussi son rythme.
+
+Pour cela, on dispose de :
+
+- `gETa_nom()` et `gETa_nom_taux()` pour une formulation nominale ;
+- `gETa_verbe()` et `gETa_verbe_taux()` pour une formulation verbale.
+
+## Exemple nominal
+
+```{r}
+gETa_nom(1.1, 1, 0.99)
+gETa_nom(0.96, 1, 1.01)
+gETa_nom(1.00049, 1, 0.9996)
+```
+
+## Exemple verbal
+
+```{r}
+gETa_verbe(1.1, 1, 0.99)
+gETa_verbe(0.96, 1, 1.01)
+gETa_verbe(1.003, 1, 0.99, sing = FALSE)
+```
+
+## Utilisation d'une variante alternative
+
+Certaines fonctions permettent, via l'argument `alea`, d'utiliser une formulation alternative.
+
+- `alea = 0` : formulation principale uniquement ;
+- `alea = 1` : formulation alternative systématique ;
+- entre 0 et 1 : tirage aléatoire.
+
+```{r}
+set.seed(123)
+gETa_verbe_taux(10, 1, alea = 1)
+gETa_nom_taux(10, 1, alea = 1)
+```
+
+# Dates, mois et trimestres
+
+Le package fournit aussi des helpers pour générer des expressions temporelles.
+
+## Mois
+
+```{r}
+quelMois(3, 2023)
+quelMois(3, 2023, majuscule = TRUE)
+nextMois(12, 2023)
+prevMois(1, 2023)
+```
+
+## Trimestres
+
+```{r}
+quelTrim(3, 2023)
+quelTrim(3, 2023, majuscule = TRUE)
+quelTrim(3, 2023, type = "chiffres")
+nextTrim(4, 2023)
+prevTrim(1, 2023)
+```
+
+## Détection d'un mois dans un texte
+
+```{r}
+whichMois("En Juil 98")
+whichMois("March 2024")
+```
+
+# Contributions
+
+La fonction `contributions()` permet de documenter les contributions des différentes composantes à une évolution globale.
+
+```{r}
+col0 <- c("Y1T1", "Y1T2", "Y1trim3", "Y1T4", "Y2T1", "Y2-T2")
+col1 <- c(12, 6, 2, 86, 19, 10)
+col2 <- c(4, 8, 7, 34, 87, 14)
+col3 <- c(10, 20, 3, 66, 90, 54)
+col4 <- c(29, 12, 4, 16, 40, 94)
+col5 <- c(58, 76, 1, 3, 34, 19)
+
+df1 <- data.frame(col0, col1, col2, col3, col4, col5)
+
+contributions(df1)
+```
+
+En anglais :
+
+```{r}
+set_serad_language("en")
+contributions(df1, lang = "en")
+set_serad_language("fr")
+```
+
+# Plus haut / plus bas niveau
+
+La fonction `plushautniveau()` permet d'indiquer si la dernière valeur d'une série correspond au plus haut ou au plus bas niveau observé sur une certaine période.
+
+```{r}
+col0 <- c("Y1T1", "Y1T2", "Y1trim3", "Y1T4", "Y2T1", "Y2-T2")
+col1 <- c(12, 11, 7, 6, 9, 10)
+col2 <- c(12, 11, 7, 6, 9, 14)
+col3 <- c(12, 11, 3, 6, 9, 4)
+
+df2 <- data.frame(col0, col1, col2, col3)
+
+plushautniveau(df2)
+plushautniveau(df2, vary = "col2")
+plushautniveau(df2, vary = "col3")
+```
+
+# Version anglaise
+
+Une fois la langue changée, les fonctions de rédaction et de formatage produisent des sorties anglaises.
+
+```{r}
+set_serad_language("en")
+
+g_nom(1.04, 1)
+g_verbe(1.04, 1)
+gETa_nom(1.1, 1, 0.99)
+gETa_verbe(1.1, 1, 0.99)
+format_g(5.4)
+format_pts(2.3)
+format_niv(365484)
+quelMois(3, 2023)
+quelTrim(3, 2023)
+```
+
+Retour au français :
+
+```{r}
+set_serad_language("fr")
+```
+
+# Personnaliser les règles de rédaction
+
+Les formulations produites par `{serad}` reposent sur des tables de correspondance stockées dans les options du package.
+
+Ces options sont initialisées par :
+
+```{r, eval = FALSE}
+init_serad_fr()
+init_serad_en()
+```
+
+Les principales tables sont :
+
+- `evo_simple`, utilisée par `g_nom_taux()`, `g_verbe_taux()`, `g_nom()` et `g_verbe()` ;
+- `evo_accel`, utilisée par `gETa_nom_taux()`, `gETa_verbe_taux()`, `gETa_nom()` et `gETa_verbe()` ;
+- `evo_accel_alt`, utilisée pour les formulations alternatives lorsque l'argument `alea` est supérieur à 0.
+
+Pour une personnalisation avancée, la méthode recommandée consiste à copier le contenu de `init_serad_fr()` ou `init_serad_en()` dans un fichier de configuration dédié, puis à modifier directement les tableaux.
+
+Par exemple, un utilisateur peut créer un fichier `init_serad_perso.R` :
+
+```{r, eval = FALSE}
+serad0 <- init_serad_fr()
+
+serad0$evo_simple <- tibble::tribble(
+  ~seuil, ~verbe_sing, ~verbe_plur, ~nom,
+  1,     "augmente", "augmentent", "une hausse",
+  0,     "est stable", "sont stables", "une stabilité",
+  -Inf,  "diminue", "diminuent", "une baisse"
+)
+
+options(serad = serad0)
+```
+
+Il est aussi possible de modifier les seuils utilisés pour les formulations avec accélération :
+
+```{r, eval = FALSE}
+serad0 <- init_serad_fr()
+
+serad0$seuil$stable <- 0.1
+serad0$seuil$accel_hausse <- 40
+serad0$seuil$accel_baisse <- -40
+
+options(serad = serad0)
+```
+
+Cette approche est volontairement simple : elle permet de personnaliser l'ensemble des règles de rédaction dans un fichier versionné, sans modifier le code interne du package.
+
+Pour plus de détails, consulter :
+
+```{r, eval = FALSE}
+?init_serad
+```
+
+# Bonnes pratiques
+
+Pour utiliser `{serad}` efficacement dans une chaîne de production, il est recommandé de :
+
+- fixer explicitement la langue au début du script ;
+- distinguer les fonctions de calcul, de formatage et de rédaction ;
+- éviter d'écrire du texte en dur dans les scripts lorsque le package peut déjà produire la formulation souhaitée ;
+- tester les rendus en français et en anglais dans une session propre.
+
+Par exemple :
+
+```{r, eval = FALSE}
+options(serad.lang = "en")
+library(serad)
+
+# ou après chargement
+set_serad_language("en")
+```
+
+# Conclusion
+
+Le package `{serad}` permet de standardiser et d'automatiser une grande partie de la rédaction conjoncturelle. Il est particulièrement utile lorsque les mêmes structures de phrases doivent être réutilisées dans des publications récurrentes, tout en conservant :
+
+- une cohérence de style ;
+- une précision dans les formulations ;
+- et désormais une capacité de sortie en français comme en anglais.

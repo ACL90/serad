@@ -10,15 +10,16 @@ quelTrim(
   type = c("lettres", "chiffres"),
   majuscule = FALSE,
   exposant = TRUE,
-  mois = NULL
+  mois = NULL,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{trim}{Trimestre sous forme numerique : 1, 2, 3 ou 4.}
+\item{trim}{Trimestre sous forme numérique : 1, 2, 3 ou 4.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"lettres" (par defaut) ou "chiffres".}
+\item{type}{"lettres" (par défaut) ou "chiffres".}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule initiale
 (ex. "Premier"), FALSE sinon.}
@@ -27,17 +28,19 @@ quelTrim(
 les exposants Markdown (ex. "1^er^"),
 FALSE pour afficher "1er".}
 
-\item{mois}{Si renseigne (entier entre 1 et 12),
-remplace trim en deduisant le trimestre correspondant.}
+\item{mois}{Si renseigné (entier entre 1 et 12),
+remplace \code{trim} en déduisant le trimestre correspondant.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres du type
-"troisieme trimestre 2023"
+Une chaîne de caractères du type
+"troisième trimestre 2023"
 ou "3^e^ trimestre 2023".
 }
 \description{
-Retourne une formulation litteraire du trimestre
-pour une annee donnee.
+Retourne une formulation littéraire du trimestre
+pour une année donnée.
 }
 \examples{
 quelTrim(3, 2023)

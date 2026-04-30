@@ -1,29 +1,29 @@
-#' Comparaison d'une variation a un seuil
+#' Comparaison d'une variation à un seuil
 #'
-#' @param g Variation exprimee en pourcentage
+#' @param g Variation exprimée en pourcentage
 #'   (5 signifie 5 %, 0.1 signifie 0.1 %).
-#' @param hausse_defaut Mot si hausse (forme par defaut).
-#' @param egalite_defaut Mot si egalite (forme par defaut).
-#' @param baisse_defaut Mot si baisse (forme par defaut).
-#' @param seuil Limite pour l'egalite (0.1 par defaut).
-#' @param alt Parametre supplementaire egal a 0 ou 1
+#' @param hausse_defaut Mot si hausse (forme par défaut).
+#' @param egalite_defaut Mot si égalité (forme par défaut).
+#' @param baisse_defaut Mot si baisse (forme par défaut).
+#' @param seuil Limite pour l'égalité (0.1 par défaut).
+#' @param alt Paramètre supplémentaire égal à 0 ou 1
 #'   (par exemple pour distinguer singulier/pluriel).
 #' @param hausse_alt Formulation alternative si alt = 1.
 #' @param egalite_alt Formulation alternative si alt = 1.
 #' @param baisse_alt Formulation alternative si alt = 1.
 #'
 #' @details
-#' Fonction interne utilisee par \code{\link{comparaison}}.
+#' Fonction interne utilisée par \code{\link{comparaison}}.
 #'
-#' @return Une chaine de caracteres correspondant a la modalite choisie.
+#' @return Une chaîne de caractères correspondant à la modalité choisie.
 #'
 #' @seealso \code{\link{comparaison}}
 #'
 #' @examples
-#' comparaison_taux(5,"augmente","reste stable","diminue")
-#' comparaison_taux(0.05,"augmente","reste stable","diminue")
-#' comparaison_taux(0,"as","bs","cs",seuil=0,alt=1,
-#'                  hausse_alt="a",egalite_alt="b",baisse_alt="c")
+#' comparaison_taux(5, "augmente", "reste stable", "diminue")
+#' comparaison_taux(0.05, "augmente", "reste stable", "diminue")
+#' comparaison_taux(0, "as", "bs", "cs", seuil = 0, alt = 1,
+#'                  hausse_alt = "a", egalite_alt = "b", baisse_alt = "c")
 #'
 #' @export
 comparaison_taux <- function(g,

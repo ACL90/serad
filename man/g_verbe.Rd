@@ -2,43 +2,45 @@
 % Please edit documentation in R/g_verbe.R
 \name{g_verbe}
 \alias{g_verbe}
-\title{Evolution verbale ne tenant pas compte de l'acceleration et suivie de la valeur}
+\title{Évolution verbale ne tenant pas compte de l'accélération et suivie de la valeur}
 \usage{
 g_verbe(
   x1,
   x2,
   sing = TRUE,
   evolution = c("pourcents", "points"),
-  stable_sans_valeur = TRUE
+  stable_sans_valeur = TRUE,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{x1}{Le niveau le plus recent.}
+\item{x1}{Le niveau le plus récent.}
 
 \item{x2}{Le niveau le plus ancien.}
 
 \item{sing}{Indicateur logique : TRUE si le sujet est singulier
-(par defaut), FALSE sinon.}
+(par défaut), FALSE sinon.}
 
-\item{evolution}{Type d'evolution :
-"pourcents" (variation relative, par defaut) ou "points".}
+\item{evolution}{Type d'évolution :
+\code{"pourcents"} (variation relative, par défaut) ou \code{"points"}.}
 
 \item{stable_sans_valeur}{Indicateur logique.
-TRUE (par defaut) : n'affiche pas la valeur en cas de stabilite.
-FALSE : affiche la valeur apres "a"
-(par exemple : "est stable a -0,1 \%").}
+TRUE (par défaut) : n'affiche pas la valeur en cas de stabilité.
+FALSE : affiche la valeur après la formulation de stabilité.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la formulation verbale
+Une chaîne de caractères correspondant à la formulation verbale
 retenue, par exemple : "bondit de 10,0 \%".
 }
 \description{
-Decrit une evolution sous forme verbale a partir de deux niveaux,
-sans tenir compte d'une eventuelle acceleration, et en ajoutant
+Décrit une évolution sous forme verbale à partir de deux niveaux,
+sans tenir compte d'une éventuelle accélération, et en ajoutant
 la valeur de variation.
 }
 \details{
-La fonction calcule d'abord une evolution a partir de \code{x1}
+La fonction calcule d'abord une évolution à partir de \code{x1}
 et \code{x2} :
 \itemize{
 \item si \code{evolution = "pourcents"}, elle utilise
@@ -46,10 +48,19 @@ et \code{x2} :
 \item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
 }
 
-La valeur obtenue est ensuite transmise a \code{\link{g_verbe_taux}},
-qui determine la formulation a partir de la table
+La valeur obtenue est ensuite transmise à \code{\link{g_verbe_taux}},
+qui détermine la formulation à partir de la table
 \code{getOption("serad")$evo_simple}.
 }
+\section{Personnalisation}{
+
+Les formulations utilisées par cette fonction proviennent de la table
+\code{getOption("serad")$evo_simple}.
+
+Pour modifier les seuils ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
 g_verbe(1.1, 1)
 g_verbe(1.04, 1)
@@ -62,5 +73,7 @@ g_verbe(0.79, 1)
 
 }
 \seealso{
-\code{\link{g_verbe_taux}}, \code{\link{g}}
+\code{\link{g_verbe_taux}},
+\code{\link{g}},
+\code{\link{init_serad}}
 }

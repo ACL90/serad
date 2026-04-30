@@ -2,35 +2,42 @@
 % Please edit documentation in R/quelTrim.R
 \name{prevMois}
 \alias{prevMois}
-\title{Fournit dynamiquement le mois precedent}
+\title{Fournit dynamiquement le mois précédent}
 \usage{
-prevMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE, k = 1)
+prevMois(
+  mois,
+  annee,
+  type = c("Annee", "autres"),
+  majuscule = FALSE,
+  k = 1,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{mois}{Mois sous forme numerique : 1 a 12.}
+\item{mois}{Mois sous forme numérique : 1 à 12.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"Annee" (par defaut, ex. "decembre 2023")
-ou "autres" (ex. "decembre").}
+\item{type}{"Annee" (par défaut) ou "autres".}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule
-initiale (ex. "Decembre"), FALSE sinon.}
+initiale, FALSE sinon.}
 
-\item{k}{Decalage en nombre de mois.
-Par defaut : 1 (mois precedent).}
+\item{k}{Décalage en nombre de mois.
+Par défaut : 1 (mois précédent).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au mois
-precedent (par exemple : "decembre 2022").
+Une chaîne de caractères correspondant au mois précédent.
 }
 \description{
-Retourne la formulation du mois situe k periodes
-avant le mois indique.
+Retourne la formulation du mois situé à \code{k} périodes
+avant le mois indiqué.
 }
 \examples{
-prevMois(1, 2023)         # "décembre 2022"
-prevMois(12, 2023, k = 2) # "octobre 2023"
+prevMois(1, 2023)
+prevMois(12, 2023, k = 2)
 
 }
 \seealso{

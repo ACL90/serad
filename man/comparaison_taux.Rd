@@ -2,7 +2,7 @@
 % Please edit documentation in R/comparaison_taux.R
 \name{comparaison_taux}
 \alias{comparaison_taux}
-\title{Comparaison d'une variation a un seuil}
+\title{Comparaison d'une variation à un seuil}
 \usage{
 comparaison_taux(
   g,
@@ -17,18 +17,18 @@ comparaison_taux(
 )
 }
 \arguments{
-\item{g}{Variation exprimee en pourcentage
+\item{g}{Variation exprimée en pourcentage
 (5 signifie 5 \%, 0.1 signifie 0.1 \%).}
 
-\item{hausse_defaut}{Mot si hausse (forme par defaut).}
+\item{hausse_defaut}{Mot si hausse (forme par défaut).}
 
-\item{egalite_defaut}{Mot si egalite (forme par defaut).}
+\item{egalite_defaut}{Mot si égalité (forme par défaut).}
 
-\item{baisse_defaut}{Mot si baisse (forme par defaut).}
+\item{baisse_defaut}{Mot si baisse (forme par défaut).}
 
-\item{seuil}{Limite pour l'egalite (0.1 par defaut).}
+\item{seuil}{Limite pour l'égalité (0.1 par défaut).}
 
-\item{alt}{Parametre supplementaire egal a 0 ou 1
+\item{alt}{Paramètre supplémentaire égal à 0 ou 1
 (par exemple pour distinguer singulier/pluriel).}
 
 \item{hausse_alt}{Formulation alternative si alt = 1.}
@@ -38,19 +38,19 @@ comparaison_taux(
 \item{baisse_alt}{Formulation alternative si alt = 1.}
 }
 \value{
-Une chaine de caracteres correspondant a la modalite choisie.
+Une chaîne de caractères correspondant à la modalité choisie.
 }
 \description{
-Comparaison d'une variation a un seuil
+Comparaison d'une variation à un seuil
 }
 \details{
-Fonction interne utilisee par \code{\link{comparaison}}.
+Fonction interne utilisée par \code{\link{comparaison}}.
 }
 \examples{
-comparaison_taux(5,"augmente","reste stable","diminue")
-comparaison_taux(0.05,"augmente","reste stable","diminue")
-comparaison_taux(0,"as","bs","cs",seuil=0,alt=1,
-                 hausse_alt="a",egalite_alt="b",baisse_alt="c")
+comparaison_taux(5, "augmente", "reste stable", "diminue")
+comparaison_taux(0.05, "augmente", "reste stable", "diminue")
+comparaison_taux(0, "as", "bs", "cs", seuil = 0, alt = 1,
+                 hausse_alt = "a", egalite_alt = "b", baisse_alt = "c")
 
 }
 \seealso{

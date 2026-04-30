@@ -2,26 +2,26 @@
 % Please edit documentation in R/s.R
 \name{s}
 \alias{s}
-\title{Met au pluriel selon la valeur numerique}
+\title{Met au pluriel selon la valeur numérique}
 \usage{
 s(a, sing = "", plur = "s", seuil = 2)
 }
 \arguments{
-\item{a}{Valeur numerique.}
+\item{a}{Valeur numérique.}
 
-\item{sing}{Forme au singulier. Par defaut : chaine vide.}
+\item{sing}{Forme au singulier. Par défaut : chaîne vide.}
 
-\item{plur}{Forme au pluriel. Par defaut : "s".}
+\item{plur}{Forme au pluriel. Par défaut : "s".}
 
-\item{seuil}{Seuil a partir duquel la forme plurielle
-est utilisee (par defaut : 2).}
+\item{seuil}{Seuil à partir duquel la forme plurielle
+est utilisée (par défaut : 2).}
 }
 \value{
-Une chaine de caracteres correspondant a la forme
-correctement accordee. NA si l'entree est NA.
+Une chaîne de caractères correspondant à la forme
+correctement accordée. NA si l'entrée est NA.
 }
 \description{
-Retourne la forme singuliere ou plurielle
+Retourne la forme singulière ou plurielle
 selon la valeur absolue du nombre.
 }
 \examples{

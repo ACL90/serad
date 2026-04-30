@@ -4,36 +4,44 @@
 \alias{format_g}
 \title{Formatage des variations en pourcentage}
 \usage{
-format_g(y, signe = TRUE, detail = getOption("serad")$arrondi_pourcent)
+format_g(
+  y,
+  signe = TRUE,
+  detail = getOption("serad")$arrondi_pourcent,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{y}{La variation a formater.}
+\item{y}{La variation à formater.}
 
 \item{signe}{Indicateur logique : TRUE pour afficher le signe,
-FALSE pour le retirer (par defaut : TRUE).}
+FALSE pour le retirer (par défaut : TRUE).}
 
-\item{detail}{Nombre de chiffres apres la virgule.
-Par defaut, on utilise getOption("serad")$arrondi_pourcent.}
+\item{detail}{Nombre de chiffres après la virgule.
+Par défaut, on utilise getOption("serad")$arrondi_pourcent.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la variation formatee
-(ex. "+5,4 \%", "-5,4 \%").
+Une chaîne de caractères correspondant à la variation formatée
+(ex. "+5,4 \%", "-5,4 \%", "+5.4 \%").
 }
 \description{
-Formate une variation exprimee en pourcentage selon les regles
+Formate une variation exprimée en pourcentage selon les règles
 d'arrondi et d'affichage du package.
 }
 \details{
-Le symbole "moins" peut etre personnalise via
+Le symbole "moins" peut être personnalisé via
 getOption("serad")$moins.
 }
 \examples{
-format_g(5.3654, signe = FALSE)  # "5,4 \%"
-format_g(5.3654)                 # "+5,4 \%"
-format_g(-5.3654, FALSE)         # "5,4 \%"
-format_g(-5.3654)                # "-5,4 \%"
-format_g(-5.3654, detail = 2)    # "-5,37 \%"
-format_g(0.35)                   # "+0,4 \%"
+format_g(5.3654, signe = FALSE)           # "5,4 \%"
+format_g(5.3654)                          # "+5,4 \%"
+format_g(-5.3654, FALSE)                  # "5,4 \%"
+format_g(-5.3654)                         # "-5,4 \%"
+format_g(-5.3654, detail = 2)             # "-5,37 \%"
+format_g(0.35)                            # "+0,4 \%"
+format_g(5.3654, lang = "en")             # "+5.4 \%"
 
 }
 \seealso{

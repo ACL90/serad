@@ -4,29 +4,36 @@
 \alias{nextMois}
 \title{Fournit dynamiquement le mois suivant}
 \usage{
-nextMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE, k = 1)
+nextMois(
+  mois,
+  annee,
+  type = c("Annee", "autres"),
+  majuscule = FALSE,
+  k = 1,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{mois}{Mois sous forme numerique : 1 a 12.}
+\item{mois}{Mois sous forme numérique : 1 à 12.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"Annee" (par defaut, ex. "fevrier 2023")
-ou "autres" (ex. "fevrier").}
+\item{type}{"Annee" (par défaut) ou "autres".}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule
-initiale (ex. "Fevrier"), FALSE sinon.}
+initiale, FALSE sinon.}
 
-\item{k}{Decalage en nombre de mois.
-Par defaut : 1 (mois suivant).}
+\item{k}{Décalage en nombre de mois.
+Par défaut : 1 (mois suivant).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au mois
-suivant (par exemple : "avril 2023").
+Une chaîne de caractères correspondant au mois suivant.
 }
 \description{
-Retourne la formulation du mois situe k periodes
-apres le mois indique.
+Retourne la formulation du mois situé à \code{k} périodes
+après le mois indiqué.
 }
 \examples{
 nextMois(3, 2023)

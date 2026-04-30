@@ -4,26 +4,34 @@
 \alias{quelMois}
 \title{Fournit dynamiquement le mois en toutes lettres}
 \usage{
-quelMois(mois, annee, type = c("Annee", "autres"), majuscule = FALSE)
+quelMois(
+  mois,
+  annee,
+  type = c("Annee", "autres"),
+  majuscule = FALSE,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{mois}{Mois sous forme numerique : 1 a 12.}
+\item{mois}{Mois sous forme numérique : 1 à 12.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"Annee" (par defaut, ex. "janvier 2023")
+\item{type}{"Annee" (par défaut, ex. "janvier 2023")
 ou "autres" (ex. "janvier").}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule
 initiale (ex. "Janvier"), FALSE sinon.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au mois,
-avec ou sans annee.
+Une chaîne de caractères correspondant au mois,
+avec ou sans année.
 }
 \description{
-Retourne une formulation litteraire du mois,
-avec ou sans annee.
+Retourne une formulation littéraire du mois,
+avec ou sans année.
 }
 \examples{
 quelMois(3, 2023)

@@ -8,31 +8,34 @@ format_pts(
   y,
   signe = TRUE,
   detail = getOption("serad")$arrondi_pourcent,
-  abrev = FALSE
+  abrev = FALSE,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{y}{La variation a formater.}
+\item{y}{La variation à formater.}
 
 \item{signe}{Indicateur logique : TRUE pour afficher le signe,
-FALSE pour le retirer (par defaut : TRUE).}
+FALSE pour le retirer (par défaut : TRUE).}
 
-\item{detail}{Nombre de chiffres apres la virgule.
-Par defaut, on utilise getOption("serad")$arrondi_pourcent.}
+\item{detail}{Nombre de chiffres après la virgule.
+Par défaut, on utilise getOption("serad")$arrondi_pourcent.}
 
-\item{abrev}{Indicateur logique : TRUE pour utiliser l'abreviation
-("pt"/"pts"), FALSE pour afficher "point(s)" (par defaut : FALSE).}
+\item{abrev}{Indicateur logique : TRUE pour utiliser l'abréviation
+("pt"/"pts"), FALSE pour afficher "point(s)" (par défaut : FALSE).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la variation formatee
-(ex. "+5,4 points", "+5,4 pts").
+Une chaîne de caractères correspondant à la variation formatée
+(ex. "+5,4 points", "+5.4 points").
 }
 \description{
-Formate une variation exprimee en points selon les regles
+Formate une variation exprimée en points selon les règles
 d'arrondi et d'affichage du package.
 }
 \details{
-Le symbole "moins" peut etre personnalise via
+Le symbole "moins" peut être personnalisé via
 getOption("serad")$moins.
 }
 \examples{

@@ -18,42 +18,42 @@ comparaison(
 )
 }
 \arguments{
-\item{x1}{Niveau le plus recent.}
+\item{x1}{Niveau le plus récent.}
 
 \item{x2}{Niveau le plus ancien.}
 
 \item{hausse_defaut}{Formulation en cas de hausse.}
 
-\item{egalite_defaut}{Formulation en cas de stabilite.}
+\item{egalite_defaut}{Formulation en cas de stabilité.}
 
 \item{baisse_defaut}{Formulation en cas de baisse.}
 
-\item{seuil}{Seuil d'egalite en valeur absolue. Par defaut : 0.1.}
+\item{seuil}{Seuil d'égalité en valeur absolue. Par défaut : 0.1.}
 
 \item{alt}{Indicateur logique permettant d'utiliser
 une formulation alternative.}
 
 \item{hausse_alt}{Formulation alternative en cas de hausse.}
 
-\item{egalite_alt}{Formulation alternative en cas de stabilite.}
+\item{egalite_alt}{Formulation alternative en cas de stabilité.}
 
 \item{baisse_alt}{Formulation alternative en cas de baisse.}
 }
 \value{
-Une chaine de caracteres correspondant a la formulation retenue.
+Une chaîne de caractères correspondant à la formulation retenue.
 }
 \description{
 Compare deux niveaux successifs et retourne une formulation
-selon l'evolution observee.
+selon l'évolution observée.
 }
 \details{
-La comparaison repose sur le taux de variation calcule via \code{\link{g}}.
-Des cas particuliers sont traites lorsque \code{x2} est nul ou negatif.
+La comparaison repose sur le taux de variation calculé via \code{\link{g}}.
+Des cas particuliers sont traités lorsque \code{x2} est nul ou négatif.
 }
 \examples{
 comparaison(1.04, 1, "augmente", "reste stable", "diminue")
 comparaison(0.9991, 1, "augmente", "reste stable", "diminue")
-comparaison(1, 1, "augmente", "reste egal", "diminue", seuil = 0)
+comparaison(1, 1, "augmente", "reste égal", "diminue", seuil = 0)
 
 }
 \seealso{

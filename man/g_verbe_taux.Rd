@@ -2,63 +2,63 @@
 % Please edit documentation in R/g_verbe_taux.R
 \name{g_verbe_taux}
 \alias{g_verbe_taux}
-\title{Evolution verbale d'un taux}
+\title{Évolution verbale d'un taux}
 \usage{
 g_verbe_taux(
   g,
   sing = TRUE,
   evolution = c("pourcents", "points"),
-  stable_sans_valeur = TRUE
+  stable_sans_valeur = TRUE,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{g}{L'evolution.}
+\item{g}{L'évolution.}
 
 \item{sing}{Indicateur logique : TRUE si le sujet est singulier
-(par defaut), FALSE sinon.}
+(par défaut), FALSE sinon.}
 
-\item{evolution}{Type d'evolution :
-"pourcents" (variation relative) ou "points".}
+\item{evolution}{Type d'évolution :
+\code{"pourcents"} (variation relative) ou \code{"points"}.}
 
-\item{stable_sans_valeur}{Indicateur logique : TRUE (par defaut)
-pour ne rien ajouter apres une stabilite.
-Si FALSE, ajoute la valeur apres "a".}
+\item{stable_sans_valeur}{Indicateur logique : TRUE (par défaut)
+pour ne rien ajouter après une stabilité.
+Si FALSE, ajoute la valeur après la formulation de stabilité.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres decrivant l'evolution,
-par exemple "bondit de 10,0 \%".
+Une chaîne de caractères décrivant l'évolution.
 }
 \description{
-Decrit une evolution sous forme verbale, sans tenir compte
-d'une eventuelle acceleration, et suivie de l'expression
-"de \if{html}{\out{<variation>}}".
+Décrit une évolution sous forme verbale, sans tenir compte
+d'une éventuelle accélération, et suivie de la valeur formatée.
 }
 \details{
-La fonction selectionne d'abord, dans la table
-\code{getOption("serad")$evo_simple}, la premiere ligne dont
-le seuil est inferieur strictement a \code{g}.
+La fonction sélectionne, dans la table
+\code{getOption("serad")$evo_simple}, la première ligne dont
+le seuil est strictement inférieur à \code{g}.
 
-Si \code{sing = TRUE}, la fonction renvoie la colonne
-\code{verbe_sing}. Sinon, elle renvoie \code{verbe_plur}.
-
-La valeur numerique est ensuite formatee avec \code{\link{format_g}}
-ou \code{\link{format_pts}} selon l'argument \code{evolution}.
-
-Si la formulation correspond a une stabilite et que
-\code{stable_sans_valeur = TRUE}, seule la formulation verbale
-est renvoyee. Sinon, la valeur formatee est ajoutee.
+Si \code{sing = TRUE}, la fonction renvoie la colonne \code{verbe_sing}.
+Sinon, elle renvoie \code{verbe_plur}.
 }
+\section{Personnalisation }{
+
+Les formulations utilisées par cette fonction proviennent de la table
+\code{getOption("serad")$evo_simple}.
+
+Pour modifier les seuils ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
-g_verbe_taux(10, TRUE)
-g_verbe_taux(4, TRUE)
-g_verbe_taux(1, FALSE)
-g_verbe_taux(0.3)
+g_verbe_taux(10)
 g_verbe_taux(-0.1)
-g_verbe_taux(-0.1, stable_sans_valeur = FALSE)
-g_verbe_taux(-4)
-g_verbe_taux(-21)
 
 }
 \seealso{
-\code{\link{g_verbe}}
+\code{\link{g_verbe}},
+\code{\link{format_g}},
+\code{\link{format_pts}},
+\code{\link{init_serad}}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/quelTrim.R
 \name{prevTrim}
 \alias{prevTrim}
-\title{Fournit dynamiquement le trimestre precedent}
+\title{Fournit dynamiquement le trimestre précédent}
 \usage{
 prevTrim(
   trim,
@@ -10,15 +10,16 @@ prevTrim(
   type = c("lettres", "chiffres"),
   majuscule = FALSE,
   exposant = TRUE,
-  k = 1
+  k = 1,
+  lang = get_serad_language()
 )
 }
 \arguments{
-\item{trim}{Trimestre sous forme numerique : 1, 2, 3 ou 4.}
+\item{trim}{Trimestre sous forme numérique : 1, 2, 3 ou 4.}
 
-\item{annee}{Annee sur 4 chiffres.}
+\item{annee}{Année sur 4 chiffres.}
 
-\item{type}{"lettres" (par defaut) ou "chiffres".}
+\item{type}{"lettres" (par défaut) ou "chiffres".}
 
 \item{majuscule}{Indicateur logique : TRUE pour une majuscule initiale,
 FALSE sinon.}
@@ -27,16 +28,17 @@ FALSE sinon.}
 les exposants Markdown (ex. "1^er^"),
 FALSE pour afficher "1er".}
 
-\item{k}{Decalage en nombre de trimestres.
-Par defaut : 1 (trimestre precedent).}
+\item{k}{Décalage en nombre de trimestres.
+Par défaut : 1 (trimestre précédent).}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant au trimestre
-precedent (par exemple : "quatrieme trimestre 2022").
+Une chaîne de caractères correspondant au trimestre précédent.
 }
 \description{
-Retourne la formulation du trimestre situe k periodes
-avant le trimestre indique.
+Retourne la formulation du trimestre situé à \code{k} périodes
+avant le trimestre indiqué.
 }
 \examples{
 prevTrim(1, 2023)

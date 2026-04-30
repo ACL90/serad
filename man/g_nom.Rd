@@ -2,31 +2,39 @@
 % Please edit documentation in R/g_nom.R
 \name{g_nom}
 \alias{g_nom}
-\title{Evolution nominale non suivie d'une valeur}
+\title{Évolution nominale non suivie d'une valeur}
 \usage{
-g_nom(x1, x2, evolution = c("pourcents", "points"), titre = FALSE)
+g_nom(
+  x1,
+  x2,
+  evolution = c("pourcents", "points"),
+  titre = FALSE,
+  lang = get_serad_language()
+)
 }
 \arguments{
-\item{x1}{Le niveau le plus recent.}
+\item{x1}{Le niveau le plus récent.}
 
 \item{x2}{Le niveau le plus ancien.}
 
-\item{evolution}{Type d'evolution :
-"pourcents" (variation relative, par defaut) ou "points".}
+\item{evolution}{Type d'évolution :
+\code{"pourcents"} (variation relative, par défaut) ou \code{"points"}.}
 
 \item{titre}{Indicateur logique : TRUE pour supprimer l'article
-initial et mettre une majuscule, notamment en debut de titre.}
+initial et mettre une majuscule, notamment en début de titre.}
+
+\item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaine de caracteres correspondant a la formulation nominale
+Une chaîne de caractères correspondant à la formulation nominale
 retenue (par exemple : "une forte hausse").
 }
 \description{
-Decrit une evolution sous forme nominale a partir de deux niveaux,
+Décrit une évolution sous forme nominale à partir de deux niveaux,
 sans ajouter la valeur de variation.
 }
 \details{
-La fonction calcule d'abord une evolution a partir de \code{x1}
+La fonction calcule d'abord une évolution à partir de \code{x1}
 et \code{x2} :
 \itemize{
 \item si \code{evolution = "pourcents"}, elle utilise
@@ -34,10 +42,19 @@ et \code{x2} :
 \item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
 }
 
-La valeur obtenue est ensuite transmise a \code{\link{g_nom_taux}},
-qui determine la formulation a partir de la table
+La valeur obtenue est ensuite transmise à \code{\link{g_nom_taux}},
+qui détermine la formulation à partir de la table
 \code{getOption("serad")$evo_simple}.
 }
+\section{Personnalisation}{
+
+Les formulations utilisées par cette fonction proviennent de la table
+\code{getOption("serad")$evo_simple}.
+
+Pour modifier les seuils ou les libellés, voir
+\code{\link{init_serad}}.
+}
+
 \examples{
 g_nom(1.04, 1)
 g_nom(1.01, 1)
@@ -50,5 +67,7 @@ g_nom(0.95, 1, evolution = "points")
 
 }
 \seealso{
-\code{\link{g_nom_taux}}, \code{\link{g}}
+\code{\link{g_nom_taux}},
+\code{\link{g}},
+\code{\link{init_serad}}
 }

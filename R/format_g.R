@@ -1,34 +1,39 @@
 #' Formatage des variations en pourcentage
 #'
-#' Formate une variation exprimee en pourcentage selon les regles
+#' Formate une variation exprimée en pourcentage selon les règles
 #' d'arrondi et d'affichage du package.
 #'
-#' @param y La variation a formater.
+#' @param y La variation à formater.
 #' @param signe Indicateur logique : TRUE pour afficher le signe,
-#'   FALSE pour le retirer (par defaut : TRUE).
-#' @param detail Nombre de chiffres apres la virgule.
-#'   Par defaut, on utilise getOption("serad")$arrondi_pourcent.
+#'   FALSE pour le retirer (par défaut : TRUE).
+#' @param detail Nombre de chiffres après la virgule.
+#'   Par défaut, on utilise getOption("serad")$arrondi_pourcent.
+#' @param lang Langue de sortie : "fr" ou "en".
 #'
 #' @return
-#' Une chaine de caracteres correspondant a la variation formatee
-#' (ex. "+5,4 %", "-5,4 %").
+#' Une chaîne de caractères correspondant à la variation formatée
+#' (ex. "+5,4 %", "-5,4 %", "+5.4 %").
 #'
 #' @seealso \code{\link{g}}, \code{\link{arrondi_tot}}
 #'
 #' @details
-#' Le symbole "moins" peut etre personnalise via
+#' Le symbole "moins" peut être personnalisé via
 #' getOption("serad")$moins.
 #'
 #' @examples
-#' format_g(5.3654, signe = FALSE)  # "5,4 %"
-#' format_g(5.3654)                 # "+5,4 %"
-#' format_g(-5.3654, FALSE)         # "5,4 %"
-#' format_g(-5.3654)                # "-5,4 %"
-#' format_g(-5.3654, detail = 2)    # "-5,37 %"
-#' format_g(0.35)                   # "+0,4 %"
+#' format_g(5.3654, signe = FALSE)           # "5,4 %"
+#' format_g(5.3654)                          # "+5,4 %"
+#' format_g(-5.3654, FALSE)                  # "5,4 %"
+#' format_g(-5.3654)                         # "-5,4 %"
+#' format_g(-5.3654, detail = 2)             # "-5,37 %"
+#' format_g(0.35)                            # "+0,4 %"
+#' format_g(5.3654, lang = "en")             # "+5.4 %"
 #'
 #' @export
-format_g <- function(y, signe = TRUE, detail = getOption("serad")$arrondi_pourcent) {
+format_g <- function(y,
+                     signe = TRUE,
+                     detail = getOption("serad")$arrondi_pourcent,
+                     lang = get_serad_language()) {
 
   moins <- getOption("serad")$moins
 
@@ -36,10 +41,12 @@ format_g <- function(y, signe = TRUE, detail = getOption("serad")$arrondi_pource
 
   # format avec signe explicite
   fmt <- paste0("%+.", detail, "f\u00a0%%")
-  w   <- sprintf(fmt, y0)
+  w <- sprintf(fmt, y0)
 
-  # virgule française
-  w <- gsub("\\.", ",", w)
+  # virgule française, point anglais
+  if (lang == "fr") {
+    w <- gsub("\\.", ",", w)
+  }
 
   if (!signe) {
     w <- gsub("\\+", "", w)
