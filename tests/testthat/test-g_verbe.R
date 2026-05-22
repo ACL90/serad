@@ -5,7 +5,7 @@ test_that("g_verbe - classification complète", {
                "bondit de 10,0\ua0%")
 
   expect_equal(g_verbe(1.04, 1),
-               "s'accroit de 4,0\ua0%")
+               "s'accro\u00EEt de 4,0\ua0%")
 
   expect_equal(g_verbe(1.01, 1, sing = FALSE),
                "sont en hausse de 1,0\ua0%")
@@ -14,11 +14,11 @@ test_that("g_verbe - classification complète", {
                "augmente de 0,3\ua0%")
 
   expect_equal(g_verbe(1.001, 1),
-               "s'accroit très légèrement de 0,1\ua0%")
+               "s'accro\u00EEt très légèrement de 0,1\ua0%")
 
   # ---- Stabilité ----
   expect_equal(g_verbe(0.999, 1, stable_sans_valeur = FALSE),
-               "est stable à \u22120,1\ua0%")
+               "est stable à -0,1\ua0%")
 
   expect_equal(g_verbe(0.999, 1, stable_sans_valeur = TRUE),
                "est stable")

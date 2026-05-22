@@ -60,6 +60,9 @@
 #'   \item une reproductibilité via un script versionné.
 #' }
 #'
+#'#' @return
+#' Pas de valeur de retour, appelée pour ses effets de bord.
+#'
 #' @seealso
 #' \code{\link{g_nom_taux}},
 #' \code{\link{g_verbe_taux}},

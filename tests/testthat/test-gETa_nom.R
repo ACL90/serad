@@ -57,7 +57,7 @@ test_that("gETa_nom - hiérarchie des cas", {
 
   expect_equal(
     gETa_nom(0.96, 1, 0.99),
-    "un recul"
+    "un repli"
   )
 
 

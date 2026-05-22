@@ -29,7 +29,7 @@
 #' format_pts(-5.3654, FALSE)          # "5,4 points"
 #' format_pts(-5.3654)                 # "-5,4 points"
 #' format_pts(-5.3654, detail = 2)     # "-5,37 points"
-#' format_pts(0.35)                    # "+0,4 point"
+#' format_pts(0.35)                    # "+0,4 points"
 #'
 #' @export
 format_pts <- function(y,
@@ -43,12 +43,19 @@ format_pts <- function(y,
   y0 <- serad::arrondi_tot(y, detail)
 
   # Singulier / pluriel
-  post <- if (!abrev) {
-    serad::s(y0, "point", "points")
+  if (lang == "en") {
+    post <- if (!abrev) {
+      ifelse(abs(y0) == 1, "point", "points")
+    } else {
+      ifelse(abs(y0) == 1, "pt", "pts")
+    }
   } else {
-    serad::s(y0, "pt", "pts")
+    post <- if (!abrev) {
+      serad::s(y0, "point", "points")
+    } else {
+      serad::s(y0, "pt", "pts")
+    }
   }
-
   # Format numérique
   fmt <- paste0("%+.", detail, "f\u00a0")
   w <- sprintf(fmt, y0)

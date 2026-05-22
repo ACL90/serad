@@ -12,7 +12,7 @@
 #'
 #' @return
 #' Une chaîne de caractères correspondant à la variation formatée
-#' (ex. "+5,4 %", "-5,4 %", "+5.4 %").
+#' (ex. "+5,4%", "-5,4%", "+5.4%").
 #'
 #' @seealso \code{\link{g}}, \code{\link{arrondi_tot}}
 #'
@@ -27,7 +27,7 @@
 #' format_g(-5.3654)                         # "-5,4 %"
 #' format_g(-5.3654, detail = 2)             # "-5,37 %"
 #' format_g(0.35)                            # "+0,4 %"
-#' format_g(5.3654, lang = "en")             # "+5.4 %"
+#' format_g(5.3654, lang = "en")             # "+5.4%"
 #'
 #' @export
 format_g <- function(y,
@@ -35,25 +35,24 @@ format_g <- function(y,
                      detail = getOption("serad")$arrondi_pourcent,
                      lang = get_serad_language()) {
 
-  moins <- getOption("serad")$moins
+  moins <- if (lang == "fr") getOption("serad")$moins else "-"
+  espace_pct <- if (lang == "fr") "\u00A0" else ""
 
   y0 <- serad::arrondi_tot(y, detail)
 
-  # format avec signe explicite
-  fmt <- paste0("%+.", detail, "f\u00a0%%")
+  fmt <- paste0("%+.", detail, "f")
   w <- sprintf(fmt, y0)
 
-  # virgule française, point anglais
   if (lang == "fr") {
     w <- gsub("\\.", ",", w)
   }
 
   if (!signe) {
-    w <- gsub("\\+", "", w)
-    w <- gsub("[-\u2212]", "", w)
+    w <- gsub("^\\+", "", w)
+    w <- gsub("^[-\u2212]", "", w)
   } else {
-    w <- gsub("-", moins, w)
+    w <- gsub("^-", moins, w)
   }
 
-  w
+  paste0(w, espace_pct, "%")
 }

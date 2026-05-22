@@ -64,12 +64,12 @@ test_that("gETa_verbe - pipeline complet", {
 
   expect_equal(
     gETa_verbe(0.96,1,1.01),
-    "recule à nouveau"
+    "recule de nouveau"
   )
 
   expect_equal(
     gETa_verbe(0.96,1,0.99),
-    "recule"
+    "se repli"
   )
 })
 

@@ -24,7 +24,7 @@ Par défaut, on utilise getOption("serad")$arrondi_pourcent.}
 }
 \value{
 Une chaîne de caractères correspondant à la variation formatée
-(ex. "+5,4 \%", "-5,4 \%", "+5.4 \%").
+(ex. "+5,4\%", "-5,4\%", "+5.4\%").
 }
 \description{
 Formate une variation exprimée en pourcentage selon les règles
@@ -41,7 +41,7 @@ format_g(-5.3654, FALSE)                  # "5,4 \%"
 format_g(-5.3654)                         # "-5,4 \%"
 format_g(-5.3654, detail = 2)             # "-5,37 \%"
 format_g(0.35)                            # "+0,4 \%"
-format_g(5.3654, lang = "en")             # "+5.4 \%"
+format_g(5.3654, lang = "en")             # "+5.4\%"
 
 }
 \seealso{

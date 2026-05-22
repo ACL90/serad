@@ -18,7 +18,7 @@ test_that("contributions - cas standards", {
       "% à l'évolution entre Y2T1 et Y2-T2 ; ",
       "col3 contribue pour +45,6", nbsp,
       "% à l'évolution entre Y2T1 et Y2-T2 ; ",
-      "col4 contribue pour −68,4", nbsp,
+      "col4 contribue pour -68,4", nbsp,
       "% à l'évolution entre Y2T1 et Y2-T2 ; "
     )
   )
@@ -30,7 +30,7 @@ test_that("contributions - cas standards", {
       "% à l'évolution entre Y1T2 et Y2-T2 ; ",
       "col3 contribue pour +49,3", nbsp,
       "% à l'évolution entre Y1T2 et Y2-T2 ; ",
-      "col5 contribue pour −82,6", nbsp,
+      "col5 contribue pour -82,6", nbsp,
       "% à l'évolution entre Y1T2 et Y2-T2 ; "
     )
   )
@@ -40,7 +40,7 @@ test_that("contributions - cas standards", {
     paste0(
       "col4 contribue pour +118,8", nbsp,
       "% à l'évolution entre Y1T2 et Y2-T2 ; ",
-      "col5 contribue pour −82,6", nbsp,
+      "col5 contribue pour -82,6", nbsp,
       "% à l'évolution entre Y1T2 et Y2-T2 ; "
     )
   )

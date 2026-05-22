@@ -45,7 +45,7 @@ format_pts(5.3654, abrev = TRUE)    # "+5,4 pts"
 format_pts(-5.3654, FALSE)          # "5,4 points"
 format_pts(-5.3654)                 # "-5,4 points"
 format_pts(-5.3654, detail = 2)     # "-5,37 points"
-format_pts(0.35)                    # "+0,4 point"
+format_pts(0.35)                    # "+0,4 points"
 
 }
 \seealso{

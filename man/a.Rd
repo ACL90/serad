@@ -27,10 +27,7 @@ L'accélération correspond à la variation du taux entre
 \examples{
 a(4, 2, 1)  # 0
 a(6, 2, 1)  # 100
-
-\dontrun{
 a(2, 1, 1)  # valeur très élevée si taux précédent proche de zéro
-}
 
 }
 \seealso{

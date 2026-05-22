@@ -29,17 +29,17 @@ test_that("format_pts", {
 
   expect_equal(
     format_pts(-5.3654, 1),
-    paste0("−5,4", nbsp, "points")
+    paste0("-5,4", nbsp, "points")
   )
 
   expect_equal(
     format_pts(-5.3654),
-    paste0("−5,4", nbsp, "points")
+    paste0("-5,4", nbsp, "points")
   )
 
   expect_equal(
     format_pts(-5.3654, detail = 2),
-    paste0("−5,37", nbsp, "points")
+    paste0("-5,37", nbsp, "points")
   )
 
   expect_equal(
