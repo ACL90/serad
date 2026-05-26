@@ -102,7 +102,7 @@ init_serad_en <- function() {
 
     # Decline
     "g1 >= seuil_g1_bas & g1 < -seuil_stable", "g2 > seuil_g2_haut", "TRUE",
-    "declined", "declined", "a decline",
+    "fell back", "fell back", "a fallback",
 
     "g1 >= seuil_g1_bas & g1 < -seuil_stable", "g2 >= -seuil_stable & g2 <= seuil_g2_haut", "TRUE",
     "decreased", "decreased", "a decrease",
@@ -114,7 +114,10 @@ init_serad_en <- function() {
     "continued to fall", "continued to fall", "continued decline",
 
     # Sharp decline
-    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "TRUE", "TRUE",
+    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "g2 > seuil_g2_haut", "TRUE",
+    "fell back sharply", "fell back sharply", "a sharp fallback",
+
+    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "g2 <= seuil_g2_haut", "TRUE",
     "fell sharply", "fell sharply", "a sharp decline",
 
     "g1 < seuil_g1_tres_bas", "TRUE", "TRUE",
@@ -139,6 +142,7 @@ init_serad_en <- function() {
     "declined",               "declined",               "a decrease",
     "fell again",             "fell again",             "a renewed decline",
     "continued to fall",      "continued to fall",      "continued decline",
+    "pulled back sharply",    "pulled back sharply",    "a sharp pullback",
     "fell sharply",           "fell sharply",           "a sharp decline",
     "collapsed",              "collapsed",              "a collapse"
   )

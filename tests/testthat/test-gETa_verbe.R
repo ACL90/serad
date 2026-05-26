@@ -38,6 +38,11 @@ test_that("gETa_verbe - pipeline complet", {
   # ---- Forte baisse ----
   expect_equal(
     gETa_verbe(0.8, 1, 0.99),
+    "se replie fortement"
+  )
+
+  expect_equal(
+    gETa_verbe(0.8, 1, 1),
     "baisse fortement"
   )
 
@@ -69,7 +74,7 @@ test_that("gETa_verbe - pipeline complet", {
 
   expect_equal(
     gETa_verbe(0.96,1,0.99),
-    "se repli"
+    "se replie"
   )
 })
 

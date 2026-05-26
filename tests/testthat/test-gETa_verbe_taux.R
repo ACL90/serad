@@ -20,6 +20,9 @@ test_that("gETa_verbe_taux - partition principale", {
 
   # ---- Forte baisse ----
   expect_equal(gETa_verbe_taux(-20, 1),
+               "se replie fortement")
+
+  expect_equal(gETa_verbe_taux(-20, 0),
                "baisse fortement")
 
   expect_equal(gETa_verbe_taux(-21, 1),

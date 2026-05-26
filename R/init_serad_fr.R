@@ -109,7 +109,7 @@ init_serad_fr <- function() {
 
     # Baisse
     "g1 >= seuil_g1_bas & g1 < -seuil_stable", "g2 > seuil_g2_haut", "TRUE",
-    "se repli", "se replient", "un repli",
+    "se replie", "se replient", "un repli",
 
     "g1 >= seuil_g1_bas & g1 < -seuil_stable", "g2 >= -seuil_stable & g2 <= seuil_g2_haut", "TRUE",
     "baisse", "baissent", "une baisse",
@@ -121,7 +121,10 @@ init_serad_fr <- function() {
     "poursuit sa baisse", "poursuivent leur baisse", "une poursuite de la baisse",
 
     # Baisse forte
-    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "TRUE", "TRUE",
+    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "g2 > seuil_g2_haut", "TRUE",
+    "se replie fortement", "se replie fortement", "un fort repli",
+
+    "g1 >= seuil_g1_tres_bas & g1 < seuil_g1_bas", "g2 <= seuil_g2_haut", "TRUE",
     "baisse fortement", "baissent fortement", "une forte baisse",
 
     "g1 < seuil_g1_tres_bas", "TRUE", "TRUE",
@@ -138,19 +141,20 @@ init_serad_fr <- function() {
   evo_accel_alt <- tibble::tribble(
     ~verbe_sing_alt, ~verbe_plur_alt, ~nom_alt,
 
-    "augmente plus vite", "augmentent plus vite", "un regain de dynamisme",
-    "se mod\u00E8re", "se mod\u00E8rent", "un essoufflement",
-    "continue d'augmenter", "continuent d'augmenter", "le prolongement de la hausse",
-    "progresse", "progressent", "une progression",
-    "se redresse", "se redressent", "un redressement",
-    "se fige", "se figent", "une stabilisation",
-    "demeure stable", "demeurent stables", "une stabilit\u00E9",
-    "recul", "reculent", "un recul",
-    "diminue", "diminuent", "une diminution",
+    "augmente plus vite",      "augmentent plus vite",       "un regain de dynamisme",
+    "se mod\u00E8re",          "se mod\u00E8rent",           "un essoufflement",
+    "continue d'augmenter",    "continuent d'augmenter",     "le prolongement de la hausse",
+    "progresse",               "progressent",                "une progression",
+    "se redresse",             "se redressent",              "un redressement",
+    "se fige",                 "se figent",                  "une stabilisation",
+    "demeure stable",          "demeurent stables",          "une stabilit\u00E9",
+    "recul",                   "reculent",                   "un recul",
+    "diminue",                 "diminuent",                  "une diminution",
     "repart \u00E0 la baisse", "repartent \u00E0 la baisse", "un nouveau recul",
-    "poursuit sa baisse", "poursuivent leur baisse", "une poursuite de la baisse",
-    "se replie fortement", "se replient fortement", "un fort repli",
-    "s'effondre", "s'effondrent", "un effondrement"
+    "poursuit sa baisse",      "poursuivent leur baisse",    "une poursuite de la baisse",
+    "recul fortement",         "recul fortement",            "un fort recul",
+    "diminue fortement",       "diminuent fortement",        "une forte diminution",
+    "s'effondre",              "s'effondrent",               "un effondrement"
   )
 
   serad0$evo_accel <- evo_accel

@@ -64,6 +64,11 @@ test_that("gETa_nom - hiérarchie des cas", {
   # ---- Forte baisse ----
   expect_equal(
     gETa_nom(0.8, 1, 0.99),
+    "un fort repli"
+  )
+
+  expect_equal(
+    gETa_nom(0.8, 1, 1),
     "une forte baisse"
   )
 })
