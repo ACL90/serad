@@ -11,6 +11,9 @@ init_serad_en()
 
 init_serad_fr()
 }
+\value{
+Pas de valeur de retour, appelée pour ses effets de bord.
+}
 \description{
 Les fonctions \code{init_serad_fr()} et \code{init_serad_en()} définissent
 l'ensemble des règles utilisées par \{serad\} pour produire des textes
@@ -71,9 +74,6 @@ Cette approche permet :
 \item une adaptation aux conventions métier ;
 \item une reproductibilité via un script versionné.
 }
-
-#' @return
-Pas de valeur de retour, appelée pour ses effets de bord.
 }
 
 \seealso{

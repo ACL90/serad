@@ -60,7 +60,7 @@
 #'   \item une reproductibilité via un script versionné.
 #' }
 #'
-#'#' @return
+#' @return
 #' Pas de valeur de retour, appelée pour ses effets de bord.
 #'
 #' @seealso
