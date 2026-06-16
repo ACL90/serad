@@ -1,7 +1,7 @@
 Package: serad
 Title: Standardized Economic Reporting and Automated Dynamic Writing /
     Synthèse d'Écrits Avec des Règles Automatisées et Dynamiques
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Alexandre", "Cazenave-Lacroutz",
            email = "alexandre.cazenave-lacroutz@sante.gouv.fr",
