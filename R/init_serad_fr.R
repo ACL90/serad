@@ -34,15 +34,15 @@ init_serad_fr <- function() {
   # - un verbe (singulier / pluriel)
   # - une formulation nominale
   evo_simple <- tibble::tribble(
-    ~condition,                         ~verbe_sing,                                  ~verbe_plur,                                    ~nom,
+    ~condition,               ~verbe_sing,                        ~verbe_plur,                          ~nom,
 
-    "g > 6.95",                         "augmente fortement de",                       "augmentent fortement de",                       "une forte hausse",
-    "g > 0.95 & g <= 6.95",             "augmente de",                                 "augmentent de",                                 "une hausse",
-    "g > 0.10 & g <= 0.95",             "augmente l\u00E9g\u00E8rement de",             "augmentent l\u00E9g\u00E8rement de",             "une l\u00E9g\u00E8re hausse",
-    "g >= -0.10 & g <= 0.10",           "est stable \u00E0",                            "sont stables \u00E0",                            "une stabilit\u00E9",
-    "g >= -0.95 & g < -0.10",           "baisse l\u00E9g\u00E8rement de",                "baissent l\u00E9g\u00E8rement de",                "une l\u00E9g\u00E8re baisse",
-    "g >= -6.95 & g < -0.95",           "baisse de",                                   "baissent de",                                   "une baisse",
-    "g < -6.95",                        "baisse fortement de",                         "baissent fortement de",                         "une forte baisse"
+    "g > 6.95",               "augmente fortement de",            "augmentent fortement de",            "une forte hausse",
+    "g > 0.95 & g <= 6.95",   "augmente de",                      "augmentent de",                      "une hausse",
+    "g > 0.10 & g <= 0.95",   "augmente l\u00E9g\u00E8rement de", "augmentent l\u00E9g\u00E8rement de", "une l\u00E9g\u00E8re hausse",
+    "g >= -0.10 & g <= 0.10", "est stable \u00E0",                "sont stables \u00E0",                "une stabilit\u00E9",
+    "g >= -0.95 & g < -0.10", "baisse l\u00E9g\u00E8rement de",   "baissent l\u00E9g\u00E8rement de",   "une l\u00E9g\u00E8re baisse",
+    "g >= -6.95 & g < -0.95", "baisse de",                        "baissent de",                        "une baisse",
+    "g < -6.95",              "baisse fortement de",              "baissent fortement de",              "une forte baisse"
   )
 
   serad0$evo_simple <- evo_simple

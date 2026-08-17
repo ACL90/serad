@@ -94,11 +94,11 @@ init_serad_en <- function() {
     "g1 > seuil_g1_haut & g1 <= seuil_g1_tres_haut", "g2 < seuil_g2_bas", "TRUE",
     "rebounded sharply", "rebounded sharply", "a sharp rebound",
 
-    # Strong increase
-    "g1 > seuil_stable & g1 <= seuil_g1_haut", "g2 >= seuil_stable", "a > seuil_accel_hausse",
+    # Increase
+    "g1 > seuil_stable & g1 <= seuil_g1_haut", "g2 >= seuil_stable", "a > seuil_accel_pos",
     "accelerated", "accelerated", "an acceleration",
 
-    "g1 > seuil_stable & g1 <= seuil_g1_haut", "g2 >= seuil_stable", "a >= seuil_accel_baisse & a <= seuil_accel_hausse",
+    "g1 > seuil_stable & g1 <= seuil_g1_haut", "g2 >= seuil_stable", "a >= seuil_accel_baisse & a <= seuil_accel_pos",
     "increased again", "increased again", "a renewed increase",
 
     "g1 > seuil_stable & g1 <= seuil_g1_haut", "g2 >= seuil_stable", "a < seuil_accel_baisse",
