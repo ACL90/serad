@@ -12,12 +12,12 @@ init_serad_en <- function() {
   serad0$arrondi_niv <- -2 # arrondi a la centaine
 
   # arrondis utilisés dans :
-  # - format_g()
+  # - format_taux()
   # - format_pts()
   serad0$arrondi_pourcent <- 1 # arrondi a un chiffre apres la virgule
 
   # symbole du signe négatif utilisé dans :
-  # - format_g()
+  # - format_taux()
   # - format_pts()
   # - format_delta()
   serad0$moins <- "-"
@@ -25,8 +25,8 @@ init_serad_en <- function() {
   # ###                          Evolution simple                          -----
 
   # Table principale utilisée par :
-  # - g_verbe_taux()
-  # - g_nom_taux()
+  # - g_verbe_evo()
+  # - g_nom_evo()
   # - g_verbe()
   # - g_nom()
   #

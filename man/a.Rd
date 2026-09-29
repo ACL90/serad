@@ -31,5 +31,5 @@ a(2, 1, 1)  # valeur très élevée si taux précédent proche de zéro
 
 }
 \seealso{
-\code{\link{g}}, \code{\link{format_g}}
+\code{\link{g}}, \code{\link{format_taux}}
 }

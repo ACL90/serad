@@ -2,13 +2,14 @@
 % Please edit documentation in R/g_verbe.R
 \name{g_verbe}
 \alias{g_verbe}
-\title{Évolution verbale ne tenant pas compte de l'accélération et suivie de la valeur}
+\title{Évolution verbale}
 \usage{
 g_verbe(
   x1,
   x2,
   sing = TRUE,
   evolution = c("pourcents", "points"),
+  avec_evolution = TRUE,
   stable_sans_valeur = TRUE,
   lang = get_serad_language()
 )
@@ -18,25 +19,31 @@ g_verbe(
 
 \item{x2}{Le niveau le plus ancien.}
 
-\item{sing}{Indicateur logique : TRUE si le sujet est singulier
-(par défaut), FALSE sinon.}
+\item{sing}{Indicateur logique : \code{TRUE} si le sujet est singulier
+(par défaut), \code{FALSE} sinon.}
 
 \item{evolution}{Type d'évolution :
 \code{"pourcents"} (variation relative, par défaut) ou \code{"points"}.}
 
-\item{stable_sans_valeur}{Indicateur logique.
-TRUE (par défaut) : n'affiche pas la valeur en cas de stabilité.
-FALSE : affiche la valeur après la formulation de stabilité.}
+\item{avec_evolution}{Indicateur logique : \code{TRUE} pour ajouter la valeur
+de l'évolution après le verbe. Par défaut, \code{FALSE} retourne uniquement
+le verbe.}
 
-\item{lang}{Langue de sortie : "fr" ou "en".}
+\item{stable_sans_valeur}{Indicateur logique : \code{TRUE} (par défaut)
+pour ne pas ajouter la valeur lorsque la catégorie correspond
+à une stabilité. Si \code{FALSE}, la valeur est ajoutée après la
+formulation de stabilité, à condition que \code{avec_evolution = TRUE}.}
+
+\item{lang}{Langue de sortie : \code{"fr"} ou \code{"en"}.}
 }
 \value{
 Une chaîne de caractères correspondant à la formulation verbale
-retenue, par exemple : "augmente de 10,0 \%".
+retenue, avec ou sans la valeur de l'évolution, par exemple :
+\code{"augmente"} ou \code{"augmente de 10,0 \%"}.
 }
 \description{
 Décrit une évolution sous forme verbale à partir de deux niveaux,
-sans tenir compte d'une éventuelle accélération, et en ajoutant
+sans tenir compte d'une éventuelle accélération, avec ou sans
 la valeur de variation.
 }
 \details{
@@ -48,12 +55,13 @@ et \code{x2} :
 \item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
 }
 
-La valeur obtenue est ensuite transmise à \code{\link{g_verbe_taux}},
-qui détermine la formulation à partir des conditions définies dans la table
+La valeur obtenue est ensuite transmise à
+\code{\link{g_verbe_evo}}, qui détermine la formulation à partir
+des conditions définies dans la table
 \code{getOption("serad")$evo_simple}.
 
-Cette table doit contenir notamment les colonnes \code{condition},
-\code{verbe_sing}, \code{verbe_plur} et \code{nom}.
+Cette table doit notamment contenir les colonnes \code{condition},
+\code{verbe_sing} et \code{verbe_plur}.
 
 Les conditions doivent être disjointes : pour une valeur donnée,
 une seule condition doit être vraie.
@@ -69,17 +77,32 @@ Pour modifier les conditions ou les libellés, voir
 
 \examples{
 g_verbe(1.1, 1)
+g_verbe(1.1, 1, avec_evolution = TRUE)
+
 g_verbe(1.04, 1)
 g_verbe(1.01, 1, sing = FALSE)
-g_verbe(1.003, 1)
+
 g_verbe(0.999, 1)
-g_verbe(0.999, 1, stable_sans_valeur = FALSE)
+g_verbe(
+  0.999,
+  1,
+  avec_evolution = TRUE,
+  stable_sans_valeur = FALSE
+)
+
 g_verbe(0.96, 1)
 g_verbe(0.79, 1)
 
+g_verbe(
+  12,
+  10,
+  evolution = "points",
+  avec_evolution = TRUE
+)
+
 }
 \seealso{
-\code{\link{g_verbe_taux}},
+\code{\link{g_verbe_evo}},
 \code{\link{g}},
 \code{\link{init_serad}}
 }

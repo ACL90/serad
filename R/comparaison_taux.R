@@ -1,5 +1,7 @@
 #' Comparaison d'une variation à un seuil
 #'
+#' Analyse un taux et retourne une formulation selon sa valeur.
+#'
 #' @param g Variation exprimée en pourcentage
 #'   (5 signifie 5 %, 0.1 signifie 0.1 %).
 #' @param hausse_defaut Mot si hausse (forme par défaut).

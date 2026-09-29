@@ -13,7 +13,7 @@
 #' @return
 #' Un nombre numérique correspondant à l'accélération en pourcentage.
 #'
-#' @seealso \code{\link{g}}, \code{\link{format_g}}
+#' @seealso \code{\link{g}}, \code{\link{format_taux}}
 #'
 #' @examples
 #' a(4, 2, 1)  # 0

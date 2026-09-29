@@ -49,5 +49,5 @@ format_pts(0.35)                    # "+0,4 points"
 
 }
 \seealso{
-\code{\link{format_g}}
+\code{\link{format_taux}} \code{\link{arrondi_tot}}
 }

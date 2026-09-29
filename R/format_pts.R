@@ -16,7 +16,7 @@
 #' Une chaîne de caractères correspondant à la variation formatée
 #' (ex. "+5,4 points", "+5.4 points").
 #'
-#' @seealso \code{\link{format_g}}
+#' @seealso \code{\link{format_taux}} \code{\link{arrondi_tot}}
 #'
 #' @details
 #' Le symbole "moins" peut être personnalisé via
@@ -43,19 +43,12 @@ format_pts <- function(y,
   y0 <- serad::arrondi_tot(y, detail)
 
   # Singulier / pluriel
-  if (lang == "en") {
-    post <- if (!abrev) {
-      ifelse(abs(y0) == 1, "point", "points")
-    } else {
-      ifelse(abs(y0) == 1, "pt", "pts")
-    }
+  post <- if (!abrev) {
+    serad::pluriel(y0, "point", "points", lang = lang)
   } else {
-    post <- if (!abrev) {
-      serad::s(y0, "point", "points")
-    } else {
-      serad::s(y0, "pt", "pts")
-    }
+    serad::pluriel(y0, "pt", "pts", lang = lang)
   }
+
   # Format numérique
   fmt <- paste0("%+.", detail, "f\u00a0")
   w <- sprintf(fmt, y0)

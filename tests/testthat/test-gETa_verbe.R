@@ -1,7 +1,5 @@
 test_that("gETa_verbe - pipeline complet", {
 
-  set.seed(123)
-
   # ---- Stabilité ----
   expect_equal(
     gETa_verbe(1.00049, 1, 0.9996),
@@ -59,7 +57,7 @@ test_that("gETa_verbe - pipeline complet", {
 
   expect_equal(
     gETa_verbe(1.002, 1, 1.01),
-    "repart à la hausse"
+    "rebondit"
   )
 
   expect_equal(
@@ -80,8 +78,6 @@ test_that("gETa_verbe - pipeline complet", {
 
 test_that("gETa_verbe - aléatoire", {
 
-  set.seed(123)
-
   # ---- Accélération ----
   res <- gETa_verbe(1.1, 1, 0.99, alea = 0.5)
   expect_true(res %in% c("augmente fortement", "croît fortement"))
@@ -98,7 +94,7 @@ test_that("gETa_verbe - aléatoire", {
 
   # ---- Rebond ----
   res <- gETa_verbe(1.002, 1, 1.01, alea = 0.5)
-  expect_true(res %in% c("repart à la hausse", "se redresse"))
+  expect_true(res %in% c("rebondit", "se redresse"))
 
   # ---- Baisse ----
   res <- gETa_verbe(0.99, 1, 1.01, alea = 0.5)

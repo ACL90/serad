@@ -13,7 +13,7 @@
 #' Une valeur numérique correspondant à la variation en pourcentage
 #' (par exemple, si x1 = 2 * x2, la fonction retourne 100).
 #'
-#' @seealso \code{\link{format_g}}
+#' @seealso \code{\link{format_taux}}
 #'
 #' @details
 #' Si \code{x2 = 0}, la valeur epsilon définie par

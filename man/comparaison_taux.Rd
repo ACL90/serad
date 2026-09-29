@@ -41,7 +41,7 @@ comparaison_taux(
 Une chaîne de caractères correspondant à la modalité choisie.
 }
 \description{
-Comparaison d'une variation à un seuil
+Analyse un taux et retourne une formulation selon sa valeur.
 }
 \details{
 Fonction interne utilisée par \code{\link{comparaison}}.

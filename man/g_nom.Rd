@@ -8,6 +8,7 @@ g_nom(
   x1,
   x2,
   evolution = c("pourcents", "points"),
+  avec_evolution = FALSE,
   titre = FALSE,
   lang = get_serad_language()
 )
@@ -19,6 +20,10 @@ g_nom(
 
 \item{evolution}{Type d'évolution :
 \code{"pourcents"} (variation relative, par défaut) ou \code{"points"}.}
+
+\item{avec_evolution}{Indicateur logique : \code{TRUE} pour ajouter la valeur
+de l'évolution à la formulation nominale, \code{FALSE} pour retourner
+uniquement la formulation.}
 
 \item{titre}{Indicateur logique : TRUE pour supprimer l'article
 initial et mettre une majuscule, notamment en début de titre.}
@@ -42,7 +47,7 @@ et \code{x2} :
 \item si \code{evolution = "points"}, elle calcule \code{x1 - x2}.
 }
 
-La valeur obtenue est ensuite transmise à \code{\link{g_nom_taux}},
+La valeur obtenue est ensuite transmise à \code{\link{g_nom_evo}},
 qui détermine la formulation à partir des conditions définies dans la table
 \code{getOption("serad")$evo_simple}.
 }
@@ -71,7 +76,7 @@ g_nom(0.95, 1, evolution = "points")
 
 }
 \seealso{
-\code{\link{g_nom_taux}},
+\code{\link{g_nom_evo}},
 \code{\link{g}},
 \code{\link{init_serad}}
 }

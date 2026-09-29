@@ -42,5 +42,5 @@ g(2, 0)  # valeur très élevée et avertissement
 
 }
 \seealso{
-\code{\link{format_g}}
+\code{\link{format_taux}}
 }

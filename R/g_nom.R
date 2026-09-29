@@ -8,6 +8,9 @@
 #' @param x2 Le niveau le plus ancien.
 #' @param evolution Type d'évolution :
 #'   `"pourcents"` (variation relative, par défaut) ou `"points"`.
+#' @param avec_evolution Indicateur logique : `TRUE` pour ajouter la valeur
+#'   de l'évolution à la formulation nominale, `FALSE` pour retourner
+#'   uniquement la formulation.
 #' @param titre Indicateur logique : TRUE pour supprimer l'article
 #'   initial et mettre une majuscule, notamment en début de titre.
 #' @param lang Langue de sortie : "fr" ou "en".
@@ -25,7 +28,7 @@
 #'   \item si `evolution = "points"`, elle calcule `x1 - x2`.
 #' }
 #'
-#' La valeur obtenue est ensuite transmise à \code{\link{g_nom_taux}},
+#' La valeur obtenue est ensuite transmise à \code{\link{g_nom_evo}},
 #' qui détermine la formulation à partir des conditions définies dans la table
 #' `getOption("serad")$evo_simple`.
 #'
@@ -41,7 +44,7 @@
 #' \code{\link{init_serad}}.
 #'
 #' @seealso
-#' \code{\link{g_nom_taux}},
+#' \code{\link{g_nom_evo}},
 #' \code{\link{g}},
 #' \code{\link{init_serad}}
 #'
@@ -58,6 +61,7 @@
 #' @export
 g_nom <- function(x1, x2,
                   evolution = c("pourcents", "points"),
+                  avec_evolution = FALSE,
                   titre = FALSE,
                   lang = get_serad_language()) {
 
@@ -69,9 +73,32 @@ g_nom <- function(x1, x2,
     points    = x1 - x2
   )
 
-  g_nom_taux(
+  resultat <- g_nom_evo(
     g = valeur,
     titre = titre,
     lang = lang
   )
+
+  if (avec_evolution) {
+
+    unite <- switch(
+      evolution,
+      pourcents = "\u00a0%",
+      points = pluriel(
+        valeur,
+        sing = " point",
+        plur = " points",
+        lang = lang
+      )
+    )
+
+    resultat <- paste0(
+      resultat,
+      if (lang == "fr") " de " else " of ",
+      abs(valeur),
+      unite
+    )
+  }
+
+  resultat
 }

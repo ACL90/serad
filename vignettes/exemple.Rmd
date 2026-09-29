@@ -62,13 +62,13 @@ max_mandat <- max(df_pres$taux, na.rm = TRUE)
 
 ```
 
-En `r format(as.Date(df_pres[[1]][last_row]), "%B %Y")`, le taux approbation du président des USA Richard Nixon  `r gETa_verbe_taux(df_pres[["taux_evolution"]][last_row], df_pres[["taux_evolution"]][last_row - 1])` par rapport au mois précédent (`r format_g(df_pres[["taux_evolution"]][last_row], signe = FALSE, detail = 0)` après `r format_g(df_pres[["taux_evolution"]][last_row-1], signe = FALSE, detail = 0)` en `r format(as.Date(df_pres[[1]][last_row-1]), "%B %Y")`).
+En `r format(as.Date(df_pres[[1]][last_row]), "%B %Y")`, le taux approbation du président des USA Richard Nixon  `r gETa_verbe_taux(df_pres[["taux_evolution"]][last_row], df_pres[["taux_evolution"]][last_row - 1])` par rapport au mois précédent (`r format_taux(df_pres[["taux_evolution"]][last_row], signe = FALSE, detail = 0)` après `r format_taux(df_pres[["taux_evolution"]][last_row-1], signe = FALSE, detail = 0)` en `r format(as.Date(df_pres[[1]][last_row-1]), "%B %Y")`).
 
 Sur un an, le taux d'approbation `r g_verbe(taux_actuel, taux_1_an, evolution = "points")`, passant de `r taux_1_an` % à `r taux_actuel` %.
 
-Sur l'ensemble du mandat, le taux d'approbation `r g_verbe(taux_actuel, taux_debut, evolution = "points")` passant de `r format_g(taux_debut, signe = FALSE, detail = 0)` au début du mandat à `r format_g(taux_actuel, signe = FALSE, detail = 0)` à la fin.
+Sur l'ensemble du mandat, le taux d'approbation `r g_verbe(taux_actuel, taux_debut, evolution = "points")` passant de `r format_taux(taux_debut, signe = FALSE, detail = 0)` au début du mandat à `r format_taux(taux_actuel, signe = FALSE, detail = 0)` à la fin.
 
-En moyenne, il s'établit à `r format_g(round(moy_mandat,1), signe = FALSE, detail = 0)`, avec un point bas à `r format_g(min_mandat, signe = FALSE, detail = 0)` et un point haut à `r format_g(max_mandat, signe = FALSE, detail = 0)`.
+En moyenne, il s'établit à `r format_taux(round(moy_mandat,1), signe = FALSE, detail = 0)`, avec un point bas à `r format_taux(min_mandat, signe = FALSE, detail = 0)` et un point haut à `r format_taux(max_mandat, signe = FALSE, detail = 0)`.
 
 # 2. Exemple en niveaux : dataset `UKDriverDeaths`
 
@@ -128,7 +128,7 @@ df_annuel_driverdeath$taux_evolution_annuel <- round(
 last_row <- nrow(df_annuel_driverdeath)
 ```
 
-En `r df_annuel_driverdeath[[1]][last_row]`, le nombre de décès liés aux accidents de la route `r gETa_verbe(df_annuel_driverdeath[["deaths_total"]][last_row], df_annuel_driverdeath[["deaths_total"]][last_row - 1], df_annuel_driverdeath[["deaths_total"]][last_row - 2])` avec `r format_niv(df_annuel_driverdeath[[4]][last_row], detail = 1)` décès en plus par rapport à `r df_annuel_driverdeath[[1]][last_row - 1]`, soit `r format_g(df_annuel_driverdeath[["taux_evolution_annuel"]][last_row])`.
+En `r df_annuel_driverdeath[[1]][last_row]`, le nombre de décès liés aux accidents de la route `r gETa_verbe(df_annuel_driverdeath[["deaths_total"]][last_row], df_annuel_driverdeath[["deaths_total"]][last_row - 1], df_annuel_driverdeath[["deaths_total"]][last_row - 2])` avec `r format_niv(df_annuel_driverdeath[[4]][last_row], detail = 1)` décès en plus par rapport à `r df_annuel_driverdeath[[1]][last_row - 1]`, soit `r format_taux(df_annuel_driverdeath[["taux_evolution_annuel"]][last_row])`.
 
 # Conclusion
 

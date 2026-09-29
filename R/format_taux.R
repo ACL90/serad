@@ -21,16 +21,16 @@
 #' getOption("serad")$moins.
 #'
 #' @examples
-#' format_g(5.3654, signe = FALSE)           # "5,4 %"
-#' format_g(5.3654)                          # "+5,4 %"
-#' format_g(-5.3654, FALSE)                  # "5,4 %"
-#' format_g(-5.3654)                         # "-5,4 %"
-#' format_g(-5.3654, detail = 2)             # "-5,37 %"
-#' format_g(0.35)                            # "+0,4 %"
-#' format_g(5.3654, lang = "en")             # "+5.4%"
+#' format_taux(5.3654, signe = FALSE)           # "5,4 %"
+#' format_taux(5.3654)                          # "+5,4 %"
+#' format_taux(-5.3654, FALSE)                  # "5,4 %"
+#' format_taux(-5.3654)                         # "-5,4 %"
+#' format_taux(-5.3654, detail = 2)             # "-5,37 %"
+#' format_taux(0.35)                            # "+0,4 %"
+#' format_taux(5.3654, lang = "en")             # "+5.4%"
 #'
 #' @export
-format_g <- function(y,
+format_taux <- function(y,
                      signe = TRUE,
                      detail = getOption("serad")$arrondi_pourcent,
                      lang = get_serad_language()) {

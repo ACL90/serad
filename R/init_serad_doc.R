@@ -19,7 +19,7 @@
 #'
 #' \itemize{
 #'   \item `evo_simple` : utilisée pour les évolutions simples
-#'   (\code{\link{g_nom_taux}}, \code{\link{g_verbe_taux}}) ;
+#'   (\code{\link{g_nom_evo}}, \code{\link{g_verbe_evo}}) ;
 #'
 #'   \item `evo_accel` : utilisée pour les évolutions tenant compte
 #'   de l'accélération
@@ -64,8 +64,8 @@
 #' Pas de valeur de retour, appelée pour ses effets de bord.
 #'
 #' @seealso
-#' \code{\link{g_nom_taux}},
-#' \code{\link{g_verbe_taux}},
+#' \code{\link{g_nom_evo}},
+#' \code{\link{g_verbe_evo}},
 #' \code{\link{gETa_nom_taux}},
 #' \code{\link{gETa_verbe_taux}}
 #'

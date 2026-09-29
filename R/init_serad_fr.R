@@ -12,12 +12,12 @@ init_serad_fr <- function() {
   serad0$arrondi_niv <- -2 # arrondi a la centaine
 
   # arrondis utilises dans :
-  # - format_g()
+  # - format_taux()
   # - format_pts()
   serad0$arrondi_pourcent <- 1 # arrondi a un chiffre apres la virgule
 
   # symbole du signe negatif utilise dans :
-  # - format_g()
+  # - format_taux()
   # - format_pts()
   # - format_delta()
   serad0$moins <- "-"
@@ -25,8 +25,8 @@ init_serad_fr <- function() {
   # ###                          Evolution simple                          -----
 
   # Table principale utilisee par :
-  # - g_verbe_taux()
-  # - g_nom_taux()
+  # - g_verbe_evo()
+  # - g_nom_evo()
   # - g_verbe()
   # - g_nom()
   #
@@ -97,7 +97,7 @@ init_serad_fr <- function() {
     "acc\u00E9l\u00E8re", "acc\u00E9l\u00E8rent", "une acc\u00E9l\u00E9ration",
 
     "g1 > seuil_stable_pos & g1 <= seuil_g1_haut", "g2 > seuil_stable_pos", "a >= seuil_accel_neg & a <= seuil_accel_pos",
-    "augmente de nouveau", "augmente de nouveau", "une nouvelle hausse",
+    "augmente de nouveau", "augmentent de nouveau", "une nouvelle hausse",
 
     "g1 > seuil_stable_pos & g1 <= seuil_g1_haut", "g2 > seuil_stable_pos", "a < seuil_accel_neg",
     "ralentit", "ralentissent", "un ralentissement",
@@ -106,7 +106,7 @@ init_serad_fr <- function() {
     "augmente", "augmentent", "une hausse",
 
     "g1 > seuil_stable_pos & g1 <= seuil_g1_haut", "g2 < seuil_stable_neg", "TRUE",
-    "repart \u00E0 la hausse", "repartent \u00E0 la hausse", "un rebond",
+    "rebondit", "rebondissent", "un rebond",
 
     # Stabilite
     "abs(g1) <= seuil_stable_pos", "abs(g2) > seuil_stable_pos", "TRUE",

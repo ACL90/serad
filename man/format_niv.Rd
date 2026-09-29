@@ -6,12 +6,16 @@
 \usage{
 format_niv(
   y,
+  signe = FALSE,
   detail = getOption("serad")$arrondi_niv,
   lang = get_serad_language()
 )
 }
 \arguments{
-\item{y}{Le niveau à formater.}
+\item{y}{Le niveau ou la variation à formater.}
+
+\item{signe}{Indicateur logique : TRUE pour afficher le signe plus
+des valeurs positives, FALSE sinon (par défaut).}
 
 \item{detail}{Précision d'arrondi. Par défaut, on utilise
 getOption("serad")$arrondi_niv.}
@@ -19,15 +23,18 @@ getOption("serad")$arrondi_niv.}
 \item{lang}{Langue de sortie : "fr" ou "en".}
 }
 \value{
-Une chaîne de caractères correspondant au niveau formaté.
+Une chaîne de caractères correspondant à la valeur formatée.
 }
 \description{
 Formate un niveau numérique selon les règles d'arrondi
-définies dans le package.
+définies dans le package. Peut afficher explicitement le signe
+d'une variation en niveau.
 }
 \examples{
-format_niv(365484)                # "365 500"
-format_niv(365484, lang = "en")   # "365,500"
+format_niv(365484)                        # "365 500"
+format_niv(365484, lang = "en")           # "365,500"
+format_niv(365484 - 300000, signe = TRUE) # "+65 500"
+format_niv(300000 - 365484, signe = TRUE) # "-65 500"
 
 }
 \seealso{

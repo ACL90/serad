@@ -45,7 +45,7 @@ test_that("gETa_verbe_taux - aléatoire", {
 
   # ---- Rebond ----
   res <- gETa_verbe_taux(0.2, -1, alea = 0.5)
-  expect_true(res %in% c("repart à la hausse", "se redresse"))
+  expect_true(res %in% c("rebondit", "se redresse"))
 
   # ---- Baisse ----
   res <- gETa_verbe_taux(-0.2, -1, alea = 1)

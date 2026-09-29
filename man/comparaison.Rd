@@ -49,11 +49,89 @@ selon l'évolution observée.
 \details{
 La comparaison repose sur le taux de variation calculé via \code{\link{g}}.
 Des cas particuliers sont traités lorsque \code{x2} est nul ou négatif.
+
+Les exemples ci-dessous proposent trois formulations à copier-coller
+et à adapter selon le contexte. Ces fonctions ne font pas partie
+du package.
 }
 \examples{
 comparaison(1.04, 1, "augmente", "reste stable", "diminue")
 comparaison(0.9991, 1, "augmente", "reste stable", "diminue")
 comparaison(1, 1, "augmente", "reste égal", "diminue", seuil = 0)
+
+# Situer un niveau par rapport à un autre :
+# « le niveau est au-dessus de celui de l'année précédente ».
+formuler_position <- function(x1, x2, lang = get_serad_language()) {
+  if (lang == "en") {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "above",
+      egalite_defaut = "at the same level as",
+      baisse_defaut = "below",
+      seuil = 0
+    )
+  } else {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "au-dessus de",
+      egalite_defaut = "au même niveau que",
+      baisse_defaut = "en dessous de",
+      seuil = 0
+    )
+  }
+}
+
+formuler_position(104, 100)
+
+# Qualifier une tendance :
+# « la tendance est à la hausse ».
+formuler_tendance <- function(
+    x1, x2, seuil = 0.1, lang = get_serad_language()
+) {
+  if (lang == "en") {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "upward",
+      egalite_defaut = "stable",
+      baisse_defaut = "downward",
+      seuil = seuil
+    )
+  } else {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "à la hausse",
+      egalite_defaut = "stable",
+      baisse_defaut = "à la baisse",
+      seuil = seuil
+    )
+  }
+}
+
+formuler_tendance(1.04, 1)
+
+# Comparer des nombres d'éléments :
+# « il y en a davantage ».
+formuler_quantite <- function(x1, x2, lang = get_serad_language()) {
+  if (lang == "en") {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "more",
+      egalite_defaut = "as many",
+      baisse_defaut = "fewer",
+      seuil = 0
+    )
+  } else {
+    comparaison(
+      x1, x2,
+      hausse_defaut = "davantage",
+      egalite_defaut = "autant",
+      baisse_defaut = "moins",
+      seuil = 0
+    )
+  }
+}
+
+formuler_quantite(104, 100)
 
 }
 \seealso{
