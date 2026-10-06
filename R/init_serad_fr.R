@@ -8,7 +8,6 @@ init_serad_fr <- function() {
 
   # arrondis utilises dans :
   # - format_niv()
-  # - format_delta()
   serad0$arrondi_niv <- -2 # arrondi a la centaine
 
   # arrondis utilises dans :
@@ -19,7 +18,6 @@ init_serad_fr <- function() {
   # symbole du signe negatif utilise dans :
   # - format_taux()
   # - format_pts()
-  # - format_delta()
   serad0$moins <- "-"
 
   # ###                          Evolution simple                          -----

@@ -1,9 +1,9 @@
 #' Initialisation des règles de rédaction de \{serad\}
 #'
 #' @description
-#' Les fonctions `init_serad_fr()` et `init_serad_en()` définissent
-#' l'ensemble des règles utilisées par \{serad\} pour produire des textes
-#' de conjoncture.
+#' Les fonctions `init_serad_fr()` et `init_serad_en()` appliquent
+#' les règles de rédaction par défaut de \{serad\}, respectivement
+#' en français et en anglais.
 #'
 #' Elles initialisent notamment :
 #' \itemize{
@@ -15,53 +15,62 @@
 #' }
 #'
 #' @details
-#' Les principales structures utilisées sont :
+#' Les règles sont enregistrées dans l'option `serad` et peuvent
+#' être consultées avec `getOption("serad")`.
 #'
+#' Les principales structures utilisées sont :
 #' \itemize{
 #'   \item `evo_simple` : utilisée pour les évolutions simples
 #'   (\code{\link{g_nom_evo}}, \code{\link{g_verbe_evo}}) ;
-#'
-#'   \item `evo_accel` : utilisée pour les évolutions tenant compte
-#'   de l'accélération
+#'   \item `seuil` : seuils utilisés pour les évolutions tenant compte
+#'   de l'accélération ;
+#'   \item `evo_accel` : formulations utilisées pour les évolutions
+#'   tenant compte de l'accélération
 #'   (\code{\link{gETa_nom_taux}}, \code{\link{gETa_verbe_taux}}) ;
-#'
 #'   \item `evo_accel_alt` : variantes utilisées lorsque l'argument
-#'   \code{alea} est activé.
+#'   `alea` est activé.
 #' }
 #'
 #' @section Personnalisation :
+#' Le package fournit deux scripts modèles commentés :
+#' `config_serad_fr.R` et `config_serad_en.R`.
 #'
-#' La méthode recommandée pour personnaliser les règles de rédaction
-#' consiste à copier le contenu de `init_serad_fr()` ou
-#' `init_serad_en()` dans un script utilisateur, puis à modifier
-#' directement les tables et les seuils.
-#'
-#' Exemple :
+#' Pour personnaliser les règles, copier le modèle de la langue
+#' souhaitée dans son projet :
 #'
 #' \preformatted{
-#' # Copier le contenu de init_serad_fr()
-#'
-#' serad0 <- list()
-#'
-#' serad0$evo_simple <- tibble::tribble(
-#'   ~seuil, ~verbe_sing, ~verbe_plur, ~nom,
-#'   1, "augmente", "augmentent", "une hausse",
-#'   0, "est stable", "sont stables", "une stabilité",
-#'   -Inf, "diminue", "diminuent", "une baisse"
+#' file.copy(
+#'   system.file("modeles", "config_serad_fr.R", package = "serad"),
+#'   "config_serad_perso.R"
 #' )
-#'
-#' options(serad = serad0)
 #' }
 #'
-#' Cette approche permet :
-#' \itemize{
-#'   \item une personnalisation complète des formulations ;
-#'   \item une adaptation aux conventions métier ;
-#'   \item une reproductibilité via un script versionné.
+#' Cette copie est réalisée une seule fois. Pour utiliser le modèle
+#' anglais, remplacer `config_serad_fr.R` par `config_serad_en.R`.
+#'
+#' Modifier ensuite les arrondis, les seuils, les conditions ou les
+#' formulations dans le fichier copié, puis le charger au début
+#' du programme :
+#'
+#' \preformatted{
+#' library(serad)
+#' source("config_serad_perso.R")
 #' }
+#'
+#' Le script applique directement les règles personnalisées avec
+#' `options(serad = serad0)`. Aucun appel supplémentaire à une
+#' fonction d'initialisation n'est nécessaire.
+#'
+#' Le fichier personnalisé peut être conservé et versionné avec
+#' le programme de production.
+#'
+#' Un appel ultérieur à `init_serad_fr()` ou `init_serad_en()`
+#' remplace les règles personnalisées par les règles par défaut
+#' de la langue choisie.
 #'
 #' @return
-#' Pas de valeur de retour, appelée pour ses effets de bord.
+#' La liste des règles appliquées, renvoyée de manière invisible.
+#' Les fonctions enregistrent également cette liste dans l'option `serad`.
 #'
 #' @seealso
 #' \code{\link{g_nom_evo}},
